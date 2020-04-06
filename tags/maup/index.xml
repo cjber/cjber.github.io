@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>maup on Cillian Berragan</title>
+    <link>/tags/maup/</link>
+    <description>Recent content in maup on Cillian Berragan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>©2020 Notepadium.</copyright>
+    <lastBuildDate>Thu, 16 May 2019 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="/tags/maup/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Assessment of Area Based Government Policy in the United Kingdom in Relation to the Modifiable Areal Unit Problem</title>
+      <link>/post/maup_essay/</link>
+      <pubDate>Thu, 16 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/maup_essay/</guid>
+      <description>&lt;p&gt;This essay presents a critique of Area Based Policy in the United Kingdom, a fairly recent development that aims to target specified geographic areas to tackle socioeconomic problems.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Using Multi-level Models to Combat the Issue of Census Data Aggregation</title>
+      <link>/post/maup_mlm/</link>
+      <pubDate>Thu, 16 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/maup_mlm/</guid>
+      <description>&lt;p&gt;This essay presents the outcome of analysis using multi level models to consider the effect of arbitrary data aggregation into census units.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

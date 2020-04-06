@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>bibtex on Cillian Berragan</title>
+    <link>/tags/bibtex/</link>
+    <description>Recent content in bibtex on Cillian Berragan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>©2020 Notepadium.</copyright>
+    <lastBuildDate>Fri, 15 Nov 2019 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="/tags/bibtex/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Managing References in R Markdown and Rnoweb</title>
+      <link>/post/managing_references/</link>
+      <pubDate>Fri, 15 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/managing_references/</guid>
+      <description>&lt;p&gt;When writing my dissertation I found it difficult to dynamically manage references to R packages that I had used along the way. For the main document refernces I use Zotero which makes managing these trivial, but for packages, it wasn&amp;rsquo;t quite a simple.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

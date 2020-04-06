@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.68.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>Scripting in Bash to Export pdfs to a Kindle&nbsp;&ndash;&nbsp;Cillian Berragan</title><link rel="stylesheet" href="/css/core.min.e9d41c6163ab76ebf9c1d79f3552be0861d1090eeffcacccd2e154e4db2c107f21f0690f7451f6a8d9c0ad1efbc600f8.css" integrity="sha384-6dQcYWOrduv5wdefNVK&#43;CGHRCQ7v/KzM0uFU5NssEH8h8GkPdFH2qNnArR77xgD4"><body>
+    <div class="base-body"><section id="header" class="site header max-body-width">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Cillian Berragan</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/about/">About Me</a><a class="nav item" href="https://github.com/cjber/cv/raw/master/cv.pdf"target="_blank">Curriculum Vitae</a><a class="nav item" href="/categories/portfolio/">Portfolio</a></nav></div></span></div></section><div id="content" class="max-body-width"><section class="article header">
+    <h1 class="article title">Scripting in Bash to Export pdfs to a Kindle</h1><p class="article date">2019-11-15<span class="reading-time"> • 2 minutes to read</span></p></section><article class="article markdown-body"><p>In an effort to convert two column pdfs to the Kindle format, I found that an accepted solution did not at present exist. Converting a single column pdf is simple enough, but with two columns most programs are unable to correctly order the text.</p>
+<p>However, one program was able to order columns into images: <code>k2pdfopt</code>. Unfortunately as this was no longer a pdf I had to use a program to read text from an image: <code>tesseract</code>. Finally the text could now be converted to the Kindle <code>EPUB</code> format using <code>calibre</code>.</p>
+<p>Requirements:</p>
+<pre><code>k2pdfopt
+tesseract
+cpdf
+calibre
+</code></pre><p>Here is the script:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/sh
+</span><span class="cp"></span><span class="nv">INPUT</span><span class="o">=</span>*.pdf
+
+mkdir out
+cp <span class="nv">$INPUT</span> out/
+<span class="nb">cd</span> out/
+
+<span class="k">for</span> pdf in <span class="nv">$INPUT</span><span class="p">;</span> <span class="k">do</span>
+
+    <span class="nv">TITLE</span><span class="o">=</span><span class="k">$(</span>pdfinfo <span class="nv">$pdf</span> <span class="p">|</span> grep -Po <span class="s1">&#39;Title:\s*\K.*&#39;</span><span class="k">)</span>
+    <span class="nv">AUTHOR</span><span class="o">=</span><span class="k">$(</span>pdfinfo <span class="nv">$pdf</span> <span class="p">|</span> grep -Po <span class="s1">&#39;Author:\s*K.*&#39;</span><span class="k">)</span>
+    <span class="nv">DATE</span><span class="o">=</span><span class="k">$(</span>pdfinfo <span class="nv">$pdf</span> <span class="p">|</span> grep -Po <span class="s1">&#39;CreationDate:\s*\K.*&#39;</span><span class="k">)</span>
+
+    <span class="nb">echo</span> <span class="p">|</span> k2pdfopt <span class="nv">$pdf</span> -o out_<span class="nv">$pdf</span>
+
+    <span class="nv">OUTPUT</span><span class="o">=</span>out.txt <span class="c1"># set to the final output file</span>
+    <span class="nv">ENDPAGE</span><span class="o">=</span><span class="k">$(</span>cpdf -pages out_<span class="nv">$pdf</span><span class="k">)</span>  <span class="c1"># set to pagenumber of the last page of PDF you wish to convert</span>
+
+<span class="k">for</span> i in <span class="k">$(</span>seq -w <span class="m">000</span> <span class="nv">$ENDPAGE</span><span class="k">)</span><span class="p">;</span> <span class="k">do</span>
+    pdfimages out_<span class="nv">$pdf</span> temp
+    <span class="nb">echo</span> processing page <span class="nv">$i</span>
+    tesseract temp-<span class="nv">$i</span>.ppm tempoutput
+    touch out.txt
+    cat tempoutput.txt &gt;&gt; <span class="nv">$OUTPUT</span>
+<span class="k">done</span>
+
+rm *.ppm
+awk <span class="s1">&#39; /^$/ { print &#34;\n&#34;; } /./ { printf(&#34;%s &#34;, $0); } END { print &#34;&#34;; } &#39;</span> <span class="nv">$OUTPUT</span> &gt; <span class="nv">$pdf</span>.txt
+
+ebook-convert <span class="nv">$pdf</span>.txt <span class="nv">$pdf</span>.mobi --authors<span class="o">=</span><span class="s2">&#34;</span><span class="nv">$AUTHOR</span><span class="s2">&#34;</span> --title<span class="o">=</span><span class="s2">&#34;</span><span class="nv">$TITLE</span><span class="s2">&#34;</span> --title-sort<span class="o">=</span><span class="s2">&#34;</span><span class="nv">$TITLE</span><span class="s2">&#34;</span> --pubdate<span class="o">=</span><span class="s2">&#34;</span><span class="nv">$DATE</span><span class="s2">&#34;</span>
+
+rm temp*
+rm *.txt
+rm *.html
+
+<span class="k">done</span>
+
+rm *.pdf
+</code></pre></div><p><strong>Ensure a copy of the original pdf is made, at present this script will delete any pdf in the directory.</strong></p>
+<p>To use this script, simply place it in a directory and copy in pdfs to convert, first run <code>chmod +x script.sh</code> to make it executible, then run <code>bash script.sh</code> and it should work automatically.</p></article><section class="article labels"><a class="article category" href=/categories/blog/>Blog</a><a class="article tag" href=/tags/bash/>bash</a><a class="article tag" href=/tags/kindle/>kindle</a></section><section class="article navigation"><p><a class="link" href="/post/managing_references/"><span class="li"></span>Managing References in R Markdown and Rnoweb</a></p><p><a class="link" href="/post/maup_essay/"><span class="li"></span>Assessment of Area Based Government Policy in the United Kingdom in Relation to the Modifiable Areal Unit Problem</a class="link">
+    </p></section></div><section id="footer" class="footer max-body-width"><div class="footer-wrap">
+    <p class="copyright">©2020 Notepadium.</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section><script src="/js/hljs.min.0799348a91dce12c6be4a73f943cfe78f181f4e6f6ec35c4af0fca1de377879f77cfab03c30f03a174d675737b5a9314.js" integrity="sha384-B5k0ipHc4Sxr5Kc/lDz&#43;ePGB9Ob27DXErw/KHeN3h593z6sDww8DoXTWdXN7WpMU"></script><script>hljs.initHighlightingOnLoad();</script></div>
+</body>
+
+</html>

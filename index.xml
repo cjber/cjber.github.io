@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Cillian Berragan</title>
+    <link>/</link>
+    <description>Recent content on Cillian Berragan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>©2020 Notepadium.</copyright>
+    <lastBuildDate>Thu, 28 Feb 2019 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Posts</title>
+      <link>/post/</link>
+      <pubDate>Thu, 12 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>About Me</title>
+      <link>/about/</link>
+      <pubDate>Thu, 28 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/about/</guid>
+      <description>I am currently studying an integrated MSc and PhD in Data Analytics and Society through @DataCDT, with @GeoDataScience at the University of Liverpool. My project title is &amp;ldquo;Improving the Geolocation of Emergency Service Response through Big Data&amp;rdquo;
+In addition to my studies I am very fond of the Linux operating system, particularly the distribution I have been running for a while now; Manjaro, with the i3 window manager. At present I maintain several Arch User Repository (AUR) PKGBUILD files for various tools and aim in the future to contribute more to various packages and other open source software, primarily through my contributions on Github.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>qlfs on Cillian Berragan</title>
+    <link>/tags/qlfs/</link>
+    <description>Recent content in qlfs on Cillian Berragan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>©2020 Notepadium.</copyright>
+    <lastBuildDate>Tue, 13 Nov 2018 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="/tags/qlfs/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Analysing Working Hours in R</title>
+      <link>/post/working_hours/</link>
+      <pubDate>Tue, 13 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/working_hours/</guid>
+      <description>&lt;p&gt;This project assesses the average hours worked in relation to the type of job role of persons assessed as part of the &lt;a href=&#34;https://www.ons.gov.uk/surveys/informationforhouseholdsandindividuals/householdandindividualsurveys/labourforcesurvey&#34;target=&#34;_blank&#34;&gt;Quarterly Labour Force Survey&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
