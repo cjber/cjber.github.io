@@ -14,10 +14,10 @@
     
     <item>
       <title>Modelling Unemployment in the United Kingdom with Census Data</title>
-      <link>/post/modelling_unemployment/</link>
+      <link>/post/projects/modelling_unemployment/</link>
       <pubDate>Thu, 10 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/modelling_unemployment/</guid>
+      <guid>/post/projects/modelling_unemployment/</guid>
       <description>&lt;p&gt;This project assesses the regional variation in unemployment across the United Kingdom using linear regression in R.&lt;/p&gt;</description>
     </item>
     

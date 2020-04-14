@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>©2020 Notepadium.</copyright>
-    <lastBuildDate>Thu, 12 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 09 Mar 2020 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="/tags/r/index.xml" rel="self" type="application/rss+xml" />
     
@@ -23,28 +23,28 @@
     
     <item>
       <title>Using Multi-level Models to Combat the Issue of Census Data Aggregation</title>
-      <link>/post/maup_mlm/</link>
+      <link>/post/projects/maup_mlm/</link>
       <pubDate>Thu, 16 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/maup_mlm/</guid>
+      <guid>/post/projects/maup_mlm/</guid>
       <description>&lt;p&gt;This essay presents the outcome of analysis using multi level models to consider the effect of arbitrary data aggregation into census units.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Modelling Unemployment in the United Kingdom with Census Data</title>
-      <link>/post/modelling_unemployment/</link>
+      <link>/post/projects/modelling_unemployment/</link>
       <pubDate>Thu, 10 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/modelling_unemployment/</guid>
+      <guid>/post/projects/modelling_unemployment/</guid>
       <description>&lt;p&gt;This project assesses the regional variation in unemployment across the United Kingdom using linear regression in R.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Analysing Working Hours in R</title>
-      <link>/post/working_hours/</link>
+      <link>/post/projects/working_hours/</link>
       <pubDate>Tue, 13 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/working_hours/</guid>
+      <guid>/post/projects/working_hours/</guid>
       <description>&lt;p&gt;This project assesses the average hours worked in relation to the type of job role of persons assessed as part of the &lt;a href=&#34;https://www.ons.gov.uk/surveys/informationforhouseholdsandindividuals/householdandindividualsurveys/labourforcesurvey&#34;target=&#34;_blank&#34;&gt;Quarterly Labour Force Survey&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
     

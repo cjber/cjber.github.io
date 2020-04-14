@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml"><url>
+    <loc>https://cjber.github.io/categories/</loc><lastmod>2020-03-09T00:00:00+00:00</lastmod></url><url>
+    <loc>https://cjber.github.io/post/projects/car_ml/</loc><lastmod>2020-03-09T00:00:00+00:00</lastmod></url><url>
+    <loc>https://cjber.github.io/categories/portfolio/</loc><lastmod>2020-03-09T00:00:00+00:00</lastmod></url><url>
+    <loc>https://cjber.github.io/post/</loc><lastmod>2020-03-09T00:00:00+00:00</lastmod></url><url>
+    <loc>https://cjber.github.io/tags/python/</loc><lastmod>2020-03-09T00:00:00+00:00</lastmod></url><url>
+    <loc>https://cjber.github.io/tags/r/</loc><lastmod>2020-03-09T00:00:00+00:00</lastmod></url><url>
+    <loc>https://cjber.github.io/tags/rmarkdown/</loc><lastmod>2020-03-09T00:00:00+00:00</lastmod></url><url>
+    <loc>https://cjber.github.io/tags/</loc><lastmod>2020-03-09T00:00:00+00:00</lastmod></url><url>
     <loc>https://cjber.github.io/tags/abm/</loc><lastmod>2019-12-12T00:00:00+00:00</lastmod></url><url>
-    <loc>https://cjber.github.io/post/abm_liv/</loc><lastmod>2019-12-12T00:00:00+00:00</lastmod></url><url>
-    <loc>https://cjber.github.io/categories/</loc><lastmod>2019-12-12T00:00:00+00:00</lastmod></url><url>
+    <loc>https://cjber.github.io/post/projects/abm_liv/</loc><lastmod>2019-12-12T00:00:00+00:00</lastmod></url><url>
     <loc>https://cjber.github.io/tags/latex/</loc><lastmod>2019-12-12T00:00:00+00:00</lastmod></url><url>
-    <loc>https://cjber.github.io/categories/portfolio/</loc><lastmod>2019-12-12T00:00:00+00:00</lastmod></url><url>
-    <loc>https://cjber.github.io/post/</loc><lastmod>2019-12-12T00:00:00+00:00</lastmod></url><url>
-    <loc>https://cjber.github.io/tags/python/</loc><lastmod>2019-12-12T00:00:00+00:00</lastmod></url><url>
-    <loc>https://cjber.github.io/tags/r/</loc><lastmod>2019-12-12T00:00:00+00:00</lastmod></url><url>
-    <loc>https://cjber.github.io/tags/rmarkdown/</loc><lastmod>2019-12-12T00:00:00+00:00</lastmod></url><url>
-    <loc>https://cjber.github.io/tags/</loc><lastmod>2019-12-12T00:00:00+00:00</lastmod></url><url>
     <loc>https://cjber.github.io/tags/template/</loc><lastmod>2019-12-12T00:00:00+00:00</lastmod></url><url>
-    <loc>https://cjber.github.io/post/uol_rmarkdown/</loc><lastmod>2019-12-12T00:00:00+00:00</lastmod></url><url>
+    <loc>https://cjber.github.io/post/projects/uol_rmarkdown/</loc><lastmod>2019-12-12T00:00:00+00:00</lastmod></url><url>
     <loc>https://cjber.github.io/tags/bash/</loc><lastmod>2019-11-15T00:00:00+00:00</lastmod></url><url>
     <loc>https://cjber.github.io/tags/bibtex/</loc><lastmod>2019-11-15T00:00:00+00:00</lastmod></url><url>
     <loc>https://cjber.github.io/categories/blog/</loc><lastmod>2019-11-15T00:00:00+00:00</lastmod></url><url>
@@ -19,15 +20,15 @@
     <loc>https://cjber.github.io/post/managing_references/</loc><lastmod>2019-11-15T00:00:00+00:00</lastmod></url><url>
     <loc>https://cjber.github.io/tags/rnoweb/</loc><lastmod>2019-11-15T00:00:00+00:00</lastmod></url><url>
     <loc>https://cjber.github.io/post/kindle/</loc><lastmod>2019-11-15T00:00:00+00:00</lastmod></url><url>
-    <loc>https://cjber.github.io/post/maup_essay/</loc><lastmod>2019-05-16T00:00:00+00:00</lastmod></url><url>
+    <loc>https://cjber.github.io/post/projects/maup_essay/</loc><lastmod>2019-05-16T00:00:00+00:00</lastmod></url><url>
     <loc>https://cjber.github.io/tags/census/</loc><lastmod>2019-05-16T00:00:00+00:00</lastmod></url><url>
     <loc>https://cjber.github.io/tags/essay/</loc><lastmod>2019-05-16T00:00:00+00:00</lastmod></url><url>
     <loc>https://cjber.github.io/tags/maup/</loc><lastmod>2019-05-16T00:00:00+00:00</lastmod></url><url>
     <loc>https://cjber.github.io/tags/rmd/</loc><lastmod>2019-05-16T00:00:00+00:00</lastmod></url><url>
-    <loc>https://cjber.github.io/post/maup_mlm/</loc><lastmod>2019-05-16T00:00:00+00:00</lastmod></url><url>
+    <loc>https://cjber.github.io/post/projects/maup_mlm/</loc><lastmod>2019-05-16T00:00:00+00:00</lastmod></url><url>
     <loc>https://cjber.github.io/about/</loc><lastmod>2019-02-28T00:00:00+00:00</lastmod></url><url>
     <loc>https://cjber.github.io/</loc><lastmod>2019-02-28T00:00:00+00:00</lastmod></url><url>
-    <loc>https://cjber.github.io/post/modelling_unemployment/</loc><lastmod>2019-01-10T00:00:00+00:00</lastmod></url><url>
+    <loc>https://cjber.github.io/post/projects/modelling_unemployment/</loc><lastmod>2019-01-10T00:00:00+00:00</lastmod></url><url>
     <loc>https://cjber.github.io/tags/unemployment/</loc><lastmod>2019-01-10T00:00:00+00:00</lastmod></url><url>
-    <loc>https://cjber.github.io/post/working_hours/</loc><lastmod>2018-11-13T00:00:00+00:00</lastmod></url><url>
+    <loc>https://cjber.github.io/post/projects/working_hours/</loc><lastmod>2018-11-13T00:00:00+00:00</lastmod></url><url>
     <loc>https://cjber.github.io/tags/qlfs/</loc><lastmod>2018-11-13T00:00:00+00:00</lastmod></url></urlset>

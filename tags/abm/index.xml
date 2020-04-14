@@ -14,10 +14,10 @@
     
     <item>
       <title>Agent Based Model: Liverpool Crime</title>
-      <link>/post/abm_liv/</link>
+      <link>/post/projects/abm_liv/</link>
       <pubDate>Thu, 12 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/abm_liv/</guid>
+      <guid>/post/projects/abm_liv/</guid>
       <description>&lt;p&gt;An agent based model framework, written in python, demonstrating the interaction between crime and police officers in the Liverpool region. Completed as part of the GEOG5995M University of Leeds module: Programming for Social Scientists.&lt;/p&gt;</description>
     </item>
     

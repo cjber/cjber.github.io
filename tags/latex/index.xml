@@ -14,10 +14,10 @@
     
     <item>
       <title>University of Liverpool R Markdown Templates</title>
-      <link>/post/uol_rmarkdown/</link>
+      <link>/post/projects/uol_rmarkdown/</link>
       <pubDate>Thu, 12 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/uol_rmarkdown/</guid>
+      <guid>/post/projects/uol_rmarkdown/</guid>
       <description>&lt;p&gt;Two R Markdown templates for use in assignments and dissertations/theses at the University of Liverpool. Template written primarily in LaTeX and packaged for use in R Markdown.&lt;/p&gt;</description>
     </item>
     

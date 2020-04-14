@@ -7,17 +7,26 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>©2020 Notepadium.</copyright>
-    <lastBuildDate>Thu, 12 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 09 Mar 2020 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="/tags/python/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Exploring Online Car Listings Using SckKit Learn</title>
+      <link>/post/projects/car_ml/</link>
+      <pubDate>Mon, 09 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/projects/car_ml/</guid>
+      <description>&lt;p&gt;This essay presents the results of a python based machine learning exercise in which car prices scraped from Ebay listings are explored. The dataset is freely available from &lt;a href=&#34;https://www.kaggle.com/orgesleka/used-cars-database&#34;target=&#34;_blank&#34;&gt;Kaggle&lt;/a&gt;, under the &lt;a href=&#34;https://creativecommons.org/publicdomain/zero/1.0/&#34;target=&#34;_blank&#34;&gt;CC0&lt;/a&gt; licence. It should be noted that significant amount of pre-cleaning was performed on this data to present it in a usable state for this assessment. For readability this pre-cleaning is included as an &lt;a href=&#34;#data_cleaning&#34;&gt;Appendix&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Agent Based Model: Liverpool Crime</title>
-      <link>/post/abm_liv/</link>
+      <link>/post/projects/abm_liv/</link>
       <pubDate>Thu, 12 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/abm_liv/</guid>
+      <guid>/post/projects/abm_liv/</guid>
       <description>&lt;p&gt;An agent based model framework, written in python, demonstrating the interaction between crime and police officers in the Liverpool region. Completed as part of the GEOG5995M University of Leeds module: Programming for Social Scientists.&lt;/p&gt;</description>
     </item>
     

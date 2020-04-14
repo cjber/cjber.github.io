@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.68.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>Agent Based Model: Liverpool Crime&nbsp;&ndash;&nbsp;Cillian Berragan</title><link rel="stylesheet" href="/css/core.min.e9d41c6163ab76ebf9c1d79f3552be0861d1090eeffcacccd2e154e4db2c107f21f0690f7451f6a8d9c0ad1efbc600f8.css" integrity="sha384-6dQcYWOrduv5wdefNVK&#43;CGHRCQ7v/KzM0uFU5NssEH8h8GkPdFH2qNnArR77xgD4"><body>
+    <div class="base-body"><section id="header" class="site header max-body-width">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Cillian Berragan</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/about/">About Me</a><a class="nav item" href="https://github.com/cjber/cv/raw/master/cv.pdf"target="_blank">Curriculum Vitae</a><a class="nav item" href="/categories/portfolio/">Portfolio</a></nav></div></span></div></section><div id="content" class="max-body-width"><section class="article header">
+    <h1 class="article title">Agent Based Model: Liverpool Crime</h1><p class="article date">2019-12-12<span class="reading-time"> • 9 minutes to read</span></p></section><article class="article markdown-body"><p>An agent based model framework, written in python, demonstrating the interaction between crime and police officers in the Liverpool region. Completed as part of the GEOG5995M University of Leeds module: Programming for Social Scientists.</p>
+<hr>
+<p align="center">
+<font size="5">
+<a href="https://github.com/cjber/abm_liv"> Repository</a></br>
+<hr>
+<p align="center">
+<a href="https://cjber.github.io/abm_liv"> Documentation</a>
+</font>
+</p>
+<hr>
+<p>Either directly download as a zip from the &ldquo;Clone or download&rdquo; button. Or:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">git clone https://github.com/cjber/abm_liv
+</code></pre></div><p>then run the program with:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">unzip abm_liv.zip
+<span class="nb">cd</span> abm_liv/
+pip install --user -r requirements.txt
+python main.py
+</code></pre></div><h2 id="final-model">Final Model</h2>
+<p><a target="_blank" rel="noopener noreferrer" 
+  href="img/model.gif"><img  src="img/model.gif"
+        alt/></a></p>
+<h2 id="intention-of-the-software">Intention of the Software</h2>
+<p>This model demonstrates a selection of unmoving crime points (red), with a selection of moving police points (blue) contained within a bounding polygon, in this case Liverpool Authority District. Crime points are taken directly from the police.uk API, and are given as a random subset of the total crime data available for the year 2018.</p>
+<p>Police aim for the crime they are nearest to, and once they reach a certain proximity this crime is considered solved, and takes a green colour. Police ignore any crime that has been solved.</p>
+<p>Additionally, the Liverpool Authority District has been split into grids of equal size, grid colour changes based on whether an unsolved crime, or police point is present for each frame. The presence of unsolved crime reduces the value of a grid, giving it a red colour, while the presence of a police point increases the value of a grid, giving it a green colour. Crime points have a chance to be randomly added with each iteration, this is printed to the console.</p>
+<p>The model itself broadly demonstrates the natural occurrence of crime in Liverpool, as most runs produce crime points clustered towards the city centre (North East). While police units are randomly spaced when initiated. Often the model when ran will cause police units to chase crime towards the city centre. If an unsolved crime is present further out, it is often left ignored by police as it does not become a priority to target, as police units chase only the nearest crime point.</p>
+<p>The goal of this model design was to demontrate the possibility of utilising true geometric areas to act as a barrier for agents. By taking true crime points for the polygon used, the effect of suitable police location may be assessed practically. Through this, the model also demonstrates the API querying made available through the police.uk website.</p>
+<h2 id="uml-diagram">UML Diagram</h2>
+<p>Given below is a UML diagram which demonstrates the interaction between python Classes and any class level functions included in this program.</p>
+<h3 id="classes">Classes</h3>
+<p><a target="_blank" rel="noopener noreferrer" 
+  href="img/classes.png"><img  src="img/classes.png"
+        alt/></a></p>
+<h3 id="modules">Modules</h3>
+<p><a target="_blank" rel="noopener noreferrer" 
+  href="img/packages.png"><img  src="img/packages.png"
+        alt/></a></p>
+<p>The three main scripts are <code>main.py</code> which contains the GUI and all functions relating to the running of the model, <code>crime.py</code> containing the Crime agent, and <code>police.py</code> containing the Police agent. Additionally the second UML image shows that the <code>api.py</code> script is connected to <code>main.py</code>, this indicates the reading in of the crime data through the API directly into the main program. The <code>data_clean.py</code> script is not connected to the main program, and as such is not necessarily required to simply run the model. It is included for the processing of the bounds data, and may be modified as outlined in the <strong>Developer Guide</strong> section of the program <a href="https://cjber.github.io/abm_liv/"target="_blank">documentation</a>.</p>
+<h2 id="issues-during-development">Issues during development</h2>
+<ul>
+<li>When querying the police.uk API on program startup, occasionally the request will be rejected. This originally meant that the program would fail. However, a solution was devised in which a successful query will save the data as a csv into the data subdirectory. The next run of the program will first query the police.uk API, and if the query is rejected it will fallback to the &ldquo;cached&rdquo; police data and use this for the crime points instead:</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Request sent.&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;API lookup fail; using cached data.&#34;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&#34;./data/crime_cached.csv&#34;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="c1">## process and write to file</span>
+</code></pre></div><ul>
+<li>Originally there were no checks to determine whether both crime and police points originally appeared within the bounds of the polygon. This meant that often points were not visible. This was solved through using the <code>geopandas.within()</code> geometric function and a while loop:</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="c1"># int for random row</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">crime_api</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">crime_api</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">crime_api</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+        <span class="c1"># convert point to geodatafame</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">x</span><span class="p">],</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">y</span><span class="p">]})</span>
+        <span class="n">geom</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">points_from_xy</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+        <span class="n">gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">geometry</span><span class="o">=</span><span class="n">geom</span><span class="p">)</span>
+
+        <span class="c1"># find if point falls within polygon</span>
+        <span class="n">within</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">gdf</span><span class="o">.</span><span class="n">within</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bounds</span><span class="p">))</span>
+        <span class="c1"># while loop breaks only if point is within</span>
+        <span class="k">if</span> <span class="n">within</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">gdf</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">gdf</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">geom</span> <span class="o">=</span> <span class="n">gdf</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span>
+            <span class="k">break</span>
+</code></pre></div><p>In this code example, the while loop does not break until the x and y variables provide a point which falls <code>within</code> the bounds of the <code>self.bounds</code> variable (the bounding polygon).</p>
+<h2 id="testing">Testing</h2>
+<p>This project primarily makes use of the <code>mypy</code> optional static type checking syntax for ensuring that correct variable types were used when assigned, and output in both global assignments and functions.</p>
+<p>An effort was made to write unit tests using the <code>unittest</code> module, however it was unclear what the benefit would be for this object orientated agent approach. Perhaps a greater understanding of unit testing was required. The attempt may be accessed through the <code>test/</code> directory. Doctests were used sparingly, as generally functions used in this project do not return anything.</p>
+<p>For an example of a doctest see <code>crime.py</code> containing the <code>Crime</code> object with the <code>distance_between</code> function. To test the doctests for this script run:</p>
+<pre><code>python -m doctest -v crime.py
+</code></pre><h2 id="concepts">Concepts</h2>
+<p>The foundation of an agent based model are the &lsquo;agents&rsquo;, which in this demonstration move around randomly, within their own environment.</p>
+<p>First some initial variables were created:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">agents</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">num_of_agents</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">num_of_iterations</span> <span class="o">=</span> <span class="mi">100</span>
+</code></pre></div><p>To move the agents around randomly, the python <code>random</code> library was imported and used to create random <code>xy</code> coordinates within a 100x100 grid.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">random</span>  <span class="c1"># random number library</span>
+
+<span class="c1"># random xy coordinates in 100x100 grid</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_of_agents</span><span class="p">):</span>
+    <span class="n">agents</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">99</span><span class="p">),</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">99</span><span class="p">)])</span>
+
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_of_iterations</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_of_agents</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">:</span>
+            <span class="n">agents</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">agents</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">100</span>
+            <span class="c1">#  print(&#34;adding 0 1&#34;) #  checking the values</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">agents</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">agents</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">100</span>
+            <span class="c1">#  print(&#34;taking 0 1&#34;)</span>
+
+        <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">:</span>
+            <span class="n">agents</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">agents</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">100</span>
+            <span class="c1">#  print(&#34;adding 1 1&#34;)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">agents</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">agents</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">100</span>
+            <span class="c1">#  print(&#34;taking 1 1&#34;)</span>
+
+        <span class="c1">#  check limits are followed</span>
+        <span class="k">if</span> <span class="n">agents</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">99</span> <span class="ow">or</span> <span class="n">agents</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> \
+                <span class="n">agents</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">99</span> <span class="ow">or</span> <span class="n">agents</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Warning; outside limits&#34;</span><span class="p">)</span>
+</code></pre></div><p>To ensure that if a agent is placed outside the 100x100 grid, the modulus operator, <code>%</code>, gives the remainder of the calculation <code>agents[i][i] +/- 1 / 100</code>, if the new agent position is below 0 or above 100, i.e. the value will wrap around to 99 with an agent position of -1, or 1 with an agent position of 101. Included in the above code are some simplistic debugging techniques, <code>print(&quot;adding X X&quot;)</code> indicates which random movement was being added in a particular iteration while <code>print(&quot;warning; outside limits&quot;)</code> was included to indicate whether the modulus operator was correctly limiting the agent limits.</p>
+<p>These agents may now be plotted using the <code>matplotlib</code> library. The <code>num_of_agents</code> variable is used here to iterate through the plot, and create the specified number of agents:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">99</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">99</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_of_agents</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">agents</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">agents</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div><p>The output of this code is a graph with random agent locations, the position of these agents changed each time the plot is rendered.</p>
+<h3 id="object-orientated-programming">Object-Orientated Programming</h3>
+<p>Building on the concept of &lsquo;agents&rsquo; and random movement, it is possible to use object orientated programming to create an agent <code>Class</code>. From now on, the Agent class may be moved into a separate python script, and the script called in using the <code>import</code> function. A minimal example of this current Class is given:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Agent</span><span class="p">():</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">environment</span><span class="p">,</span> <span class="n">agents</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">environment</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">environment</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">agents</span> <span class="o">=</span> <span class="n">agents</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">store</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">environment</span> <span class="o">=</span> <span class="n">environment</span>
+
+    <span class="k">def</span> <span class="nf">move</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">environment</span><span class="p">):</span>
+        <span class="n">height</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">environment</span><span class="p">)</span>
+        <span class="n">width</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">environment</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+           <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">rand</span><span class="p">)</span> <span class="o">%</span> <span class="n">width</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">rand</span><span class="p">)</span> <span class="o">%</span> <span class="n">width</span>
+            <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">rand</span><span class="p">)</span> <span class="o">%</span> <span class="n">height</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">rand</span><span class="p">)</span> <span class="o">%</span> <span class="n">height</span>
+</code></pre></div><p>Classes are appropriate for developing agent based model frameworks as they enable the creation of new types of objects, which there may be multiple instances of. Additionally, classes in python may have methods which enable the modification of the class state.</p>
+<p>With this agent class is is now possible to create agents in an object orientated manner:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># agentframework.py contains the Agent Class</span>
+<span class="c1"># and is within the same directory as the main script</span>
+<span class="kn">import</span> <span class="nn">agentframework</span> 
+
+<span class="n">num_of_agents</span>
+<span class="n">agents</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Make the agents.</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_of_agents</span><span class="p">):</span>
+    <span class="n">agents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">agentframework</span><span class="o">.</span><span class="n">Agent</span><span class="p">())</span>
+
+<span class="c1"># Move the agents.</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_of_iterations</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_of_agents</span><span class="p">):</span>
+        <span class="n">agents</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">move</span><span class="p">()</span>
+</code></pre></div><h3 id="environment">Environment</h3>
+<p>The environment was created from a text file with comma separated values ranging from 0 to ~250, with 300 values per line, and 300 lines. This was read into python forming a two dimensional array:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">environment</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;in.txt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">csv_file</span><span class="p">:</span>
+    <span class="n">csv_reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">csv_file</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">csv_reader</span><span class="p">:</span>
+        <span class="n">rowlist</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
+            <span class="n">rowlist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+        <span class="n">environment</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rowlist</span><span class="p">)</span>
+</code></pre></div><h2 id="animating">Animating</h2>
+<p>The next step is to animate the model, and allow a number of iterations to see how it develops over time. First initial parameters may be set, one method for user input is the use of command line arguments. This may be achieved through the <code>sys</code> import.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="n">num_of_agents</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">num_of_iterations</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">neighbourhood</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+</code></pre></div><p>This allows when running the program for parameters to be selected in the form: <code>python main.py 10 10 10</code>.</p>
+<p>To create the animation, both the <code>matplotlib.pyplot</code> and <code>matplotlib.animation</code> libraries were required, the total imports used now include:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">agentframework</span>
+<span class="kn">import</span> <span class="nn">importlib</span>
+
+<span class="c1"># typically accepted convention</span>
+<span class="kn">from</span> <span class="nn">matplotlib.animation</span> <span class="kn">import</span> <span class="n">FuncAnimation</span>
+</code></pre></div><p>Additional functions allow for the running of the animation, in this example agents move randomly, and eat the environment. An <code>update()</code> function is created which runs the class functions, and updates the plot each frame. The <code>gen_function()</code> specifies the number of frames to run, which in this case is a maximum of 1000, or until the stopping condition is met.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="n">frame_number</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_of_iterations</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_of_agents</span><span class="p">):</span>
+            <span class="n">agents</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">environment</span><span class="p">)</span>
+            <span class="n">agents</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">eat</span><span class="p">()</span>
+            <span class="n">fig</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+            <span class="k">global</span> <span class="n">carry_on</span>
+
+    <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mf">0.0001</span><span class="p">:</span>
+        <span class="n">carry_on</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;stopping condition&#34;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_of_agents</span><span class="p">):</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">environment</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="n">min_val</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">max_val</span><span class="p">,</span>
+                   <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;copper&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">agents</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">agents</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">gen_function</span><span class="p">(</span><span class="n">b</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">global</span> <span class="n">carry_on</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">a</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">carry_on</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="n">a</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">1</span>
+
+
+<span class="n">animation</span> <span class="o">=</span> <span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">update</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                               <span class="n">frames</span><span class="o">=</span><span class="n">gen_function</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></article><section class="article labels"><a class="article category" href=/categories/portfolio/>Portfolio</a><a class="article tag" href=/tags/python/>python</a><a class="article tag" href=/tags/abm/>abm</a></section><section class="article navigation"><p><a class="link" href="/post/projects/car_ml/"><span class="li"></span>Exploring Online Car Listings Using SckKit Learn</a></p><p><a class="link" href="/post/projects/uol_rmarkdown/"><span class="li"></span>University of Liverpool R Markdown Templates</a class="link">
+    </p></section></div><section id="footer" class="footer max-body-width"><div class="footer-wrap">
+    <p class="copyright">©2020 Notepadium.</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section><script src="/js/hljs.min.0799348a91dce12c6be4a73f943cfe78f181f4e6f6ec35c4af0fca1de377879f77cfab03c30f03a174d675737b5a9314.js" integrity="sha384-B5k0ipHc4Sxr5Kc/lDz&#43;ePGB9Ob27DXErw/KHeN3h593z6sDww8DoXTWdXN7WpMU"></script><script>hljs.initHighlightingOnLoad();</script></div>
+</body>
+
+</html>
