@@ -18,7 +18,7 @@
       <pubDate>Mon, 09 Mar 2020 00:00:00 +0000</pubDate>
       
       <guid>/post/projects/car_ml/</guid>
-      <description>&lt;p&gt;This essay presents the results of a python based machine learning exercise in which car prices scraped from Ebay listings are explored. The dataset is freely available from &lt;a href=&#34;https://www.kaggle.com/orgesleka/used-cars-database&#34;target=&#34;_blank&#34;&gt;Kaggle&lt;/a&gt;, under the &lt;a href=&#34;https://creativecommons.org/publicdomain/zero/1.0/&#34;target=&#34;_blank&#34;&gt;CC0&lt;/a&gt; licence. It should be noted that significant amount of pre-cleaning was performed on this data to present it in a usable state for this assessment. For readability this pre-cleaning is included as an &lt;a href=&#34;#data_cleaning&#34;&gt;Appendix&lt;/a&gt;.&lt;/p&gt;</description>
+      <description>&lt;p&gt;This essay presents the results of a python based machine learning exercise in which car prices scraped from Ebay listings are explored. The dataset is freely available from &lt;a href=&#34;https://www.kaggle.com/orgesleka/used-cars-database&#34;target=&#34;_blank&#34;&gt;Kaggle&lt;/a&gt;, under the &lt;a href=&#34;https://creativecommons.org/publicdomain/zero/1.0/&#34;target=&#34;_blank&#34;&gt;CC0&lt;/a&gt; licence. It should be noted that significant amount of pre-cleaning was performed on this data to present it in a usable state for this assessment. For readability this pre-cleaning is included as an Appendix.&lt;/p&gt;</description>
     </item>
     
     <item>

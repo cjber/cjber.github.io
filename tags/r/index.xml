@@ -22,11 +22,29 @@
     </item>
     
     <item>
+      <title>Predicting Property Values within the Liverpool Authority District using Spatial Econometric Models</title>
+      <link>/post/projects/spatial_econ/</link>
+      <pubDate>Thu, 16 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/projects/spatial_econ/</guid>
+      <description>&lt;p&gt;This essay presents the outcome of analysis using multi level models to consider the effect of arbitrary data aggregation into census units.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Using Multi-level Models to Combat the Issue of Census Data Aggregation</title>
       <link>/post/projects/maup_mlm/</link>
       <pubDate>Thu, 16 May 2019 00:00:00 +0000</pubDate>
       
       <guid>/post/projects/maup_mlm/</guid>
+      <description>&lt;p&gt;This essay presents the outcome of analysis using multi level models to consider the effect of arbitrary data aggregation into census units.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Spatial Autocorrelation and Geographically Weighted Regression</title>
+      <link>/post/projects/gir/</link>
+      <pubDate>Thu, 28 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/projects/gir/</guid>
       <description>&lt;p&gt;This essay presents the outcome of analysis using multi level models to consider the effect of arbitrary data aggregation into census units.&lt;/p&gt;</description>
     </item>
     

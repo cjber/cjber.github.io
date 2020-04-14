@@ -103,6 +103,24 @@
     </item>
     
     <item>
+      <title>essay</title>
+      <link>/tags/essay/</link>
+      <pubDate>Sun, 15 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/essay/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>maup</title>
+      <link>/tags/maup/</link>
+      <pubDate>Sun, 15 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/maup/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>census</title>
       <link>/tags/census/</link>
       <pubDate>Thu, 16 May 2019 00:00:00 +0000</pubDate>
@@ -112,20 +130,11 @@
     </item>
     
     <item>
-      <title>essay</title>
-      <link>/tags/essay/</link>
+      <title>gir</title>
+      <link>/tags/gir/</link>
       <pubDate>Thu, 16 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/essay/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>maup</title>
-      <link>/tags/maup/</link>
-      <pubDate>Thu, 16 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/maup/</guid>
+      <guid>/tags/gir/</guid>
       <description></description>
     </item>
     
