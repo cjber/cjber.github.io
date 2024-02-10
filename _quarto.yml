@@ -18,4 +18,4 @@ format:
     css: styles.css
     toc: true
 
-bibliography: ~/drive/bib/references.bib
+bibliography: references.bib
