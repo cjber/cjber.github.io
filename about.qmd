@@ -1,15 +1,28 @@
 ---
 title: "About"
-image: profile.jpg
+image: imgs/profile.jpg
 about:
   template: jolla
   links:
     - icon: twitter
       text: Twitter
-      href: https://twitter.com
-    # (additional links excluded for brevity)
+      href: https://twitter.com/cjberragan
+    - icon: github
+      text: GitHub
+      href: https://github.com/cjber
+    - icon: linkedin
+      text: LinkedIn
+      href: https://linkedin.com/in/cjberr
 ---
 
-## About this website
+NLP Engineer at the Consumer Data Research Centre (CDRC). Building a RAG powered search system for the CDRC Data Catalogue, using the Llama Index framework. Aiming to improve data search and discovery.
 
-This is the contents of the about page for my website
+Experienced with PyTorch and Hugging Face Transformers, MLOps with DagsHub, DVC, GH Actions. Machine Learning with Scikit-Learn, Pandas, Polars, and Numpy. Keen to learn more about AWS and other cloud services.
+
+### Other Links
+
+[{{< ai google-scholar >}} Cillian Berragan](https://scholar.google.com/citations?user=mBNb4rgAAAAJ&hl=en)
+
+[{{< ai orcid >}} 0000-0003-2198-2245](https://orcid.org/my-orcid?orcid=0000-0003-2198-2245)
+
+[{{< ai cv >}}](https://github.com/cjber/cv)

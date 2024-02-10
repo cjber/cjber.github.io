@@ -10,9 +10,3 @@ listing:
 page-layout: full
 title-block-banner: true
 ---
-
-Google Scholar {{< ai google-scholar >}} 
-
-ORCID: {{< ai orcid >}}
-
-{{< ai doi >}} {{< ai figshare >}} {{< ai open-access >}} {{< ai orcid >}} {{< ai cv >}}
