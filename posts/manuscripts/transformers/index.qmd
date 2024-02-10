@@ -15,11 +15,13 @@ authors:
     affiliation: Ordnance Survey
     email: Jeremy.Morley@os.uk
 keywords: [named entity recognition, volunteered geographic information, natural language processing, place name extraction]
+doi: https://doi.org/10.1080/13658816.2022.2133125
 
 image: "figs/figure2.jpg"
 date: 2022-10-02
-other-links: [{href: https://github.com/cjber/ger-wiki, icon: github, rel: icon, text: Github Repository}, {href:  https://doi.org/10.5454/JPSv1i220161014, icon: journal-richtext, rel: icon, text: DOI 10.1080/13658816.2022.2133125}]
+other-links: [{href: https://github.com/cjber/ger-wiki, icon: github, rel: icon, text: Github Repository}, {href: https://figshare.com/articles/journal_contribution/Transformer_based_named_entity_recognition_for_place_name_extraction_from_unstructured_text/13415255, icon: database, rel: icon, text: FigShare Repository}]
 subtitle: "{{< ai open-access >}} {{< ai figshare >}} {{< ai doi >}}"
+description: "This published research article builds a custom transformer-based named entity recognition model (NER), evaluating the performance of this model against existing solutions for geoparsing geographic place names from text. This project uses the AllenNLP python library, containerised using Docker for reproducibility."
 ---
 
 ## Abstract {-}
