@@ -1,0 +1,3450 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//NLM//DTD JATS (Z39.96) Journal Archiving
+and Interchange DTD v1.2 20190208//EN" "JATS-archivearticle1.dtd">
+
+<article xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:xlink="http://www.w3.org/1999/xlink" dtd-version="1.2" article-type="other">
+
+<front>
+
+
+<article-meta>
+
+
+<title-group>
+<article-title>Mapping Cognitive Place Associations within the United
+Kingdom through Online Discussion on Reddit</article-title>
+</title-group>
+
+<contrib-group>
+<contrib contrib-type="author" corresp="yes">
+<name>
+<surname>Berragan</surname>
+<given-names>Cillian</given-names>
+</name>
+<string-name>Cillian Berragan</string-name>
+
+<email>c.berragan@liverpool.ac.uk</email>
+<xref ref-type="aff" rid="aff-1">a</xref>
+<xref ref-type="corresp" rid="cor-1">&#x002A;</xref>
+</contrib>
+<contrib contrib-type="author">
+<name>
+<surname>Singleton</surname>
+<given-names>Alex</given-names>
+</name>
+<string-name>Alex Singleton</string-name>
+
+<email>alex.singleton@liverpool.ac.uk</email>
+<xref ref-type="aff" rid="aff-1">a</xref>
+</contrib>
+<contrib contrib-type="author">
+<name>
+<surname>Calafiore</surname>
+<given-names>Alessia</given-names>
+</name>
+<string-name>Alessia Calafiore</string-name>
+
+<email>acalafio@ed.ac.uk</email>
+<xref ref-type="aff" rid="aff-2">b</xref>
+</contrib>
+<contrib contrib-type="author">
+<name>
+<surname>Morley</surname>
+<given-names>Jeremy</given-names>
+</name>
+<string-name>Jeremy Morley</string-name>
+
+<email>Jeremy.Morley@os.uk</email>
+<xref ref-type="aff" rid="aff-3">c</xref>
+</contrib>
+</contrib-group>
+<aff id="aff-1">
+<institution-wrap>
+<institution>University of Liverpool</institution>
+</institution-wrap>
+
+
+
+
+
+
+
+</aff>
+<aff id="aff-2">
+<institution-wrap>
+<institution>University of Edinburgh</institution>
+</institution-wrap>
+
+
+
+
+
+
+
+</aff>
+<aff id="aff-3">
+<institution-wrap>
+<institution>Ordnance Survey</institution>
+</institution-wrap>
+
+
+
+
+
+
+
+</aff>
+<author-notes>
+<corresp id="cor-1">c.berragan@liverpool.ac.uk</corresp>
+</author-notes>
+
+
+
+
+
+
+
+
+
+<history></history>
+
+
+<abstract>
+<p>This paper explores cognitive place associations; conceptualised as a
+place-based mental model that derives subconscious links between
+geographic locations. Utilising a large corpus of online discussion data
+from the social media website Reddit, we experiment on the extraction of
+such geographic knowledge from unstructured text. First we construct a
+system to identify place names found in Reddit comments, disambiguating
+each to a set of coordinates where possible. Following this, we build a
+collective picture of cognitive place associations in the United
+Kingdom, linking locations that co-occur in user comments and evaluating
+the effect of distance on the strength of these associations. Exploring
+these geographies nationally, associations were shown to be typically
+weaker over greater distances. This distance decay is also highly
+regional, rural areas typically have greater levels of distance decay,
+particularly in Wales and Scotland. When comparing major cities across
+the UK, we observe distinct distance decay patterns, influenced
+primarily by proximity to other cities.</p>
+</abstract>
+<kwd-group kwd-group-type="author">
+<kwd>cognitive place connectivity</kwd>
+<kwd>distance decay</kwd>
+<kwd>geoparsing</kwd>
+<kwd>mental maps</kwd>
+<kwd>natural language processing</kwd>
+<kwd>United Kingdom</kwd>
+</kwd-group>
+
+
+
+
+</article-meta>
+
+</front>
+
+<body>
+<sec id="sec-introduction">
+  <title>Introduction</title>
+  <p>The importance of relational thinking to understand geographical
+  phenomena has been widely acknowledged in human and computational
+  geography
+  (<xref alt="Glückler and Panitz 2021" rid="ref-gluckler2021" ref-type="bibr">Glückler
+  and Panitz 2021</xref>;
+  <xref alt="Bergmann and O’Sullivan 2018" rid="ref-bergmann2018" ref-type="bibr">Bergmann
+  and O’Sullivan 2018</xref>;
+  <xref alt="Lukermann 1961" rid="ref-lukermann1961" ref-type="bibr">Lukermann
+  1961</xref>). Spatial networks have been explored from a variety of
+  perspectives, to uncover the dynamics underpinning the spatial
+  behaviours of individuals
+  (<xref alt="González, Hidalgo, and Barabási 2008" rid="ref-gonzalez2008" ref-type="bibr">González,
+  Hidalgo, and Barabási 2008</xref>;
+  <xref alt="Noulas et al. 2011" rid="ref-noulas2011" ref-type="bibr">Noulas
+  et al. 2011</xref>), or to challenge conceptualisations of regions as
+  bounded by administrative definitions
+  (<xref alt="Calafiore et al. 2021" rid="ref-calafiore2021" ref-type="bibr">Calafiore
+  et al. 2021</xref>;
+  <xref alt="Alessandretti, Aslak, and Lehmann 2020" rid="ref-alessandretti2020" ref-type="bibr">Alessandretti,
+  Aslak, and Lehmann 2020</xref>).</p>
+  <p>Within computational geography, most research has explored direct
+  connections between places by investigating physical movements of
+  individuals, using population movement data from both traditional data
+  sources such as Census or surveys
+  (<xref alt="Rae 2009" rid="ref-rae2009" ref-type="bibr">Rae
+  2009</xref>;
+  <xref alt="Titheridge et al. 2009" rid="ref-titheridge2009" ref-type="bibr">Titheridge
+  et al. 2009</xref>), or through alternative forms of data like
+  transport records
+  (<xref alt="Yang, Li, and Li 2019" rid="ref-yang2019" ref-type="bibr">Yang,
+  Li, and Li 2019</xref>;
+  <xref alt="Allard and Moura 2016" rid="ref-allard2016" ref-type="bibr">Allard
+  and Moura 2016</xref>;
+  <xref alt="Gong et al. 2021" rid="ref-gong2021" ref-type="bibr">Gong
+  et al. 2021</xref>;
+  <xref alt="Farber and Li 2013" rid="ref-farber2013" ref-type="bibr">Farber
+  and Li 2013</xref>), mobile phone data
+  (<xref alt="Lin, Wu, and Li 2019" rid="ref-lin2019" ref-type="bibr">Lin,
+  Wu, and Li 2019</xref>;
+  <xref alt="SafeGraph 2022" rid="ref-safegraph2022" ref-type="bibr">SafeGraph
+  2022</xref>;
+  <xref alt="Rowe et al. 2022" rid="ref-rowe2022" ref-type="bibr">Rowe
+  et al. 2022</xref>), and geotagged social media
+  (<xref alt="Steiger et al. 2015" rid="ref-steiger2015" ref-type="bibr">Steiger
+  et al. 2015</xref>;
+  <xref alt="Arthur and Williams 2019" rid="ref-arthur2019" ref-type="bibr">Arthur
+  and Williams 2019</xref>;
+  <xref alt="Ostermann et al. 2015" rid="ref-ostermann2015" ref-type="bibr">Ostermann
+  et al. 2015</xref>;
+  <xref alt="Z. Li et al. 2021" rid="ref-li2021" ref-type="bibr">Z. Li
+  et al. 2021</xref>). However, focussing only on connections built
+  through population movement conceals associations that persist through
+  individuals or community subconscious, regardless of any physical
+  movement.</p>
+  <p>Literature discussing the role of human cognition in constructing
+  mental images of cities
+  (<xref alt="Lynch 1964" rid="ref-lynch1964" ref-type="bibr">Lynch
+  1964</xref>), and how they can be represented through mental maps
+  (<xref alt="Gould and White 1986" rid="ref-gould1986" ref-type="bibr">Gould
+  and White 1986</xref>), reveals that the way humans conceive spatial
+  structures and associations between places are substantially
+  entrenched in individuals’ experiences and geographic knowledge, which
+  only partially derive from movements. Places represent a complex
+  network of socio-spatial relationships that emerge from linked
+  individual experiences
+  (<xref alt="Pierce, Martin, and Murphy 2011" rid="ref-pierce2011" ref-type="bibr">Pierce,
+  Martin, and Murphy 2011</xref>), enabling the definition of
+  collectively recognised place associations. While movements in
+  geographic space are limited by time and distance
+  (<xref alt="Miller 2018" rid="ref-miller2018" ref-type="bibr">Miller
+  2018</xref>;
+  <xref alt="Patterson and Farber 2015" rid="ref-patterson2015" ref-type="bibr">Patterson
+  and Farber 2015</xref>), representational spaces expressed through
+  mental maps are not necessarily bounded by spatio-temporal constraints
+  (<xref alt="Merrifield 1993" rid="ref-merrifield1993" ref-type="bibr">Merrifield
+  1993</xref>). Modern developments in transport and communication
+  access warp the perceptions of distance between places
+  (<xref alt="Massey 2008" rid="ref-massey2008" ref-type="bibr">Massey
+  2008</xref>), and in turn their perceived level of connectivity
+  (<xref alt="Fabrikant et al. 2002" rid="ref-fabrikant2002" ref-type="bibr">Fabrikant
+  et al. 2002</xref>).</p>
+  <p>Alternatively, online sources of data offer novel opportunities to
+  explore place associations, built directly from the passive
+  contributions of individual users. Recent work has demonstrated how
+  digital social friendships
+  (<xref alt="Bailey et al. 2018" rid="ref-bailey2018" ref-type="bibr">Bailey
+  et al. 2018</xref>), or embedded links in Wikipedia articles
+  (<xref alt="Salvini and Fabrikant 2016" rid="ref-salvini2016" ref-type="bibr">Salvini
+  and Fabrikant 2016</xref>), may be used to provide insight into social
+  place connections. Other works have instead considered that text
+  itself can be used to quantify relationships between geographic terms,
+  described as ‘geo-semantic relatedness’
+  (<xref alt="Ballatore, Bertolotto, and Wilson 2014" rid="ref-ballatore2014" ref-type="bibr">Ballatore,
+  Bertolotto, and Wilson 2014</xref>). Work building on this concept has
+  applied it to city and region names identified in news articles,
+  social media, and general web pages
+  (<xref alt="Hu, Ye, and Shaw 2017" rid="ref-hu2017" ref-type="bibr">Hu,
+  Ye, and Shaw 2017</xref>;
+  <xref alt="Ye, Gong, and Li 2021" rid="ref-ye2021" ref-type="bibr">Ye,
+  Gong, and Li 2021</xref>;
+  <xref alt="Liu et al. 2014" rid="ref-liu2014" ref-type="bibr">Liu et
+  al. 2014</xref>;
+  <xref alt="Meijers and Peris 2019" rid="ref-meijers2019" ref-type="bibr">Meijers
+  and Peris 2019</xref>).</p>
+  <p>Distance is a key influence on observed levels of connectivity in
+  spatial interaction literature
+  (<xref alt="Haynes and Fotheringham 1985" rid="ref-haynes1985" ref-type="bibr">Haynes
+  and Fotheringham 1985</xref>), and Tobler’s first law of geography,
+  where locations that are further apart are typically less
+  well-connected
+  (<xref alt="Tobler 1970" rid="ref-tobler1970" ref-type="bibr">Tobler
+  1970</xref>), has generated the term ‘distance decay’
+  (<xref alt="Taylor 1983" rid="ref-taylor1983" ref-type="bibr">Taylor
+  1983</xref>), which has various forms of mathematical representation.
+  Given a legacy of empirical evidence, distance decay in its various
+  forms can be sensibly assumed in place connections when both temporal
+  and spatial constraints are considered in our physical environment.
+  However, when considering the links between locations from the
+  perspective of cognitive associations built through mental maps, such
+  constraints are no longer as restrictive
+  (<xref alt="Fabrikant et al. 2002" rid="ref-fabrikant2002" ref-type="bibr">Fabrikant
+  et al. 2002</xref>). Quantifying the effect of distance on cognitive
+  place associations may therefore result in unexpected patterns in the
+  effect of distance on associations, that reveal the cognitive biases
+  used to construct mental maps.</p>
+  <p>The objective of this paper is to quantify cognitive place
+  associations across the UK<xref ref-type="fn" rid="fn1">1</xref> to
+  build mental maps, while evaluating the effect of distance on the
+  strength of these associations, measuring the level of distance decay
+  through a gravity model. To generate association measures from a
+  cognitive rather than geographic perspective, we infer associations
+  through co-occurring locations extracted from a large corpus of
+  informal, unstructured and discursive text from the social media
+  website Reddit. Locations when mentioned in informal comments are
+  drawn from a cognitive process associated with mental maps of these
+  locations, subconsciously illustrating associations between places
+  from memory and based on experience.</p>
+  <p><xref alt="Section 2" rid="sec-cognitive-place-associations">Section 2</xref>
+  outlines existing literature relating to cognitive place associations,
+  detailing methods that can be used for the automated extraction and
+  grounding of place names<xref ref-type="fn" rid="fn2">2</xref> from a
+  large corpus of unstructured text.
+  <xref alt="Section 3" rid="sec-methodology">Section 3</xref> provides
+  details on our data sources, our methodology for geoparsing place
+  names, and the computation of a gravity model to examine the effects
+  of distance decay on the strength of associations. In
+  <xref alt="Section 4" rid="sec-results">Section 4</xref> we present
+  the results of our gravity model and demonstrate variations in
+  distance decay with respect to six locations. In
+  <xref alt="Section 5" rid="sec-conclusion">Section 5</xref> we
+  conclude our findings and outline the scope for future work.</p>
+</sec>
+<sec id="sec-cognitive-place-associations">
+  <title>Cognitive Place Associations</title>
+  <p>The term ‘mental map’ typically refers to the cognitive
+  visualisation of a geographic environment. They represent collective,
+  experiential geographic knowledge, relating to both places, and the
+  relationships between them
+  (<xref alt="Kaplan 1976" rid="ref-kaplan1976" ref-type="bibr">Kaplan
+  1976</xref>). Mental maps exhibit a variety of biases, for example,
+  they are often more detailed with respect to locations that we are
+  familiar with, while others may be less detailed or even absent
+  entirely
+  (<xref alt="Gould and White 1986" rid="ref-gould1986" ref-type="bibr">Gould
+  and White 1986</xref>). The scale and distance between features in
+  mental maps can be warped
+  (<xref alt="Peake and Moore 2004" rid="ref-peake2004" ref-type="bibr">Peake
+  and Moore 2004</xref>;
+  <xref alt="Marston, Jones III, and Woodward 2005" rid="ref-marston2005" ref-type="bibr">Marston,
+  Jones III, and Woodward 2005</xref>); prominent roads may appear
+  larger than in reality, skyline features in a city may be perceived as
+  less prominent due to their irrelevance to an individual at street
+  level
+  (<xref alt="Gould and White 1986" rid="ref-gould1986" ref-type="bibr">Gould
+  and White 1986</xref>;
+  <xref alt="Lynch 1964" rid="ref-lynch1964" ref-type="bibr">Lynch
+  1964</xref>), and good transport connections narrow the time it takes
+  to reach connected locations, which in turn reduces the perceived
+  distance between them
+  (<xref alt="Massey 2008" rid="ref-massey2008" ref-type="bibr">Massey
+  2008</xref>;
+  <xref alt="Merrifield 1993" rid="ref-merrifield1993" ref-type="bibr">Merrifield
+  1993</xref>). Intermediate features along common routes also have
+  varying levels of importance to individuals; unimportant features may
+  appear less prominent than in reality or absent altogether
+  (<xref alt="Carr and Schissler 1969" rid="ref-carr1969" ref-type="bibr">Carr
+  and Schissler 1969</xref>;
+  <xref alt="Kaplan 1976" rid="ref-kaplan1976" ref-type="bibr">Kaplan
+  1976</xref>).</p>
+  <p>The characterisation of mental maps has been well studied from a
+  qualitative perspective, often featuring individual participation for
+  the physical construction of hand-drawn sketches
+  (<xref alt="Lynch 1964" rid="ref-lynch1964" ref-type="bibr">Lynch
+  1964</xref>;
+  <xref alt="Pocock 1976" rid="ref-pocock1976" ref-type="bibr">Pocock
+  1976</xref>;
+  <xref alt="Montello et al. 2003" rid="ref-montello2003a" ref-type="bibr">Montello
+  et al. 2003</xref>;
+  <xref alt="Haney and Knowles 1978" rid="ref-haney1978" ref-type="bibr">Haney
+  and Knowles 1978</xref>;
+  <xref alt="Canter 1977" rid="ref-canter1977" ref-type="bibr">Canter
+  1977</xref>;
+  <xref alt="Murray and Spencer 1979" rid="ref-murray1979" ref-type="bibr">Murray
+  and Spencer 1979</xref>;
+  <xref alt="Lee 1973" rid="ref-lee1973" ref-type="bibr">Lee
+  1973</xref>;
+  <xref alt="Gould and White 1986" rid="ref-gould1986" ref-type="bibr">Gould
+  and White 1986</xref>;
+  <xref alt="Goodey 1974" rid="ref-goodey1974" ref-type="bibr">Goodey
+  1974</xref>). Such approaches typically consider more localised areas
+  that are familiar to selected participants
+  (<xref alt="Pocock 1976" rid="ref-pocock1976" ref-type="bibr">Pocock
+  1976</xref>;
+  <xref alt="Haney and Knowles 1978" rid="ref-haney1978" ref-type="bibr">Haney
+  and Knowles 1978</xref>;
+  <xref alt="Canter 1977" rid="ref-canter1977" ref-type="bibr">Canter
+  1977</xref>), focussing on mapping landmarks and regions within
+  cities. Others have considered the broad characterisation of larger
+  regions like entire countries
+  (<xref alt="Gould and White 1968" rid="ref-gould1968" ref-type="bibr">Gould
+  and White 1968</xref>;
+  <xref alt="Goodey 1974" rid="ref-goodey1974" ref-type="bibr">Goodey
+  1974</xref>), where mental maps are less detailed, instead
+  contributing generalised information regarding areas that are deemed
+  important to the participant. Inherently, these techniques capture
+  subjective information from individuals, which may not necessarily
+  conform with a generalised collective knowledge of these geographic
+  locations.</p>
+  <sec id="quantifying-associations">
+    <title>Quantifying associations</title>
+    <p>Within mobility research, connections between locations are
+    broadly quantified through mapping the flow of populations, goods,
+    services or other entities between origin and destination locations
+    (<xref alt="Shaw and Hesse 2010" rid="ref-shaw2010" ref-type="bibr">Shaw
+    and Hesse 2010</xref>). This relates to the concept of
+    <italic>Spatial Interaction</italic>, which describes a mathematical
+    or statistical representation of physical movements over space,
+    typically observed in the context of commuting, migration or
+    information and commodity flows
+    (<xref alt="Haynes and Fotheringham 1985" rid="ref-haynes1985" ref-type="bibr">Haynes
+    and Fotheringham 1985</xref>;
+    <xref alt="Shaw and Hesse 2010" rid="ref-shaw2010" ref-type="bibr">Shaw
+    and Hesse 2010</xref>;
+    <xref alt="Dennett and Wilson 2013" rid="ref-dennett2013" ref-type="bibr">Dennett
+    and Wilson 2013</xref>;
+    <xref alt="Rowe, Lovelace, and Dennett 2022" rid="ref-rowe2022a" ref-type="bibr">Rowe,
+    Lovelace, and Dennett 2022</xref>;
+    <xref alt="Singleton, Wilson, and O’Brien 2012" rid="ref-singleton2012" ref-type="bibr">Singleton,
+    Wilson, and O’Brien 2012</xref>;
+    <xref alt="Rowe et al. 2022" rid="ref-rowe2022" ref-type="bibr">Rowe
+    et al. 2022</xref>). In spatial interaction literature, the strength
+    of connectivity between locations is generally quantified through
+    gravity models, which incorporate the effect of relative distance on
+    the strength of interaction between origin and destination locations
+    (<xref alt="Erlander 1980" rid="ref-erlander1980" ref-type="bibr">Erlander
+    1980</xref>;
+    <xref alt="Haynes and Fotheringham 1985" rid="ref-haynes1985" ref-type="bibr">Haynes
+    and Fotheringham 1985</xref>). Typically, an increase in distance
+    leads to a decrease in spatial interaction, known as ‘distance
+    decay’
+    (<xref alt="Taylor and Openshaw 1975" rid="ref-taylor1975" ref-type="bibr">Taylor
+    and Openshaw 1975</xref>). While conceptualising geographic
+    connections in this manner builds a picture that is constrained by
+    spatio-temporal movement, this is not necessarily a requirement for
+    a more generalised understanding of associations as a geographic
+    concept
+    (<xref alt="Merriman 2012" rid="ref-merriman2012" ref-type="bibr">Merriman
+    2012</xref>).</p>
+    <p>Unlike physical connections, which are described by movements
+    across Euclidean space, cognitive associations are decoupled from
+    the restriction of physical movements; both the distance between
+    locations, and the time taken to travel between them, do not
+    directly influence the strength of cognitive associations. Instead,
+    they capture the persistent perceived associations that reflect the
+    experiential geographic knowledge used by individuals to generate
+    ‘mental maps’
+    (<xref alt="Gould and White 1986" rid="ref-gould1986" ref-type="bibr">Gould
+    and White 1986</xref>). Such associations capture non-specific
+    subconscious links between locations, influenced by personal
+    experiences, incorporating cultural similarities
+    (<xref alt="Greenberg Raanan and Shoval 2014" rid="ref-greenbergraanan2014" ref-type="bibr">Greenberg
+    Raanan and Shoval 2014</xref>), distortion through commuting methods
+    and navigation technologies
+    (<xref alt="Peake and Moore 2004" rid="ref-peake2004" ref-type="bibr">Peake
+    and Moore 2004</xref>), online communication
+    (<xref alt="Zook 2006" rid="ref-zook2006" ref-type="bibr">Zook
+    2006</xref>), and other influences on cognitive bias. For example,
+    transport access and telecommunication warp a general sense of
+    perceived geographic distance between certain locations
+    (<xref alt="Massey 2008" rid="ref-massey2008" ref-type="bibr">Massey
+    2008</xref>), and the cognitive understanding of ‘nearness’ does not
+    necessarily correlate with Euclidean distance
+    (<xref alt="Fabrikant et al. 2002" rid="ref-fabrikant2002" ref-type="bibr">Fabrikant
+    et al. 2002</xref>;
+    <xref alt="Worboys 2001" rid="ref-worboys2001" ref-type="bibr">Worboys
+    2001</xref>;
+    <xref alt="Montello 1993" rid="ref-montello1993" ref-type="bibr">Montello
+    1993</xref>). These implicit associations between places are
+    generated through a complex network of socio-spatial relationships,
+    built through linked individual experiences, and allow for shared
+    experiences of places to captured
+    (<xref alt="Pierce, Martin, and Murphy 2011" rid="ref-pierce2011" ref-type="bibr">Pierce,
+    Martin, and Murphy 2011</xref>).</p>
+    <p>Traditional approaches to the exploration of differences between
+    cognitive and real-world associations would have relied on the use
+    of large-scale studies and active individual participation to derive
+    these associations, for example through volunteered geographic
+    information (VGI)
+    (<xref alt="Goodchild 2007" rid="ref-goodchild2007" ref-type="bibr">Goodchild
+    2007</xref>), or participatory mapping
+    (<xref alt="Chambers 2006" rid="ref-chambers2006" ref-type="bibr">Chambers
+    2006</xref>;
+    <xref alt="Pánek 2016" rid="ref-panek2016" ref-type="bibr">Pánek
+    2016</xref>). Additionally, while mental maps may be generated
+    through hand-drawn sketches, such methods do not scale well to
+    derive a population level understanding.</p>
+    <p>By contrast, alternative forms of data online present an
+    opportunity to infer associations between places, by capturing
+    persistent links that are not temporally or spatially bounded.
+    Facebook for example has been used to generate social connections
+    between locations, geographically grounded based on the home
+    location of two friends
+    (<xref alt="Bailey et al. 2018" rid="ref-bailey2018" ref-type="bibr">Bailey
+    et al. 2018</xref>). Geographic networks may also be generated from
+    crowdsourced databases like Wikipedia
+    (<xref alt="Salvini and Fabrikant 2016" rid="ref-salvini2016" ref-type="bibr">Salvini
+    and Fabrikant 2016</xref>), which demonstrate connections between
+    cities based on hyperlinks embedded in articles that contain general
+    knowledge. Unlike these structured data sources, unstructured online
+    text also provides embedded geographic information as place names,
+    which may be extracted through computational techniques, such as
+    natural language processing
+    (<xref alt="Purves et al. 2018" rid="ref-purves2018" ref-type="bibr">Purves
+    et al. 2018</xref>;
+    <xref alt="Berragan et al. 2022" rid="ref-berragan2022" ref-type="bibr">Berragan
+    et al. 2022</xref>).</p>
+    <p>Relationships between locational mentions in text are typically
+    examined through co-occurrences, where locations that are frequently
+    mentioned in a shared context are assumed to have a real-world
+    relationship
+    (<xref alt="Hu, Ye, and Shaw 2017" rid="ref-hu2017" ref-type="bibr">Hu,
+    Ye, and Shaw 2017</xref>;
+    <xref alt="Ye, Gong, and Li 2021" rid="ref-ye2021" ref-type="bibr">Ye,
+    Gong, and Li 2021</xref>;
+    <xref alt="Liu et al. 2014" rid="ref-liu2014" ref-type="bibr">Liu et
+    al. 2014</xref>;
+    <xref alt="Meijers and Peris 2019" rid="ref-meijers2019" ref-type="bibr">Meijers
+    and Peris 2019</xref>;
+    <xref alt="Ballatore, Bertolotto, and Wilson 2014" rid="ref-ballatore2014" ref-type="bibr">Ballatore,
+    Bertolotto, and Wilson 2014</xref>). Current research has however
+    concentrated primarily on examining the relationships between city
+    names on news articles
+    (<xref alt="Hu, Ye, and Shaw 2017" rid="ref-hu2017" ref-type="bibr">Hu,
+    Ye, and Shaw 2017</xref>), or general web pages
+    (<xref alt="Liu et al. 2014" rid="ref-liu2014" ref-type="bibr">Liu
+    et al. 2014</xref>), where locational mentions do not necessarily
+    capture a collective and generalised view generated from the mental
+    perceptions of geography that exist within populations.</p>
+    <p>Alternative sources include online social media, which contribute
+    a large volume of natural language text submitted by many unique
+    users, discussing a range of informal topics, typically with shared
+    user interactions. Place names discussed on social media more
+    frequently include fine-grained locations
+    (<xref alt="Han et al. 2018" rid="ref-han2018" ref-type="bibr">Han
+    et al. 2018</xref>;
+    <xref alt="C. Li and Sun 2014" rid="ref-li2014" ref-type="bibr">C.
+    Li and Sun 2014</xref>), and given interactions are often more
+    informal, the information captured likely exhibit user cognitive
+    biases related to their own mental maps
+    (<xref alt="Jang and Kim 2019" rid="ref-jang2019" ref-type="bibr">Jang
+    and Kim 2019</xref>). While past work has built co-occurring place
+    names from single news articles or documents, they may instead be
+    built from a user facing perspective, building co-occurrences from
+    comments associated with each user in a large corpus of social media
+    data. We argue that this approach more appropriately captures the
+    cognitive information each user uses to associate two locations,
+    which can then be generalised by combining associations across each
+    user in the corpus.</p>
+    <p>There are however concerns with the use of passively contributed,
+    user-generated data for place-focussed geographic research;
+    primarily with the representativeness of populations, and the bias
+    in contributions
+    (<xref alt="Gardner et al. 2020" rid="ref-gardner2020" ref-type="bibr">Gardner
+    et al. 2020</xref>;
+    <xref alt="Graham, Straumann, and Hogan 2015" rid="ref-graham2015" ref-type="bibr">Graham,
+    Straumann, and Hogan 2015</xref>). For example, despite having over
+    300 million users, Twitter users typically post from high-density
+    urban areas, rather than where they live
+    (<xref alt="Ballatore and De Sabbata 2020" rid="ref-ballatore2020" ref-type="bibr">Ballatore
+    and De Sabbata 2020</xref>), demographic groups have variable
+    propensity to contribute
+    (<xref alt="Hecht and Stephens 2014" rid="ref-hecht2014" ref-type="bibr">Hecht
+    and Stephens 2014</xref>;
+    <xref alt="Ballatore and De Sabbata 2018" rid="ref-ballatore2018" ref-type="bibr">Ballatore
+    and De Sabbata 2018</xref>;
+    <xref alt="Gardner et al. 2020" rid="ref-gardner2020" ref-type="bibr">Gardner
+    et al. 2020</xref>), and contributions to gazetteers or digital maps
+    are increased in more densely populated, urban locations
+    (<xref alt="Graham, Straumann, and Hogan 2015" rid="ref-graham2015" ref-type="bibr">Graham,
+    Straumann, and Hogan 2015</xref>;
+    <xref alt="Laurier, Brown, and McGregor 2016" rid="ref-laurier2016" ref-type="bibr">Laurier,
+    Brown, and McGregor 2016</xref>;
+    <xref alt="Smith et al. 2020" rid="ref-smith2020" ref-type="bibr">Smith
+    et al. 2020</xref>). Another concern with user-generated data comes
+    from the tendency for few users to contribute the greatest
+    proportion of activity
+    (<xref alt="Haklay 2016" rid="ref-haklay2016" ref-type="bibr">Haklay
+    2016</xref>), meaning that despite a large volume of unique users,
+    there may be bias towards the contributions of certain individuals.
+    In other research methods like participatory mapping, biases often
+    reflect the social and cultural background of the communities
+    contributing their understanding of geographies
+    (<xref alt="Corbett and Rambaldi 2009" rid="ref-corbett2009" ref-type="bibr">Corbett
+    and Rambaldi 2009</xref>;
+    <xref alt="Pánek 2016" rid="ref-panek2016" ref-type="bibr">Pánek
+    2016</xref>), which in our work equates to the experiential
+    knowledge used to construct those mental maps that inform our
+    cognitive place associations.</p>
+  </sec>
+  <sec id="extracting-locations-from-text">
+    <title>Extracting Locations from Text</title>
+    <p>Past works that considered links between locational mentions in
+    text have identified locations either by querying articles for city
+    names
+    (<xref alt="Hu, Ye, and Shaw 2017" rid="ref-hu2017" ref-type="bibr">Hu,
+    Ye, and Shaw 2017</xref>), or simply using a word list of city names
+    to parse articles for their occurrences
+    (<xref alt="Meijers and Peris 2019" rid="ref-meijers2019" ref-type="bibr">Meijers
+    and Peris 2019</xref>). Such approaches suffer with performance,
+    Meijers and Peris
+    (<xref alt="2019" rid="ref-meijers2019" ref-type="bibr">2019</xref>)
+    for example identified that 2.8% of their target place names could
+    refer to multiple locations, while 1% of names were words that
+    appeared in the English vocabulary. In total, they identify that
+    around 15% of their place names displayed some level of ambiguity,
+    and quantitative assessment of the effect of this demonstrated that
+    it negatively impacted the quality of the associations identified.
+    To avoid such issues, instead of a simple rule-based approach for
+    the extraction of place names from our text, we construct a
+    structured process using machine learning. This implements
+    geoparsing, which is the process of extracting place names from
+    unstructured text and matching them to the correct associated
+    geographic coordinates
+    (<xref alt="Purves et al. 2018" rid="ref-purves2018" ref-type="bibr">Purves
+    et al. 2018</xref>). This task can be divided into two stages;
+    identifying place names in text, followed by the association of
+    these place names with a unique identifier in a knowledge base
+    (typically a gazetteer) in a process called geocoding or toponym
+    disambiguation.</p>
+    <p>Modern geoparsing processes use Named Entity Recognition (NER) to
+    identify place names from natural language text
+    (<xref alt="Purves et al. 2018" rid="ref-purves2018" ref-type="bibr">Purves
+    et al. 2018</xref>;
+    <xref alt="Karimzadeh et al. 2019" rid="ref-karimzadeh2019" ref-type="bibr">Karimzadeh
+    et al. 2019</xref>;
+    <xref alt="Halterman 2017" rid="ref-halterman2017" ref-type="bibr">Halterman
+    2017</xref>). Unlike simpler methods which use knowledge or
+    rule-based methods
+    (<xref alt="Leidner and Lieberman 2011" rid="ref-leidner2011" ref-type="bibr">Leidner
+    and Lieberman 2011</xref>), NER uses more complex supervised machine
+    learning to identify place names. The use of machine learning allows
+    for the identification of place names that do not already appear
+    within formal gazetteers, which is particularly useful in research
+    considering colloquial names
+    (<xref alt="Hollenstein 2008" rid="ref-hollenstein2008" ref-type="bibr">Hollenstein
+    2008</xref>). Word context may also be used to improve accuracy, as
+    words may appear in a gazetteer but not be used in a geographic
+    context (Reading could be considered a place in the UK or a noun)
+    (<xref alt="Purves et al. 2018" rid="ref-purves2018" ref-type="bibr">Purves
+    et al. 2018</xref>). This is particularly important when considering
+    informal text, where capitalisation may not always indicate the use
+    of proper nouns, misspellings may be frequent, and names that do not
+    often appear in gazetteers are common.</p>
+    <p>Recent work however has noted that current geoparsing systems
+    using existing NER models do not necessarily perform well for the
+    task of place name extraction
+    (<xref alt="Berragan et al. 2022" rid="ref-berragan2022" ref-type="bibr">Berragan
+    et al. 2022</xref>). Such pre-built models do not always consider
+    geographically specific issues like the use of metonyms
+    (<xref alt="Gritta, Pilehvar, and Collier 2020" rid="ref-gritta2020" ref-type="bibr">Gritta,
+    Pilehvar, and Collier 2020</xref>), and are typically trained on
+    news articles, which limits their performance on other forms of
+    text, like social media
+    (<xref alt="Won, Murrieta-Flores, and Martins 2018" rid="ref-won2018" ref-type="bibr">Won,
+    Murrieta-Flores, and Martins 2018</xref>;
+    <xref alt="Berragan et al. 2022" rid="ref-berragan2022" ref-type="bibr">Berragan
+    et al. 2022</xref>). For toponym disambiguation, the global
+    GeoNames<xref ref-type="fn" rid="fn3">3</xref> database is typically
+    used as a gazetteer in these geoparsing systems, which has limited
+    data for fine-grained locations in the United Kingdom
+    (<xref alt="Stock et al. 2013" rid="ref-stock2013" ref-type="bibr">Stock
+    et al. 2013</xref>;
+    <xref alt="Moncla et al. 2014" rid="ref-moncla2014" ref-type="bibr">Moncla
+    et al. 2014</xref>), while increasing potential noise with the
+    inclusion of place names outside the UK. As such, existing
+    geoparsers were considered unsuitable for our task; geoparsing UK
+    place names within Reddit comments, with the inclusion of
+    fine-grained locations.</p>
+  </sec>
+</sec>
+<sec id="sec-methodology">
+  <title>Methodology</title>
+  <p>We first developed a task-specific geoparsing process to identify
+  all place names contained within the Reddit comment corpus, resolving
+  them to geographic coordinates within the United Kingdom. Cognitive
+  associations were then generated between each identified location
+  using co-occurrence: when identified locations are mentioned by the
+  same author, they create an association between places. These
+  associations are therefore built from the mental maps of individual
+  Reddit users, unbounded from the typical space-time constraints of
+  traditional spatial relationships derived from movements. We then
+  investigate the strength of these associations by deriving aggregate
+  geographic representations derived from each user, and determine the
+  role of distance in shaping the strength of these associations through
+  a gravity model. Finally, we select four urban and four rural regions
+  to map the strength of associations geographically, demonstrating
+  variations in distance decay patterns.</p>
+  <sec id="geoparsing-reddit-comments">
+    <title>Geoparsing Reddit Comments</title>
+    <p>Reddit<xref ref-type="fn" rid="fn4">4</xref> is a public
+    discussion, news aggregation social network, and among the top 20
+    most visited websites in the United Kingdom. As of 2020, Reddit had
+    around 430 million active monthly users, comparable to the number of
+    Twitter users
+    (<xref alt="Murphy 2019" rid="ref-murphy2019" ref-type="bibr">Murphy
+    2019</xref>;
+    <xref alt="Statista 2022" rid="ref-statista2022" ref-type="bibr">Statista
+    2022</xref>). Reddit is divided into separate independent
+    <italic>subreddits</italic> each covering specific topics of
+    discussion, where <italic>users</italic> may submit
+    <italic>posts</italic> that have dedicated nested conversational
+    threads enabling users to add and respond to
+    <italic>comments</italic>. Subreddits cover a wide range of topics,
+    and in the interest of geography, they also act as forums for the
+    discussion of local places. The United Kingdom
+    subreddit<xref ref-type="fn" rid="fn5">5</xref> acts as a general
+    hub for related topics, notably including a list of smaller and more
+    geographically specific related subreddits. This list provides a
+    ‘Places’ section, a collection of local British subreddits, ranging
+    in scale from country level (<monospace>/r/England</monospace>),
+    regional (<monospace>/r/thenorth</monospace>,
+    <monospace>/r/Teeside</monospace>), to cities
+    (<monospace>/r/Manchester</monospace>) and small towns
+    (<monospace>/r/Alnwick</monospace>). In total there are 213
+    subreddits that relate to ‘places’ within the United
+    Kingdom<xref ref-type="fn" rid="fn6">6</xref>. For each subreddit,
+    every single historic comment was retrieved using the
+    Pushshift<xref ref-type="fn" rid="fn7">7</xref> Reddit archive
+    (<xref alt="Baumgartner et al. 2020" rid="ref-baumgartner2020" ref-type="bibr">Baumgartner
+    et al. 2020</xref>). In total 8,070,827 comments were extracted,
+    submitted by 490,534 unique users, between 2011-01-01 and
+    2022-04-17, this represents a very large corpus of text comprising
+    262 million words.</p>
+    <p>We then implemented our own geoparsing methodology to extract and
+    geolocate any place name mention within each comment text. We first
+    identified all place name mentions using a custom-built NER
+    model<xref ref-type="fn" rid="fn8">8</xref>. This model was built
+    using a large language model called BERT
+    (<xref alt="Devlin et al. 2019" rid="ref-devlin2019" ref-type="bibr">Devlin
+    et al. 2019</xref>), which is pre-trained on a large corpus of
+    general human text, meaning for tasks like NER it performs better
+    compared with simpler models. Our NER model was then trained to
+    identify all place names within this corpus. Coordinate information
+    was attributed with all identified place names, using OS Open
+    Names<xref ref-type="fn" rid="fn9">9</xref>, and ‘natural’ locations
+    from the Gazetteer of British Place
+    Names<xref ref-type="fn" rid="fn10">10</xref>. Given place names
+    typically appear multiple times in gazetteers, a disambiguation
+    method was required. We therefore disambiguated place names by
+    finding their minimum distance to a collection of contextual
+    locations. Contextual locations in this case referred to all
+    gazetteer entries matching place names that appear in sentences with
+    this target place name, within the same subreddit. This worked under
+    the assumption that each unique place name in a single subreddit is
+    likely to refer to the same location, and that locations mentioned
+    in surrounding text are likely geographically close together
+    (<xref alt="Kamalloo and Rafiei 2018" rid="ref-kamalloo2018" ref-type="bibr">Kamalloo
+    and Rafiei 2018</xref>). When associating locations with coordinate
+    information, we excluded any location that was larger than a city,
+    for example countries or regions.</p>
+    <p>Our final dataset therefore consisted of a collection of place
+    names with their geographic coordinates, corpus location, and an
+    anonymised user ID for the user of the comment the place name was
+    taken from. In total, 213,764 unique users mentioned at least one
+    place name in our corpus, 39,050 mentioned more than 10 place names,
+    and 3,158 over 100. 1% of these contributed 32% of all place names,
+    representing the top 2,137 users. As is common in user-generated
+    content, our data are skewed in that proportionally few users
+    mention a large proportion of our total place names. The large
+    volume of unique users that contribute low volumes of comments do
+    however mean that we likely still achieve a broad representation,
+    particularly compared with past work that generated mental maps for
+    a limited number of individuals
+    (<xref alt="Goodchild and Li 2012" rid="ref-goodchild2012" ref-type="bibr">Goodchild
+    and Li 2012</xref>). As our comments spanned a period of over 10
+    years, we also examined the temporality of contributions made by
+    users. The mean time between a user’s first and final comment is
+    318.1 days, with a maximum of 4112 days. As such, the contributor
+    distribution is highly skewed, as the majority of users (55%) only
+    have commented a maximum of 1 day apart.</p>
+  </sec>
+  <sec id="place-associations-through-co-occurrence">
+    <title>Place associations through Co-occurrence</title>
+    <p>‘Cognitive association strength’ is defined in our paper as the
+    normalised proportion of co-occurrences between two locations in our
+    corpus, where co-occurrences represent the total collection of
+    locations mentioned by a single user. The following section first
+    outlines the construction of distance decay measures using a gravity
+    model that incorporates cognitive association strength alongside
+    distance, then details how we generate a scaled measure of this
+    cognitive association strength. The first measure enables us to
+    quantify how distance impacts our association strength, determining
+    whether there is an observable distance decay effect when
+    considering locational co-occurrences in user comments. The second
+    enables the direct strength of association between locations to be
+    examined, without the incorporation of distance in the
+    calculation.</p>
+    <p>To measure the effect of distance decay we employ the same
+    gravity model used by both Liu et al.
+    (<xref alt="2014" rid="ref-liu2014" ref-type="bibr">2014</xref>) and
+    Hu, Ye, and Shaw
+    (<xref alt="2017" rid="ref-hu2017" ref-type="bibr">2017</xref>),
+    shown on
+    <xref alt="Equation 1" rid="eq-decay">Equation 1</xref>:</p>
+    <p><styled-content id="eq-decay"><disp-formula><alternatives>
+    <tex-math><![CDATA[
+    \mathbf{S}_{i j} \propto \frac{\mathbf{S}_{i} \mathbf{S}_{j}}{d_{i j}^{\beta}},
+     \qquad(1)]]></tex-math>
+    <mml:math display="block" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:msub><mml:mi>𝐒</mml:mi><mml:mrow><mml:mi>i</mml:mi><mml:mi>j</mml:mi></mml:mrow></mml:msub><mml:mo>∝</mml:mo><mml:mfrac><mml:mrow><mml:msub><mml:mi>𝐒</mml:mi><mml:mi>i</mml:mi></mml:msub><mml:msub><mml:mi>𝐒</mml:mi><mml:mi>j</mml:mi></mml:msub></mml:mrow><mml:msubsup><mml:mi>d</mml:mi><mml:mrow><mml:mi>i</mml:mi><mml:mi>j</mml:mi></mml:mrow><mml:mi>β</mml:mi></mml:msubsup></mml:mfrac><mml:mo>,</mml:mo><mml:mspace width="2.0em"></mml:mspace><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:mn>1</mml:mn><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow></mml:mrow></mml:math></alternatives></disp-formula></styled-content></p>
+    <p>where <inline-formula><alternatives>
+    <tex-math><![CDATA[\mathbf{S}_{ij}]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:msub><mml:mi>𝐒</mml:mi><mml:mrow><mml:mi>i</mml:mi><mml:mi>j</mml:mi></mml:mrow></mml:msub></mml:math></alternatives></inline-formula>
+    is the total number of users that mention both places
+    <inline-formula><alternatives>
+    <tex-math><![CDATA[i]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>i</mml:mi></mml:math></alternatives></inline-formula>
+    and <inline-formula><alternatives>
+    <tex-math><![CDATA[j]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>j</mml:mi></mml:math></alternatives></inline-formula>,
+    and <inline-formula><alternatives>
+    <tex-math><![CDATA[\mathbf{S}_{i}\mathbf{S}_{j}]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:msub><mml:mi>𝐒</mml:mi><mml:mi>i</mml:mi></mml:msub><mml:msub><mml:mi>𝐒</mml:mi><mml:mi>j</mml:mi></mml:msub></mml:mrow></mml:math></alternatives></inline-formula>
+    is the total number of users that mention place
+    <inline-formula><alternatives>
+    <tex-math><![CDATA[i]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>i</mml:mi></mml:math></alternatives></inline-formula>,
+    multiplied by the total number of users that mention place
+    <inline-formula><alternatives>
+    <tex-math><![CDATA[j]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>j</mml:mi></mml:math></alternatives></inline-formula>.
+    <inline-formula><alternatives>
+    <tex-math><![CDATA[d_{ij}]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:msub><mml:mi>d</mml:mi><mml:mrow><mml:mi>i</mml:mi><mml:mi>j</mml:mi></mml:mrow></mml:msub></mml:math></alternatives></inline-formula>
+    is the distance between the two locations
+    <inline-formula><alternatives>
+    <tex-math><![CDATA[i]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>i</mml:mi></mml:math></alternatives></inline-formula>
+    and <inline-formula><alternatives>
+    <tex-math><![CDATA[j]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>j</mml:mi></mml:math></alternatives></inline-formula>,
+    and <inline-formula><alternatives>
+    <tex-math><![CDATA[\beta]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>β</mml:mi></mml:math></alternatives></inline-formula>
+    is the friction factor. Larger values for
+    <inline-formula><alternatives>
+    <tex-math><![CDATA[\beta]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>β</mml:mi></mml:math></alternatives></inline-formula>
+    indicate a stronger distance decay effect. Estimating the value of
+    <inline-formula><alternatives>
+    <tex-math><![CDATA[\beta]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>β</mml:mi></mml:math></alternatives></inline-formula>
+    generates a quantifiable measure of the distance decay effect
+    (<xref alt="Hu, Ye, and Shaw 2017" rid="ref-hu2017" ref-type="bibr">Hu,
+    Ye, and Shaw 2017</xref>).</p>
+    <p>We can decompose
+    <xref alt="Equation 1" rid="eq-decay">Equation 1</xref> into the
+    following multiple linear regression model
+    (<xref alt="Taaffe 1996" rid="ref-taaffe1996" ref-type="bibr">Taaffe
+    1996</xref>):</p>
+    <p><styled-content id="eq-lr"><disp-formula><alternatives>
+    <tex-math><![CDATA[
+    \log(\mathbf{S}_{ij}) = b_{0} + b_{1}\log(\mathbf{S}_{i}\mathbf{S}_{j}) + b_{2}\log(d_{ij}),
+     \qquad(2)]]></tex-math>
+    <mml:math display="block" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mo>log</mml:mo><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:msub><mml:mi>𝐒</mml:mi><mml:mrow><mml:mi>i</mml:mi><mml:mi>j</mml:mi></mml:mrow></mml:msub><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow><mml:mo>=</mml:mo><mml:msub><mml:mi>b</mml:mi><mml:mn>0</mml:mn></mml:msub><mml:mo>+</mml:mo><mml:msub><mml:mi>b</mml:mi><mml:mn>1</mml:mn></mml:msub><mml:mo>log</mml:mo><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:msub><mml:mi>𝐒</mml:mi><mml:mi>i</mml:mi></mml:msub><mml:msub><mml:mi>𝐒</mml:mi><mml:mi>j</mml:mi></mml:msub><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow><mml:mo>+</mml:mo><mml:msub><mml:mi>b</mml:mi><mml:mn>2</mml:mn></mml:msub><mml:mo>log</mml:mo><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:msub><mml:mi>d</mml:mi><mml:mrow><mml:mi>i</mml:mi><mml:mi>j</mml:mi></mml:mrow></mml:msub><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow><mml:mo>,</mml:mo><mml:mspace width="2.0em"></mml:mspace><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:mn>2</mml:mn><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow></mml:mrow></mml:math></alternatives></disp-formula></styled-content></p>
+    <p>where <inline-formula><alternatives>
+    <tex-math><![CDATA[b_2 = -(\beta * b_1)]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:msub><mml:mi>b</mml:mi><mml:mn>2</mml:mn></mml:msub><mml:mo>=</mml:mo><mml:mo>−</mml:mo><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:mi>β</mml:mi><mml:mo>*</mml:mo><mml:msub><mml:mi>b</mml:mi><mml:mn>1</mml:mn></mml:msub><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow></mml:mrow></mml:math></alternatives></inline-formula>,
+    meaning we can calculate our <inline-formula><alternatives>
+    <tex-math><![CDATA[\beta]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>β</mml:mi></mml:math></alternatives></inline-formula>
+    coefficient using <inline-formula><alternatives>
+    <tex-math><![CDATA[\beta = -(b_2 / b_1)]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mi>β</mml:mi><mml:mo>=</mml:mo><mml:mo>−</mml:mo><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:msub><mml:mi>b</mml:mi><mml:mn>2</mml:mn></mml:msub><mml:mi>/</mml:mi><mml:msub><mml:mi>b</mml:mi><mml:mn>1</mml:mn></mml:msub><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow></mml:mrow></mml:math></alternatives></inline-formula>
+    (<xref alt="Hu, Ye, and Shaw 2017" rid="ref-hu2017" ref-type="bibr">Hu,
+    Ye, and Shaw 2017</xref>;
+    <xref alt="C. Li and Sun 2014" rid="ref-li2014" ref-type="bibr">C.
+    Li and Sun 2014</xref>).<xref ref-type="fn" rid="fn11">11</xref></p>
+    <p>While this approach enables the calculation of a global
+    <inline-formula><alternatives>
+    <tex-math><![CDATA[\beta]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>β</mml:mi></mml:math></alternatives></inline-formula>
+    to measure distance decay, a spatial regression model would enable
+    us to calculate local values of <inline-formula><alternatives>
+    <tex-math><![CDATA[\beta]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>β</mml:mi></mml:math></alternatives></inline-formula>,
+    quantifying the distance decay effect on individual locations
+    (<xref alt="Rey, Arribas-Bel, and Wolf 2023" rid="ref-rey2023" ref-type="bibr">Rey,
+    Arribas-Bel, and Wolf 2023</xref>). We therefore additionally
+    implement a spatial regression model which incorporates a fixed
+    spatial effect for the H3 polygon name, allowing for
+    <inline-formula><alternatives>
+    <tex-math><![CDATA[\beta]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>β</mml:mi></mml:math></alternatives></inline-formula>
+    coefficients to be calculated for each location in our study, to
+    explore spatial heterogeneity.</p>
+    <p>Finally, we generate a normalised cognitive association measure
+    to assess the strength between two locations. Unlike the previous
+    gravity models, co-occurrences are not incorporated alongside
+    distance. This mirrors similar work that considered the strength of
+    social connections between Facebook
+    (<xref alt="Bailey et al. 2018" rid="ref-bailey2018" ref-type="bibr">Bailey
+    et al. 2018</xref>), and Twitter users
+    (<xref alt="Z. Li et al. 2021" rid="ref-li2021" ref-type="bibr">Z.
+    Li et al. 2021</xref>), enabling the direct strength of associations
+    to be generated:</p>
+    <p><styled-content id="eq-pci"><disp-formula><alternatives>
+    <tex-math><![CDATA[
+    \frac{\mathbf{S}_{i j}}{\sqrt{\mathbf{S}_{i} \mathbf{S}_{j}}}
+     \qquad(3)]]></tex-math>
+    <mml:math display="block" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mfrac><mml:msub><mml:mi>𝐒</mml:mi><mml:mrow><mml:mi>i</mml:mi><mml:mi>j</mml:mi></mml:mrow></mml:msub><mml:msqrt><mml:mrow><mml:msub><mml:mi>𝐒</mml:mi><mml:mi>i</mml:mi></mml:msub><mml:msub><mml:mi>𝐒</mml:mi><mml:mi>j</mml:mi></mml:msub></mml:mrow></mml:msqrt></mml:mfrac><mml:mspace width="2.0em"></mml:mspace><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:mn>3</mml:mn><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow></mml:mrow></mml:math></alternatives></disp-formula></styled-content></p>
+    <p>In this equation, dividing by <inline-formula><alternatives>
+    <tex-math><![CDATA[\sqrt{\mathbf{S}_{i} \mathbf{S}_{j}}]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:msqrt><mml:mrow><mml:msub><mml:mi>𝐒</mml:mi><mml:mi>i</mml:mi></mml:msub><mml:msub><mml:mi>𝐒</mml:mi><mml:mi>j</mml:mi></mml:msub></mml:mrow></mml:msqrt></mml:math></alternatives></inline-formula>
+    normalises our values, given locations with higher populations are
+    expected to be mentioned by a larger number of users. Values
+    therefore range from 0 indicating no association, to 1, showing a
+    complete overlap in user mentions.</p>
+    <p>To present the results of our analysis we aggregate our user
+    location mentions into H3
+    hexagons<xref ref-type="fn" rid="fn12">12</xref>, a hierarchical
+    spatial indexing system which partitions all locations across earth
+    into a uniform hexagonal grid, available for different levels of
+    aggregation. We select an H3 resolution of 5 which equates to an
+    average hexagon area of 252 km<sup>2</sup> and an edge length of 9.8
+    km. All associations between each location contained within a shared
+    H3 hexagon are then combined, forming association measures between
+    hexagons, rather that unique point locations. To name hexagons we
+    select the most frequently occurring location.</p>
+    <p>The use of fixed unit size hexagons for aggregating data in our
+    analysis is beneficial for several reasons. Firstly, hexagons are
+    geometries that enable us to obtain results that are statistically
+    more robust especially when analysing distance decay between
+    locations, because of the constant number of neighbours, with an
+    equal distance separating them
+    (<xref alt="Birch, Oom, and Beecham 2007" rid="ref-birch2007" ref-type="bibr">Birch,
+    Oom, and Beecham 2007</xref>). Secondly, hexagon grids help to
+    minimise misrepresentation in spatial visualisation
+    (<xref alt="Langton and Solymosi 2021" rid="ref-langton2021" ref-type="bibr">Langton
+    and Solymosi 2021</xref>), and allow us to capture inter-region
+    heterogeneity. Finally, aggregation is essential given the data
+    representations of locations within gazetteers; despite many
+    locations having large footprints, they are all represented as a
+    single coordinate pair
+    (<xref alt="Goodchild and Hill 2008" rid="ref-goodchild2008" ref-type="bibr">Goodchild
+    and Hill 2008</xref>). This problem means that despite users
+    mentioning locations like parks within cities, without aggregation
+    they are treated as two distinct points, with a geographic distance
+    separating them. Alternatively OpenStreetMap can be used to provide
+    more accurate place footprints, but at the cost of a very large data
+    volume when considering the entirety of the UK
+    (<xref alt="Haklay and Weber 2008" rid="ref-haklay2008" ref-type="bibr">Haklay
+    and Weber 2008</xref>).</p>
+    <p>Additionally, we classify our H3 hexagons into both rural and
+    urban using the England and Wales Rural Urban
+    Classification<xref ref-type="fn" rid="fn13">13</xref> and Scotland
+    Rural Urban Classification<xref ref-type="fn" rid="fn14">14</xref>.
+    For Scotland classes 1 and 2 were considered Urban.</p>
+  </sec>
+</sec>
+<sec id="sec-results">
+  <title>Results</title>
+  <p>In the following section, we first examine the performance of our
+  geoparsing methodology, identifying any potential noise and how this
+  was mitigated. We then examine our cognitive place associations,
+  exploring how distance impacts the strength of association by
+  generating gravity models to calculate <inline-formula><alternatives>
+  <tex-math><![CDATA[\beta]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>β</mml:mi></mml:math></alternatives></inline-formula>
+  coefficients both globally and locally. Finally, we examine the
+  patterns in association strength across a selection of targeted
+  geographic locations.</p>
+  <sec id="extracting-names-and-locations-assessing-geoparsing-performance">
+    <title>Extracting Names and Locations: Assessing Geoparsing
+    performance</title>
+    <p>In total, 26.8% of all comments within the Reddit corpus
+    contained at least one place name: 5,001,261 place names were
+    identified, with 2,848,310 (57.0%) being attributable to a set of
+    coordinates<xref ref-type="fn" rid="fn15">15</xref>. From these
+    locations, 42,333 were found to be unique, of which 21,014 were only
+    mentioned a single time, while London was the most frequently
+    encountered location, at 283,521 mentions. The most ambiguous place
+    name was found to be ‘High Street’, with 47 total unique coordinate
+    locations. As expected, many of the most ambiguous place names were
+    street names, including ‘Church Street’ (36 locations), ‘Bridge
+    Street’ (34 locations), and ‘London Road’ (34 locations).</p>
+    <fig id="fig-noise">
+      <caption><p>Figure 1: Locations of three place names that appear
+      in the UK gazetteer that are difficult to correctly disambiguate.
+      Size of the green points indicate frequency in mentions, black
+      points are user locations determined through mean locational
+      mentions. Values indicate the proportional contributions of each
+      disambiguated location to their respective polygon (Top four
+      percentages shown).</p></caption>
+      <graphic mimetype="image" mime-subtype="png" xlink:href="main_files/figure-pdf/Figure_1.png" />
+    </fig>
+    <p>In <xref alt="Figure 1" rid="fig-noise">Figure 1</xref> we
+    consider three examples where place names may have been incorrectly
+    geoparsed. <xref alt="Figure 1" rid="fig-noise">Figure 1</xref> (a)
+    shows the geographic distribution of all 47 ‘High Street’ locations.
+    The percentage values indicate the proportion of ‘High Street’
+    mentions within a particular H3 polygon, compared to all other
+    locations in this polygon. Aggregation here appears to mitigate the
+    risk of noise in most cases, given most ‘High Street’ locations
+    contribute lower than 1% towards polygon associations. A similar
+    case is shown in
+    <xref alt="Figure 1" rid="fig-noise">Figure 1</xref> (b), where
+    ‘City Centre’ mentions only account for 3.2% of the Manchester
+    hexagon. <xref alt="Figure 1" rid="fig-noise">Figure 1</xref> (c)
+    instead demonstrates a location that is impossible to correctly
+    geoparse in our model, and despite there being 13 unique locations
+    in the UK called ‘California’, this issue only appears prominent in
+    one hexagon. This hexagon named ‘California’ does potentially
+    generate noise in our analysis, given the high contribution of
+    85.1%. However, as users that mention ‘California’ are spread across
+    the country, it is less likely to largely impact our
+    associations.</p>
+    <p>Notably, despite both ‘High Street’ and ‘City Centre’ being
+    shared with non-specific geographic concepts, the model is still
+    able to distinguish between them depending on context. For example,
+    ‘city centre’ appears 23,961 times in our corpus, but is only tagged
+    by our NER model 3,008 times. While ‘high street’ appears 7,773
+    times and is only tagged 768 times. These results suggest that the
+    model is often able to correctly understand that identical phrases
+    may or may not refer to place names, depending on their semantic
+    context.</p>
+  </sec>
+  <sec id="measuring-distance-decay-of-cognitive-association-strength">
+    <title>Measuring Distance Decay of Cognitive Association
+    Strength</title>
+    <p>In the following section we present the levels of distance decay
+    observed when evaluating place association strength through the
+    gravity model specified in
+    <xref alt="Equation 1" rid="eq-decay">Equation 1</xref>, quantifying
+    the level of distance decay using a <inline-formula><alternatives>
+    <tex-math><![CDATA[\beta]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>β</mml:mi></mml:math></alternatives></inline-formula>
+    coefficient. As calculated, higher <inline-formula><alternatives>
+    <tex-math><![CDATA[\beta]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>β</mml:mi></mml:math></alternatives></inline-formula>
+    coefficient values indicate a stronger distance decay effect,
+    meaning that co-occurrences between locations that are
+    geographically more distant tend to be less frequent. A
+    <inline-formula><alternatives>
+    <tex-math><![CDATA[\beta]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>β</mml:mi></mml:math></alternatives></inline-formula>
+    value of zero would indicate that distance has no effect on the
+    frequency of co-occurrences between locations.</p>
+    <p>Our gravity model gives a <inline-formula><alternatives>
+    <tex-math><![CDATA[\beta]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>β</mml:mi></mml:math></alternatives></inline-formula>
+    coefficient of 1.00 (Pearson’s R<sup>2</sup>: 0.772), reflecting a
+    distance decay from co-occurrences in Reddit comments that is
+    stronger than decay observed in other studies that explored news
+    articles (0.23)
+    (<xref alt="Hu, Ye, and Shaw 2017" rid="ref-hu2017" ref-type="bibr">Hu,
+    Ye, and Shaw 2017</xref>), or general web queries (0.2)
+    (<xref alt="Liu et al. 2014" rid="ref-liu2014" ref-type="bibr">Liu
+    et al. 2014</xref>). Confirming the existence of a general distance
+    decay effect for Reddit derived places demonstrates that distance
+    typically contributes to lower co-occurrences in locations that are
+    further apart, a similarity that is shared with past work that
+    examines decay from the perspective of true population movements
+    (<xref alt="Gong et al. 2021" rid="ref-gong2021" ref-type="bibr">Gong
+    et al. 2021</xref>;
+    <xref alt="Yang, Li, and Li 2019" rid="ref-yang2019" ref-type="bibr">Yang,
+    Li, and Li 2019</xref>), and the social relationships of regions
+    examined through social media
+    (<xref alt="Bailey et al. 2018" rid="ref-bailey2018" ref-type="bibr">Bailey
+    et al. 2018</xref>;
+    <xref alt="Z. Li et al. 2021" rid="ref-li2021" ref-type="bibr">Z. Li
+    et al. 2021</xref>). Our place associations generated from users on
+    Reddit therefore appear to more appropriately incorporate a
+    geographic component, compared with city mentions in news articles
+    or general web pages. However, while this gravity model gives us an
+    indication of the global level of distance decay in our corpus, it
+    is likely that the level of distance decay varies by location. In
+    the following analysis we therefore consider locations where the
+    gravity model does not achieve a good approximation.</p>
+    <fig id="fig-resid">
+      <caption><p>Figure 2: H3 polygons showing (a) Top 20 associations
+      by residual values in green (&gt;0), and (b) bottom 20
+      associations by residual values (&lt;0) in red. (c) Residuals
+      taken from <xref alt="Equation 2" rid="eq-lr">Equation 2</xref>
+      against co-occurrence strength (10,000 samples). (*) Indicates a
+      location that is incorrectly geoparsed.</p></caption>
+      <graphic mimetype="image" mime-subtype="png" xlink:href="main_files/figure-pdf/Figure_2-updated.png" />
+    </fig>
+    <p><xref alt="Figure 2" rid="fig-resid">Figure 2</xref> (a) and (b)
+    plots the top (most positive) and bottom (most negative) 20
+    residuals from our gravity model, demonstrating associations that
+    are stronger or weaker than expected, when accounting for the
+    distance between two regions. Many of the top residuals concern
+    associations shared with London and other major cities in the UK,
+    with some associations between urban areas in Scotland. The most
+    positive residual is the association between London and Edinburgh
+    (3.89), Glasgow and London in second (3.84), and Glasgow and
+    Edinburgh in third (3.81). As expected, these residuals reflect a
+    strong association between regions over larger distances (mean 293
+    km), highlighting associations where distance decay is less
+    effective. Notably, there is an incorrect association here between a
+    natural feature named ‘London Bridge’ and London, which has appeared
+    due to the lack of urban landmarks in our gazetteer. The bottom
+    residuals are more sporadic, typically showing associations over
+    shorter distances (mean 156 km), between lesser known locations that
+    are unusually weak. For example, highlighted on this figure is the
+    association between Swansea Bay and Southampton (-2.55).
+    <xref alt="Figure 2" rid="fig-resid">Figure 2</xref> (c) plots the
+    model residuals against cognitive association strength, showing that
+    for locations with a greater proportion of co-occurrences, the model
+    is likely to be under-estimating in prediction, leading to an
+    over-prediction in distance decay, with the inverse true for
+    locations with a lower proportion of co-occurrences.</p>
+  </sec>
+  <sec id="regional-difference-in-distance-decay">
+    <title>Regional Difference in Distance Decay</title>
+    <p><xref alt="Figure 2" rid="fig-resid">Figure 2</xref> demonstrates
+    that there are clear regional variations in the observed level of
+    distance decay, which do not conform with the general decay effect
+    calculated through our proposed gravity model approximation. To
+    examine regional effects on distance decay, we implement a spatial
+    regression model (a mixed linear model with spatial fixed effects),
+    allowing <inline-formula><alternatives>
+    <tex-math><![CDATA[\beta]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>β</mml:mi></mml:math></alternatives></inline-formula>
+    values to change depending on the location of each polygon.</p>
+    <fig id="fig-mixed-map">
+      <caption><p>Figure 3: H3 polygons showing (a) Distribution of
+      geoparsed locations. (b) Urban rural classification index for
+      England, Wales, and Scotland, reclassified into binary ‘Urban’ or
+      ‘Rural’. (c) Calculated <inline-formula><alternatives>
+      <tex-math><![CDATA[\beta]]></tex-math>
+      <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>β</mml:mi></mml:math></alternatives></inline-formula>
+      coefficients for the spatial regression model; higher
+      <inline-formula><alternatives>
+      <tex-math><![CDATA[\beta]]></tex-math>
+      <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>β</mml:mi></mml:math></alternatives></inline-formula>
+      values indicate a greater distance decay strength.</p></caption>
+      <graphic mimetype="image" mime-subtype="png" xlink:href="main_files/figure-pdf/Figure_3.png" />
+    </fig>
+    <p>Incorporating this spatial information gives a more effective
+    approximation of our gravity model, and achieves an improved
+    Pearson’s R<sup>2</sup> of 0.946, suggesting that distance decay is
+    not uniform across all regions in our study.
+    <xref alt="Figure 3" rid="fig-mixed-map">Figure 3</xref> (a) shows
+    the distribution of locations mentioned in our study, which broadly
+    conform with the binary urban rural classification shown on
+    <xref alt="Figure 3" rid="fig-mixed-map">Figure 3</xref> (b).
+    <xref alt="Figure 3" rid="fig-mixed-map">Figure 3</xref> (c) maps
+    the spatial <inline-formula><alternatives>
+    <tex-math><![CDATA[\beta]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>β</mml:mi></mml:math></alternatives></inline-formula>
+    coefficients obtained through our spatial regression model, with
+    high distance decay present across Scotland, Wales, and areas in the
+    South West and North East of England. Users that mention locations
+    in these regions typically do not mention other locations that are
+    geographically distant, highlighting areas that are either more
+    isolated from the rest of the UK, or have stronger associations with
+    nearby locations.</p>
+    <p>In the North East, this perceived isolation from the rest of the
+    UK mirrors lexical research, where Tweets in the North East have
+    been shown to be unlike other regions
+    (<xref alt="Arthur and Williams 2019" rid="ref-arthur2019" ref-type="bibr">Arthur
+    and Williams 2019</xref>). This region in particular has been known
+    to suffer economically following the historic decline of local
+    industries
+    (<xref alt="Middleton and Freestone 2008" rid="ref-middleton2008" ref-type="bibr">Middleton
+    and Freestone 2008</xref>), where lack of job opportunities has
+    resulted in poor inward migration, with among the lowest population
+    growth in the country
+    (<xref alt="Office for National Statistics 2022" rid="ref-officefornationalstatistics2022" ref-type="bibr">Office
+    for National Statistics 2022</xref>). Alternatively, this
+    observation may be also attributable to a general sense of identity
+    that is associated with these regions. Both the South West and North
+    East of England are known to exhibit a strong sense of localised
+    identity
+    (<xref alt="Deacon 2007" rid="ref-deacon2007" ref-type="bibr">Deacon
+    2007</xref>;
+    <xref alt="Middleton and Freestone 2008" rid="ref-middleton2008" ref-type="bibr">Middleton
+    and Freestone 2008</xref>), which is similarly translatable to the
+    national identity that generates strong associations within Scotland
+    and Wales, that are not shared with England
+    (<xref alt="Haesly 2005" rid="ref-haesly2005" ref-type="bibr">Haesly
+    2005</xref>).</p>
+    <p>To explicitly quantify the difference in distance decay between
+    urban and rural areas we calculate separate
+    <inline-formula><alternatives>
+    <tex-math><![CDATA[\beta]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>β</mml:mi></mml:math></alternatives></inline-formula>
+    coefficient values based on the binary split of areas into urban or
+    rural. Urban areas have a <inline-formula><alternatives>
+    <tex-math><![CDATA[\beta]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>β</mml:mi></mml:math></alternatives></inline-formula>
+    coefficient of 0.68, while rural areas had a
+    <inline-formula><alternatives>
+    <tex-math><![CDATA[\beta]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>β</mml:mi></mml:math></alternatives></inline-formula>
+    coefficient of 1.14, indicating that urban areas do appear to have a
+    lower overall level of distance decay compared with rural regions.
+    This correlates with the results of traditional mobility studies
+    where more populated areas tend to exhibit a lower distance decay
+    (<xref alt="Thomas 1981" rid="ref-thomas1981" ref-type="bibr">Thomas
+    1981</xref>), largely dictated by the improved accessibility to
+    external locations through public transport, the road network or job
+    opportunities
+    (<xref alt="Moseley 2023" rid="ref-moseley2023" ref-type="bibr">Moseley
+    2023</xref>;
+    <xref alt="Findlay, Short, and Stockdale 2000" rid="ref-findlay2000" ref-type="bibr">Findlay,
+    Short, and Stockdale 2000</xref>), and the general cultural
+    significance that is more frequently associated with urban locations
+    (<xref alt="Lynch 1964" rid="ref-lynch1964" ref-type="bibr">Lynch
+    1964</xref>;
+    <xref alt="Borer 2006" rid="ref-borer2006" ref-type="bibr">Borer
+    2006</xref>).</p>
+    <p>We have demonstrated that not only does distance decay vary
+    between rural and urban locations, but within these classes there is
+    also apparent heterogeneity. In the following section, we therefore
+    consider the ability to directly map the strength of cognitive
+    associations with respect to a selection of both rural and urban
+    regions in our study, to understand the variation in distance decay
+    patterns.</p>
+  </sec>
+  <sec id="mapping-cognitive-place-associations">
+    <title>Mapping Cognitive Place Associations</title>
+    <fig id="fig-polys">
+      <caption><p>Figure 4: Data subsets with respect to eight selected
+      locations showing cognitive association strength associated with
+      each H3 polygon containing each named location (highlighted in
+      green), <inline-formula><alternatives>
+      <tex-math><![CDATA[\beta]]></tex-math>
+      <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>β</mml:mi></mml:math></alternatives></inline-formula>
+      values generated from data subsets. Distance decay plots below
+      maps show association strength against distance for each selected
+      location. Lines show rolling mean for 250 samples in black and
+      lower samples in grey.</p></caption>
+      <graphic mimetype="image" mime-subtype="png" xlink:href="main_files/figure-pdf/Figure_4.png" />
+    </fig>
+    <p>In <xref alt="Figure 4" rid="fig-polys">Figure 4</xref> we map
+    the cognitive association strength of each H3 polygon in our study,
+    with respect to four major cities, and four rural locations in the
+    UK, also indicating the associated <inline-formula><alternatives>
+    <tex-math><![CDATA[\beta]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>β</mml:mi></mml:math></alternatives></inline-formula>
+    coefficients. Mapped cognitive association values are given by
+    <xref alt="Equation 3" rid="eq-pci">Equation 3</xref>, and indicate
+    the proportion of users that have comments that mention locations
+    both within the target polygon (e.g. London), and locations in other
+    polygons. Distance decay curves for each polygon are shown below
+    these maps, indicating patterns in decay associated with each
+    location. London has the lowest <inline-formula><alternatives>
+    <tex-math><![CDATA[\beta]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>β</mml:mi></mml:math></alternatives></inline-formula>
+    coefficient of all cities, indicating that locations at increasing
+    distance from London decay in their association at a slower rate
+    compared with other cities. This is reflected by the shallow overall
+    decay curve for London, increasing at points associated with main
+    urban conurbations in England and Scotland, observable on the map
+    for <xref alt="Figure 4" rid="fig-polys">Figure 4</xref> (a). Such
+    trends are perhaps unsurprising given London’s prominence as the
+    capital city. Manchester on
+    <xref alt="Figure 4" rid="fig-polys">Figure 4</xref> (b) reveals a
+    different decay pattern, showing a sharp drop in associations
+    initially, that reduces and reverses when cities like London or
+    Edinburgh are included in the distribution. Unlike Manchester,
+    Newcastle (d) has an overall greater <inline-formula><alternatives>
+    <tex-math><![CDATA[\beta]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>β</mml:mi></mml:math></alternatives></inline-formula>
+    coefficient, where association strength drops more quickly and is
+    less persistent across England, only increasing with urban locations
+    in Scotland, and slightly with London. While both are major cities
+    in England, Manchester is both physically more well connected to the
+    rest of the country through existing rail routes
+    (<xref alt="Miyoshi and Givoni 2013" rid="ref-miyoshi2013" ref-type="bibr">Miyoshi
+    and Givoni 2013</xref>), and is a greater economic centre compared
+    with Newcastle. These factors likely contribute to the perceived
+    strength of associations with these cities, which is captured in our
+    analysis.</p>
+    <p>Edinburgh (c) is distinct compared with other cities, with a
+    steeper initial decay curve compared with London, largely dictated
+    by stronger initial associations with Scottish locations. Again, as
+    is common for many cities in the UK, this city also shares a strong
+    association with London, regardless of the distance. This increased
+    strength of association with locations within Scotland gives
+    Edinburgh the highest <inline-formula><alternatives>
+    <tex-math><![CDATA[\beta]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>β</mml:mi></mml:math></alternatives></inline-formula>
+    coefficient, an effect that captures the strong sense of identity
+    between areas in Scotland
+    (<xref alt="Haesly 2005" rid="ref-haesly2005" ref-type="bibr">Haesly
+    2005</xref>).</p>
+    <p><xref alt="Figure 4" rid="fig-polys">Figure 4</xref> (e-g) give
+    examples of variable distance decay curves for rural locations
+    across the UK. Both ‘(e) Milford Haven’ in Wales, and ‘(f) Cowel’ in
+    Scotland share general associations across each respective country,
+    which appears to drop past the border into England. This similarly
+    captures the sense of national identity associated with both Wales
+    and Scotland, and conforms with results from the analysis of both
+    physical and networks, where strong ‘boundary effects’ often see
+    intra-connectivity within regions, that becomes weaker when moving
+    across borders
+    (<xref alt="Z. Li et al. 2021" rid="ref-li2021" ref-type="bibr">Z.
+    Li et al. 2021</xref>;
+    <xref alt="Bailey et al. 2018" rid="ref-bailey2018" ref-type="bibr">Bailey
+    et al. 2018</xref>;
+    <xref alt="Arthur and Williams 2019" rid="ref-arthur2019" ref-type="bibr">Arthur
+    and Williams 2019</xref>;
+    <xref alt="Yin et al. 2017" rid="ref-yin2017a" ref-type="bibr">Yin
+    et al. 2017</xref>). Given a national identity is less prominent in
+    England, the town ‘(g) St Austell’ gives a steep distance decay
+    curve, with low association strength between any location more than
+    50 km away, a noticeably different curve compared with the rural
+    locations analysed in Scotland and Wales.</p>
+    <p>We also examine the incorrectly disambiguated ‘(h) California’
+    polygon, and confirm that the distance decay curve does not appear
+    to show a geographically cohesive pattern, with no noticeable
+    gradient. The positive <inline-formula><alternatives>
+    <tex-math><![CDATA[\beta]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>β</mml:mi></mml:math></alternatives></inline-formula>
+    coefficient appears to relate with an unexplained increase in
+    association with Scotland, however values remain low.</p>
+  </sec>
+</sec>
+<sec id="sec-conclusion">
+  <title>Conclusions, Implications and Future Work</title>
+  <p>In our work we present an alternative method for determining
+  subconscious associations between locations, generating quantifiable
+  measures of association strength solely using user-generated social
+  media text. Unlike physical or online social interactions, our
+  cognitive associations are intended as persistent measure of strength
+  between locations across the UK, built from the naive, place-based
+  geographic knowledge of individuals. Our geoparsing process means that
+  no explicitly geographic information like geotags are required in our
+  data source, allowing for the inclusion of fine-grained and informally
+  defined locations, and associations may be examined between any two
+  locations identified in our corpus.</p>
+  <p>By utilising a distance-based gravity model, we demonstrate that
+  our associations do broadly conform with established real-world
+  geographic restrictions, through an observed distance-decay effect,
+  but with notable deviations. Unlike past work that only considered
+  co-occurring city names, we expand our analysis to incorporate place
+  name mentions of any scale, which enables the exploration of both
+  rural and suburban decay. We are therefore able to demonstrate that
+  distance decay is greater in rural areas compared with urban areas,
+  and that cities across the UK have varying patterns in distance decay.
+  Associations between major cities like Manchester and London are
+  demonstrably stronger than less prominent intermediate locations, an
+  effect that challenges the notion of Euclidean distance in a mental
+  understanding of geography
+  (<xref alt="Carr and Schissler 1969" rid="ref-carr1969" ref-type="bibr">Carr
+  and Schissler 1969</xref>;
+  <xref alt="Kaplan 1976" rid="ref-kaplan1976" ref-type="bibr">Kaplan
+  1976</xref>), and conforms with the suggestion that ‘nearness’ is not
+  a uniform concept
+  (<xref alt="Massey 2008" rid="ref-massey2008" ref-type="bibr">Massey
+  2008</xref>;
+  <xref alt="Fabrikant et al. 2002" rid="ref-fabrikant2002" ref-type="bibr">Fabrikant
+  et al. 2002</xref>;
+  <xref alt="Worboys 2001" rid="ref-worboys2001" ref-type="bibr">Worboys
+  2001</xref>;
+  <xref alt="Montello 1993" rid="ref-montello1993" ref-type="bibr">Montello
+  1993</xref>). Alternative patterns are also demonstrated, particularly
+  for locations in Scotland, where distance appears to have little
+  impact on association strength, until locations across the border into
+  England are reached. This observation appears to correlate with the
+  concept of a ‘boundary effect’, that has been captured in both
+  physical and online networks
+  (<xref alt="Z. Li et al. 2021" rid="ref-li2021" ref-type="bibr">Z. Li
+  et al. 2021</xref>;
+  <xref alt="Bailey et al. 2018" rid="ref-bailey2018" ref-type="bibr">Bailey
+  et al. 2018</xref>;
+  <xref alt="Arthur and Williams 2019" rid="ref-arthur2019" ref-type="bibr">Arthur
+  and Williams 2019</xref>;
+  <xref alt="Yin et al. 2017" rid="ref-yin2017a" ref-type="bibr">Yin et
+  al. 2017</xref>). This example is particularly interesting,
+  replicating past research that generated mental maps from individuals
+  through participatory mapping, which captured strong desirability
+  towards areas within Scotland from residents, that did not persist
+  across the border into England
+  (<xref alt="Gould and White 1968" rid="ref-gould1968" ref-type="bibr">Gould
+  and White 1968</xref>)</p>
+  <p>The distinct patterns in distance decay that we observe demonstrate
+  differences in associations between cities that capture real-world
+  perceptions of these locations. For example, regions of low
+  association across the UK may reflect the lack of desire to connect
+  more broadly with the rest of the country
+  (<xref alt="Roos Breines, Raghuram, and Gunter 2019" rid="ref-roosbreines2019" ref-type="bibr">Roos
+  Breines, Raghuram, and Gunter 2019</xref>). This is particularly
+  noticeable in Scotland, Wales, and the North East of England, regions
+  where populations often exhibit a strong sense of independence from
+  the UK, driven by a sense of regional or national pride
+  (<xref alt="Haesly 2005" rid="ref-haesly2005" ref-type="bibr">Haesly
+  2005</xref>;
+  <xref alt="Middleton and Freestone 2008" rid="ref-middleton2008" ref-type="bibr">Middleton
+  and Freestone 2008</xref>;
+  <xref alt="Nayak 2016" rid="ref-nayak2016" ref-type="bibr">Nayak
+  2016</xref>). Strong associations with London and Manchester are also
+  indicative of their importance nationally, while cities like Newcastle
+  are perceived as less important, resulting in lower associations.
+  Imbalance in rural locations may also be driven by an increasing
+  dependence on digital maps
+  (<xref alt="Farman 2020" rid="ref-farman2020" ref-type="bibr">Farman
+  2020</xref>); rural landmarks are far less common compared with cities
+  with named streets and buildings
+  (<xref alt="Laurier, Brown, and McGregor 2016" rid="ref-laurier2016" ref-type="bibr">Laurier,
+  Brown, and McGregor 2016</xref>), limiting our ability to
+  conceptualise rural environments
+  (<xref alt="Smith et al. 2020" rid="ref-smith2020" ref-type="bibr">Smith
+  et al. 2020</xref>).</p>
+  <p>Finally, Reddit is unique compared with alternative social media
+  sources; general activity is centred around discussing specific topics
+  or themes within communities, relative to more general social networks
+  such as Twitter or Facebook
+  (<xref alt="Sylla et al. 2022" rid="ref-sylla2022" ref-type="bibr">Sylla
+  et al. 2022</xref>;
+  <xref alt="Medvedev, Lambiotte, and Delvenne 2019" rid="ref-medvedev2019" ref-type="bibr">Medvedev,
+  Lambiotte, and Delvenne 2019</xref>). Communities on Reddit therefore
+  present the opportunity to generate collective, but geographically
+  disaggregated representations of spatial knowledge. Locations
+  identified from within these communities likely represent urban areas
+  of interest which may be derived based on their frequency of mentions
+  (<xref alt="Chen 2019" rid="ref-chen2019" ref-type="bibr">Chen
+  2019</xref>), or semantic regions that reflect mental perceptions of
+  places
+  (<xref alt="Gao et al. 2017" rid="ref-gao2017a" ref-type="bibr">Gao et
+  al. 2017</xref>). These unstructured comments also provide contextual
+  lexicons relating to places names, meaning there is also the
+  opportunity to explore associations between these communities through
+  their associated typology
+  (<xref alt="Gao et al. 2017" rid="ref-gao2017a" ref-type="bibr">Gao et
+  al. 2017</xref>;
+  <xref alt="Arthur and Williams 2019" rid="ref-arthur2019" ref-type="bibr">Arthur
+  and Williams 2019</xref>). While count-based lexical approaches have
+  been traditionally used to explore geographic variation in text, large
+  language models are now able to capture deep contextual semantic
+  information
+  (<xref alt="Devlin et al. 2019" rid="ref-devlin2019" ref-type="bibr">Devlin
+  et al. 2019</xref>), allowing for a deeper connection between language
+  and geography to be explored.</p>
+</sec>
+</body>
+
+<back>
+<ref-list>
+  <title>References</title>
+  <ref id="ref-alessandretti2020">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Alessandretti</surname><given-names>Laura</given-names></name>
+        <name><surname>Aslak</surname><given-names>Ulf</given-names></name>
+        <name><surname>Lehmann</surname><given-names>Sune</given-names></name>
+      </person-group>
+      <article-title>The scales of human mobility</article-title>
+      <source>Nature</source>
+      <year iso-8601-date="2020-11">2020</year><month>11</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-08-27">2022</year><month>08</month><day>27</day></date-in-citation>
+      <volume>587</volume>
+      <issue>7834</issue>
+      <issn>0028-0836, 1476-4687</issn>
+      <pub-id pub-id-type="doi">10.1038/s41586-020-2909-1</pub-id>
+      <fpage>402</fpage>
+      <lpage>407</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-allard2016">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Allard</surname><given-names>Ryan F.</given-names></name>
+        <name><surname>Moura</surname><given-names>Filipe</given-names></name>
+      </person-group>
+      <article-title>The Incorporation of Passenger Connectivity and Intermodal Considerations in Intercity Transport Planning</article-title>
+      <source>Transport Reviews</source>
+      <year iso-8601-date="2016-03">2016</year><month>03</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-06-27">2022</year><month>06</month><day>27</day></date-in-citation>
+      <volume>36</volume>
+      <issue>2</issue>
+      <issn>0144-1647, 1464-5327</issn>
+      <pub-id pub-id-type="doi">10.1080/01441647.2015.1059379</pub-id>
+      <fpage>251</fpage>
+      <lpage>277</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-arthur2019">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Arthur</surname><given-names>Rudy</given-names></name>
+        <name><surname>Williams</surname><given-names>Hywel T. P.</given-names></name>
+      </person-group>
+      <article-title>The human geography of Twitter: Quantifying regional identity and inter-region communication in England and Wales</article-title>
+      <source>PLOS ONE</source>
+      <person-group person-group-type="editor">
+        <name><surname>Ferrara</surname><given-names>Emilio</given-names></name>
+      </person-group>
+      <year iso-8601-date="2019-04">2019</year><month>04</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-05-20">2022</year><month>05</month><day>20</day></date-in-citation>
+      <volume>14</volume>
+      <issue>4</issue>
+      <issn>1932-6203</issn>
+      <pub-id pub-id-type="doi">10.1371/journal.pone.0214466</pub-id>
+      <fpage>e0214466</fpage>
+      <lpage></lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-bailey2018">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Bailey</surname><given-names>Michael</given-names></name>
+        <name><surname>Cao</surname><given-names>Rachel</given-names></name>
+        <name><surname>Kuchler</surname><given-names>Theresa</given-names></name>
+        <name><surname>Stroebel</surname><given-names>Johannes</given-names></name>
+        <name><surname>Wong</surname><given-names>Arlene</given-names></name>
+      </person-group>
+      <article-title>Social Connectedness: Measurement, Determinants, and Effects</article-title>
+      <source>Journal of Economic Perspectives</source>
+      <year iso-8601-date="2018-08">2018</year><month>08</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-07-03">2022</year><month>07</month><day>03</day></date-in-citation>
+      <volume>32</volume>
+      <issue>3</issue>
+      <issn>0895-3309</issn>
+      <pub-id pub-id-type="doi">10.1257/jep.32.3.259</pub-id>
+      <fpage>259</fpage>
+      <lpage>280</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-ballatore2014">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Ballatore</surname><given-names>Andrea</given-names></name>
+        <name><surname>Bertolotto</surname><given-names>Michela</given-names></name>
+        <name><surname>Wilson</surname><given-names>David C.</given-names></name>
+      </person-group>
+      <article-title>An evaluative baseline for geo-semantic relatedness and similarity</article-title>
+      <source>GeoInformatica</source>
+      <year iso-8601-date="2014-10">2014</year><month>10</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-07-11">2022</year><month>07</month><day>11</day></date-in-citation>
+      <volume>18</volume>
+      <issue>4</issue>
+      <issn>1384-6175, 1573-7624</issn>
+      <uri>https://arxiv.org/abs/1402.3371</uri>
+      <pub-id pub-id-type="doi">10.1007/s10707-013-0197-8</pub-id>
+      <fpage>747</fpage>
+      <lpage>767</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-ballatore2018">
+    <element-citation publication-type="chapter">
+      <person-group person-group-type="author">
+        <name><surname>Ballatore</surname><given-names>Andrea</given-names></name>
+        <name><surname>De Sabbata</surname><given-names>Stefano</given-names></name>
+      </person-group>
+      <article-title>Charting the Geographies of Crowdsourced Information in Greater London</article-title>
+      <source>Geospatial Technologies for All</source>
+      <person-group person-group-type="editor">
+        <name><surname>Mansourian</surname><given-names>Ali</given-names></name>
+        <name><surname>Pilesjö</surname><given-names>Petter</given-names></name>
+        <name><surname>Harrie</surname><given-names>Lars</given-names></name>
+        <name><surname>van Lammeren</surname><given-names>Ron</given-names></name>
+      </person-group>
+      <publisher-name>Springer International Publishing</publisher-name>
+      <publisher-loc>Cham</publisher-loc>
+      <year iso-8601-date="2018">2018</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2020-10-05">2020</year><month>10</month><day>05</day></date-in-citation>
+      <isbn>978-3-319-78207-2 978-3-319-78208-9</isbn>
+      <pub-id pub-id-type="doi">10.1007/978-3-319-78208-9_8</pub-id>
+      <fpage>149</fpage>
+      <lpage>168</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-ballatore2020">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Ballatore</surname><given-names>Andrea</given-names></name>
+        <name><surname>De Sabbata</surname><given-names>Stefano</given-names></name>
+      </person-group>
+      <article-title>Los Angeles as a digital place: The geographies of user-generated content</article-title>
+      <source>Transactions in GIS</source>
+      <year iso-8601-date="2020">2020</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2023-07-25">2023</year><month>07</month><day>25</day></date-in-citation>
+      <volume>24</volume>
+      <issue>4</issue>
+      <issn>1467-9671</issn>
+      <pub-id pub-id-type="doi">10.1111/tgis.12600</pub-id>
+      <fpage>880</fpage>
+      <lpage>902</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-baumgartner2020">
+    <element-citation>
+      <person-group person-group-type="author">
+        <name><surname>Baumgartner</surname><given-names>Jason</given-names></name>
+        <name><surname>Zannettou</surname><given-names>Savvas</given-names></name>
+        <name><surname>Keegan</surname><given-names>Brian</given-names></name>
+        <name><surname>Squire</surname><given-names>Megan</given-names></name>
+        <name><surname>Blackburn</surname><given-names>Jeremy</given-names></name>
+      </person-group>
+      <article-title>The Pushshift Reddit Dataset</article-title>
+      <publisher-name>arXiv</publisher-name>
+      <year iso-8601-date="2020-01">2020</year><month>01</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-05-18">2022</year><month>05</month><day>18</day></date-in-citation>
+      <uri>https://arxiv.org/abs/2001.08435</uri>
+    </element-citation>
+  </ref>
+  <ref id="ref-bergmann2018">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Bergmann</surname><given-names>Luke</given-names></name>
+        <name><surname>O’Sullivan</surname><given-names>David</given-names></name>
+      </person-group>
+      <article-title>Reimagining GIScience for relational spaces: Reimagining GIScience</article-title>
+      <source>The Canadian Geographer / Le Géographe canadien</source>
+      <year iso-8601-date="2018-03">2018</year><month>03</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-08-27">2022</year><month>08</month><day>27</day></date-in-citation>
+      <volume>62</volume>
+      <issue>1</issue>
+      <issn>00083658</issn>
+      <pub-id pub-id-type="doi">10.1111/cag.12405</pub-id>
+      <fpage>7</fpage>
+      <lpage>14</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-berragan2022">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Berragan</surname><given-names>Cillian</given-names></name>
+        <name><surname>Singleton</surname><given-names>Alex</given-names></name>
+        <name><surname>Calafiore</surname><given-names>Alessia</given-names></name>
+        <name><surname>Morley</surname><given-names>Jeremy</given-names></name>
+      </person-group>
+      <article-title>Geoparsing comments from Reddit to extract mental place connectivity within the United Kingdom</article-title>
+      <year iso-8601-date="2022-09">2022</year><month>09</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2023-10-30">2023</year><month>10</month><day>30</day></date-in-citation>
+      <pub-id pub-id-type="doi">10.25436/E28C7R</pub-id>
+    </element-citation>
+  </ref>
+  <ref id="ref-birch2007">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Birch</surname><given-names>Colin P. D.</given-names></name>
+        <name><surname>Oom</surname><given-names>Sander P.</given-names></name>
+        <name><surname>Beecham</surname><given-names>Jonathan A.</given-names></name>
+      </person-group>
+      <article-title>Rectangular and hexagonal grids used for observation, experiment and simulation in ecology</article-title>
+      <source>Ecological Modelling</source>
+      <year iso-8601-date="2007-08">2007</year><month>08</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2023-09-18">2023</year><month>09</month><day>18</day></date-in-citation>
+      <volume>206</volume>
+      <issue>3</issue>
+      <issn>0304-3800</issn>
+      <pub-id pub-id-type="doi">10.1016/j.ecolmodel.2007.03.041</pub-id>
+      <fpage>347</fpage>
+      <lpage>359</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-borer2006">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Borer</surname><given-names>Michael Ian</given-names></name>
+      </person-group>
+      <article-title>The Location of Culture: The Urban Culturalist Perspective</article-title>
+      <source>City &amp; Community</source>
+      <year iso-8601-date="2006">2006</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2023-09-19">2023</year><month>09</month><day>19</day></date-in-citation>
+      <volume>5</volume>
+      <issue>2</issue>
+      <issn>1540-6040</issn>
+      <pub-id pub-id-type="doi">10.1111/j.1540-6040.2006.00168.x</pub-id>
+      <fpage>173</fpage>
+      <lpage>197</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-calafiore2021">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Calafiore</surname><given-names>Alessia</given-names></name>
+        <name><surname>Palmer</surname><given-names>Gregory</given-names></name>
+        <name><surname>Comber</surname><given-names>Sam</given-names></name>
+        <name><surname>Arribas-Bel</surname><given-names>Daniel</given-names></name>
+        <name><surname>Singleton</surname><given-names>Alex</given-names></name>
+      </person-group>
+      <article-title>A geographic data science framework for the functional and contextual analysis of human dynamics within global cities</article-title>
+      <source>Computers, Environment and Urban Systems</source>
+      <year iso-8601-date="2021-01">2021</year><month>01</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-08-27">2022</year><month>08</month><day>27</day></date-in-citation>
+      <volume>85</volume>
+      <issn>0198-9715</issn>
+      <pub-id pub-id-type="doi">10.1016/j.compenvurbsys.2020.101539</pub-id>
+      <fpage>101539</fpage>
+      <lpage></lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-canter1977">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Canter</surname><given-names>David</given-names></name>
+      </person-group>
+      <article-title>The psychology of place.</article-title>
+      <source>The psychology of place.</source>
+      <publisher-name>St Martin’S Press</publisher-name>
+      <publisher-loc>Oxford, England</publisher-loc>
+      <year iso-8601-date="1977">1977</year>
+      <issn>0312653220 (Hardcover)</issn>
+      <fpage>x, 198</fpage>
+      <lpage>x, 198</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-carr1969">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Carr</surname><given-names>Stephen</given-names></name>
+        <name><surname>Schissler</surname><given-names>Dale</given-names></name>
+      </person-group>
+      <article-title>The city as a trip: Perceptual selection and memory in the view from the road</article-title>
+      <source>Environment and behavior</source>
+      <publisher-name>Sage Publications.</publisher-name>
+      <year iso-8601-date="1969">1969</year>
+      <volume>1</volume>
+      <issue>1</issue>
+      <issn>0013-9165</issn>
+      <fpage>7</fpage>
+      <lpage></lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-chambers2006">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Chambers</surname><given-names>Robert</given-names></name>
+      </person-group>
+      <article-title>Participatory Mapping and Geographic Information Systems: Whose Map? Who is Empowered and Who Disempowered? Who Gains and Who Loses?</article-title>
+      <source>THE ELECTRONIC JOURNAL OF INFORMATION SYSTEMS IN DEVELOPING COUNTRIES</source>
+      <year iso-8601-date="2006">2006</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-10-08">2022</year><month>10</month><day>08</day></date-in-citation>
+      <volume>25</volume>
+      <issue>1</issue>
+      <issn>1681-4835</issn>
+      <pub-id pub-id-type="doi">10.1002/j.1681-4835.2006.tb00163.x</pub-id>
+      <fpage>1</fpage>
+      <lpage>11</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-chen2019">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Chen</surname><given-names>Meixu</given-names></name>
+      </person-group>
+      <article-title>Understanding the dynamics of urban areas of interest through volunteered geographic information</article-title>
+      <year iso-8601-date="2019">2019</year>
+      <pub-id pub-id-type="doi">10.1007/s10109-018-0284-3</pub-id>
+      <fpage>21</fpage>
+      <lpage></lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-corbett2009">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Corbett</surname><given-names>Jon</given-names></name>
+        <name><surname>Rambaldi</surname><given-names>Giacomo</given-names></name>
+      </person-group>
+      <article-title>Geographic information technologies, local knowledge, and change</article-title>
+      <source>Qualitative GIS: a mixed methods approach</source>
+      <publisher-name>Sage</publisher-name>
+      <year iso-8601-date="2009">2009</year>
+      <fpage>75</fpage>
+      <lpage>92</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-deacon2007">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Deacon</surname><given-names>Bernard</given-names></name>
+      </person-group>
+      <article-title>County, Nation, Ethnic Group? The Shaping of the Cornish Identity</article-title>
+      <source>The International Journal of Regional and Local Studies</source>
+      <year iso-8601-date="2007-01">2007</year><month>01</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2023-08-29">2023</year><month>08</month><day>29</day></date-in-citation>
+      <volume>3</volume>
+      <issue>1</issue>
+      <issn>1750-0478</issn>
+      <pub-id pub-id-type="doi">10.1179/jrl.2007.3.1.5</pub-id>
+      <fpage>5</fpage>
+      <lpage>29</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-dennett2013">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Dennett</surname><given-names>Adam</given-names></name>
+        <name><surname>Wilson</surname><given-names>Alan</given-names></name>
+      </person-group>
+      <article-title>A Multilevel Spatial Interaction Modelling Framework for Estimating Interregional Migration in Europe</article-title>
+      <source>Environment and Planning A: Economy and Space</source>
+      <year iso-8601-date="2013-06">2013</year><month>06</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2023-02-03">2023</year><month>02</month><day>03</day></date-in-citation>
+      <volume>45</volume>
+      <issue>6</issue>
+      <issn>0308-518X, 1472-3409</issn>
+      <pub-id pub-id-type="doi">10.1068/a45398</pub-id>
+      <fpage>1491</fpage>
+      <lpage>1507</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-devlin2019">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Devlin</surname><given-names>Jacob</given-names></name>
+        <name><surname>Chang</surname><given-names>Ming-Wei</given-names></name>
+        <name><surname>Lee</surname><given-names>Kenton</given-names></name>
+        <name><surname>Toutanova</surname><given-names>Kristina</given-names></name>
+      </person-group>
+      <article-title>BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding</article-title>
+      <source>arXiv:1810.04805 [cs]</source>
+      <year iso-8601-date="2019-05">2019</year><month>05</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2020-02-11">2020</year><month>02</month><day>11</day></date-in-citation>
+      <uri>https://arxiv.org/abs/1810.04805</uri>
+    </element-citation>
+  </ref>
+  <ref id="ref-erlander1980">
+    <element-citation publication-type="book">
+      <person-group person-group-type="author">
+        <name><surname>Erlander</surname><given-names>Sven</given-names></name>
+      </person-group>
+      <source>Optimal Spatial Interaction and the Gravity Model</source>
+      <person-group person-group-type="editor">
+        <name><surname>Beckmann</surname><given-names>M.</given-names></name>
+        <name><surname>Künzi</surname><given-names>H. P.</given-names></name>
+      </person-group>
+      <publisher-name>Springer Berlin Heidelberg</publisher-name>
+      <publisher-loc>Berlin, Heidelberg</publisher-loc>
+      <year iso-8601-date="1980">1980</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-09-15">2022</year><month>09</month><day>15</day></date-in-citation>
+      <volume>173</volume>
+      <isbn>978-3-540-09729-7 978-3-642-45515-5</isbn>
+      <pub-id pub-id-type="doi">10.1007/978-3-642-45515-5</pub-id>
+    </element-citation>
+  </ref>
+  <ref id="ref-fabrikant2002">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Fabrikant</surname><given-names>Sara Irina</given-names></name>
+        <name><surname>Ruocco</surname><given-names>Marco</given-names></name>
+        <name><surname>Middleton</surname><given-names>Richard</given-names></name>
+        <name><surname>Montello</surname><given-names>Daniel R.</given-names></name>
+        <name><surname>Jörgensen</surname><given-names>Corinne</given-names></name>
+      </person-group>
+      <article-title>The first law of cognitive geography: Distance and similarity in semantic space</article-title>
+      <source>Proceedings of GIScience 2002</source>
+      <year iso-8601-date="2002">2002</year>
+      <fpage>31</fpage>
+      <lpage>33</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-farber2013">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Farber</surname><given-names>Steven</given-names></name>
+        <name><surname>Li</surname><given-names>Xiao</given-names></name>
+      </person-group>
+      <article-title>Urban sprawl and social interaction potential: An empirical analysis of large metropolitan regions in the United States</article-title>
+      <source>Journal of Transport Geography</source>
+      <year iso-8601-date="2013-07">2013</year><month>07</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-05-26">2022</year><month>05</month><day>26</day></date-in-citation>
+      <volume>31</volume>
+      <issn>09666923</issn>
+      <pub-id pub-id-type="doi">10.1016/j.jtrangeo.2013.03.002</pub-id>
+      <fpage>267</fpage>
+      <lpage>277</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-farman2020">
+    <element-citation publication-type="book">
+      <person-group person-group-type="author">
+        <name><surname>Farman</surname><given-names>Jason</given-names></name>
+      </person-group>
+      <source>Mobile interface theory: Embodied space and locative media</source>
+      <publisher-name>Routledge</publisher-name>
+      <year iso-8601-date="2020">2020</year>
+      <isbn>0-429-86312-8</isbn>
+    </element-citation>
+  </ref>
+  <ref id="ref-findlay2000">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Findlay</surname><given-names>Allan M.</given-names></name>
+        <name><surname>Short</surname><given-names>David</given-names></name>
+        <name><surname>Stockdale</surname><given-names>Aileen</given-names></name>
+      </person-group>
+      <article-title>The labour-market impact of migration to rural areas</article-title>
+      <source>Applied Geography</source>
+      <year iso-8601-date="2000-10">2000</year><month>10</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2023-09-19">2023</year><month>09</month><day>19</day></date-in-citation>
+      <volume>20</volume>
+      <issue>4</issue>
+      <issn>0143-6228</issn>
+      <pub-id pub-id-type="doi">10.1016/S0143-6228(00)00012-6</pub-id>
+      <fpage>333</fpage>
+      <lpage>348</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-gao2017a">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Gao</surname><given-names>Song</given-names></name>
+        <name><surname>Janowicz</surname><given-names>Krzysztof</given-names></name>
+        <name><surname>Montello</surname><given-names>Daniel R.</given-names></name>
+        <name><surname>Hu</surname><given-names>Yingjie</given-names></name>
+        <name><surname>Yang</surname><given-names>Jiue-An</given-names></name>
+        <name><surname>McKenzie</surname><given-names>Grant</given-names></name>
+        <name><surname>Ju</surname><given-names>Yiting</given-names></name>
+        <name><surname>Gong</surname><given-names>Li</given-names></name>
+        <name><surname>Adams</surname><given-names>Benjamin</given-names></name>
+        <name><surname>Yan</surname><given-names>Bo</given-names></name>
+      </person-group>
+      <article-title>A data-synthesis-driven method for detecting and extracting vague cognitive regions</article-title>
+      <source>International Journal of Geographical Information Science</source>
+      <year iso-8601-date="2017-06">2017</year><month>06</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2020-08-27">2020</year><month>08</month><day>27</day></date-in-citation>
+      <volume>31</volume>
+      <issue>6</issue>
+      <issn>13658816</issn>
+      <pub-id pub-id-type="doi">10.1080/13658816.2016.1273357</pub-id>
+      <fpage>1245</fpage>
+      <lpage>1271</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-gardner2020">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Gardner</surname><given-names>Z.</given-names></name>
+        <name><surname>Mooney</surname><given-names>P.</given-names></name>
+        <name><surname>De Sabbata</surname><given-names>S.</given-names></name>
+        <name><surname>Dowthwaite</surname><given-names>L.</given-names></name>
+      </person-group>
+      <article-title>Quantifying gendered participation in OpenStreetMap: Responding to theories of female (under) representation in crowdsourced mapping</article-title>
+      <source>GeoJournal</source>
+      <year iso-8601-date="2020-12">2020</year><month>12</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2023-07-25">2023</year><month>07</month><day>25</day></date-in-citation>
+      <volume>85</volume>
+      <issue>6</issue>
+      <issn>1572-9893</issn>
+      <pub-id pub-id-type="doi">10.1007/s10708-019-10035-z</pub-id>
+      <fpage>1603</fpage>
+      <lpage>1620</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-gluckler2021">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Glückler</surname><given-names>Johannes</given-names></name>
+        <name><surname>Panitz</surname><given-names>Robert</given-names></name>
+      </person-group>
+      <article-title>Unleashing the potential of relational research: A meta-analysis of network studies in human geography</article-title>
+      <source>Progress in Human Geography</source>
+      <year iso-8601-date="2021-12">2021</year><month>12</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-08-27">2022</year><month>08</month><day>27</day></date-in-citation>
+      <volume>45</volume>
+      <issue>6</issue>
+      <issn>0309-1325, 1477-0288</issn>
+      <pub-id pub-id-type="doi">10.1177/03091325211002916</pub-id>
+      <fpage>1531</fpage>
+      <lpage>1557</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-gong2021">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Gong</surname><given-names>Junfang</given-names></name>
+        <name><surname>Li</surname><given-names>Shengwen</given-names></name>
+        <name><surname>Ye</surname><given-names>Xinyue</given-names></name>
+        <name><surname>Peng</surname><given-names>Qiong</given-names></name>
+        <name><surname>Kudva</surname><given-names>Sonali</given-names></name>
+      </person-group>
+      <article-title>Modelling impacts of high-speed rail on urban interaction with social media in China’s mainland</article-title>
+      <source>Geo-spatial Information Science</source>
+      <year iso-8601-date="2021-10">2021</year><month>10</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-06-27">2022</year><month>06</month><day>27</day></date-in-citation>
+      <volume>24</volume>
+      <issue>4</issue>
+      <issn>1009-5020, 1993-5153</issn>
+      <pub-id pub-id-type="doi">10.1080/10095020.2021.1972771</pub-id>
+      <fpage>638</fpage>
+      <lpage>653</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-gonzalez2008">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>González</surname><given-names>Marta C.</given-names></name>
+        <name><surname>Hidalgo</surname><given-names>César A.</given-names></name>
+        <name><surname>Barabási</surname><given-names>Albert-László</given-names></name>
+      </person-group>
+      <article-title>Understanding individual human mobility patterns</article-title>
+      <source>Nature</source>
+      <year iso-8601-date="2008-06">2008</year><month>06</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-08-27">2022</year><month>08</month><day>27</day></date-in-citation>
+      <volume>453</volume>
+      <issue>7196</issue>
+      <issn>0028-0836, 1476-4687</issn>
+      <pub-id pub-id-type="doi">10.1038/nature06958</pub-id>
+      <fpage>779</fpage>
+      <lpage>782</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-goodchild2007">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Goodchild</surname><given-names>Michael F.</given-names></name>
+      </person-group>
+      <article-title>Citizens as sensors: The world of volunteered geography</article-title>
+      <source>GeoJournal</source>
+      <publisher-name>Springer</publisher-name>
+      <year iso-8601-date="2007">2007</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2020-08-28">2020</year><month>08</month><day>28</day></date-in-citation>
+      <volume>69</volume>
+      <issue>4</issue>
+      <issn>0343-2521</issn>
+      <uri>https://www.jstor.org/stable/41148191</uri>
+      <pub-id pub-id-type="doi">10.1007/s10708-007-9111-y</pub-id>
+      <fpage>211</fpage>
+      <lpage>221</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-goodchild2008">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Goodchild</surname><given-names>Michael F.</given-names></name>
+        <name><surname>Hill</surname><given-names>L. L.</given-names></name>
+      </person-group>
+      <article-title>Introduction to digital gazetteer research</article-title>
+      <source>International Journal of Geographical Information Science</source>
+      <year iso-8601-date="2008-10">2008</year><month>10</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2019-12-19">2019</year><month>12</month><day>19</day></date-in-citation>
+      <volume>22</volume>
+      <issue>10</issue>
+      <issn>1365-8816, 1362-3087</issn>
+      <pub-id pub-id-type="doi">10.1080/13658810701850497</pub-id>
+      <fpage>1039</fpage>
+      <lpage>1044</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-goodchild2012">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Goodchild</surname><given-names>Michael F.</given-names></name>
+        <name><surname>Li</surname><given-names>Linna</given-names></name>
+      </person-group>
+      <article-title>Assuring the quality of volunteered geographic information</article-title>
+      <source>Spatial Statistics</source>
+      <year iso-8601-date="2012-05">2012</year><month>05</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-10-03">2022</year><month>10</month><day>03</day></date-in-citation>
+      <volume>1</volume>
+      <issn>2211-6753</issn>
+      <pub-id pub-id-type="doi">10.1016/j.spasta.2012.03.002</pub-id>
+      <fpage>110</fpage>
+      <lpage>120</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-goodey1974">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Goodey</surname><given-names>Brian</given-names></name>
+      </person-group>
+      <article-title>Images of place: Essays on environmental perception, communications and education</article-title>
+      <source>(No Title)</source>
+      <year iso-8601-date="1974">1974</year>
+    </element-citation>
+  </ref>
+  <ref id="ref-gould1968">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Gould</surname><given-names>Peter R.</given-names></name>
+        <name><surname>White</surname><given-names>R. R.</given-names></name>
+      </person-group>
+      <article-title>The mental maps of British school leavers</article-title>
+      <source>Regional Studies</source>
+      <year iso-8601-date="1968-11">1968</year><month>11</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-12-02">2022</year><month>12</month><day>02</day></date-in-citation>
+      <volume>2</volume>
+      <issue>2</issue>
+      <issn>0034-3404, 1360-0591</issn>
+      <pub-id pub-id-type="doi">10.1080/09595236800185171</pub-id>
+      <fpage>161</fpage>
+      <lpage>182</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-gould1986">
+    <element-citation publication-type="book">
+      <person-group person-group-type="author">
+        <name><surname>Gould</surname><given-names>Peter R.</given-names></name>
+        <name><surname>White</surname><given-names>Rodney</given-names></name>
+      </person-group>
+      <source>Mental Maps.</source>
+      <publisher-name>Taylor and Francis</publisher-name>
+      <publisher-loc>Hoboken</publisher-loc>
+      <year iso-8601-date="1986">1986</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-04-20">2022</year><month>04</month><day>20</day></date-in-citation>
+      <isbn>978-0-203-11151-2</isbn>
+    </element-citation>
+  </ref>
+  <ref id="ref-graham2015">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Graham</surname><given-names>Mark</given-names></name>
+        <name><surname>Straumann</surname><given-names>Ralph K.</given-names></name>
+        <name><surname>Hogan</surname><given-names>Bernie</given-names></name>
+      </person-group>
+      <article-title>Digital Divisions of Labor and Informational Magnetism: Mapping Participation in Wikipedia</article-title>
+      <source>Annals of the Association of American Geographers</source>
+      <publisher-name>Routledge</publisher-name>
+      <year iso-8601-date="2015-11">2015</year><month>11</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2023-07-25">2023</year><month>07</month><day>25</day></date-in-citation>
+      <volume>105</volume>
+      <issue>6</issue>
+      <issn>0004-5608</issn>
+      <pub-id pub-id-type="doi">10.1080/00045608.2015.1072791</pub-id>
+      <fpage>1158</fpage>
+      <lpage>1178</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-greenbergraanan2014">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Greenberg Raanan</surname><given-names>Malka</given-names></name>
+        <name><surname>Shoval</surname><given-names>Noam</given-names></name>
+      </person-group>
+      <article-title>Mental maps compared to actual spatial behavior using GPS data: A new method for investigating segregation in cities</article-title>
+      <source>Cities</source>
+      <year iso-8601-date="2014-02">2014</year><month>02</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-12-06">2022</year><month>12</month><day>06</day></date-in-citation>
+      <volume>36</volume>
+      <issn>0264-2751</issn>
+      <pub-id pub-id-type="doi">10.1016/j.cities.2013.09.003</pub-id>
+      <fpage>28</fpage>
+      <lpage>40</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-gritta2020">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Gritta</surname><given-names>Milan</given-names></name>
+        <name><surname>Pilehvar</surname><given-names>Mohammad Taher</given-names></name>
+        <name><surname>Collier</surname><given-names>Nigel</given-names></name>
+      </person-group>
+      <article-title>A pragmatic guide to geoparsing evaluation: Toponyms, Named Entity Recognition and pragmatics</article-title>
+      <source>Language Resources and Evaluation</source>
+      <year iso-8601-date="2020-09">2020</year><month>09</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-07-20">2022</year><month>07</month><day>20</day></date-in-citation>
+      <volume>54</volume>
+      <issue>3</issue>
+      <issn>1574-020X, 1574-0218</issn>
+      <pub-id pub-id-type="doi">10.1007/s10579-019-09475-3</pub-id>
+      <fpage>683</fpage>
+      <lpage>712</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-haesly2005">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Haesly</surname><given-names>Richard</given-names></name>
+      </person-group>
+      <article-title>Identifying Scotland and Wales: Types of Scottish and Welsh national identities</article-title>
+      <source>Nations and Nationalism</source>
+      <year iso-8601-date="2005">2005</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2023-05-18">2023</year><month>05</month><day>18</day></date-in-citation>
+      <volume>11</volume>
+      <issue>2</issue>
+      <issn>1469-8129</issn>
+      <pub-id pub-id-type="doi">10.1111/j.1354-5078.2005.00202.x</pub-id>
+      <fpage>243</fpage>
+      <lpage>263</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-haklay2008">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Haklay</surname><given-names>Mordechai E.</given-names></name>
+        <name><surname>Weber</surname><given-names>Patrick</given-names></name>
+      </person-group>
+      <article-title>Openstreetmap: User-generated street maps</article-title>
+      <source>IEEE Pervasive computing</source>
+      <publisher-name>Ieee</publisher-name>
+      <year iso-8601-date="2008">2008</year>
+      <volume>7</volume>
+      <issue>4</issue>
+      <issn>1536-1268</issn>
+      <pub-id pub-id-type="doi">10.1109/MPRV.2008.80</pub-id>
+      <fpage>12</fpage>
+      <lpage>18</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-haklay2016">
+    <element-citation publication-type="chapter">
+      <person-group person-group-type="author">
+        <name><surname>Haklay</surname><given-names>Mordechai E.</given-names></name>
+      </person-group>
+      <article-title>Why is participation inequality important?</article-title>
+      <publisher-name>Ubiquity Press</publisher-name>
+      <year iso-8601-date="2016">2016</year>
+    </element-citation>
+  </ref>
+  <ref id="ref-halterman2017">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Halterman</surname><given-names>Andrew</given-names></name>
+      </person-group>
+      <article-title>Mordecai: Full text geoparsing and event geocoding</article-title>
+      <source>The Journal of Open Source Software</source>
+      <year iso-8601-date="2017">2017</year>
+      <volume>2</volume>
+      <issue>9</issue>
+      <pub-id pub-id-type="doi">10.21105/joss.00091</pub-id>
+    </element-citation>
+  </ref>
+  <ref id="ref-han2018">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Han</surname><given-names>Jialong</given-names></name>
+        <name><surname>Sun</surname><given-names>Aixin</given-names></name>
+        <name><surname>Cong</surname><given-names>Gao</given-names></name>
+        <name><surname>Zhao</surname><given-names>Wayne Xin</given-names></name>
+        <name><surname>Ji</surname><given-names>Zongcheng</given-names></name>
+        <name><surname>Phan</surname><given-names>Minh C.</given-names></name>
+      </person-group>
+      <article-title>Linking Fine-Grained Locations in User Comments</article-title>
+      <source>IEEE Transactions on Knowledge and Data Engineering</source>
+      <year iso-8601-date="2018-01">2018</year><month>01</month>
+      <volume>30</volume>
+      <issue>1</issue>
+      <issn>1558-2191</issn>
+      <pub-id pub-id-type="doi">10.1109/TKDE.2017.2758780</pub-id>
+      <fpage>59</fpage>
+      <lpage>72</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-haney1978">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Haney</surname><given-names>Wava G.</given-names></name>
+        <name><surname>Knowles</surname><given-names>Eric S.</given-names></name>
+      </person-group>
+      <article-title>Perception of neighborhoods by city and suburban residents</article-title>
+      <source>Human Ecology</source>
+      <year iso-8601-date="1978-06">1978</year><month>06</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-12-02">2022</year><month>12</month><day>02</day></date-in-citation>
+      <volume>6</volume>
+      <issue>2</issue>
+      <issn>0300-7839, 1572-9915</issn>
+      <pub-id pub-id-type="doi">10.1007/BF00889095</pub-id>
+      <fpage>201</fpage>
+      <lpage>214</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-haynes1985">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Haynes</surname><given-names>Kingsley E</given-names></name>
+        <name><surname>Fotheringham</surname><given-names>A Stewart</given-names></name>
+      </person-group>
+      <article-title>Gravity and Spatial Interaction Models</article-title>
+      <year iso-8601-date="1985">1985</year>
+      <fpage>72</fpage>
+      <lpage></lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-hecht2014">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Hecht</surname><given-names>Brent</given-names></name>
+        <name><surname>Stephens</surname><given-names>Monica</given-names></name>
+      </person-group>
+      <article-title>A Tale of Cities: Urban Biases in Volunteered Geographic Information</article-title>
+      <year iso-8601-date="2014">2014</year>
+      <pub-id pub-id-type="doi">10.1609/icwsm.v8i1.14554</pub-id>
+      <fpage>9</fpage>
+      <lpage></lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-hollenstein2008">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Hollenstein</surname><given-names>Livia</given-names></name>
+      </person-group>
+      <article-title>Capturing vernacular geography from georeferenced tags</article-title>
+      <publisher-name>Geographisches Institut der Universität Zürich</publisher-name>
+      <year iso-8601-date="2008">2008</year>
+    </element-citation>
+  </ref>
+  <ref id="ref-hu2017">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Hu</surname><given-names>Yingjie</given-names></name>
+        <name><surname>Ye</surname><given-names>Xinyue</given-names></name>
+        <name><surname>Shaw</surname><given-names>Shih-Lung</given-names></name>
+      </person-group>
+      <article-title>Extracting and analyzing semantic relatedness between cities using news articles</article-title>
+      <source>International Journal of Geographical Information Science</source>
+      <year iso-8601-date="2017-12">2017</year><month>12</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-07-11">2022</year><month>07</month><day>11</day></date-in-citation>
+      <volume>31</volume>
+      <issue>12</issue>
+      <issn>1365-8816, 1362-3087</issn>
+      <pub-id pub-id-type="doi">10.1080/13658816.2017.1367797</pub-id>
+      <fpage>2427</fpage>
+      <lpage>2451</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-jang2019">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Jang</surname><given-names>Kee Moon</given-names></name>
+        <name><surname>Kim</surname><given-names>Youngchul</given-names></name>
+      </person-group>
+      <article-title>Crowd-sourced cognitive mapping: A new way of displaying people’s cognitive perception of urban space</article-title>
+      <source>PLOS ONE</source>
+      <year iso-8601-date="2019-06">2019</year><month>06</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2023-02-07">2023</year><month>02</month><day>07</day></date-in-citation>
+      <volume>14</volume>
+      <issue>6</issue>
+      <issn>1932-6203</issn>
+      <pub-id pub-id-type="doi">10.1371/journal.pone.0218590</pub-id>
+      <fpage>e0218590</fpage>
+      <lpage></lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-kamalloo2018">
+    <element-citation publication-type="paper-conference">
+      <person-group person-group-type="author">
+        <name><surname>Kamalloo</surname><given-names>Ehsan</given-names></name>
+        <name><surname>Rafiei</surname><given-names>Davood</given-names></name>
+      </person-group>
+      <article-title>A Coherent Unsupervised Model for Toponym Resolution</article-title>
+      <source>Proceedings of the 2018 World Wide Web Conference on World Wide Web - WWW ’18</source>
+      <publisher-name>ACM Press</publisher-name>
+      <publisher-loc>Lyon, France</publisher-loc>
+      <year iso-8601-date="2018">2018</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-04-01">2022</year><month>04</month><day>01</day></date-in-citation>
+      <isbn>978-1-4503-5639-8</isbn>
+      <pub-id pub-id-type="doi">10.1145/3178876.3186027</pub-id>
+      <fpage>1287</fpage>
+      <lpage>1296</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-kaplan1976">
+    <element-citation publication-type="chapter">
+      <person-group person-group-type="author">
+        <name><surname>Kaplan</surname><given-names>Stephen</given-names></name>
+      </person-group>
+      <article-title>Adaptation, structure and knowledge</article-title>
+      <year iso-8601-date="1976">1976</year>
+    </element-citation>
+  </ref>
+  <ref id="ref-karimzadeh2019">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Karimzadeh</surname><given-names>Morteza</given-names></name>
+        <name><surname>Pezanowski</surname><given-names>Scott</given-names></name>
+        <name><surname>MacEachren</surname><given-names>Alan M.</given-names></name>
+        <name><surname>Wallgrün</surname><given-names>Jan O.</given-names></name>
+      </person-group>
+      <article-title>GeoTxt: A scalable geoparsing system for unstructured text geolocation</article-title>
+      <source>Transactions in GIS</source>
+      <year iso-8601-date="2019-02">2019</year><month>02</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2020-01-28">2020</year><month>01</month><day>28</day></date-in-citation>
+      <volume>23</volume>
+      <issue>1</issue>
+      <issn>1361-1682, 1467-9671</issn>
+      <pub-id pub-id-type="doi">10.1111/tgis.12510</pub-id>
+      <fpage>118</fpage>
+      <lpage>136</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-langton2021">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Langton</surname><given-names>Samuel H</given-names></name>
+        <name><surname>Solymosi</surname><given-names>Reka</given-names></name>
+      </person-group>
+      <article-title>Cartograms, hexograms and regular grids: Minimising misrepresentation in spatial data visualisations</article-title>
+      <source>Environment and Planning B: Urban Analytics and City Science</source>
+      <publisher-name>SAGE Publications Ltd STM</publisher-name>
+      <year iso-8601-date="2021-02">2021</year><month>02</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2023-09-18">2023</year><month>09</month><day>18</day></date-in-citation>
+      <volume>48</volume>
+      <issue>2</issue>
+      <issn>2399-8083</issn>
+      <pub-id pub-id-type="doi">10.1177/2399808319873923</pub-id>
+      <fpage>348</fpage>
+      <lpage>357</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-laurier2016">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Laurier</surname><given-names>Eric</given-names></name>
+        <name><surname>Brown</surname><given-names>Barry</given-names></name>
+        <name><surname>McGregor</surname><given-names>Moira</given-names></name>
+      </person-group>
+      <article-title>Mediated Pedestrian Mobility: Walking and the Map App</article-title>
+      <source>Mobilities</source>
+      <year iso-8601-date="2016-01">2016</year><month>01</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2023-08-15">2023</year><month>08</month><day>15</day></date-in-citation>
+      <volume>11</volume>
+      <issue>1</issue>
+      <issn>1745-0101, 1745-011X</issn>
+      <pub-id pub-id-type="doi">10.1080/17450101.2015.1099900</pub-id>
+      <fpage>117</fpage>
+      <lpage>134</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-lee1973">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Lee</surname><given-names>Terence R</given-names></name>
+      </person-group>
+      <article-title>Psychology and living space</article-title>
+      <source>Image and environment</source>
+      <publisher-name>Aldine New York</publisher-name>
+      <year iso-8601-date="1973">1973</year>
+      <fpage>87</fpage>
+      <lpage>108</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-leidner2011">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Leidner</surname><given-names>Jochen L</given-names></name>
+        <name><surname>Lieberman</surname><given-names>Michael D</given-names></name>
+      </person-group>
+      <article-title>Detecting geographical references in the form of place names and associated spatial natural language</article-title>
+      <source>SIGSPATIAL Special</source>
+      <year iso-8601-date="2011">2011</year>
+      <volume>3</volume>
+      <issue>2</issue>
+      <pub-id pub-id-type="doi">10.1145/2047296.2047298</pub-id>
+      <fpage>5</fpage>
+      <lpage>11</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-li2014">
+    <element-citation publication-type="paper-conference">
+      <person-group person-group-type="author">
+        <name><surname>Li</surname><given-names>Chenliang</given-names></name>
+        <name><surname>Sun</surname><given-names>Aixin</given-names></name>
+      </person-group>
+      <article-title>Fine-grained location extraction from tweets with temporal awareness</article-title>
+      <source>Proceedings of the 37th international ACM SIGIR conference on Research &amp; development in information retrieval - SIGIR ’14</source>
+      <publisher-name>ACM Press</publisher-name>
+      <publisher-loc>Gold Coast, Queensland, Australia</publisher-loc>
+      <year iso-8601-date="2014">2014</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2020-02-13">2020</year><month>02</month><day>13</day></date-in-citation>
+      <isbn>978-1-4503-2257-7</isbn>
+      <pub-id pub-id-type="doi">10.1145/2600428.2609582</pub-id>
+      <fpage>43</fpage>
+      <lpage>52</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-li2021">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Li</surname><given-names>Zhenlong</given-names></name>
+        <name><surname>Huang</surname><given-names>Xiao</given-names></name>
+        <name><surname>Ye</surname><given-names>Xinyue</given-names></name>
+        <name><surname>Jiang</surname><given-names>Yuqin</given-names></name>
+        <name><surname>Martin</surname><given-names>Yago</given-names></name>
+        <name><surname>Ning</surname><given-names>Huan</given-names></name>
+        <name><surname>Hodgson</surname><given-names>Michael E.</given-names></name>
+        <name><surname>Li</surname><given-names>Xiaoming</given-names></name>
+      </person-group>
+      <article-title>Measuring global multi-scale place connectivity using geotagged social media data</article-title>
+      <source>Scientific Reports</source>
+      <year iso-8601-date="2021-12">2021</year><month>12</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-05-25">2022</year><month>05</month><day>25</day></date-in-citation>
+      <volume>11</volume>
+      <issue>1</issue>
+      <issn>2045-2322</issn>
+      <pub-id pub-id-type="doi">10.1038/s41598-021-94300-7</pub-id>
+      <fpage>14694</fpage>
+      <lpage></lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-lin2019">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Lin</surname><given-names>Jinyao</given-names></name>
+        <name><surname>Wu</surname><given-names>Zhifeng</given-names></name>
+        <name><surname>Li</surname><given-names>Xia</given-names></name>
+      </person-group>
+      <article-title>Measuring inter-city connectivity in an urban agglomeration based on multi-source data</article-title>
+      <source>International Journal of Geographical Information Science</source>
+      <year iso-8601-date="2019-05">2019</year><month>05</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-06-27">2022</year><month>06</month><day>27</day></date-in-citation>
+      <volume>33</volume>
+      <issue>5</issue>
+      <issn>1365-8816, 1362-3087</issn>
+      <pub-id pub-id-type="doi">10.1080/13658816.2018.1563302</pub-id>
+      <fpage>1062</fpage>
+      <lpage>1081</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-liu2014">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Liu</surname><given-names>Yu</given-names></name>
+        <name><surname>Wang</surname><given-names>Fahui</given-names></name>
+        <name><surname>Kang</surname><given-names>Chaogui</given-names></name>
+        <name><surname>Gao</surname><given-names>Yong</given-names></name>
+        <name><surname>Lu</surname><given-names>Yongmei</given-names></name>
+      </person-group>
+      <article-title>Analyzing Relatedness by Toponym Co-Occurrences on Web Pages: Analyzing Relatedness by Toponym Co-Occurrences on Web Pages</article-title>
+      <source>Transactions in GIS</source>
+      <year iso-8601-date="2014-02">2014</year><month>02</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-07-11">2022</year><month>07</month><day>11</day></date-in-citation>
+      <volume>18</volume>
+      <issue>1</issue>
+      <issn>13611682</issn>
+      <pub-id pub-id-type="doi">10.1111/tgis.12023</pub-id>
+      <fpage>89</fpage>
+      <lpage>107</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-lukermann1961">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Lukermann</surname><given-names>F.</given-names></name>
+      </person-group>
+      <article-title>The Concept of Location in Classical Geography</article-title>
+      <source>Annals of the Association of American Geographers</source>
+      <year iso-8601-date="1961">1961</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-12-06">2022</year><month>12</month><day>06</day></date-in-citation>
+      <volume>51</volume>
+      <issue>2</issue>
+      <issn>1467-8306</issn>
+      <pub-id pub-id-type="doi">10.1111/j.1467-8306.1961.tb00373.x</pub-id>
+      <fpage>194</fpage>
+      <lpage>210</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-lynch1964">
+    <element-citation publication-type="book">
+      <person-group person-group-type="author">
+        <name><surname>Lynch</surname><given-names>Kevin</given-names></name>
+      </person-group>
+      <source>The Image of the City</source>
+      <publisher-name>MIT Press</publisher-name>
+      <year iso-8601-date="1964-06">1964</year><month>06</month>
+      <isbn>978-0-262-62001-7</isbn>
+    </element-citation>
+  </ref>
+  <ref id="ref-marston2005">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Marston</surname><given-names>Sallie A</given-names></name>
+        <name><surname>Jones III</surname><given-names>John Paul</given-names></name>
+        <name><surname>Woodward</surname><given-names>Keith</given-names></name>
+      </person-group>
+      <article-title>Human geography without scale</article-title>
+      <source>Transactions of the Institute of British Geographers</source>
+      <year iso-8601-date="2005">2005</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2023-11-02">2023</year><month>11</month><day>02</day></date-in-citation>
+      <volume>30</volume>
+      <issue>4</issue>
+      <issn>1475-5661</issn>
+      <pub-id pub-id-type="doi">10.1111/j.1475-5661.2005.00180.x</pub-id>
+      <fpage>416</fpage>
+      <lpage>432</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-massey2008">
+    <element-citation publication-type="chapter">
+      <person-group person-group-type="author">
+        <name><surname>Massey</surname><given-names>Doreen</given-names></name>
+      </person-group>
+      <article-title>A global sense of place</article-title>
+      <source>The cultural geography reader</source>
+      <publisher-name>Routledge</publisher-name>
+      <year iso-8601-date="2008">2008</year>
+      <isbn>0-203-93195-5</isbn>
+      <fpage>269</fpage>
+      <lpage>275</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-medvedev2019">
+    <element-citation publication-type="chapter">
+      <person-group person-group-type="author">
+        <name><surname>Medvedev</surname><given-names>Alexey N.</given-names></name>
+        <name><surname>Lambiotte</surname><given-names>Renaud</given-names></name>
+        <name><surname>Delvenne</surname><given-names>Jean-Charles</given-names></name>
+      </person-group>
+      <article-title>The Anatomy of Reddit: An Overview of Academic Research</article-title>
+      <source>Dynamics On and Of Complex Networks III</source>
+      <person-group person-group-type="editor">
+        <name><surname>Ghanbarnejad</surname><given-names>Fakhteh</given-names></name>
+        <name><surname>Saha Roy</surname><given-names>Rishiraj</given-names></name>
+        <name><surname>Karimi</surname><given-names>Fariba</given-names></name>
+        <name><surname>Delvenne</surname><given-names>Jean-Charles</given-names></name>
+        <name><surname>Mitra</surname><given-names>Bivas</given-names></name>
+      </person-group>
+      <publisher-name>Springer International Publishing</publisher-name>
+      <publisher-loc>Cham</publisher-loc>
+      <year iso-8601-date="2019">2019</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-10-07">2022</year><month>10</month><day>07</day></date-in-citation>
+      <isbn>978-3-030-14682-5 978-3-030-14683-2</isbn>
+      <pub-id pub-id-type="doi">10.1007/978-3-030-14683-2_9</pub-id>
+      <fpage>183</fpage>
+      <lpage>204</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-meijers2019">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Meijers</surname><given-names>Evert</given-names></name>
+        <name><surname>Peris</surname><given-names>Antoine</given-names></name>
+      </person-group>
+      <article-title>Using toponym co-occurrences to measure relationships between places: Review, application and evaluation</article-title>
+      <source>International Journal of Urban Sciences</source>
+      <year iso-8601-date="2019-04">2019</year><month>04</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-08-07">2022</year><month>08</month><day>07</day></date-in-citation>
+      <volume>23</volume>
+      <issue>2</issue>
+      <issn>1226-5934, 2161-6779</issn>
+      <pub-id pub-id-type="doi">10.1080/12265934.2018.1497526</pub-id>
+      <fpage>246</fpage>
+      <lpage>268</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-merrifield1993">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Merrifield</surname><given-names>Andrew</given-names></name>
+      </person-group>
+      <article-title>Place and Space: A Lefebvrian Reconciliation</article-title>
+      <source>Transactions of the Institute of British Geographers</source>
+      <publisher-name>[Royal Geographical Society (with the Institute of British Geographers), Wiley]</publisher-name>
+      <year iso-8601-date="1993">1993</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2023-11-02">2023</year><month>11</month><day>02</day></date-in-citation>
+      <volume>18</volume>
+      <issue>4</issue>
+      <issn>0020-2754</issn>
+      <uri>https://www.jstor.org/stable/622564</uri>
+      <pub-id pub-id-type="doi">10.2307/622564</pub-id>
+      <fpage>516</fpage>
+      <lpage>531</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-merriman2012">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Merriman</surname><given-names>Peter</given-names></name>
+      </person-group>
+      <article-title>Human geography without time-space</article-title>
+      <source>Transactions of the Institute of British Geographers</source>
+      <year iso-8601-date="2012">2012</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-12-06">2022</year><month>12</month><day>06</day></date-in-citation>
+      <volume>37</volume>
+      <issue>1</issue>
+      <issn>1475-5661</issn>
+      <pub-id pub-id-type="doi">10.1111/j.1475-5661.2011.00455.x</pub-id>
+      <fpage>13</fpage>
+      <lpage>27</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-middleton2008">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Middleton</surname><given-names>Christopher</given-names></name>
+        <name><surname>Freestone</surname><given-names>Philip</given-names></name>
+      </person-group>
+      <article-title>The Impact of Culture-led Regeneration on Regional Identity in North East England</article-title>
+      <year iso-8601-date="2008">2008</year>
+    </element-citation>
+  </ref>
+  <ref id="ref-miller2018">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Miller</surname><given-names>Harvey J</given-names></name>
+      </person-group>
+      <article-title>Time geography</article-title>
+      <source>Handbook of Behavioral and Cognitive Geography</source>
+      <publisher-name>Edward Elgar Publishing</publisher-name>
+      <year iso-8601-date="2018">2018</year>
+      <pub-id pub-id-type="doi">10.4337/9781784717544.00011</pub-id>
+      <fpage>74</fpage>
+      <lpage>94</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-miyoshi2013">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Miyoshi</surname><given-names>Chikage</given-names></name>
+        <name><surname>Givoni</surname><given-names>Moshe</given-names></name>
+      </person-group>
+      <article-title>The Environmental Case for the High-Speed Train in the UK: Examining the LondonManchester Route</article-title>
+      <source>International Journal of Sustainable Transportation</source>
+      <publisher-name>Taylor &amp; Francis</publisher-name>
+      <year iso-8601-date="2013-03">2013</year><month>03</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2023-08-15">2023</year><month>08</month><day>15</day></date-in-citation>
+      <volume>8</volume>
+      <issue>2</issue>
+      <issn>1556-8318</issn>
+      <pub-id pub-id-type="doi">10.1080/15568318.2011.645124</pub-id>
+      <fpage>107</fpage>
+      <lpage>126</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-moncla2014">
+    <element-citation publication-type="paper-conference">
+      <person-group person-group-type="author">
+        <name><surname>Moncla</surname><given-names>Ludovic</given-names></name>
+        <name><surname>Renteria-Agualimpia</surname><given-names>Walter</given-names></name>
+        <name><surname>Nogueras-Iso</surname><given-names>Javier</given-names></name>
+        <name><surname>Gaio</surname><given-names>Mauro</given-names></name>
+      </person-group>
+      <article-title>Geocoding for texts with fine-grain toponyms: An experiment on a geoparsed hiking descriptions corpus</article-title>
+      <source>Proceedings of the 22nd ACM SIGSPATIAL International Conference on Advances in Geographic Information Systems</source>
+      <publisher-name>ACM</publisher-name>
+      <publisher-loc>Dallas Texas</publisher-loc>
+      <year iso-8601-date="2014-11">2014</year><month>11</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-07-20">2022</year><month>07</month><day>20</day></date-in-citation>
+      <isbn>978-1-4503-3131-9</isbn>
+      <pub-id pub-id-type="doi">10.1145/2666310.2666386</pub-id>
+      <fpage>183</fpage>
+      <lpage>192</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-montello1993">
+    <element-citation publication-type="chapter">
+      <person-group person-group-type="author">
+        <name><surname>Montello</surname><given-names>Daniel R.</given-names></name>
+      </person-group>
+      <article-title>Scale and multiple psychologies of space</article-title>
+      <source>Spatial Information Theory A Theoretical Basis for GIS</source>
+      <person-group person-group-type="editor">
+        <name><surname>Goos</surname><given-names>Gerhard</given-names></name>
+        <name><surname>Hartmanis</surname><given-names>Juris</given-names></name>
+        <name><surname>Frank</surname><given-names>Andrew U.</given-names></name>
+        <name><surname>Campari</surname><given-names>Irene</given-names></name>
+      </person-group>
+      <publisher-name>Springer Berlin Heidelberg</publisher-name>
+      <publisher-loc>Berlin, Heidelberg</publisher-loc>
+      <year iso-8601-date="1993">1993</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-12-05">2022</year><month>12</month><day>05</day></date-in-citation>
+      <volume>716</volume>
+      <isbn>978-3-540-57207-7 978-3-540-47966-6</isbn>
+      <pub-id pub-id-type="doi">10.1007/3-540-57207-4_21</pub-id>
+      <fpage>312</fpage>
+      <lpage>321</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-montello2003a">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Montello</surname><given-names>Daniel R.</given-names></name>
+        <name><surname>Goodchild</surname><given-names>Michael F.</given-names></name>
+        <name><surname>Gottsegen</surname><given-names>Jonathon</given-names></name>
+        <name><surname>Fohl</surname><given-names>Peter</given-names></name>
+      </person-group>
+      <article-title>Where’s Downtown?: Behavioral Methods for Determining Referents of Vague Spatial Queries</article-title>
+      <year iso-8601-date="2003">2003</year>
+      <fpage>20</fpage>
+      <lpage></lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-moseley2023">
+    <element-citation publication-type="book">
+      <person-group person-group-type="author">
+        <name><surname>Moseley</surname><given-names>Malcolm J.</given-names></name>
+      </person-group>
+      <source>Accessibility: The Rural Challenge</source>
+      <publisher-name>Taylor &amp; Francis</publisher-name>
+      <year iso-8601-date="2023-07">2023</year><month>07</month>
+      <isbn>978-1-00-092730-6</isbn>
+    </element-citation>
+  </ref>
+  <ref id="ref-murphy2019">
+    <element-citation>
+      <person-group person-group-type="author">
+        <name><surname>Murphy</surname><given-names>Nicole</given-names></name>
+      </person-group>
+      <article-title>Reddit’s 2019 Year in Review - Upvoted</article-title>
+      <publisher-name>https://www.redditinc.com/blog/reddits-2019-year-in-review/#content</publisher-name>
+      <year iso-8601-date="2019">2019</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-04-27">2022</year><month>04</month><day>27</day></date-in-citation>
+    </element-citation>
+  </ref>
+  <ref id="ref-murray1979">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Murray</surname><given-names>Debra</given-names></name>
+        <name><surname>Spencer</surname><given-names>Christopher</given-names></name>
+      </person-group>
+      <article-title>Individual Differences in the Drawing of Cognitive Maps: The Effects of Geographical Mobility, Strength of Mental Imagery and Basic Graphic Ability</article-title>
+      <source>Transactions of the Institute of British Geographers</source>
+      <year iso-8601-date="1979">1979</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-12-01">2022</year><month>12</month><day>01</day></date-in-citation>
+      <volume>4</volume>
+      <issue>3</issue>
+      <issn>00202754</issn>
+      <uri>https://www.jstor.org/stable/622058</uri>
+      <pub-id pub-id-type="doi">10.2307/622058</pub-id>
+      <fpage>385</fpage>
+      <lpage></lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-nayak2016">
+    <element-citation publication-type="book">
+      <person-group person-group-type="author">
+        <name><surname>Nayak</surname><given-names>Anoop</given-names></name>
+      </person-group>
+      <source>Race, place and globalization: Youth cultures in a changing world</source>
+      <publisher-name>Bloomsbury Publishing</publisher-name>
+      <year iso-8601-date="2016">2016</year>
+      <isbn>1-84520-568-5</isbn>
+    </element-citation>
+  </ref>
+  <ref id="ref-noulas2011">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Noulas</surname><given-names>Anastasios</given-names></name>
+        <name><surname>Scellato</surname><given-names>Salvatore</given-names></name>
+        <name><surname>Mascolo</surname><given-names>Cecilia</given-names></name>
+        <name><surname>Pontil</surname><given-names>Massimiliano</given-names></name>
+      </person-group>
+      <article-title>An Empirical Study of Geographic User Activity Patterns in Foursquare</article-title>
+      <source>Proceedings of the International AAAI Conference on Web and Social Media</source>
+      <year iso-8601-date="2011">2011</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-08-27">2022</year><month>08</month><day>27</day></date-in-citation>
+      <volume>5</volume>
+      <issue>1</issue>
+      <issn>2334-0770</issn>
+      <pub-id pub-id-type="doi">10.1609/icwsm.v5i1.14175</pub-id>
+      <fpage>570</fpage>
+      <lpage>573</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-officefornationalstatistics2022">
+    <element-citation>
+      <person-group person-group-type="author">
+        <string-name>Office for National Statistics</string-name>
+      </person-group>
+      <article-title>How the population changed in Newcastle upon Tyne, Census 2021 - ONS</article-title>
+      <publisher-name>https://www.ons.gov.uk/visualisations/censuspopulationchange/E08000021/</publisher-name>
+      <year iso-8601-date="2022">2022</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2023-09-18">2023</year><month>09</month><day>18</day></date-in-citation>
+    </element-citation>
+  </ref>
+  <ref id="ref-ostermann2015">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Ostermann</surname><given-names>F. O.</given-names></name>
+        <name><surname>Huang</surname><given-names>H.</given-names></name>
+        <name><surname>Andrienko</surname><given-names>G.</given-names></name>
+        <name><surname>Andrienko</surname><given-names>N.</given-names></name>
+        <name><surname>Capineri</surname><given-names>C.</given-names></name>
+        <name><surname>Farkas</surname><given-names>K.</given-names></name>
+        <name><surname>Purves</surname><given-names>R. S.</given-names></name>
+      </person-group>
+      <article-title>Extracting and comparing places using geo-social media</article-title>
+      <source>ISPRS Annals of the Photogrammetry, Remote Sensing and Spatial Information Sciences</source>
+      <year iso-8601-date="2015-08">2015</year><month>08</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-05-19">2022</year><month>05</month><day>19</day></date-in-citation>
+      <volume>II-3/W5</volume>
+      <issn>2194-9050</issn>
+      <pub-id pub-id-type="doi">10.5194/isprsannals-II-3-W5-311-2015</pub-id>
+      <fpage>311</fpage>
+      <lpage>316</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-panek2016">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Pánek</surname><given-names>Jiří</given-names></name>
+      </person-group>
+      <article-title>From Mental Maps to GeoParticipation</article-title>
+      <source>The Cartographic Journal</source>
+      <publisher-name>Taylor &amp; Francis</publisher-name>
+      <year iso-8601-date="2016-10">2016</year><month>10</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-12-07">2022</year><month>12</month><day>07</day></date-in-citation>
+      <volume>53</volume>
+      <issue>4</issue>
+      <issn>0008-7041</issn>
+      <pub-id pub-id-type="doi">10.1080/00087041.2016.1243862</pub-id>
+      <fpage>300</fpage>
+      <lpage>307</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-patterson2015">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Patterson</surname><given-names>Zachary</given-names></name>
+        <name><surname>Farber</surname><given-names>Steven</given-names></name>
+      </person-group>
+      <article-title>Potential Path Areas and Activity Spaces in Application: A Review</article-title>
+      <source>Transport Reviews</source>
+      <publisher-name>Routledge</publisher-name>
+      <year iso-8601-date="2015-11">2015</year><month>11</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-08-27">2022</year><month>08</month><day>27</day></date-in-citation>
+      <volume>35</volume>
+      <issue>6</issue>
+      <issn>0144-1647</issn>
+      <pub-id pub-id-type="doi">10.1080/01441647.2015.1042944</pub-id>
+      <fpage>679</fpage>
+      <lpage>700</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-peake2004">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Peake</surname><given-names>Simon</given-names></name>
+        <name><surname>Moore</surname><given-names>Tony</given-names></name>
+      </person-group>
+      <article-title>Analysis of distortions in a mental map using GPS and GIS</article-title>
+      <year iso-8601-date="2004">2004</year>
+      <fpage>10</fpage>
+      <lpage></lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-pierce2011">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Pierce</surname><given-names>Joseph</given-names></name>
+        <name><surname>Martin</surname><given-names>Deborah G</given-names></name>
+        <name><surname>Murphy</surname><given-names>James T</given-names></name>
+      </person-group>
+      <article-title>Relational place-making: The networked politics of place</article-title>
+      <source>Transactions of the Institute of British Geographers</source>
+      <year iso-8601-date="2011">2011</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2023-11-02">2023</year><month>11</month><day>02</day></date-in-citation>
+      <volume>36</volume>
+      <issue>1</issue>
+      <issn>1475-5661</issn>
+      <pub-id pub-id-type="doi">10.1111/j.1475-5661.2010.00411.x</pub-id>
+      <fpage>54</fpage>
+      <lpage>70</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-pocock1976">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Pocock</surname><given-names>D. C. D.</given-names></name>
+      </person-group>
+      <article-title>Some Characteristics of Mental Maps: An Empirical Study</article-title>
+      <source>Transactions of the Institute of British Geographers</source>
+      <year iso-8601-date="1976">1976</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-12-01">2022</year><month>12</month><day>01</day></date-in-citation>
+      <volume>1</volume>
+      <issue>4</issue>
+      <issn>00202754</issn>
+      <uri>https://www.jstor.org/stable/621905</uri>
+      <pub-id pub-id-type="doi">10.2307/621905</pub-id>
+      <fpage>493</fpage>
+      <lpage></lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-purves2018">
+    <element-citation publication-type="book">
+      <person-group person-group-type="author">
+        <name><surname>Purves</surname><given-names>Ross S.</given-names></name>
+        <name><surname>Clough</surname><given-names>Paul</given-names></name>
+        <name><surname>Jones</surname><given-names>Christopher B.</given-names></name>
+        <name><surname>Hall</surname><given-names>Mark H.</given-names></name>
+        <name><surname>Murdock</surname><given-names>Vanessa</given-names></name>
+      </person-group>
+      <source>Geographic Information Retrieval: Progress and Challenges in Spatial Search of Text</source>
+      <publisher-name>now</publisher-name>
+      <year iso-8601-date="2018">2018</year>
+      <isbn>978-1-68083-413-0</isbn>
+      <pub-id pub-id-type="doi">10.1561/1500000034</pub-id>
+    </element-citation>
+  </ref>
+  <ref id="ref-rae2009">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Rae</surname><given-names>Alasdair</given-names></name>
+      </person-group>
+      <article-title>From spatial interaction data to spatial interaction information? Geovisualisation and spatial structures of migration from the 2001 UK census</article-title>
+      <source>Computers, Environment and Urban Systems</source>
+      <year iso-8601-date="2009-05">2009</year><month>05</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-05-19">2022</year><month>05</month><day>19</day></date-in-citation>
+      <volume>33</volume>
+      <issue>3</issue>
+      <issn>01989715</issn>
+      <pub-id pub-id-type="doi">10.1016/j.compenvurbsys.2009.01.007</pub-id>
+      <fpage>161</fpage>
+      <lpage>178</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-rey2023">
+    <element-citation publication-type="book">
+      <person-group person-group-type="author">
+        <name><surname>Rey</surname><given-names>Sergio</given-names></name>
+        <name><surname>Arribas-Bel</surname><given-names>Dani</given-names></name>
+        <name><surname>Wolf</surname><given-names>Levi John</given-names></name>
+      </person-group>
+      <source>Geographic data science with python</source>
+      <publisher-name>CRC Press</publisher-name>
+      <year iso-8601-date="2023">2023</year>
+      <isbn>1-00-088522-4</isbn>
+    </element-citation>
+  </ref>
+  <ref id="ref-roosbreines2019">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Roos Breines</surname><given-names>Markus</given-names></name>
+        <name><surname>Raghuram</surname><given-names>Parvati</given-names></name>
+        <name><surname>Gunter</surname><given-names>Ashley</given-names></name>
+      </person-group>
+      <article-title>Infrastructures of immobility: Enabling international distance education students in Africa to not move</article-title>
+      <source>Mobilities</source>
+      <publisher-name>Routledge</publisher-name>
+      <year iso-8601-date="2019-07">2019</year><month>07</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2023-07-25">2023</year><month>07</month><day>25</day></date-in-citation>
+      <volume>14</volume>
+      <issue>4</issue>
+      <issn>1745-0101</issn>
+      <pub-id pub-id-type="doi">10.1080/17450101.2019.1618565</pub-id>
+      <fpage>484</fpage>
+      <lpage>499</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-rowe2022">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Rowe</surname><given-names>Francisco</given-names></name>
+        <name><surname>Calafiore</surname><given-names>Alessia</given-names></name>
+        <name><surname>Arribas-Bel</surname><given-names>Daniel</given-names></name>
+        <name><surname>Samardzhiev</surname><given-names>Krasen</given-names></name>
+        <name><surname>Fleischmann</surname><given-names>Martin</given-names></name>
+      </person-group>
+      <article-title>Urban exodus? Understanding human mobility in Britain during the COVID-19 pandemic using Meta-Facebook data</article-title>
+      <source>Population, Space and Place</source>
+      <year iso-8601-date="2022">2022</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-12-08">2022</year><month>12</month><day>08</day></date-in-citation>
+      <volume>n/a</volume>
+      <issue>n/a</issue>
+      <issn>1544-8452</issn>
+      <pub-id pub-id-type="doi">10.1002/psp.2637</pub-id>
+      <fpage>e37</fpage>
+      <lpage></lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-rowe2022a">
+    <element-citation>
+      <person-group person-group-type="author">
+        <name><surname>Rowe</surname><given-names>Francisco</given-names></name>
+        <name><surname>Lovelace</surname><given-names>Robin</given-names></name>
+        <name><surname>Dennett</surname><given-names>Adam</given-names></name>
+      </person-group>
+      <article-title>Spatial Interaction Modelling: A Manifesto</article-title>
+      <publisher-name>OSF Preprints</publisher-name>
+      <year iso-8601-date="2022-07">2022</year><month>07</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-10-14">2022</year><month>10</month><day>14</day></date-in-citation>
+      <pub-id pub-id-type="doi">10.31219/osf.io/xcdms</pub-id>
+    </element-citation>
+  </ref>
+  <ref id="ref-safegraph2022">
+    <element-citation>
+      <person-group person-group-type="author">
+        <string-name>SafeGraph</string-name>
+      </person-group>
+      <article-title>Places Data Curated for Accurate Geospatial Analytics  SafeGraph</article-title>
+      <publisher-name>https://www.safegraph.com</publisher-name>
+      <year iso-8601-date="2022">2022</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-06-27">2022</year><month>06</month><day>27</day></date-in-citation>
+    </element-citation>
+  </ref>
+  <ref id="ref-salvini2016">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Salvini</surname><given-names>Marco M</given-names></name>
+        <name><surname>Fabrikant</surname><given-names>Sara I</given-names></name>
+      </person-group>
+      <article-title>Spatialization of user-generated content to uncover the multirelational world city network</article-title>
+      <year iso-8601-date="2016">2016</year>
+      <pub-id pub-id-type="doi">10.1177/0265813515603868</pub-id>
+      <fpage>21</fpage>
+      <lpage></lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-shaw2010">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Shaw</surname><given-names>Jon</given-names></name>
+        <name><surname>Hesse</surname><given-names>Markus</given-names></name>
+      </person-group>
+      <article-title>Transport, geography and the ‘new’ mobilities</article-title>
+      <source>Transactions of the Institute of British Geographers</source>
+      <year iso-8601-date="2010">2010</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-10-03">2022</year><month>10</month><day>03</day></date-in-citation>
+      <volume>35</volume>
+      <issue>3</issue>
+      <issn>1475-5661</issn>
+      <pub-id pub-id-type="doi">10.1111/j.1475-5661.2010.00382.x</pub-id>
+      <fpage>305</fpage>
+      <lpage>312</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-singleton2012">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Singleton</surname><given-names>A. D.</given-names></name>
+        <name><surname>Wilson</surname><given-names>A. G.</given-names></name>
+        <name><surname>O’Brien</surname><given-names>O.</given-names></name>
+      </person-group>
+      <article-title>Geodemographics and spatial interaction: An integrated model for higher education</article-title>
+      <source>Journal of Geographical Systems</source>
+      <year iso-8601-date="2012-04">2012</year><month>04</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-05-10">2022</year><month>05</month><day>10</day></date-in-citation>
+      <volume>14</volume>
+      <issue>2</issue>
+      <issn>1435-5930, 1435-5949</issn>
+      <pub-id pub-id-type="doi">10.1007/s10109-010-0141-5</pub-id>
+      <fpage>223</fpage>
+      <lpage>241</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-smith2020">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Smith</surname><given-names>Thomas Aneurin</given-names></name>
+        <name><surname>Laurier</surname><given-names>Eric</given-names></name>
+        <name><surname>Reeves</surname><given-names>Stuart</given-names></name>
+        <name><surname>Dunkley</surname><given-names>Ria Ann</given-names></name>
+      </person-group>
+      <article-title>“Off the beaten map”: Navigating with digital maps on moorland</article-title>
+      <source>Transactions of the Institute of British Geographers</source>
+      <year iso-8601-date="2020">2020</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2023-07-25">2023</year><month>07</month><day>25</day></date-in-citation>
+      <volume>45</volume>
+      <issue>1</issue>
+      <issn>1475-5661</issn>
+      <pub-id pub-id-type="doi">10.1111/tran.12336</pub-id>
+      <fpage>223</fpage>
+      <lpage>240</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-statista2022">
+    <element-citation>
+      <person-group person-group-type="author">
+        <string-name>Statista</string-name>
+      </person-group>
+      <article-title>Most popular social networks worldwide as of January 2022, ranked by number of monthly active users</article-title>
+      <source>Statista</source>
+      <publisher-name>https://www.statista.com/statistics/272014/global-social-networks-ranked-by-number-of-users/</publisher-name>
+      <year iso-8601-date="2022">2022</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-07-03">2022</year><month>07</month><day>03</day></date-in-citation>
+    </element-citation>
+  </ref>
+  <ref id="ref-steiger2015">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Steiger</surname><given-names>Enrico</given-names></name>
+        <name><surname>Westerholt</surname><given-names>René</given-names></name>
+        <name><surname>Resch</surname><given-names>Bernd</given-names></name>
+        <name><surname>Zipf</surname><given-names>Alexander</given-names></name>
+      </person-group>
+      <article-title>Twitter as an indicator for whereabouts of people? Correlating Twitter with UK census data</article-title>
+      <source>Computers, Environment and Urban Systems</source>
+      <year iso-8601-date="2015-11">2015</year><month>11</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-08-27">2022</year><month>08</month><day>27</day></date-in-citation>
+      <volume>54</volume>
+      <issn>01989715</issn>
+      <pub-id pub-id-type="doi">10.1016/j.compenvurbsys.2015.09.007</pub-id>
+      <fpage>255</fpage>
+      <lpage>265</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-stock2013">
+    <element-citation publication-type="chapter">
+      <person-group person-group-type="author">
+        <name><surname>Stock</surname><given-names>Kristin</given-names></name>
+        <name><surname>Pasley</surname><given-names>Robert C.</given-names></name>
+        <name><surname>Gardner</surname><given-names>Zoe</given-names></name>
+        <name><surname>Brindley</surname><given-names>Paul</given-names></name>
+        <name><surname>Morley</surname><given-names>Jeremy</given-names></name>
+        <name><surname>Cialone</surname><given-names>Claudia</given-names></name>
+      </person-group>
+      <article-title>Creating a Corpus of Geospatial Natural Language</article-title>
+      <source>Spatial Information Theory</source>
+      <person-group person-group-type="editor">
+        <name><surname>Hutchison</surname><given-names>David</given-names></name>
+        <name><surname>Kanade</surname><given-names>Takeo</given-names></name>
+        <name><surname>Kittler</surname><given-names>Josef</given-names></name>
+        <name><surname>Kleinberg</surname><given-names>Jon M.</given-names></name>
+        <name><surname>Mattern</surname><given-names>Friedemann</given-names></name>
+        <name><surname>Mitchell</surname><given-names>John C.</given-names></name>
+        <name><surname>Naor</surname><given-names>Moni</given-names></name>
+        <name><surname>Nierstrasz</surname><given-names>Oscar</given-names></name>
+        <name><surname>Pandu Rangan</surname><given-names>C.</given-names></name>
+        <name><surname>Steffen</surname><given-names>Bernhard</given-names></name>
+        <name><surname>Sudan</surname><given-names>Madhu</given-names></name>
+        <name><surname>Terzopoulos</surname><given-names>Demetri</given-names></name>
+        <name><surname>Tygar</surname><given-names>Doug</given-names></name>
+        <name><surname>Vardi</surname><given-names>Moshe Y.</given-names></name>
+        <name><surname>Weikum</surname><given-names>Gerhard</given-names></name>
+        <name><surname>Tenbrink</surname><given-names>Thora</given-names></name>
+        <name><surname>Stell</surname><given-names>John</given-names></name>
+        <name><surname>Galton</surname><given-names>Antony</given-names></name>
+        <name><surname>Wood</surname><given-names>Zena</given-names></name>
+      </person-group>
+      <publisher-name>Springer International Publishing</publisher-name>
+      <publisher-loc>Cham</publisher-loc>
+      <year iso-8601-date="2013">2013</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2020-10-13">2020</year><month>10</month><day>13</day></date-in-citation>
+      <volume>8116</volume>
+      <isbn>978-3-319-01789-1 978-3-319-01790-7</isbn>
+      <pub-id pub-id-type="doi">10.1007/978-3-319-01790-7_16</pub-id>
+      <fpage>279</fpage>
+      <lpage>298</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-sylla2022">
+    <element-citation publication-type="chapter">
+      <person-group person-group-type="author">
+        <name><surname>Sylla</surname><given-names>Aline</given-names></name>
+        <name><surname>Glawe</surname><given-names>Felix</given-names></name>
+        <name><surname>Braun</surname><given-names>Dirk</given-names></name>
+        <name><surname>Padev</surname><given-names>Mihail</given-names></name>
+        <name><surname>Schäfer</surname><given-names>Sina</given-names></name>
+        <name><surname>Ahmetaj</surname><given-names>Albina</given-names></name>
+        <name><surname>Kojan</surname><given-names>Lilian</given-names></name>
+        <name><surname>Calero Valdez</surname><given-names>André</given-names></name>
+      </person-group>
+      <article-title>Discourses of Climate Delay in American Reddit Discussions</article-title>
+      <source>Disinformation in Open Online Media</source>
+      <person-group person-group-type="editor">
+        <name><surname>Spezzano</surname><given-names>Francesca</given-names></name>
+        <name><surname>Amaral</surname><given-names>Adriana</given-names></name>
+        <name><surname>Ceolin</surname><given-names>Davide</given-names></name>
+        <name><surname>Fazio</surname><given-names>Lisa</given-names></name>
+        <name><surname>Serra</surname><given-names>Edoardo</given-names></name>
+      </person-group>
+      <publisher-name>Springer International Publishing</publisher-name>
+      <publisher-loc>Cham</publisher-loc>
+      <year iso-8601-date="2022">2022</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-10-07">2022</year><month>10</month><day>07</day></date-in-citation>
+      <volume>13545</volume>
+      <isbn>978-3-031-18252-5 978-3-031-18253-2</isbn>
+      <pub-id pub-id-type="doi">10.1007/978-3-031-18253-2_9</pub-id>
+      <fpage>123</fpage>
+      <lpage>137</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-taaffe1996">
+    <element-citation publication-type="book">
+      <person-group person-group-type="author">
+        <name><surname>Taaffe</surname><given-names>Edward James</given-names></name>
+      </person-group>
+      <source>Geography of Transportation</source>
+      <publisher-name>MORTON O’KELLY</publisher-name>
+      <year iso-8601-date="1996">1996</year>
+      <isbn>978-0-13-368572-5</isbn>
+    </element-citation>
+  </ref>
+  <ref id="ref-taylor1975">
+    <element-citation publication-type="paper-conference">
+      <person-group person-group-type="author">
+        <name><surname>Taylor</surname><given-names>Peter J</given-names></name>
+        <name><surname>Openshaw</surname><given-names>S</given-names></name>
+      </person-group>
+      <article-title>Distance decay in spatial interactions</article-title>
+      <source>Concepts and techniques in modern geography</source>
+      <publisher-name>Citeseer</publisher-name>
+      <year iso-8601-date="1975">1975</year>
+    </element-citation>
+  </ref>
+  <ref id="ref-taylor1983">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Taylor</surname><given-names>Peter J</given-names></name>
+      </person-group>
+      <article-title>Distance decay in spatial interactions</article-title>
+      <source>Concepts Techniques Modern Geogr</source>
+      <year iso-8601-date="1983">1983</year>
+      <volume>2</volume>
+    </element-citation>
+  </ref>
+  <ref id="ref-thomas1981">
+    <element-citation publication-type="book">
+      <person-group person-group-type="author">
+        <name><surname>Thomas</surname><given-names>R. W.</given-names></name>
+      </person-group>
+      <source>Information statistics in geography</source>
+      <publisher-name>Geo Abstracts</publisher-name>
+      <publisher-loc>Norwich</publisher-loc>
+      <year iso-8601-date="1981">1981</year>
+      <isbn>978-0-86094-090-6</isbn>
+    </element-citation>
+  </ref>
+  <ref id="ref-titheridge2009">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Titheridge</surname><given-names>Helena</given-names></name>
+        <name><surname>Achuthan</surname><given-names>Kamalasudhan</given-names></name>
+        <name><surname>Mackett</surname><given-names>Roger L.</given-names></name>
+        <name><surname>Solomon</surname><given-names>Juliet</given-names></name>
+      </person-group>
+      <article-title>Assessing the extent of transport social exclusion among the elderly</article-title>
+      <source>Journal of Transport and Land Use</source>
+      <year iso-8601-date="2009-09">2009</year><month>09</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-08-27">2022</year><month>08</month><day>27</day></date-in-citation>
+      <volume>2</volume>
+      <issue>2</issue>
+      <issn>1938-7849</issn>
+      <pub-id pub-id-type="doi">10.5198/jtlu.v2i2.44</pub-id>
+    </element-citation>
+  </ref>
+  <ref id="ref-tobler1970">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Tobler</surname><given-names>W. R.</given-names></name>
+      </person-group>
+      <article-title>A Computer Movie Simulating Urban Growth in the Detroit Region</article-title>
+      <source>Economic Geography</source>
+      <year iso-8601-date="1970-06">1970</year><month>06</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-07-11">2022</year><month>07</month><day>11</day></date-in-citation>
+      <volume>46</volume>
+      <issn>00130095</issn>
+      <uri>https://www.jstor.org/stable/143141</uri>
+      <pub-id pub-id-type="doi">10.2307/143141</pub-id>
+      <fpage>234</fpage>
+      <lpage></lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-won2018">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Won</surname><given-names>Miguel</given-names></name>
+        <name><surname>Murrieta-Flores</surname><given-names>Patricia</given-names></name>
+        <name><surname>Martins</surname><given-names>Bruno</given-names></name>
+      </person-group>
+      <article-title>Ensemble Named Entity Recognition (NER): Evaluating NER Tools in the Identification of Place Names in Historical Corpora</article-title>
+      <source>Frontiers in Digital Humanities</source>
+      <year iso-8601-date="2018-03">2018</year><month>03</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-05-24">2022</year><month>05</month><day>24</day></date-in-citation>
+      <volume>5</volume>
+      <issn>2297-2668</issn>
+      <pub-id pub-id-type="doi">10.3389/fdigh.2018.00002</pub-id>
+      <fpage>2</fpage>
+      <lpage></lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-worboys2001">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Worboys</surname><given-names>Michael F.</given-names></name>
+      </person-group>
+      <article-title>Nearness relations in environmental space</article-title>
+      <source>International Journal of Geographical Information Science</source>
+      <year iso-8601-date="2001-10">2001</year><month>10</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-12-05">2022</year><month>12</month><day>05</day></date-in-citation>
+      <volume>15</volume>
+      <issue>7</issue>
+      <issn>1365-8816, 1362-3087</issn>
+      <pub-id pub-id-type="doi">10.1080/13658810110061162</pub-id>
+      <fpage>633</fpage>
+      <lpage>651</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-yang2019">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Yang</surname><given-names>Yang</given-names></name>
+        <name><surname>Li</surname><given-names>Dong</given-names></name>
+        <name><surname>Li</surname><given-names>Xiang (Robert)</given-names></name>
+      </person-group>
+      <article-title>Public Transport Connectivity and Intercity Tourist Flows</article-title>
+      <source>Journal of Travel Research</source>
+      <year iso-8601-date="2019-01">2019</year><month>01</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-06-27">2022</year><month>06</month><day>27</day></date-in-citation>
+      <volume>58</volume>
+      <issue>1</issue>
+      <issn>0047-2875, 1552-6763</issn>
+      <pub-id pub-id-type="doi">10.1177/0047287517741997</pub-id>
+      <fpage>25</fpage>
+      <lpage>41</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-ye2021">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Ye</surname><given-names>Xinyue</given-names></name>
+        <name><surname>Gong</surname><given-names>Junfang</given-names></name>
+        <name><surname>Li</surname><given-names>Shengwen</given-names></name>
+      </person-group>
+      <article-title>Analyzing Asymmetric City Connectivity by Toponym on Social Media in China</article-title>
+      <source>Chinese Geographical Science</source>
+      <year iso-8601-date="2021-02">2021</year><month>02</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-07-11">2022</year><month>07</month><day>11</day></date-in-citation>
+      <volume>31</volume>
+      <issue>1</issue>
+      <issn>1002-0063, 1993-064X</issn>
+      <pub-id pub-id-type="doi">10.1007/s11769-020-1172-6</pub-id>
+      <fpage>14</fpage>
+      <lpage>26</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-yin2017a">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Yin</surname><given-names>Wenpeng</given-names></name>
+        <name><surname>Kann</surname><given-names>Katharina</given-names></name>
+        <name><surname>Yu</surname><given-names>Mo</given-names></name>
+        <name><surname>Schütze</surname><given-names>Hinrich</given-names></name>
+      </person-group>
+      <article-title>Comparative Study of CNN and RNN for Natural Language Processing</article-title>
+      <source>arXiv:1702.01923 [cs]</source>
+      <year iso-8601-date="2017-02">2017</year><month>02</month>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2020-01-02">2020</year><month>01</month><day>02</day></date-in-citation>
+      <uri>https://arxiv.org/abs/1702.01923</uri>
+    </element-citation>
+  </ref>
+  <ref id="ref-zook2006">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Zook</surname><given-names>Matthew</given-names></name>
+      </person-group>
+      <article-title>The geographies of the Internet</article-title>
+      <source>Annu. Rev. Inf. Sci. Technol.</source>
+      <year iso-8601-date="2006">2006</year>
+      <volume>40</volume>
+      <issue>1</issue>
+      <pub-id pub-id-type="doi">10.1002/aris.1440400109</pub-id>
+      <fpage>53</fpage>
+      <lpage>78</lpage>
+    </element-citation>
+  </ref>
+</ref-list>
+<fn-group>
+  <fn id="fn1">
+    <label>1</label><p>Ordnance Survey UK does not include data for
+    Northern Ireland.</p>
+  </fn>
+  <fn id="fn2">
+    <label>2</label><p>In our work we consider ‘place names’ to be
+    ambiguous noun phrases found in text, without associated
+    coordinates, while ‘locations’ are place names that have attributed
+    coordinates. We use ‘<italic>place</italic> associations’ to capture
+    the vagueness involved in cognitive associations.</p>
+  </fn>
+  <fn id="fn3">
+    <label>3</label><p>https://www.geonames.org</p>
+  </fn>
+  <fn id="fn4">
+    <label>4</label><p>https://reddit.com</p>
+  </fn>
+  <fn id="fn5">
+    <label>5</label><p>https://reddit.com/r/unitedkingdom</p>
+  </fn>
+  <fn id="fn6">
+    <label>6</label><p>https://www.reddit.com/r/unitedkingdom/wiki/british_subreddits</p>
+  </fn>
+  <fn id="fn7">
+    <label>7</label><p>https://pushshift.io/</p>
+  </fn>
+  <fn id="fn8">
+    <label>8</label><p>URL provided following submission</p>
+  </fn>
+  <fn id="fn9">
+    <label>9</label><p>https://www.ordnancesurvey.co.uk/business-government/products/open-map-names</p>
+  </fn>
+  <fn id="fn10">
+    <label>10</label><p>https://gazetteer.org.uk</p>
+  </fn>
+  <fn id="fn11">
+    <label>11</label><p>For a more detailed mathematical explanation see
+    Hu, Ye, and Shaw
+    (<xref alt="2017" rid="ref-hu2017" ref-type="bibr">2017</xref>)</p>
+  </fn>
+  <fn id="fn12">
+    <label>12</label><p>https://www.uber.com/en-GB/blog/h3/</p>
+  </fn>
+  <fn id="fn13">
+    <label>13</label><p>https://www.gov.uk/government/collections/rural-urban-classification</p>
+  </fn>
+  <fn id="fn14">
+    <label>14</label><p>https://www.gov.scot/publications/scottish-government-urban-rural-classification-2020</p>
+  </fn>
+  <fn id="fn15">
+    <label>15</label><p>Note that many names absent from our gazetteer
+    include locations outside the UK</p>
+  </fn>
+</fn-group>
+</back>
+
+
+</article>

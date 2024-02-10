@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://cjber.github.io/posts/transformers/index.html</loc>
-    <lastmod>2024-02-10T16:18:15.010Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cjber.github.io/index.html</loc>
-    <lastmod>2024-02-10T16:18:15.002Z</lastmod>
+    <loc>https://cjber.github.io/posts/manuscripts/transformers/index.html</loc>
+    <lastmod>2024-02-10T17:56:56.304Z</lastmod>
   </url>
   <url>
     <loc>https://cjber.github.io/about.html</loc>
-    <lastmod>2024-02-10T16:18:15.002Z</lastmod>
+    <lastmod>2024-02-10T17:56:56.272Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cjber.github.io/index.html</loc>
+    <lastmod>2024-02-10T17:56:56.272Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cjber.github.io/posts/manuscripts/associations/index.html</loc>
+    <lastmod>2024-02-10T17:56:56.272Z</lastmod>
   </url>
 </urlset>
