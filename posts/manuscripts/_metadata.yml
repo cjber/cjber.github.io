@@ -18,13 +18,6 @@ format:
           \usepackage[capitalise,noabbrev]{cleveref}
           \usepackage{tikz-dependency}
           \usepackage{makecell}
-          \usepackage[T1]{fontenc}
-          \usepackage{libertine}
-          \setmonofont[Scale=MatchLowercase]{JetBrainsMono Nerd Font}[
-              Contextuals = Alternate,
-              Ligatures = TeX,
-          ]
-          \usepackage{setspace}
 
 execute:
   freeze: true
