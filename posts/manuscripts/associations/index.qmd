@@ -19,7 +19,7 @@ keywords: [cognitive place connectivity, distance decay, geoparsing, mental maps
 image: "main_files/figure-pdf/Figure_4.png"
 date: 2024-01-08
 other-links: [{href: https://github.com/cjber/reddit-connectivity, icon: github, rel: icon, text: Github Repository}, {href: https://doi.org/10.1111/tran.12669, icon: journal-richtext, rel: icon, text: DOI 10.1111/tran.12669}]
-subtitle: "{{<ai open-access >}} {{<ai figshare >}} {{< ai doi >}}"
+subtitle: "{{< ai open-access >}} {{< ai figshare >}} {{< ai doi >}}"
 ---
 
 
