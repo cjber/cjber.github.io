@@ -15,17 +15,17 @@ authors:
     affiliation: Ordnance Survey
     email: Jeremy.Morley@os.uk
 keywords: [cognitive place connectivity, distance decay, geoparsing, mental maps, natural language processing, United Kingdom]
+
 image: "main_files/figure-pdf/Figure_4.png"
 date: 2024-01-08
-description: "Test"
 other-links: [{href: https://github.com/cjber/reddit-connectivity, icon: github, rel: icon, text: Github Repository}, {href: https://doi.org/10.1111/tran.12669, icon: journal-richtext, rel: icon, text: DOI 10.1111/tran.12669}]
+subtitle: "{{<ai open-access >}} {{<ai figshare >}} {{< ai doi >}}"
 ---
 
 
 # Abstract
 
 This paper explores cognitive place associations; conceptualised as a place-based mental model that derives subconscious links between geographic locations. Utilising a large corpus of online discussion data from the social media website Reddit, we experiment on the extraction of such geographic knowledge from unstructured text. First we construct a system to identify place names found in Reddit comments, disambiguating each to a set of coordinates where possible. Following this, we build a collective picture of cognitive place associations in the United Kingdom, linking locations that co-occur in user comments and evaluating the effect of distance on the strength of these associations. Exploring these geographies nationally, associations were shown to be typically weaker over greater distances. This distance decay is also highly regional, rural areas typically have greater levels of distance decay, particularly in Wales and Scotland. When comparing major cities across the UK, we observe distinct distance decay patterns, influenced primarily by proximity to other cities.
-
 
 
 
