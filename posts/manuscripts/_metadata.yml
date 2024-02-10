@@ -7,8 +7,7 @@ format:
   html:
     comments:
       hypothesis: false
-  docx: default
-  jats: default
+  odt: default
   arxiv-pdf:
     authorcols: true
     runninghead: " "
