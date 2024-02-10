@@ -13,6 +13,7 @@ and Interchange DTD v1.2 20190208//EN" "JATS-archivearticle1.dtd">
 <title-group>
 <article-title>Transformer based named entity recognition for place name
 extraction from unstructured text</article-title>
+<subtitle>{{}} {{}}</subtitle>
 </title-group>
 
 <contrib-group>
