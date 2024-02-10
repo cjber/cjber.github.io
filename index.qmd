@@ -1,12 +1,30 @@
 ---
 title: "Cillian Berragan"
 listing:
-  contents: posts
-  sort: "date desc"
-  type: default
-  categories: true
-  sort-ui: false
-  filter-ui: false
+  - id: manuscripts
+    contents: posts/manuscripts
+    sort: "date desc"
+    type: default
+    categories: true
+    sort-ui: false
+    filter-ui: false
+  - id: projects
+    contents: posts/projects
+    sort: "date desc"
+    type: default
+    categories: true
+    sort-ui: false
+    filter-ui: false
 page-layout: full
 title-block-banner: true
 ---
+
+## Projects
+
+:::{#projects}
+:::
+
+## Papers
+
+:::{#manuscripts}
+:::
