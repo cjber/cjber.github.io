@@ -1,0 +1,33 @@
+categories: [paper, code]
+
+manuscript:
+  article: index.qmd
+
+format:
+  html:
+    comments:
+      hypothesis: false
+  docx: default
+  jats: default
+  arxiv-pdf:
+    authorcols: true
+    runninghead: " "
+    include-in-header:
+      - text: |
+          \usepackage{hyperref}
+          \usepackage[capitalise,noabbrev]{cleveref}
+          \usepackage{tikz-dependency}
+          \usepackage{makecell}
+          \usepackage[T1]{fontenc}
+          \usepackage{libertine}
+          \setmonofont[Scale=MatchLowercase]{JetBrainsMono Nerd Font}[
+              Contextuals = Alternate,
+              Ligatures = TeX,
+          ]
+          \usepackage{setspace}
+
+execute:
+  freeze: true
+
+filters:
+  - abstract-section

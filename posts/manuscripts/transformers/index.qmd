@@ -1,18 +1,25 @@
 ---
-title: Transformers
+title: Transformer based named entity recognition for place name extraction from unstructured text
 authors:
-  - name: Norah Jones
-    affiliation: The University
-    roles: writing
+  - name: Cillian Berragan
+    affiliation: University of Liverpool
+    email: c.berragan@liverpool.ac.uk
     corresponding: true
-bibliography: references.bib
+  - name: Alex Singleton
+    affiliation: University of Liverpool
+    email: alex.singleton@liverpool.ac.uk
+  - name: Alessia Calafiore
+    affiliation: University of Edinburgh
+    email: acalafio@ed.ac.uk
+  - name: Jeremy Morley
+    affiliation: Ordnance Survey
+    email: Jeremy.Morley@os.uk
+keywords: [named entity recognition, volunteered geographic information, natural language processing, place name extraction]
 ---
 
 ## Abstract {-}
 
 Place names embedded in online natural language text present a useful source of geographic information. Despite this, many methods for the extraction of place names from text use pre-trained models that were not explicitly designed for this task. Our paper builds five custom-built Named Entity Recognition (NER) models and evaluates them against three popular pre-built models for place name extraction. The models are evaluated using a set of manually annotated Wikipedia articles with reference to the F1 score metric. Our best performing model achieves an F1 score of 0.939 compared with 0.730 for the best performing pre-built model. Our model is then used to extract all place names from Wikipedia articles in Great Britain, demonstrating the ability to more accurately capture unknown place names from volunteered sources of online geographic information.
-
-\newpage
 
 ## Introduction
 
@@ -52,7 +59,7 @@ Our paper proposes fine-tuning transformer-based language models for place name 
 
 ## Methodology {#sec-trans-methodology}
 
-Figure \ref{fig-workflow} gives an overview of the model and data processing pipeline used in our paper. This section first outlines the computational infrastructure used. The data collection and data processing is then described, obtaining a corpus of Wikipedia articles for locations in Great Britain with place names labelled.
+@fig-workflow gives an overview of the model and data processing pipeline used in our paper. This section first outlines the computational infrastructure used. The data collection and data processing is then described, obtaining a corpus of Wikipedia articles for locations in Great Britain with place names labelled.
 
 This dataset was then used to train custom NER models of various architectures, which were evaluated using separate test data against each other and popular pre-built NER models. We then selected our DistilBERT transformer model to extract all place names from the full corpus of Wikipedia articles, as this model performed well as indicated by its test F~1~ score, despite its smaller size.
 
@@ -104,7 +111,7 @@ From these 200 labelled Wikipedia abstracts, 10% were kept for both validation a
 
 ### Building the entity recognition models
 
-Named entity recognition is a subset of token classification where a sequence of tokens $\mathbf{x} = \{x_{0}, x_{1}\dots x_{n}\}$ are taken as input, and the most likely sequence tags $\mathbf{y} = \{y_0, y_1, \dots y_n\}$ are predicted. The models constructed in our paper may be divided into three main components, outlined on Figure \ref{fig-workflow}:
+Named entity recognition is a subset of token classification where a sequence of tokens $\mathbf{x} = \{x_{0}, x_{1}\dots x_{n}\}$ are taken as input, and the most likely sequence tags $\mathbf{y} = \{y_0, y_1, \dots y_n\}$ are predicted. The models constructed in our paper may be divided into three main components, outlined on @fig-workflow:
 
 * **Embedding Layer**: Each token in a sequence represented as high dimension numerical space, they may be either:
   * Randomly initialised
@@ -114,8 +121,9 @@ Named entity recognition is a subset of token classification where a sequence of
   * Transformer
 * **Classification layer:** The final layer of the model that takes a high dimensional output from the previous layers, and projects them to the classification dimension. The `argmax` from this layer corresponds to the label selected for each token. Each model uses a Conditional Random Field (CRF) to classify tokens which are popular in NER tasks, as they consider tagging decisions between all input tokens [@lample2016]. This is necessary given the inside tag for a place (I-PLACE), cannot directly follow a unit tag (U-PLACE) for example.
 
+::: {#tbl-models}
+```{=latex}
 \begin{table}
-\caption{\label{tbl-models}Overview of the models trained through our paper, detailing the architecture used. Integers in brackets indicate the vector dimensions}
 \centering
 \fontsize{9}{11}\selectfont
 \begin{tabular}[h]{lllll}
@@ -130,8 +138,11 @@ Named entity recognition is a subset of token classification where a sequence of
 \bottomrule
 \end{tabular}
 \end{table}
+```
+Overview of the models trained through our paper, detailing the architecture used. Integers in brackets indicate the vector dimensions
+:::
 
-Table \ref{tbl-models} gives an overview of the model architectures built through our paper. First a simplistic model was constructed as a baseline, using untrained randomly initialised 50 dimension token embeddings, fed into a two-layer Bidirectional LSTM (BiLSTM) with 200 hidden dimensions. The output from the BiLSTM was input into a conditional random field classifier. A second BiLSTM model was also created based on the architecture described in @peters2018, adding pre-trained GloVe token embeddings [@pennington2014] with 50 dimensions and 16 dimension character embeddings. Both models used the `Adam` optimiser which makes use of stochastic gradient descent for weight optimisation [@kingma2017].
+@tbl-models gives an overview of the model architectures built through our paper. First a simplistic model was constructed as a baseline, using untrained randomly initialised 50 dimension token embeddings, fed into a two-layer Bidirectional LSTM (BiLSTM) with 200 hidden dimensions. The output from the BiLSTM was input into a conditional random field classifier. A second BiLSTM model was also created based on the architecture described in @peters2018, adding pre-trained GloVe token embeddings [@pennington2014] with 50 dimensions and 16 dimension character embeddings. Both models used the `Adam` optimiser which makes use of stochastic gradient descent for weight optimisation [@kingma2017].
 
 Three BERT-based transformer models were also created, using BERT [@devlin2019], RoBERTa which attempts to optimise the training process of BERT [@liu2019], and DistilBERT, which distils the data used in pre-training to create a smaller, faster model [@sanh2020]. The primary architecture of transformers is 'attention' which enables them to consider and weight each word in a sequence against each other word simultaneously. This allows them to be highly parallel, providing significant improvements to computational speed with GPUs which can handle highly parallel tasks, and benefits over traditional architectures like Long Short-Term Memory (LSTM) which are only able to consider sequences sequentially [@vaswani2017]. These models were pre-trained on very large general text corpora, enabling 'transfer learning', where a pre-trained model like BERT is used as a base and fine-tuned to be task specific. Conceptually, these pre-trained models learn deep embedded weights for words based on comprehensive contextual information extracted from the large general text corpora, these then only require smaller adjustments in fine-tuning to achieve good task-specific results. Fine-tuning these pre-trained models in NLP has produced results that often outperform models using traditional architectures that include manually trained word embeddings [Word2Vec, @mikolov2013], which are limited by the volume of data provided to them and pre-trained embeddings like GloVe [@pennington2014].
 
@@ -145,15 +156,13 @@ For every model, weights were adjusted each epoch to minimise the training loss.
 
 Following the training of each model, their accuracy, precision, recall and F~1~ score was evaluated using a corpus of test data, against three popular modern pre-built NER models provided through the `SpaCy` and `Stanza` Python packages. A `SpaCy` model is used in the _Mordecai_ geoparser and optionally in the _GeoTxt_ geoparser, while the `Stanza` model is a more recent implementation of the Stanford NLP model used by the _GeoTxt_ geoparser.
 
-As these pre-built models were not trained to recognise 'place names', their tags were adjusted so that anything labelled as 'GPE' (Geopolitical Entity), 'LOC' (Location), or 'FAC' (facility) was considered to be a 'place name', mirroring the process used to discard unrelated entities by geoparsing systems that use these models. The default `Stanza` NER model, and two `SpaCy` models (`en_core_web_sm`, `en_core_web_lg`) were evaluated on the labelled test data. Table \ref{tbl-prebuilt} gives an overview of these pre-built models.
-
-<!-- ^[[These entities are chosen by Mordecai](https://github.com/openeventdata/mordecai/blob/9d37110f6cd1275852548fc53fd7a21bb77593f9/mordecai/geoparse.py#L511)] -->
+As these pre-built models were not trained to recognise 'place names', their tags were adjusted so that anything labelled as 'GPE' (Geopolitical Entity), 'LOC' (Location), or 'FAC' (facility) was considered to be a 'place name', mirroring the process used to discard unrelated entities by geoparsing systems that use these models. The default `Stanza` NER model, and two `SpaCy` models (`en_core_web_sm`, `en_core_web_lg`) were evaluated on the labelled test data. @tbl-prebuilt gives an overview of these pre-built models.
 
 Each model was evaluated on 3 separate subsets of the annotated test dataset, giving a range of scores for each model. Significance testing was then performed using paired t-tests to test the null hypothesis:
 
 > $\mathbf{H_0}$: There will be no statistically significant difference between the mean F~1~ score of each custom built model against the best performing pre-built model (`Stanza`).
 
-Significant results that reject this null hypothesis were indicated by $p<0.05$ and are shown on Table \ref{tbl-eval}.
+Significant results that reject this null hypothesis were indicated by $p<0.05$ and are shown on @tbl-eval.
 
 The best performing model trained on the annotated Wikipedia data was also evaluated using paired t-tests against each other model trained on the same data, to test the null hypothesis:
 
@@ -163,9 +172,10 @@ Significant results that reject this null hypothesis were also indicated by $p<0
 
 It should be noted that significance testing is not common in deep learning research [@dror2018a], but papers that do report the significance of mean scores between models tend to use paired t-tests, despite potentially violating the parametric assumptions made. @dror2018a suggest that while normality may be assumed due to the Central Limit Theorem, it is likely that future progress in this field will present more appropriate statistical significance testing.
 
-\begin{table}
 
-\caption{\label{tbl-prebuilt}Pre-built NER models}
+::: {#tbl-prebuilt}
+```{=latex}
+\begin{table}
 \centering
 \fontsize{9}{11}\selectfont
 \begin{tabular}[t]{lllc}
@@ -180,6 +190,9 @@ Stanza & OntoNotes 5 & BiLSTM CRF & 0.89$^b$\\
 \multicolumn{4}{l}{\rule{0pt}{1em}b \href{https://stanfordnlp.github.io/stanza/performance.html}{https://stanfordnlp.github.io/stanza/performance.html}}\\
 \end{tabular}
 \end{table}
+```
+Pre-built NER models
+:::
 
 ### Output processing
 
@@ -193,11 +206,11 @@ This section first evaluates the results of the models presented against each ot
 
 ### Model performance
 
-Table \ref{tbl-eval} shows three popular pre-built NER models, evaluated on the labelled Wikipedia test data, compared with the models produced through our paper. The `BiLSTM-CRF (basic)` model gives a baseline reference for a typical NER model with a simple architecture. Out of the pre-built models, `Stanza` performs the best, achieving precision and accuracy just below the trained baseline model, with an F~1~ score which isn't significantly worse (paired t-test $p>0.05$), both `SpaCy` models however show notably worse results compared with `Stanza`. The primary issue with the pre-built models is recall, which is far below any of the custom-built models, reflecting a high number of false negatives.
+@tbl-eval shows three popular pre-built NER models, evaluated on the labelled Wikipedia test data, compared with the models produced through our paper. The `BiLSTM-CRF (basic)` model gives a baseline reference for a typical NER model with a simple architecture. Out of the pre-built models, `Stanza` performs the best, achieving precision and accuracy just below the trained baseline model, with an F~1~ score which isn't significantly worse (paired t-test $p>0.05$), both `SpaCy` models however show notably worse results compared with `Stanza`. The primary issue with the pre-built models is recall, which is far below any of the custom-built models, reflecting a high number of false negatives.
 
+::: {#tbl-eval}
+```{=latex}
 \begin{table}
-
-\caption{\label{tbl-eval}Geographic entity recognition mean (±SD) performance metrics over 3 runs of annotated Wikipedia test data subsets. Pre-built NER models are shown in italics. Bold values indicate statistically significant F1 scores of fine-tuned models in relation to `Stanza` (Paired t-tests $p<0.05$).}
 \centering
 \fontsize{9}{11}\selectfont
 \begin{tabular}[t]{llccc}
@@ -216,26 +229,29 @@ CRF biLSTM (basic) & 0.947 ±0.0040 & 0.836 ±0.0546 & 0.698 ±0.023 & 0.760 ±0
 \bottomrule
 \end{tabular}
 \end{table}
+```
+Geographic entity recognition mean (±SD) performance metrics over 3 runs of annotated Wikipedia test data subsets. Pre-built NER models are shown in italics. Bold values indicate statistically significant F1 scores of fine-tuned models in relation to `Stanza` (Paired t-tests $p<0.05$).
+:::
 
-It is  worth noting that due to class imbalances, i.e. many more 'other' (`O`) entities relative to the small number of `PLACE` entities, accuracy should be considered a poor metric, and is only included for completeness. This class imbalance means that as only approximately 15% of tokens are labelled as entities, it is possible to achieve 85% accuracy and high precision by labelling all tokens as not entities. F~1~ score is often used to compensate for these issues in multiple classification tasks, but it should be known that it is not itself a perfect metric. With respect to the best performing pre-built model `Stanza`, all transformer models fine-tuned on the Wikipedia annotated data, have significantly higher F~1~ scores (paired t-test $p<0.05$).
+It is worth noting that due to class imbalances, i.e. many more 'other' (`O`) entities relative to the small number of `PLACE` entities, accuracy should be considered a poor metric, and is only included for completeness. This class imbalance means that as only approximately 15% of tokens are labelled as entities, it is possible to achieve 85% accuracy and high precision by labelling all tokens as not entities. F~1~ score is often used to compensate for these issues in multiple classification tasks, but it should be known that it is not itself a perfect metric. With respect to the best performing pre-built model `Stanza`, all transformer models fine-tuned on the Wikipedia annotated data, have significantly higher F~1~ scores (paired t-test $p<0.05$).
 
-The DistilBERT transformer model is less complex than both the BERT and RoBERTa model, with a total of 260 MB in model weights, compared with 433 MB and 498 MB respectively. Despite this, the DistilBERT model achieves similar results to RoBERTa on test data (Table \ref{tbl-eval}). While all transformer models perform significantly better than the best performing pre-built model, Stanza, both CRF models do not give significantly better F~1~ scores (paired t-test $p>0.05$). BERT performs best overall, with an F~1~ score of 0.939 on the test data, a result that is only significantly better than the two CRF models (paired t-test $p<0.05)$.
+The DistilBERT transformer model is less complex than both the BERT and RoBERTa model, with a total of 260 MB in model weights, compared with 433 MB and 498 MB respectively. Despite this, the DistilBERT model achieves similar results to RoBERTa on test data (@tbl-eval). While all transformer models perform significantly better than the best performing pre-built model, Stanza, both CRF models do not give significantly better F~1~ scores (paired t-test $p>0.05$). BERT performs best overall, with an F~1~ score of 0.939 on the test data, a result that is only significantly better than the two CRF models (paired t-test $p<0.05)$.
 
-Figure \ref{fig-qual} shows the output of the chosen fine-tuned NER model `DistilBERT` alongside `SpaCy (large)` and `Stanza`, applied to a simple Wikipedia article summary. Figure \ref{fig-qual} (A) gives promising results for `DistilBERT`, with the summary for the Wikipedia page 'Rowlatts Hill', correctly identifying all place names.
+@fig-qual shows the output of the chosen fine-tuned NER model `DistilBERT` alongside `SpaCy (large)` and `Stanza`, applied to a simple Wikipedia article summary. @fig-qual (A) gives promising results for `DistilBERT`, with the summary for the Wikipedia page 'Rowlatts Hill', correctly identifying all place names.
 
-While evaluation metrics indicate that `Stanza` performs reasonably well, it primarily suffers from the annotation scheme used, some place names are misidentified as 'Person', or 'Organisation', meaning a standard geoparsing system would miss several place names here, given they are not otherwise identifiable (Figure \ref{fig-qual}).
+While evaluation metrics indicate that `Stanza` performs reasonably well, it primarily suffers from the annotation scheme used, some place names are misidentified as 'Person', or 'Organisation', meaning a standard geoparsing system would miss several place names here, given they are not otherwise identifiable (@fig-qual).
 
 ![Comparison of outputs between the best performing fine-tuned transformer model and the two best performing pre-built NER models.](./figs/figure2.jpg){#fig-qual}
 
 ![Ability for trained model to distinguish between metonymic usage of place names.](./figs/figure3.jpg){#fig-qual-china}
 
-Figure \ref{fig-qual-china} demonstrates the ability for our DistilBERT transformer model to accurately ignore entities that do not relate to place names. This example paragraph only refers to a single geographic location in text, the location of the 1952 Summer Games, in Helsinki, Finland. While Stanza identifies a large number of GPE tags, they either relate to China used in a metynomic sense, meaning the Chinese Olympic team ('China competed'), or as a related geopolitical noun ('delegation of ROC'), which is not considered to be a place name referring to a geographic location in this context. Our model correctly infers the single mention of a geographic place name based on the contextual information, meaning a large amount of unrelated information is excluded. Particularly, recognising and ignoring these nouns related to place names is something that is noted as an issue in current geoparsing systems [@gritta2020]. This figure also demonstrates the importance of using a pre-trained model base for this task, as the BiLSTM CRF performs poorly. It is likely that this issue stems from the limited training data used, as the model is unable to learn more complex cases where place names are less obvious (Figure \ref{fig-qual-china} (B)). Using a pre-trained transformer enables the model to correctly identify instances where proper nouns do not relate to place names, taking information learned through its pre-training procedure.
+@fig-qual-china demonstrates the ability for our DistilBERT transformer model to accurately ignore entities that do not relate to place names. This example paragraph only refers to a single geographic location in text, the location of the 1952 Summer Games, in Helsinki, Finland. While Stanza identifies a large number of GPE tags, they either relate to China used in a metynomic sense, meaning the Chinese Olympic team ('China competed'), or as a related geopolitical noun ('delegation of ROC'), which is not considered to be a place name referring to a geographic location in this context. Our model correctly infers the single mention of a geographic place name based on the contextual information, meaning a large amount of unrelated information is excluded. Particularly, recognising and ignoring these nouns related to place names is something that is noted as an issue in current geoparsing systems [@gritta2020]. This figure also demonstrates the importance of using a pre-trained model base for this task, as the BiLSTM CRF performs poorly. It is likely that this issue stems from the limited training data used, as the model is unable to learn more complex cases where place names are less obvious (@fig-qual-china (B)). Using a pre-trained transformer enables the model to correctly identify instances where proper nouns do not relate to place names, taking information learned through its pre-training procedure.
 
 ### Identified place names from Wikipedia
 
+::: {#tbl-freq}
+```{=latex}
 \begin{table}
-\caption{\label{tbl-freq}Top and bottom named places by frequency, excluding any present in the GeoNames gazetter or mentioned less than 100 times.}
-
 \centering
 \fontsize{9}{11}\selectfont
 \begin{tabular}[t]{lll}
@@ -278,8 +294,11 @@ Figure \ref{fig-qual-china} demonstrates the ability for our DistilBERT transfor
 \bottomrule
 \end{tabular}
 \end{table}
+```
+Top and bottom named places by frequency, excluding any present in the GeoNames gazetteer or mentioned less than 100 times.
+:::
 
-Table \ref{tbl-freq} gives an overview of the most common place names identified by the DistilBERT model and the SpaCy model. Notably, the SpaCy model appears to struggle with correctly aligning entities, including 'the' with 'United Kingdom', and partially missing place names containing 'Tyne' (e.g. 'Tyne and Wear' or 'River Tyne'). The DistilBERT model also extracts around 6 times the number of place names compared with SpaCy, reflected by the low recall noted above. One example where the DistilBERT model appears confused is by giving the place name 'Church of England', this problem relates to the language used in Wikipedia articles, when churches are described as a 'Church of England church', a nominal mention of a place rather than specific.
+@tbl-freq gives an overview of the most common place names identified by the DistilBERT model and the SpaCy model. Notably, the SpaCy model appears to struggle with correctly aligning entities, including 'the' with 'United Kingdom', and partially missing place names containing 'Tyne' (e.g. 'Tyne and Wear' or 'River Tyne'). The DistilBERT model also extracts around 6 times the number of place names compared with SpaCy, reflected by the low recall noted above. One example where the DistilBERT model appears confused is by giving the place name 'Church of England', this problem relates to the language used in Wikipedia articles, when churches are described as a 'Church of England church', a nominal mention of a place rather than specific.
 
 The total number of place names extracted from the Wikipedia summaries by the `DistilBERT` model was 614,672, with 99,697 unique place names. In total 62,178 unique place names were extracted that are not found within the GeoNames gazetteer. These entities primarily exist as granular names mentioned in single instances (e.g. road names: Shady Lane, Chapeltown Road), organisational names used in a place related context (e.g. describing locations along the Great Western Railway route), and alternative names that are not captured by GeoNames. For example, 'M1' appears in GeoNames as 'M1 Motorway'^[https://www.geonames.org/8714914/m1-motorway.html]. While the 'M1 motorway' is used in Wikipedia articles, it is often also referred to as just the 'M1'.
 
@@ -293,7 +312,7 @@ Additionally, while our paper selects Wikipedia for place name extraction, due t
 
 The recent development of pre-trained language models and their suitability for fine-tuning in many tasks, including NER, presents a method for the construction of accurate models that are task specific, using relatively small labelled corpora^[Compared with the Reuters corpus used for CoNLL03 for example] that defines entities more suited to the task of place name extraction. The architecture in our paper is more simplistic to implement than other attempts at similar tasks [e.g. @weissenbacher2019], with most of the complexity hidden within the transformer layers. This, combined with libraries that abstract and implement state of the art models, provides a more accessible approach for research in place name extraction, without requiring a deep understanding of semantic rules, or the construction of deep multi-layered models from the ground up.
 
-Evaluation against pre-built NER models on Table \ref{tbl-eval} shows that performance for place name extraction is greatly improved, particularly with respect to recall, a notable issue with past studies [@hu2019;@karimzadeh2019]. The construction of an NER model for the task specific extraction of place names moves towards systems that appropriately consider the geographic elements present in natural language. The large number of place names that are absent from the GeoNames gazetteer suggests that geoparsing and related work likely misses a substantial amount of geographic information present in text. The dataset produced through this work aims to assist with filling these gaps, while the methodology described enables an approach that may be mirrored and applied to further work on other data sources.
+Evaluation against pre-built NER models on @tbl-eval shows that performance for place name extraction is greatly improved, particularly with respect to recall, a notable issue with past studies [@hu2019;@karimzadeh2019]. The construction of an NER model for the task specific extraction of place names moves towards systems that appropriately consider the geographic elements present in natural language. The large number of place names that are absent from the GeoNames gazetteer suggests that geoparsing and related work likely misses a substantial amount of geographic information present in text. The dataset produced through this work aims to assist with filling these gaps, while the methodology described enables an approach that may be mirrored and applied to further work on other data sources.
 
 Finally, both 'place' focussed annotation schemes describe the use of 'nominal' place related entities [@mani2010;@pustejovsky2017]. While out of the scope of our work, we would like to encourage the focus on extracting this additional geographic information from text. Often in language the use of these non-specific terms are used, for example 'I visited the shops', 'York is a city', provide geographically specific information. 'The shops' with enough context may provide a specific geographic location, and similarly the link between 'York' -\> 'city' could be explored [@couclelis2010].
 

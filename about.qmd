@@ -1,5 +1,15 @@
 ---
 title: "About"
+image: profile.jpg
+about:
+  template: jolla
+  links:
+    - icon: twitter
+      text: Twitter
+      href: https://twitter.com
+    # (additional links excluded for brevity)
 ---
 
-About this site
+## About this website
+
+This is the contents of the about page for my website
