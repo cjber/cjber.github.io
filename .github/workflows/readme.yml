@@ -13,5 +13,9 @@ jobs:
       uses: actions/checkout@v2
     - name: Get the latest AHAH readme
       run: make ahah-readme-update
+      with:
+        target: gh-pages
     - name: Get the latest Search readme
       run: make search-readme-update
+      with:
+        target: gh-pages
