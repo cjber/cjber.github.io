@@ -8,3 +8,7 @@ image: "https://assets-global.website-files.com/6459a0e3f348e9e898b7df80/6462ca6
 ---
 
 The CDRC Semantic Search System is a project designed to enhance the search capabilities of the Centre for Consumer Data Research (CDRC) data catalogue. The goal is to implement a semantic search approach that goes beyond traditional keyword-based searches, providing users with more accurate and relevant results. 
+
+---
+
+{{< include README.md >}}
