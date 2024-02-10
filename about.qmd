@@ -23,6 +23,6 @@ Experienced with PyTorch and Hugging Face Transformers, MLOps with DagsHub, DVC,
 
 [{{< ai google-scholar >}} Cillian Berragan](https://scholar.google.com/citations?user=mBNb4rgAAAAJ&hl=en)
 
-[{{< ai orcid >}} 0000-0003-2198-2245](https://orcid.org/my-orcid?orcid=0000-0003-2198-2245)
+[{{< ai orcid >}} 0000-0003-2198-2245](https://orcid.org/0000-0003-2198-2245)
 
 [{{< ai cv >}}](https://github.com/cjber/cv)
