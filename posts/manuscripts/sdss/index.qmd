@@ -1,0 +1,102 @@
+---
+title: Geoparsing comments from Reddit to extract mental place connectivity within the United Kingdom
+authors:
+  - name: Cillian Berragan
+    affiliation: University of Liverpool
+    email: c.berragan@liverpool.ac.uk
+    orcid: 0000-0003-2198-2245
+    corresponding: true
+  - name: Alex Singleton
+    affiliation: University of Liverpool
+    email: alex.singleton@liverpool.ac.uk
+    orcid: 0000-0002-2338-2334
+  - name: Alessia Calafiore
+    affiliation: University of Edinburgh
+    email: acalafio@ed.ac.uk
+    orcid: 0000-0002-5953-2891
+  - name: Jeremy Morley
+    affiliation: Ordnance Survey
+    email: Jeremy.Morley@os.uk
+    orcid: 0000-0002-3658-8796
+keywords: [social media, natural language processing, social interaction]
+doi: 10.25436/E28C7R
+
+# image: "geoext_files/figure-pdf/fig-pca-output-1.jpg"
+categories: [open-access, zenodo]
+date: 2022-09-09
+subtitle: "{{< ai open-access >}} {{< ai doi >}} {{< ai zenodo >}}"
+# description: "This published research article builds a custom transformer-based geoparsing pipeline using the Hugging Face `transformers` Python library, to extract all place names from 8.3 million Reddit comments. DVC pipelines are used to ensure full reproducibility of the model workflow."
+
+citation:
+  type: paper-conference
+  container-title: "Spatial Data Science Symposium 2022 Short Paper Proceedings"
+  url: https://escholarship.org/uc/item/4wg37921
+---
+
+# Abstract
+
+Place connectivity is explored between geographic locations extracted from comments on Reddit. Unlike formally structured geographic data, this corpus of unstructured text provides connections derived from co-occurring locations, capturing subconscious links between them, alongside inherent biases. Our work demonstrates the ability to link locations mentioned by unique users, building ‘mental’ place connections for over 50,000 unique locations in the United Kingdom. Sentiment regarding locations is compared against their levels of connectivity, demonstrating that user opinions regarding locations are likely drivers in mental place connectivity.
+
+# Introduction
+
+Connectivity between places may be explored through the physical movement of individuals, using population movement data like transport records [@yang2019;@allard2016;@gong2021;@farber2013], or GPS information through mobile phone data [@lin2019;@safegraph2022]. Due to the advent of ‘Volunteered Geographic Information’ (VGI) [@goodchild2007], these connections may also be explored through geotagged social media posts [@arthur2019;@ostermann2015;@li2021], with results that mirror true population movements [li2021;@kuchler2020].
+
+Literature discussing the role of human cognition in constructing mental images of cities [@lynch1964], and how they can be represented through mental maps [@gould1986], shows that the way humans conceive spatial structures and place relationships are substantially entrenched in individuals’ experiences and geographic knowledge, which only partially derive from movements. In particular, while movements are constrained by time and euclidean distance in geographic space [@miller2018;@patterson2015], representational spaces expressed in mental maps do not necessarily correlate with these spatio-temporal boundaries.
+
+New forms of data, especially social media and text data, offer novel opportunities to explore place connections, emerging from peoples naïve and experiential geographic knowledge. Recent studies have investigated how digital social networks, i.e. Facebook friendships [@bailey2018], may be explored in this regard. While, geo-semantic relatedness outlines the ability to quantify relationships between geographic terms in text [@ballatore2014], with work applying this to co-occurring city names found in news articles, social media, and general web pages [@hu2017;@ye2021;@liu2014;@meijers2019]. Our paper considers the use of a novel corpus of text data from comments on the online social media website Reddit as a source of VGI. A task-specific geoparsing pipeline is first used to identify place names4 related to the United Kingdom and resolve them to geographic coordinates [@purves2018], at a geographic resolution higher than is typically explored through geoparsing. We derive connectivity between each location in our corpus based on the number of times two distinct locations co-occur, normalised by the total number of users that mention each location. The context for co-occurrences is derived from the total collection of comments submitted by each unique user, meaning every location mentioned by a single user is treated as co-occurring, and exhibiting some implicit connectivity. A full interactive map showing place connections is available through Unfolded.ai.
+
+With the connectivity between places established, we consider the ability to derive explainable characteristics from the text, to determine why different levels of place connectivity occur. While traditional connections between places may be influenced by factors like transport availability [@allard2016], the alternative mental place connections derived through our paper may be more heavily influenced by a subconscious bias. Connectivity is therefore examined against sentiment, expected to highlight these biases, alongside a standard measure of relative material deprivation (limited to England), through the Indices of Multiple Deprivation (IMD), an alternative measure that would be expected to affect traditional place connectivity.
+
+# Methodology
+
+## Data sources
+
+Reddit is a public discussion, news aggregation social network, among the top 20 most visited websites in the United Kingdom. As of 2020, Reddit had around 430 million active monthly users, comparable to the number of Twitter users [@murphy2019;@statista2022]. Reddit is divided into separate independent subreddits each with specific topics of discussion, where users may submit posts which each have dedicated nested conversation threads that users can add comments to. In total there are 213 subreddits that relate to ‘places’ within the United Kingdom^[https://reddit.com/r/unitedkingdom/wiki/british_subreddits]. For each subreddit, every single historic comment was retrieved using the Pushshift Reddit archive [@baumgartner2020]. In total 8,295,591 comments were extracted, submitted by 492,123 unique users, between 2011-01-01 and 2022-04-17. 
+
+To train a model to identify place names from comments, the WNUT-17 corpus was used [@derczynski2017], keeping only ‘location’ labels. In total this corpus covers 5,690 individual documents from Reddit, Twitter, YouTube, and StackExchange. Two gazetteers were selected to geocode place names, chosen to be UK centric, and at a high resolution. We were specifically interested in a gazetteer that did not include country names external to the UK, but included fine-grained named locations like street names. For our gazetteer we combined OS Open Names, and non-settlements from the Gazetteer of British Place Names.
+
+## Geoparsing
+
+A custom named entity recognition (NER) model was built using a RoBERTa based transformer language model, pre-trained using Twitter data^[https://huggingface.co/cardiffnlp/twitter-roberta-base], as this architecture has given good results on the WNUT-17 corpus [@barbieri2020].
+
+With place names identified, we developed a method for attributing each name to a single set of geographic coordinates. Place names typically appear multiple times in gazetteers, especially when grounding fine-grained locations like street names, meaning a disambiguation method is required. We disambiguate place names by finding their minimum distance to a collection of contextual locations. Contextual locations in this case refer to all gazetteer entries matching place names that appear in sentences with this target place name, in the same subreddit. This works under the assumption that each unique place name in a single subreddit is likely to refer to the same location, and that locations mentioned in surrounding text are likely close together [@kamalloo2018].
+
+Sentiment was attributed to each sentence in our corpus containing a place name, using an existing fine-tuned sentiment classification transformer model^[https://huggingface.co/cardiffnlp/twitter-roberta-base-sentiment-latest]. Each place name identified by our NER model was assigned sentiment based on its context sentence.
+
+## Measuring place connectivity
+
+Our place connectivity methodology considers the co-occurrence between each place mentioned by every unique user in our corpus. The following equation described by [@li2021] outlines this concept:
+
+$$
+PCI_{ij} = \frac{\mathbf{S}_{ij}}{\sqrt{\mathbf{S}_i\mathbf{S}_j}}, i, j \in [1, N]
+$$
+
+$PCI_{ij}$ is the place connectivity index between locations $i$ and $j$, $\mathbf{S}_{ij}$ is the total number of users that mention both locations (i.e. the intersect in set theory). This is normalised, given locations with higher populations are expected to be mentioned by a larger number of users, using $\sqrt{\mathbf{S}_{i}\mathbf{S}_{j}}$, the total number of users mentioning $\mathbf{S}_{i}$ multiplied by the total number of users mentioning $\mathbf{S}_{j}$, taking the square root. $n$ is the total number of unique locations found in all comments.
+
+# Results
+
+To assess the performance of our trained NER model we manually annotated 498 randomly selected Reddit comments with place names. On this test dataset, our model achieved an F1 performance of 0.845, a recall of 0.91 and precision of 0.85, above the expected performance on the WNUT test dataset. Similarly, we annotated 200 comments as neutral, positive or negative sentiment, and found the pre-built sentiment model performed as expected [@loureiro2022], with an F1, recall and precision of 0.70.
+
+In total 26% of all comments contained at least one place name, 4,475,800 place names were identified, with 2,816,072 (63%) attributed with a set of coordinates. From these locations, 57,682 were found to be unique.
+
+## Place connectivity
+
+![Place connections aggregated to Local Authority District, edge size weighted by PCI values, full interactive map available through [Unfolded](https://studio.foursquare.com/public/af5007d8-0d4f-42e8-ab55-857153187644)](figs/connections.png){#fig-connections}
+
+@fig-connections demonstrates mental place connections when aggregated to Local Authority Districts (LAD). This aggregation is performed by treating a place equivalent to the LAD it is contained in. Aggregation allows for a higher level view of place connections to be observed, for example combining several points of interest within a major city produces a single strong connection, rather than several weaker connections. @fig-connections (a) shows connections within England and Wales. Clusters emerge where isolated urban areas and their surrounding LADs exhibit strong connectivity, for example around London, Liverpool and Manchester, and Bristol. Notably Wales appears reasonably isolated from England, but inter-connectivity between LADs is strong, including in more rural areas. This isolation between Wales and the rest of the UK has also been observed through semantic analysis of Twitter [@ostermann2015].
+
+@fig-connections (b) shows connections within Scotland, these are much stronger generally than the rest of the UK, and highly inter-connected. These connections are also less isolated compared with Wales, with links between Glasgow, Edinburgh and London, as well as strong links with Durham and Newcastle. Links in Scotland are not restricted to urban areas, with strong connections between the rural Highland LAD and all major urban centres. These connections may however be influenced by the varying levels of ambiguity between English place names compared with names in remote Scotland. For example in the ‘Highland’ LAD, 27% of place names are ambiguous, compared with 40% in Manchester, meaning toponym disambiguation is likely more accurate in the Highlands.
+
+@fig-connections (c) shows a highly urbanised area of England, with two major cities; Liverpool and Manchester. While Manchester links directly with Liverpool, this figure does not appear to reflect the contiguous urban area that links these two cities [@dembski2015], given intermediate LADs are not connected. The link between these two cities appears direct from a mental perspective, meaning intermediate urban zones are perceived as less connected through our index.
+
+![Correlation between PCI and target (a) IMD, (b) Sentiment, and (c) Dis- tance for unaggregated connections between locations. Connections with fewer than 100 shared users have been excluded. Values aggregated into 200 bins for readability.](figs/pci.png){#fig-pci}
+
+While there are a multitude of factors that affect this mental place connectivity, typical connectivity models explore the effects of distance decay [@yang2019;@gong2021;@li2021;@bailey2018;@hu2017]. As past work has found, with both social and physical connections between places, our mental PCI does experience distance decay, with a medium strength negative correlation between PCI and the log of distance (R = −0.55; p = 0.0; @fig-pci (c)). Additionally we explore how sentiment and deprivation may influence PCI values. @fig-pci (a) shows a significant weak correlation between PCI and sentiment (R = 0.18; p = 0.0), while @fig-pci (b) shows a very weak negative correlation between PCI and the IMD Score (R = −0.04; p = 0.0).
+
+Lower connectivity for places with more negative sentiment may be influenced by factors like ‘fear of crime’ [@solymosi2021], and given deprivation appears less influential, these perceptions likely capture information that is not directly quantifiable through traditional data sources. Certain areas in the United Kingdom have been shown to have ‘reputations’ [@kearns2013], meaning they are known to be viewed negatively both inside and outside their occupants, particularly between the North and South of England [@gould1986].
+
+# Conclusion
+
+Our paper demonstrates the use of Reddit to explore mental place connectivity from a novel source of data, without the reliance on explicit geographic information. Despite Reddit being both more pseudo-anonymous than Twitter (users more frequently use pseudonyms), and without explicit social connections between users (unlike Twitter, followers are not emphasised), mental place connectivity derived through Reddit still exhibits the distance decay that is expected when observing place connectivity [@yang2019;@li2021;@bailey2018]. While Reddit users are not completely representative of the UK population, the volume of unique users that contribute to this corpus are expected to better reflect a more accurate, general view of mental connectivity, compared to alternative text sources like news articles [@hu2017].
+
+Future work may consider a further exploration of sentiment between subreddits, London for example may be viewed differently based on subreddit communities focussed on North of England, compared with the South [@gould1986;@jewell1994]. There is also the opportunity to explore relationships between locations or communities through their semantic typology; clustering through Latent Dirichlet Allocation (LDA) [@gao2017], or finding the cosine similarity between derived lexicons [@arthur2019]. Locations identified from within these communities also likely represent urban areas of interest which may be derived based on their frequency of mentions [@chen2019], or semantic regions that reflect mental perceptions of places [@gao2017a].
