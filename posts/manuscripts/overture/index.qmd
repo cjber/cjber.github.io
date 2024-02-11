@@ -12,7 +12,7 @@ authors:
     orcid: 0000-0001-8980-2912
 keywords: [points of interest, overture, amazon web services]
 
-categories: [open-access, preprint, figshare, doi, github, code, arxiv]
+categories: [open-access, preprint, figshare, doi, github]
 doi: 10.48550/arXiv.2310.18415
 # image: "main_files/figure-pdf/Figure_4.png"
 date: 2023-10-27

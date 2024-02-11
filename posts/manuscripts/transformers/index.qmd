@@ -21,7 +21,7 @@ authors:
 keywords: [named entity recognition, volunteered geographic information, natural language processing, place name extraction]
 doi: https://doi.org/10.1080/13658816.2022.2133125
 
-categories: [open-access, figshare, doi, github, code]
+categories: [open-access, figshare, github, peer-reviewed, journal]
 image: "figs/figure2.jpg"
 date: 2022-10-02
 other-links: [{href: https://github.com/cjber/ger-wiki, icon: github, rel: icon, text: Github Repository}, {href: https://figshare.com/articles/journal_contribution/Transformer_based_named_entity_recognition_for_place_name_extraction_from_unstructured_text/13415255, icon: database, rel: icon, text: FigShare Repository}]

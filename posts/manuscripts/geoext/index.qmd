@@ -20,7 +20,7 @@ authors:
     orcid: 0000-0002-3658-8796
 keywords: [social media, natural language processing, social interaction]
 
-categories: [open-access, ceur]
+categories: [open-access, peer-reviewed, conference]
 image: "geoext_files/figure-pdf/fig-pca-output-1.jpg"
 date: 2023-04-02
 subtitle: "{{< ai open-access >}} {{< ai ceur >}}"

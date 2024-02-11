@@ -20,7 +20,7 @@ authors:
     orcid: 0000-0002-3658-8796
 keywords: [cognitive place connectivity, distance decay, geoparsing, mental maps, natural language processing, United Kingdom]
 
-categories: [open-access, figshare, doi, github, code]
+categories: [open-access, figshare, github, peer-reviewed, journal]
 doi: 10.1111/tran.12669
 image: "main_files/figure-pdf/Figure_4.png"
 date: 2024-01-08
