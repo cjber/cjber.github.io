@@ -91,35 +91,6 @@ div.csl-indent {
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../../../styles.css">
 </head>
@@ -189,6 +160,7 @@ window.Quarto = {
     <div class="quarto-category">doi</div>
     <div class="quarto-category">github</div>
     <div class="quarto-category">code</div>
+    <div class="quarto-category">arxiv</div>
   </div>
   </div>
 
@@ -206,12 +178,7 @@ window.Quarto = {
           </p>
       </div>
     <div class="quarto-title-meta-contents">
-    <p class="author">Patrick Ballantyne </p>
-  </div>
-  <div class="quarto-title-meta-contents">
-      </div>
-    <div class="quarto-title-meta-contents">
-    <p class="author">Cillian Berragan <a href="mailto:p.ballantyne@liverpool.ac.uk" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0001-8980-2912" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+    <p class="author">Patrick Ballantyne <a href="mailto:p.ballantyne@liverpool.ac.uk" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0001-8980-2912" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
   </div>
   <div class="quarto-title-meta-contents">
         <p class="affiliation">
@@ -271,8 +238,8 @@ window.Quarto = {
 </section>
 <section id="reliability-analysis---retail-brands" class="level1">
 <h1>Reliability Analysis - Retail Brands</h1>
-<p>To assess the reliability of Overture places, we compared them with the Geolytix Supermarket Retail Points dataset <span class="citation" data-cites="geolytix2023">(<a href="#ref-geolytix2023" role="doc-biblioref">Geolytix 2023</a>)</span>, which is known to provide reliable information about supermarkets in the UK, and provides a useful ‘ground-truth’ dataset to test how well Overture represents economic activities. In particular, we examined how many of the Geolytix supermarkets are captured in Overture, the accuracy of the POI coordinates, and how complete the category/brand information is. Table <span class="math inline">\(\ref{table1}\)</span> shows that the Overture data aligns well with the Geolytix data, with small differences across the three retailers (&lt; 5%). Table <span class="math inline">\(\ref{table1}\)</span> shows that there was a relatively low median distance (metres) between Overture points and their closest Geolytix point, evidencing a relatively high level of accuracy in terms of geographical positioning. This is an important attribute, as incorrect positioning of POI data can have dramatic implications for accessibility measurement <span class="citation" data-cites="green2018a graells-garrido2021">(<a href="#ref-green2018a" role="doc-biblioref">Green et al. 2018</a>; <a href="#ref-graells-garrido2021" role="doc-biblioref">Graells-Garrido et al. 2021</a>)</span>, and urban boundary delineation <span class="citation" data-cites="ballantyne2022">(<a href="#ref-ballantyne2022" role="doc-biblioref">Ballantyne et al. 2022</a>)</span>.</p>
-<p>In terms of the comprehensiveness of the category and brand information, a large number of the Overture POIs contained missing values for categories or brands (Table <span class="math inline">\(\ref{table2}\)</span>), making filtering of the dataset to a specific retailer (e.g., Waitrose), slightly less simple. Table <span class="math inline">\(\ref{table2}\)</span> displays the complexity of these issues, where different degrees of completeness are apparent when considering the source of the POI (Meta or Microsoft). This has strong implications for how Overture data can and should be used, especially for applications involving specific POI categories or brands. Whilst it is not impossible to extract a complete list of POIs for a retailer, through collective filtering of POI name, brand and categories to collect these features (see supplementary materials), users should be aware of the high level of attribute incompleteness for POIs extracted from Microsoft. Further reliability analysis is beyond the scope of this paper, but there is a clear need for further investigation into how well Overture places captures category and brand information for other non-retail POIs (e.g., GP practices, post offices).</p>
+<p>To assess the reliability of Overture places, we compared them with the Geolytix Supermarket Retail Points dataset <span class="citation" data-cites="geolytix2023">(<a href="#ref-geolytix2023" role="doc-biblioref">Geolytix 2023</a>)</span>, which is known to provide reliable information about supermarkets in the UK, and provides a useful ‘ground-truth’ dataset to test how well Overture represents economic activities. In particular, we examined how many of the Geolytix supermarkets are captured in Overture, the accuracy of the POI coordinates, and how complete the category/brand information is. <a href="#tbl-table1" class="quarto-xref">Table&nbsp;1</a> shows that the Overture data aligns well with the Geolytix data, with small differences across the three retailers (&lt; 5%). <a href="#tbl-table1" class="quarto-xref">Table&nbsp;1</a> shows that there was a relatively low median distance (metres) between Overture points and their closest Geolytix point, evidencing a relatively high level of accuracy in terms of geographical positioning. This is an important attribute, as incorrect positioning of POI data can have dramatic implications for accessibility measurement <span class="citation" data-cites="green2018a graells-garrido2021">(<a href="#ref-green2018a" role="doc-biblioref">Green et al. 2018</a>; <a href="#ref-graells-garrido2021" role="doc-biblioref">Graells-Garrido et al. 2021</a>)</span>, and urban boundary delineation <span class="citation" data-cites="ballantyne2022">(<a href="#ref-ballantyne2022" role="doc-biblioref">Ballantyne et al. 2022</a>)</span>.</p>
+<p>In terms of the comprehensiveness of the category and brand information, a large number of the Overture POIs contained missing values for categories or brands (<a href="#tbl-table2" class="quarto-xref">Table&nbsp;2</a>), making filtering of the dataset to a specific retailer (e.g., Waitrose), slightly less simple. <a href="#tbl-table2" class="quarto-xref">Table&nbsp;2</a> displays the complexity of these issues, where different degrees of completeness are apparent when considering the source of the POI (Meta or Microsoft). This has strong implications for how Overture data can and should be used, especially for applications involving specific POI categories or brands. Whilst it is not impossible to extract a complete list of POIs for a retailer, through collective filtering of POI name, brand and categories to collect these features (see supplementary materials), users should be aware of the high level of attribute incompleteness for POIs extracted from Microsoft. Further reliability analysis is beyond the scope of this paper, but there is a clear need for further investigation into how well Overture places captures category and brand information for other non-retail POIs (e.g., GP practices, post offices).</p>
 <div id="tbl-table1" class="quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-table1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -373,8 +340,7 @@ Zhang, Liming, and Dieter Pfoser. 2019. <span>“Using <span>OpenStreetMap</span
 <li id="fn4"><p>https://figshare.com/s/144265a705159c03c08f?file=42809452<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@article{berragan2023,
-  author = {Berragan, Cillian and Ballantyne, Patrick and Berragan,
-    Cillian},
+  author = {Berragan, Cillian and Ballantyne, Patrick},
   title = {Overture {POI} Data for the {United} {Kingdom:} A
     Comprehensive, Queryable Open Data Product},
   journal = {arxiv},
@@ -384,9 +350,9 @@ Zhang, Liming, and Dieter Pfoser. 2019. <span>“Using <span>OpenStreetMap</span
   langid = {en}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-berragan2023" class="csl-entry quarto-appendix-citeas" role="listitem">
-Berragan, Cillian, Patrick Ballantyne, and Cillian Berragan. 2023.
-<span>“Overture POI Data for the United Kingdom: A Comprehensive,
-Queryable Open Data Product.”</span> <em>Arxiv</em>, October. <a href="https://doi.org/10.48550/arXiv.2310.18415">https://doi.org/10.48550/arXiv.2310.18415</a>.
+Berragan, Cillian, and Patrick Ballantyne. 2023. <span>“Overture POI
+Data for the United Kingdom: A Comprehensive, Queryable Open Data
+Product.”</span> <em>Arxiv</em>, October. <a href="https://doi.org/10.48550/arXiv.2310.18415">https://doi.org/10.48550/arXiv.2310.18415</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
