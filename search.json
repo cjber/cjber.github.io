@@ -123,7 +123,14 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "NLP Engineer at the Consumer Data Research Centre (CDRC). Building a RAG powered search system for the CDRC Data Catalogue, using the Llama Index framework. Aiming to improve data search and discovery.\nExperienced with PyTorch and Hugging Face Transformers, MLOps with DagsHub, DVC, GH Actions. Machine Learning with Scikit-Learn, Pandas, Polars, and Numpy. Keen to learn more about AWS and other cloud services.\n\nOther Links\n Cillian Berragan\n 0000-0003-2198-2245"
+    "text": "Software Engineer at the Consumer Data Research Centre (CDRC), with over 5 years of experience programming in Python. PhD with published research papers in geographic information science and NLP.\nIn my current role, I worked with Llama Index and LangChain to build a Retrieval Augmented Generation (RAG) LLM-powered search system for the CDRC Data Catalogue. I am currently developing a data ingestion pipeline using Prefect to automate data checks, while building various data products, including a large-scale UK geocoded corpus from the Common Crawl.\nExtensive experience with PyTorch (Lightning), Hugging Face transformers, and the OpenAI API. MLOps and reproducibility with DVC, Prefect, GitHub Actions and Docker/Podman. Machine Learning and data processing with Scikit-Learn, Pandas and Polars1."
+  },
+  {
+    "objectID": "about.html#footnotes",
+    "href": "about.html#footnotes",
+    "title": "About",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nMy new favourite dataframe library.↩︎"
   },
   {
     "objectID": "index.html",
