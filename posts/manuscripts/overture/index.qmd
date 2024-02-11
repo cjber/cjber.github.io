@@ -12,7 +12,7 @@ authors:
     orcid: 0000-0001-8980-2912
 keywords: [points of interest, overture, amazon web services]
 
-categories: [open-access, preprint, figshare, doi, github, code]
+categories: [open-access, preprint, figshare, doi, github, code, arxiv]
 doi: 10.48550/arXiv.2310.18415
 # image: "main_files/figure-pdf/Figure_4.png"
 date: 2023-10-27
@@ -46,15 +46,14 @@ As noted, many of the columns that provide metadata relating to POIs are represe
 
 # Reliability Analysis - Retail Brands
 
-To assess the reliability of Overture places, we compared them with the Geolytix Supermarket Retail Points dataset [@geolytix2023], which is known to provide reliable information about supermarkets in the UK, and provides a useful ‘ground-truth’ dataset to test how well Overture represents economic activities. In particular, we examined how many of the Geolytix supermarkets are captured in Overture, the accuracy of the POI coordinates, and how complete the category/brand information is. Table \ref{table1} shows that the Overture data aligns well with the Geolytix data, with small differences across the three retailers (< 5%). Table \ref{table1} shows that there was a relatively low median distance (metres) between Overture points and their closest Geolytix point, evidencing a relatively high level of accuracy in terms of geographical positioning. This is an important attribute, as incorrect positioning of POI data can have dramatic implications for accessibility measurement [@green2018a;@graells-garrido2021], and urban boundary delineation [@ballantyne2022].
+To assess the reliability of Overture places, we compared them with the Geolytix Supermarket Retail Points dataset [@geolytix2023], which is known to provide reliable information about supermarkets in the UK, and provides a useful ‘ground-truth’ dataset to test how well Overture represents economic activities. In particular, we examined how many of the Geolytix supermarkets are captured in Overture, the accuracy of the POI coordinates, and how complete the category/brand information is. @tbl-table1 shows that the Overture data aligns well with the Geolytix data, with small differences across the three retailers (< 5%). @tbl-table1 shows that there was a relatively low median distance (metres) between Overture points and their closest Geolytix point, evidencing a relatively high level of accuracy in terms of geographical positioning. This is an important attribute, as incorrect positioning of POI data can have dramatic implications for accessibility measurement [@green2018a;@graells-garrido2021], and urban boundary delineation [@ballantyne2022].
 
-In terms of the comprehensiveness of the category and brand information, a large number of the Overture POIs contained missing values for categories or brands (Table \ref{table2}), making filtering of the dataset to a specific retailer (e.g., Waitrose), slightly less simple. Table \ref{table2} displays the complexity of these issues, where different degrees of completeness are apparent when considering the source of the POI (Meta or Microsoft). This has strong implications for how Overture data can and should be used, especially for applications involving specific POI categories or brands. Whilst it is not impossible to extract a complete list of POIs for a retailer, through collective filtering of POI name, brand and categories to collect these features (see supplementary materials), users should be aware of the high level of attribute incompleteness for POIs extracted from Microsoft. Further reliability analysis is beyond the scope of this paper, but there is a clear need for further investigation into how well Overture places captures category and brand information for other non-retail POIs (e.g., GP practices, post offices). 
+In terms of the comprehensiveness of the category and brand information, a large number of the Overture POIs contained missing values for categories or brands (@tbl-table2), making filtering of the dataset to a specific retailer (e.g., Waitrose), slightly less simple. @tbl-table2 displays the complexity of these issues, where different degrees of completeness are apparent when considering the source of the POI (Meta or Microsoft). This has strong implications for how Overture data can and should be used, especially for applications involving specific POI categories or brands. Whilst it is not impossible to extract a complete list of POIs for a retailer, through collective filtering of POI name, brand and categories to collect these features (see supplementary materials), users should be aware of the high level of attribute incompleteness for POIs extracted from Microsoft. Further reliability analysis is beyond the scope of this paper, but there is a clear need for further investigation into how well Overture places captures category and brand information for other non-retail POIs (e.g., GP practices, post offices). 
 
 ::: {#tbl-table1}
 ```{=latex}
 \def\arraystretch{1.5}
 \begin{table}[]
-\caption{\label{table1} Reliability analysis of Overture compared with Geolytix retail points dataset.}
 \centering
 \bigskip
 \begin{tabular}{lccc}

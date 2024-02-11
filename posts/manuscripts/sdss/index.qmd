@@ -22,9 +22,9 @@ keywords: [social media, natural language processing, social interaction]
 doi: 10.25436/E28C7R
 
 # image: "geoext_files/figure-pdf/fig-pca-output-1.jpg"
-categories: [open-access, zenodo]
+categories: [open-access, doi]
 date: 2022-09-09
-subtitle: "{{< ai open-access >}} {{< ai doi >}} {{< ai zenodo >}}"
+subtitle: "{{< ai open-access >}} {{< ai doi >}}"
 # description: "This published research article builds a custom transformer-based geoparsing pipeline using the Hugging Face `transformers` Python library, to extract all place names from 8.3 million Reddit comments. DVC pipelines are used to ensure full reproducibility of the model workflow."
 
 citation:
