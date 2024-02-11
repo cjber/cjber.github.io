@@ -1,0 +1,219 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/jskherman/cv.typ/main/cv.typ.schema.json
+
+personal:
+  name: Cillian Berragan
+  email: cjberragan@gmail.com
+  phone: 07787796620
+  url:
+  location:
+    city: Liverpool
+    postalCode: L22 8QD
+    country: United Kingdom
+  profiles:
+    - network: LinkedIn
+      username: Cillian Berragan
+      url: https://linkedin.com/in/cjberr
+    - network: GitHub
+      username: cjber
+      url: https://github.com/cjber
+
+work:
+  - organization: Consumer Data Research Centre
+    position: Software Engineer (NLP)
+    url: https://www.cdrc.ac.uk
+    location: Liverpool, UK
+    startDate: 2023-12-01
+    endDate: 2024-05-01
+    highlights:
+      - Developing a Retrieval Augmented Generation (RAG) Search System for the CDRC Data Catalogue, powered by Llama Index and OpenAI, to enhance data discovery and access.
+      - Generated data schemas for data products to enable automated checks on ingestion of new data products; using Pydantic, Pandera (pandas/polars dataframes) and Prefect for monitoring.
+  - organization: University of Liverpool
+    position: PhD Researcher
+    url: https://www.liverpool.ac.uk/geographic-data-science/our-people/
+    location: Liverpool, UK
+    startDate: 2019-09-01
+    endDate: 2023-12-01
+    highlights:
+      - Funded CDT position contributing to research through the Geographic Data Science Lab.
+      - Engaged with lab activities; hosting and contributing to weekly meetings. Showcasing research or technical demonstrations.
+      - Collaborated on peer-reviewed research external to PhD thesis.
+  - organization: Consumer Data Research Centre
+    position: Data Scientist (Part Time)
+    url: https://www.cdrc.ac.uk
+    location: Liverpool, UK
+    startDate: 2021-02-01
+    endDate: 2022-05-01
+    highlights:
+      - Developed a system to calculate access to amenities using the road network across each postcode in Great Britain.
+      - Improved calculation times from previous implementations using GPU accelerated (cugraph) graphs, reducting time from 8 hours per calculation, to 10 minutes.
+  - organization: TEP - The Evnironment Partnership
+    position: Graduate Ecologist
+    url: https://www.tep.uk.com
+    location: Warrington, UK
+    startDate: 2018-05-01
+    endDate: 2018-09-01
+    highlights:
+      - Led projects to support planning and development across the country
+      - Wrote professional reports and collaborated as part of a large team
+      - Travelled to sites to engage in-person with clients and site managers
+education:
+  - institution: University of Liverpool
+    url: https://www.liverpool.ac.uk
+    area: Natural Language Processing & Geography
+    studyType: Doctor of Philosophy
+    startDate: 2019-09-01
+    endDate: 2023-12-01
+    location: Liverpool, UK
+    honors:
+      - 
+    courses:
+      - TEMP
+    highlights:
+      - "*Thesis*: Exploring Place from the Perspective of Informal Social Media Text"
+      - "*Activities*: TEMP"
+      - Published peer-reviewed research in reputable journals and presented at international conferences.
+      - Expanded research focussing on geographic knowledge extracted through natural language processing.
+      - Extensively used Python for deep learning through PyTorch (Lightning) and Hugging Face Transformers.
+  - institution: University of Liverpool
+    url:
+    area: Geographic Data Science
+    studyType: Master's of Science
+    startDate: 2018-09-01
+    endDate: 2019-09-01
+    location: Liverpool, UK
+    honors:
+      - TEMP
+    courses:
+      - TEMP
+    highlights:
+      - "*Thesis*: TEMP"
+      - "*Activities*: TEMP"
+
+affiliations:
+  - organization: White Hat Hackers Association
+    position: Vice President for Internal Affairs
+    location: Cambridge, United Kingdom
+    url: https://example.com
+    startDate: 2020-05-30
+    endDate: 2021-05-30
+    highlights:
+      - But I must explain to you how all this mistaken idea of reprobating pleasure and extolling pain arose.
+      - But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?
+      - Can you then suppose that those heroic men performed their famous deeds without any motive at all?
+  - organization: London Bridge Toastmasters Club
+    position: Member
+    location: City of London, United Kingdom
+    url:
+    startDate: 2022-06-15
+    endDate: 2023-06-30
+    highlights:
+      - Won Champion in the Division A District X Speech Evaluation Contest of Toastmasters International
+      - Promising Toastmaster of the Year (PY 2022-2023)
+      - Tell me, pray, what explanation do you put upon their actions?
+
+awards:
+  - title: Champion in the Division A District X Speech Evaluation Contest
+    date: 2023-05-09
+    issuer: Toastmasters International
+    url:
+    location: City of London, United Kingdom
+    highlights:
+      # - Champion in the Division A District X Speech Evaluation Contest of Toastmasters International in London.
+  - title: "Finalist in the 2020 SCG Bangkok Business Challenge Global Competition"
+    date: 2020-07-12
+    issuer: Sasin School of Management
+    url:
+    location: Bangkok, Thailand
+    highlights:
+      - "Made it to the Top 5 (selected from over 100 teams) in the world for the semi-finals of the SCG Bangkok Business Challenge #sym.at Sasin 2020 Global Competition held at Bangkok, Thailand from July 7-12, 2020."
+      - "Served as the speaker and presented in the 60-second pitch round of the Opening Reception of the SCG Bangkok Business Challenge #sym.at Sasin 2022 for Team London Bridge."
+
+certificates:
+  - name: "Learning How to Learn: Powerful mental tools to help you master tough subjects"
+    date: 2021-09-01
+    issuer: Coursera
+    url: https://example.com
+
+publications:
+  - name: Transformer based named entity recognition for place name extraction from unstructured text
+    publisher: International Journal of Geographical Information Science
+    releaseDate: 2022-10-17
+    url: https://doi.org/10.1080/13658816.2022.2133125
+
+projects:
+  - name: "Job Tailor"
+    url: https://example.com/
+    affiliation: Open University
+    startDate: 2020-11-01
+    endDate: 2021-04-30
+    highlights:
+      - Created an AI-powered resume editor application that allowed users to easily create different resumes and cover letters specifically tailored to and customized for individual job descriptions based on their personal information in their complete curriculum vitae.
+      - Acquired more than 100,000 user sign ups in 3 months and more than 10,000 active monthly users in its lifetime before being sold to investors.
+      - Generated profit of upwards \$20,000 yearly with a team of only four developers and three business operatives
+
+skills:
+  - category: Soft Skills
+    skills:
+      - Public Speaking
+      - Communication
+      - Critical Thinking
+      - Leadership
+      - Academic Writing
+      - Technical Writing
+  - category: Programming
+    skills:
+      - Python
+      - SQL, PostgreSQL
+      - MATLAB/Octave
+      - HTML
+      - CSS
+      - Javascript
+      - Typst
+      - LaTeX
+  - category: Tools
+    skills:
+      - Microsoft Word
+      - Git
+      - Docker
+      - Visual Studio Code
+      - Canva
+  - category: Machine Learning & Data Science
+    skills:
+      - React
+      - Next.js
+      - million.js
+      - Svelte & Sveltekit
+      - Tailwind CSS
+      - Node.js
+      - Deno
+      - FastAPI
+      - Flask
+  - category: Natural Language Processing
+    skills:
+      - Jupyter Notebook
+      - Numpy
+      - Pandas
+      - Plotly
+      - Altair
+
+languages:
+#   - language: English
+#     fluency: Native speaker
+#   - language: German
+#     fluency: Native speaker
+#   - language: Japanese
+#     fluency: Basic proficiency
+
+interests:
+#   - Video Games
+#   - Anime
+#   - Reading Non-fiction
+#   - Classical and Original Soundtrack Music
+
+references:
+#   # You can comment out the entries below if you don't have any references
+#   # The same goes for the publications
+#
+#   - name: Dr. Jane Austin
+#     reference: John was a great student. He was always eager to learn new things and was very passionate about his studies. As his mentor, I am proud to say that he was also a great leader and was able to lead his team to victory in the 2020 SCG Bangkok Business Challenge Global Competition.
+#     url: https://janeaustin.com
