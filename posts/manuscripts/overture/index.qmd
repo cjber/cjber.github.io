@@ -7,7 +7,6 @@ authors:
     orcid: 0000-0003-2198-2245
     corresponding: true
   - name: Patrick Ballantyne
-  - name: Cillian Berragan
     affiliation: University of Liverpool
     email: p.ballantyne@liverpool.ac.uk
     orcid: 0000-0001-8980-2912
