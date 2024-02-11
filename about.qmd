@@ -15,14 +15,23 @@ about:
       href: https://linkedin.com/in/cjberr
 ---
 
-NLP Engineer at the Consumer Data Research Centre (CDRC). Building a RAG powered search system for the CDRC Data Catalogue, using the Llama Index framework. Aiming to improve data search and discovery.
+**Software Engineer at the Consumer Data Research Centre (CDRC), with over 5 years of experience programming in Python. PhD with published research papers in geographic information science and NLP.**
 
-Experienced with PyTorch and Hugging Face Transformers, MLOps with DagsHub, DVC, GH Actions. Machine Learning with Scikit-Learn, Pandas, Polars, and Numpy. Keen to learn more about AWS and other cloud services.
+In my current role, I worked with [Llama Index](https://www.llamaindex.ai) and [LangChain](https://www.langchain.com) to build a Retrieval Augmented Generation (RAG) LLM-powered search system for the CDRC Data Catalogue. I am currently developing a data ingestion pipeline using [Prefect](https://www.prefect.io) to automate data checks, while building various data products, including a large-scale UK geocoded corpus from the [Common Crawl](https://www.commoncrawl.org).
 
-### Other Links
+Extensive experience with [PyTorch](https://www.pytorch.org) ([Lightning](https://www.lightning.ai)), [Hugging Face](https://www.huggingface.co) `transformers`, and the [OpenAI](https://www.openai.com) API. MLOps and reproducibility with [DVC](https://www.dvc.org), [Prefect](https://www.prefect.io), [GitHub Actions](https://www.docs.github.com/actions) and [Docker](https://www.docker.com)/[Podman](https://www.podman.io). Machine Learning and data processing with [Scikit-Learn](https://www.scikit-learn.org), [Pandas](https://www.pandas.pydata.org) and [Polars](https://www.pola.rs)^[My new favourite dataframe library.].
 
-[{{< ai google-scholar >}} Cillian Berragan](https://scholar.google.com/citations?user=mBNb4rgAAAAJ&hl=en)
+---
 
-[{{< ai orcid >}} 0000-0003-2198-2245](https://orcid.org/0000-0003-2198-2245)
+<style>
+.pdf {
+  max-width: 100%;
+  width: 100%;
+  height: 1000px;
+  border: 10px solid rgba(239, 239, 240, .5);
+  margin: 0;
+}
+</style>
 
-[{{< ai cv >}}](https://github.com/cjber/cv)
+<!-- Add later -->
+<!-- {{< pdf ./cv/cvcb.pdf class=pdf >}} -->
