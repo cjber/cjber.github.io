@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.549">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2023-10-27">
+<meta name="keywords" content="points of interest, overture, amazon web services">
+
+<title>cjber.github.io - Overture POI data for the United Kingdom: a comprehensive, queryable open data product</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/quarto-contrib/academicons-1.9.2/all.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-contrib/academicons-1.9.2/size.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">cjber.github.io</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
+  <li><a href="#reliability-analysis---retail-brands" id="toc-reliability-analysis---retail-brands" class="nav-link" data-scroll-target="#reliability-analysis---retail-brands">Reliability Analysis - Retail Brands</a></li>
+  <li><a href="#application---mapping-supermarkets-in-the-uk" id="toc-application---mapping-supermarkets-in-the-uk" class="nav-link" data-scroll-target="#application---mapping-supermarkets-in-the-uk">Application - Mapping supermarkets in the UK</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#data-availability-statement" id="toc-data-availability-statement" class="nav-link" data-scroll-target="#data-availability-statement">Data Availability Statement</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.odt"><i class="bi bi-file"></i>OpenOffice</a></li><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>PDF (arxiv)</a></li></ul></div><div class="quarto-other-links"><h2>Other Links</h2><ul><li><a href="https://github.com/cjber/overture-uk" rel="icon"><i class="bi bi-github"></i>Github Repository</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Overture POI data for the United Kingdom: a comprehensive, queryable open data product</h1>
+<p class="subtitle lead"><i class="ai  ai-open-access"></i> <i class="ai  ai-figshare"></i> <i class="ai  ai-doi"></i> <i class="ai  ai-arxiv"></i></p>
+  <div class="quarto-categories">
+    <div class="quarto-category">open-access</div>
+    <div class="quarto-category">preprint</div>
+    <div class="quarto-category">figshare</div>
+    <div class="quarto-category">doi</div>
+    <div class="quarto-category">github</div>
+    <div class="quarto-category">code</div>
+  </div>
+  </div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Authors</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Cillian Berragan <a href="mailto:c.berragan@liverpool.ac.uk" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0003-2198-2245" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            University of Liverpool
+          </p>
+      </div>
+    <div class="quarto-title-meta-contents">
+    <p class="author">Patrick Ballantyne </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+      </div>
+    <div class="quarto-title-meta-contents">
+    <p class="author">Cillian Berragan <a href="mailto:p.ballantyne@liverpool.ac.uk" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0001-8980-2912" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            University of Liverpool
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 27, 2023</p>
+    </div>
+  </div>
+  
+    
+    <div>
+    <div class="quarto-title-meta-heading">Doi</div>
+    <div class="quarto-title-meta-contents">
+      <p class="doi">
+        <a href="https://doi.org/10.48550/arXiv.2310.18415">10.48550/arXiv.2310.18415</a>
+      </p>
+    </div>
+  </div>
+  </div>
+  
+<div>
+  <div class="abstract">
+    <div class="block-title">Abstract</div>
+    <p>Point of Interest data that is comprehensive, globally-available and open-access, is sparse, despite being important inputs for research in a number of application areas. New data from the Overture Maps Foundation offers significant potential in this arena, but accessing the data relies on computational resources beyond the skillset and capacity of the average researcher. In this article, we provide a processed version of the Overture places (POI) dataset for the UK, in a fully-queryable format, and provide accompanying code through which to explore the data, and generate other national subsets. In the article, we describe the construction and characteristics of the dataset, before considering how reliable it is (locational accuracy, attribute comprehensiveness), through direct comparison with Geolytix supermarket data. This dataset can support new and important research projects in a variety of different thematic areas, and foster a network of researchers to further evaluate its advantages and limitations.</p>
+  </div>
+</div>
+
+<div>
+  <div class="keywords">
+    <div class="block-title">Keywords</div>
+    <p>points of interest, overture, amazon web services</p>
+  </div>
+</div>
+
+</header>
+
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>Point of Interest (POI) data is an invaluable source of information, acting as a key input to much of the research that has, and continues to be generated in urban analytics and city science. These data provide key locational attributes about a broad variety of social, environmental and economic phenomena, including historical landmarks, parks, hospitals and retailers, and have been vital sources of data for different applications, including health <span class="citation" data-cites="green2018a hobbs2019">(<a href="#ref-green2018a" role="doc-biblioref">Green et al. 2018</a>; <a href="#ref-hobbs2019" role="doc-biblioref">Hobbs et al. 2019</a>)</span>, urban mobility <span class="citation" data-cites="graells-garrido2021 jay2022">(<a href="#ref-graells-garrido2021" role="doc-biblioref">Graells-Garrido et al. 2021</a>; <a href="#ref-jay2022" role="doc-biblioref">Jay et al. 2022</a>)</span>, retail and location analysis <span class="citation" data-cites="ballantyne2022">(<a href="#ref-ballantyne2022" role="doc-biblioref">Ballantyne et al. 2022</a>)</span>, transportation <span class="citation" data-cites="owen2023 credit2018">(<a href="#ref-owen2023" role="doc-biblioref">Owen, Arribas-Bel, and Rowe 2023</a>; <a href="#ref-credit2018" role="doc-biblioref">Credit 2018</a>)</span>, and many others. However, a major challenge when working with POI data relates to the coverage and comprehensiveness of these datasets <span class="citation" data-cites="ballantyne2022 zhang2019">(<a href="#ref-ballantyne2022" role="doc-biblioref">Ballantyne et al. 2022</a>; <a href="#ref-zhang2019" role="doc-biblioref">Zhang and Pfoser 2019</a>)</span>. By this we mean how much the chosen source(s) of POI data restricts the analyses to specific cities or regions (i.e., coverage), and the attributes and characteristics that are provided for each POI (i.e., comprehensiveness).</p>
+<p>Many POI datasets offer a high level of global coverage and availability, such as OpenStreetMap. However there are problems when considering the coverage and comprehensiveness of OpenStreetMap data at finer spatial resolutions and in areas with less contributors <span class="citation" data-cites="haklay2010">(<a href="#ref-haklay2010" role="doc-biblioref">Haklay 2010</a>)</span>, as well as in less developed countries <span class="citation" data-cites="mahabir2017">(<a href="#ref-mahabir2017" role="doc-biblioref">Mahabir et al. 2017</a>)</span>. Similarly, datasets like OpenStreetMap often contain inconsistent attributes for economic activities like retail stores and leisure <span class="citation" data-cites="zhang2019 ballantyne2022">(<a href="#ref-zhang2019" role="doc-biblioref">Zhang and Pfoser 2019</a>; <a href="#ref-ballantyne2022" role="doc-biblioref">Ballantyne et al. 2022</a>)</span>. Some POI datasets exist which fill this gap, such as the Ordnance Survey ‘Points of Interest’ data product, which provides a more comprehensive database of economic activities <span class="citation" data-cites="haklay2010">(<a href="#ref-haklay2010" role="doc-biblioref">Haklay 2010</a> )</span>, but is not openly-available. Other data providers have democratised access to comprehensive POI datasets such as SafeGraph and the Local Data Company, however these datasets exhibit poor global coverage of non-branded POIs (SafeGraph), and a lack of comprehensive coverage in the UK <span class="citation" data-cites="dolega2021">(<a href="#ref-dolega2021" role="doc-biblioref">Dolega et al. 2021</a>)</span>. As a result, there is a clear gap for data that can address some of these limitations, by providing an openly-available, comprehensive and accurate source of POIs for the UK. In this article, we introduce readers to a processed version of the Overture Maps places (POI) dataset <span class="citation" data-cites="overturemapsfoundation2023">(<a href="#ref-overturemapsfoundation2023" role="doc-biblioref">Overture Maps Foundation 2023</a>)</span>, which arguably provides a strong solution to many of these problems, and can facilitate groundbreaking urban analytics research in a number of different application areas.</p>
+</section>
+<section id="data" class="level1">
+<h1>Data</h1>
+<p>The data was accessed through the Overture Maps Foundation, which was set up as a collaborative venture to develop reliable, easy-to-use, and interoperable open map data <span class="citation" data-cites="overturemapsfoundation2023">(<a href="#ref-overturemapsfoundation2023" role="doc-biblioref">Overture Maps Foundation 2023</a>)</span>. The foundation, which is steered by Amazon, Microsoft, Meta and TomTom, has developed a number of open data products including Buildings, Places, Transportation and Administrative Geographies, all of which are available at global scales and contain a detailed number of attributes <span class="citation" data-cites="overturemapsfoundation2023">(<a href="#ref-overturemapsfoundation2023" role="doc-biblioref">Overture Maps Foundation 2023</a>)</span>. Users can access the data parquet files from the cloud using Amazon Athena, Microsoft Synapse or DuckDB, or download them locally. However, a specific challenge for urban analytics researchers and city scientists is that the majority will not have the data engineering skills to query these datasets from the cloud, and process the attributes in their nested JSON format. Furthermore, for those who want to download the files locally, they can be difficult to work with, as the full global places file is over 200 GB. Therefore, our aim is to provide a processed subset of the Overture places dataset for the UK, which bypasses these issues, and creates an open data product for use in research.</p>
+<p>Overture hosts all data through Amazon Web Services (AWS), which enables a number of query end points to be used to download data subsets. The Overture data schema includes a bounding box structure column to enable efficient spatial SQL queries. To query POI data for the UK, a spatial SQL query was constructed using the DuckDB SQL engine and the UK bounding box, based on EPSG:27700. This query downloaded a GeoPackage file containing all POIs within the UK bounding box, totalling 1.34 GB. This file was then clipped to the administrative boundaries of the United Kingdom, to exclude non-UK places that appeared within the bounding box query.</p>
+<p>As noted, many of the columns that provide metadata relating to POIs are represented in a nested JSON format (columns containing lists of lists), which are difficult to efficiently parse with traditional tabular data frame libraries. We therefore processed the following columns to ensure the data frame remained two-dimensional: Names, Category, Address and Brand. Following this processing, we spatially joined the 2021 census area geographies for England including Output Areas (OA), Lower layer Super Output Areas (LSOA), Middle layer Super Output Areas (MSOA), and the 2022 Local Authority Districts (LAD). For both Scotland and Northern Ireland, we spatially joined the 2011 Data Zone geographies. We also include the H3 (hexagons) addresses associated with each point for all resolutions between 1 and 9. The resulting dataset is a 358 MB GeoParquet file, hosted as part of a DagsHub data repository, and the final processed data file, comprising the Overture POI subset for the UK can be easily downloaded<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. A list of attributes for the data product can be found in Table i (supplementary materials), and as a secondary output of this paper, an example workflow for how to extract Overture places for other study areas has also been produced<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
+</section>
+<section id="reliability-analysis---retail-brands" class="level1">
+<h1>Reliability Analysis - Retail Brands</h1>
+<p>To assess the reliability of Overture places, we compared them with the Geolytix Supermarket Retail Points dataset <span class="citation" data-cites="geolytix2023">(<a href="#ref-geolytix2023" role="doc-biblioref">Geolytix 2023</a>)</span>, which is known to provide reliable information about supermarkets in the UK, and provides a useful ‘ground-truth’ dataset to test how well Overture represents economic activities. In particular, we examined how many of the Geolytix supermarkets are captured in Overture, the accuracy of the POI coordinates, and how complete the category/brand information is. Table <span class="math inline">\(\ref{table1}\)</span> shows that the Overture data aligns well with the Geolytix data, with small differences across the three retailers (&lt; 5%). Table <span class="math inline">\(\ref{table1}\)</span> shows that there was a relatively low median distance (metres) between Overture points and their closest Geolytix point, evidencing a relatively high level of accuracy in terms of geographical positioning. This is an important attribute, as incorrect positioning of POI data can have dramatic implications for accessibility measurement <span class="citation" data-cites="green2018a graells-garrido2021">(<a href="#ref-green2018a" role="doc-biblioref">Green et al. 2018</a>; <a href="#ref-graells-garrido2021" role="doc-biblioref">Graells-Garrido et al. 2021</a>)</span>, and urban boundary delineation <span class="citation" data-cites="ballantyne2022">(<a href="#ref-ballantyne2022" role="doc-biblioref">Ballantyne et al. 2022</a>)</span>.</p>
+<p>In terms of the comprehensiveness of the category and brand information, a large number of the Overture POIs contained missing values for categories or brands (Table <span class="math inline">\(\ref{table2}\)</span>), making filtering of the dataset to a specific retailer (e.g., Waitrose), slightly less simple. Table <span class="math inline">\(\ref{table2}\)</span> displays the complexity of these issues, where different degrees of completeness are apparent when considering the source of the POI (Meta or Microsoft). This has strong implications for how Overture data can and should be used, especially for applications involving specific POI categories or brands. Whilst it is not impossible to extract a complete list of POIs for a retailer, through collective filtering of POI name, brand and categories to collect these features (see supplementary materials), users should be aware of the high level of attribute incompleteness for POIs extracted from Microsoft. Further reliability analysis is beyond the scope of this paper, but there is a clear need for further investigation into how well Overture places captures category and brand information for other non-retail POIs (e.g., GP practices, post offices).</p>
+<div id="tbl-table1" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-table1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Reliability analysis of Overture compared with Geolytix retail points dataset.
+</figcaption>
+<div aria-describedby="tbl-table1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+
+</div>
+</figure>
+</div>
+<div id="tbl-table2" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-table2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Overture attributes compared with Geolytix retail points dataset.
+</figcaption>
+<div aria-describedby="tbl-table2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+
+</div>
+</figure>
+</div>
+</section>
+<section id="application---mapping-supermarkets-in-the-uk" class="level1">
+<h1>Application - Mapping supermarkets in the UK</h1>
+<p>To demonstrate how this dataset can be used, an example workflow has been presented which reads in the UK processed version of Overture places, filters to a specific brand of supermarket, and then maps the distribution of these nationally (Figure 1). The purpose of these workflows is to illustrate how easy it is to work with this dataset, and the variety of different POI attributes that are stored within the dataset. Example workflows have been presented for both the Python<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> and R<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> programming languages, and utilise preferred packages for data manipulation and mapping (e.g., arrow, geopandas)</p>
+<div id="fig-figure1" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-figure1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/figure1.png" id="fig-figure1" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-figure1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>This paper presents a comprehensive, queryable open data product, which represents a processed UK national subset of the Overture places database. This new open data product makes Overture data more accessible for researchers, bypassing the need for advanced data engineering skills and large amounts of memory on which to store the complete database. The potential applications of this data product in a variety of different fields is highly significant (e.g., urban accessibility), given the evidence presented about the coverage, comprehensiveness and locational accuracy of this dataset. At a time where the retail sector is undergoing significant transformations in response to the cost-of-living crisis, such data can provide invaluable insights about the characteristics and performance of the sector <span class="citation" data-cites="ballantyne2022 dolega2021">(<a href="#ref-ballantyne2022" role="doc-biblioref">Ballantyne et al. 2022</a>; <a href="#ref-dolega2021" role="doc-biblioref">Dolega et al. 2021</a>)</span>, which has historically been a challenge due to the availability of suitable retailer data. However, there are inherent limitations to this dataset, which have been illustrated through direct comparison with Geolytix data. Users need to be cautious about how they are using this data, especially when the POIs they are using are largely sourced from Microsoft. However, it is our hope that by releasing this data into the open domain, a network of researchers will be fostered who can utilise this data for their own research questions, and critically evaluate how the Overture places database represents a variety of different social, economic and environmental activities.</p>
+</section>
+<section id="data-availability-statement" class="level1">
+<h1>Data Availability Statement</h1>
+<p>The UK Overture data product (anonymised for peer review) can be downloaded directly from Figshare: <a href="https://figshare.com/s/144265a705159c03c08f?file=42761512">https://figshare.com/s/144265a705159c03c08f?file=42761512</a>. The data product can be directly queried from the DagsHub repository, but for the purposes of anonymous peer review, this has not been included in the paper.</p>
+</section>
+<section id="references" class="level1 unnumbered">
+
+
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-ballantyne2022" class="csl-entry" role="listitem">
+Ballantyne, Patrick, Alex Singleton, Les Dolega, and Kevin Credit. 2022. <span>“A Framework for Delineating the Scale, Extent and Characteristics of <span>American</span> Retail Centre Agglomerations.”</span> <em>Environment and Planning B: Urban Analytics and City Science</em> 49 (3): 1112–28.
+</div>
+<div id="ref-credit2018" class="csl-entry" role="listitem">
+Credit, Kevin. 2018. <span>“Transit-Oriented Economic Development: <span>The</span> Impact of Light Rail on New Business Starts in the <span>Phoenix</span>, <span>AZ Region</span>, <span>USA</span>.”</span> <em>Urban Studies</em> 55 (13): 2838–62.
+</div>
+<div id="ref-dolega2021" class="csl-entry" role="listitem">
+Dolega, Les, Jonathan Reynolds, Alex Singleton, and Michalis Pavlis. 2021. <span>“Beyond Retail: <span>New</span> Ways of Classifying <span>UK</span> Shopping and Consumption Spaces.”</span> <em>Environment and Planning B: Urban Analytics and City Science</em> 48 (1): 132–50.
+</div>
+<div id="ref-geolytix2023" class="csl-entry" role="listitem">
+Geolytix. 2023. <span>“Supermarket <span>Retail Points</span>.”</span> <em>Geolytix</em>. https://geolytix.com/blog/supermarket-retail-points/.
+</div>
+<div id="ref-graells-garrido2021" class="csl-entry" role="listitem">
+Graells-Garrido, Eduardo, Feliu Serra-Burriel, Francisco Rowe, Fernando M Cucchietti, and Patricio Reyes. 2021. <span>“A City of Cities: <span>Measuring</span> How 15-Minutes Urban Accessibility Shapes Human Mobility in <span>Barcelona</span>.”</span> <em>PloS One</em> 16 (5): e0250080.
+</div>
+<div id="ref-green2018a" class="csl-entry" role="listitem">
+Green, Mark A, Konstantinos Daras, Alec Davies, Ben Barr, David Bayliss, and Alex Singleton. 2018. <span>“Developing Openly Accessible Health Indicators for Small Areas in <span>Great Britain</span>: An Observational Study.”</span> <em>The Lancet</em> 392 (November): S39. <a href="https://doi.org/10.1016/s0140-6736(18)32876-9">https://doi.org/10.1016/s0140-6736(18)32876-9</a>.
+</div>
+<div id="ref-haklay2010" class="csl-entry" role="listitem">
+Haklay, Mordechai E. 2010. <span>“How <span>Good</span> Is <span>Volunteered Geographical Information</span>? <span>A Comparative Study</span> of <span>OpenStreetMap</span> and <span>Ordnance Survey Datasets</span>.”</span> <em>Environment and Planning B: Planning and Design</em> 37 (4): 682–703. <a href="https://doi.org/10.1068/b35097">https://doi.org/10.1068/b35097</a>.
+</div>
+<div id="ref-hobbs2019" class="csl-entry" role="listitem">
+Hobbs, Matt, Claire Griffiths, MA Green, A Christensen, and J McKenna. 2019. <span>“Examining Longitudinal Associations Between the Recreational Physical Activity Environment, Change in Body Mass Index, and Obesity by Age in 8864 <span>Yorkshire Health Study</span> Participants.”</span> <em>Social Science &amp; Medicine</em> 227: 76–83.
+</div>
+<div id="ref-jay2022" class="csl-entry" role="listitem">
+Jay, Jonathan, Felicia Heykoop, Linda Hwang, Alexa Courtepatte, Jorrit de Jong, and Michelle Kondo. 2022. <span>“Use of Smartphone Mobility Data to Analyze City Park Visits During the <span>COVID-19</span> Pandemic.”</span> <em>Landscape and Urban Planning</em> 228: 104554.
+</div>
+<div id="ref-mahabir2017" class="csl-entry" role="listitem">
+Mahabir, Ron, Anthony Stefanidis, Arie Croitoru, Andrew T Crooks, and Peggy Agouris. 2017. <span>“Authoritative and Volunteered Geographical Information in a Developing Country: <span>A</span> Comparative Case Study of Road Datasets in <span>Nairobi</span>, <span>Kenya</span>.”</span> <em>ISPRS International Journal of Geo-Information</em> 6 (1): 24.
+</div>
+<div id="ref-overturemapsfoundation2023" class="csl-entry" role="listitem">
+Overture Maps Foundation. 2023. <span>“Overture <span>Maps Foundation Releases Its First World-Wide Open Map Dataset</span> <span></span> <span>Overture Maps Foundation</span>.”</span>
+</div>
+<div id="ref-owen2023" class="csl-entry" role="listitem">
+Owen, Danial, Daniel Arribas-Bel, and Francisco Rowe. 2023. <span>“Tracking the <span>Transit Divide</span>: <span>A Multilevel Modelling Approach</span> of <span>Urban Inequalities</span> and <span>Train Ridership Disparities</span> in <span>Chicago</span>.”</span> <em>Sustainability</em> 15 (11): 8821.
+</div>
+<div id="ref-zhang2019" class="csl-entry" role="listitem">
+Zhang, Liming, and Dieter Pfoser. 2019. <span>“Using <span>OpenStreetMap</span> Point-of-Interest Data to Model Urban Change<span></span><span>A</span> Feasibility Study.”</span> <em>PloS One</em> 14 (2): e0212606.
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>https://figshare.com/s/144265a705159c03c08f?file=42761512<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>https://figshare.com/s/144265a705159c03c08f?file=42809656<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>https://figshare.com/s/144265a705159c03c08f?file=42809500<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>https://figshare.com/s/144265a705159c03c08f?file=42809452<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@article{berragan2023,
+  author = {Berragan, Cillian and Ballantyne, Patrick and Berragan,
+    Cillian},
+  title = {Overture {POI} Data for the {United} {Kingdom:} A
+    Comprehensive, Queryable Open Data Product},
+  journal = {arxiv},
+  date = {2023-10-27},
+  url = {https://arxiv.org/abs/2310.18415},
+  doi = {10.48550/arXiv.2310.18415},
+  langid = {en}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-berragan2023" class="csl-entry quarto-appendix-citeas" role="listitem">
+Berragan, Cillian, Patrick Ballantyne, and Cillian Berragan. 2023.
+<span>“Overture POI Data for the United Kingdom: A Comprehensive,
+Queryable Open Data Product.”</span> <em>Arxiv</em>, October. <a href="https://doi.org/10.48550/arXiv.2310.18415">https://doi.org/10.48550/arXiv.2310.18415</a>.
+</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
