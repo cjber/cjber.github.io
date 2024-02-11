@@ -1,5 +1,3 @@
-categories: [paper, code]
-
 manuscript:
   article: index.qmd
 
@@ -17,6 +15,7 @@ format:
           \usepackage[capitalise,noabbrev]{cleveref}
           \usepackage{tikz-dependency}
           \usepackage{makecell}
+          \usepackage{multirow}
 
 execute:
   freeze: true
