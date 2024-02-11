@@ -4,24 +4,35 @@ authors:
   - name: Cillian Berragan
     affiliation: University of Liverpool
     email: c.berragan@liverpool.ac.uk
+    orcid: 0000-0003-2198-2245
     corresponding: true
   - name: Alex Singleton
     affiliation: University of Liverpool
     email: alex.singleton@liverpool.ac.uk
+    orcid: 0000-0002-2338-2334
   - name: Alessia Calafiore
     affiliation: University of Edinburgh
     email: acalafio@ed.ac.uk
+    orcid: 0000-0002-5953-2891
   - name: Jeremy Morley
     affiliation: Ordnance Survey
     email: Jeremy.Morley@os.uk
+    orcid: 0000-0002-3658-8796
 keywords: [named entity recognition, volunteered geographic information, natural language processing, place name extraction]
 doi: https://doi.org/10.1080/13658816.2022.2133125
 
+categories: [open-access, figshare, doi, github, code]
 image: "figs/figure2.jpg"
 date: 2022-10-02
 other-links: [{href: https://github.com/cjber/ger-wiki, icon: github, rel: icon, text: Github Repository}, {href: https://figshare.com/articles/journal_contribution/Transformer_based_named_entity_recognition_for_place_name_extraction_from_unstructured_text/13415255, icon: database, rel: icon, text: FigShare Repository}]
 subtitle: "{{< ai open-access >}} {{< ai figshare >}} {{< ai doi >}}"
 description: "This published research article builds a custom transformer-based named entity recognition model (NER), evaluating the performance of this model against existing solutions for geoparsing geographic place names from text. This project uses the AllenNLP python library, containerised using Docker for reproducibility."
+
+citation:
+  type: article-journal
+  container-title: "International Journal of Geographical Information Science"
+  doi: "10.1080/13658816.2022.2133125"
+  url: https://www.tandfonline.com/doi/full/10.1080/13658816.2022.2133125
 ---
 
 ## Abstract {-}
