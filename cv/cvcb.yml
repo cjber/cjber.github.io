@@ -65,12 +65,9 @@ education:
     endDate: 2023-12-01
     location: Liverpool, UK
     honors:
-      - 
     courses:
-      - TEMP
     highlights:
       - "*Thesis*: Exploring Place from the Perspective of Informal Social Media Text"
-      - "*Activities*: TEMP"
       - Published peer-reviewed research in reputable journals and presented at international conferences.
       - Expanded research focussing on geographic knowledge extracted through natural language processing.
       - Extensively used Python for deep learning through PyTorch (Lightning) and Hugging Face Transformers.
@@ -82,57 +79,55 @@ education:
     endDate: 2019-09-01
     location: Liverpool, UK
     honors:
-      - TEMP
     courses:
-      - TEMP
     highlights:
-      - "*Thesis*: TEMP"
-      - "*Activities*: TEMP"
+      - "*Dissertation*: Utilisting Supervised Parametric Classification to Assess the Quality of the UK Rural Road Network using Aerial LiDAR Data"
+      - TODO; See old CV.
 
-affiliations:
-  - organization: White Hat Hackers Association
-    position: Vice President for Internal Affairs
-    location: Cambridge, United Kingdom
-    url: https://example.com
-    startDate: 2020-05-30
-    endDate: 2021-05-30
-    highlights:
-      - But I must explain to you how all this mistaken idea of reprobating pleasure and extolling pain arose.
-      - But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?
-      - Can you then suppose that those heroic men performed their famous deeds without any motive at all?
-  - organization: London Bridge Toastmasters Club
-    position: Member
-    location: City of London, United Kingdom
-    url:
-    startDate: 2022-06-15
-    endDate: 2023-06-30
-    highlights:
-      - Won Champion in the Division A District X Speech Evaluation Contest of Toastmasters International
-      - Promising Toastmaster of the Year (PY 2022-2023)
-      - Tell me, pray, what explanation do you put upon their actions?
+# affiliations:
+#   - organization: White Hat Hackers Association
+#     position: Vice President for Internal Affairs
+#     location: Cambridge, United Kingdom
+#     url: https://example.com
+#     startDate: 2020-05-30
+#     endDate: 2021-05-30
+#     highlights:
+#       - But I must explain to you how all this mistaken idea of reprobating pleasure and extolling pain arose.
+#       - But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?
+#       - Can you then suppose that those heroic men performed their famous deeds without any motive at all?
+#   - organization: London Bridge Toastmasters Club
+#     position: Member
+#     location: City of London, United Kingdom
+#     url:
+#     startDate: 2022-06-15
+#     endDate: 2023-06-30
+#     highlights:
+#       - Won Champion in the Division A District X Speech Evaluation Contest of Toastmasters International
+#       - Promising Toastmaster of the Year (PY 2022-2023)
+#       - Tell me, pray, what explanation do you put upon their actions?
 
-awards:
-  - title: Champion in the Division A District X Speech Evaluation Contest
-    date: 2023-05-09
-    issuer: Toastmasters International
-    url:
-    location: City of London, United Kingdom
-    highlights:
-      # - Champion in the Division A District X Speech Evaluation Contest of Toastmasters International in London.
-  - title: "Finalist in the 2020 SCG Bangkok Business Challenge Global Competition"
-    date: 2020-07-12
-    issuer: Sasin School of Management
-    url:
-    location: Bangkok, Thailand
-    highlights:
-      - "Made it to the Top 5 (selected from over 100 teams) in the world for the semi-finals of the SCG Bangkok Business Challenge #sym.at Sasin 2020 Global Competition held at Bangkok, Thailand from July 7-12, 2020."
-      - "Served as the speaker and presented in the 60-second pitch round of the Opening Reception of the SCG Bangkok Business Challenge #sym.at Sasin 2022 for Team London Bridge."
+# awards:
+#   - title: Champion in the Division A District X Speech Evaluation Contest
+#     date: 2023-05-09
+#     issuer: Toastmasters International
+#     url:
+#     location: City of London, United Kingdom
+#     highlights:
+#       # - Champion in the Division A District X Speech Evaluation Contest of Toastmasters International in London.
+#   - title: "Finalist in the 2020 SCG Bangkok Business Challenge Global Competition"
+#     date: 2020-07-12
+#     issuer: Sasin School of Management
+#     url:
+#     location: Bangkok, Thailand
+#     highlights:
+#       - "Made it to the Top 5 (selected from over 100 teams) in the world for the semi-finals of the SCG Bangkok Business Challenge #sym.at Sasin 2020 Global Competition held at Bangkok, Thailand from July 7-12, 2020."
+#       - "Served as the speaker and presented in the 60-second pitch round of the Opening Reception of the SCG Bangkok Business Challenge #sym.at Sasin 2022 for Team London Bridge."
 
-certificates:
-  - name: "Learning How to Learn: Powerful mental tools to help you master tough subjects"
-    date: 2021-09-01
-    issuer: Coursera
-    url: https://example.com
+# certificates:
+#   - name: "Learning How to Learn: Powerful mental tools to help you master tough subjects"
+#     date: 2021-09-01
+#     issuer: Coursera
+#     url: https://example.com
 
 publications:
   - name: Transformer based named entity recognition for place name extraction from unstructured text
@@ -196,7 +191,7 @@ skills:
       - Plotly
       - Altair
 
-languages:
+# languages:
 #   - language: English
 #     fluency: Native speaker
 #   - language: German
@@ -204,7 +199,7 @@ languages:
 #   - language: Japanese
 #     fluency: Basic proficiency
 
-interests:
+# interests:
 #   - Video Games
 #   - Anime
 #   - Reading Non-fiction
