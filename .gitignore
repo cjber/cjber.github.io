@@ -1,2 +1,6 @@
+.quarto/
+_site/
+.envrc
+.venv/
+
 /.quarto/
-/_site/
