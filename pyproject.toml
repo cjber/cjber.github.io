@@ -1,0 +1,29 @@
+[project]
+name = "cjber-github-io"
+version = "0.1.0"
+description = "Add your description here"
+authors = [
+    { name = "cjber", email = "cjberragan@gmail.com" }
+]
+dependencies = [
+    "pre-commit>=3.6.1",
+]
+readme = "README.md"
+requires-python = ">= 3.12"
+
+[project.scripts]
+hello = "cjber_github_io:hello"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.rye]
+managed = true
+dev-dependencies = []
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/cjber_github_io"]
