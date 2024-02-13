@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.549">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="keywords" content="vernacular geography, semantics, social media, natural language processing">
+
+<title>cjber.github.io - Mapping Great Britain’s Semantic Footprints through a Large Language Model Analysis of Reddit Comments</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">cjber.github.io</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#sec-literature" id="toc-sec-literature" class="nav-link" data-scroll-target="#sec-literature">Geographic Variation in Social Media Text</a></li>
+  <li><a href="#sec-methodology" id="toc-sec-methodology" class="nav-link" data-scroll-target="#sec-methodology">Methodology</a>
+  <ul class="collapse">
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
+  <li><a href="#generating-and-analysing-geographic-footprints" id="toc-generating-and-analysing-geographic-footprints" class="nav-link" data-scroll-target="#generating-and-analysing-geographic-footprints">Generating and Analysing Geographic Footprints</a></li>
+  <li><a href="#creating-embeddings" id="toc-creating-embeddings" class="nav-link" data-scroll-target="#creating-embeddings">Creating Embeddings</a></li>
+  <li><a href="#spatial-clustering-and-autocorrelation" id="toc-spatial-clustering-and-autocorrelation" class="nav-link" data-scroll-target="#spatial-clustering-and-autocorrelation">Spatial Clustering and Autocorrelation</a></li>
+  <li><a href="#semantic-similarity" id="toc-semantic-similarity" class="nav-link" data-scroll-target="#semantic-similarity">Semantic Similarity</a></li>
+  <li><a href="#capturing-national-identities-through-text" id="toc-capturing-national-identities-through-text" class="nav-link" data-scroll-target="#capturing-national-identities-through-text">Capturing National Identities through Text</a></li>
+  </ul></li>
+  <li><a href="#sec-results" id="toc-sec-results" class="nav-link" data-scroll-target="#sec-results">Results</a>
+  <ul class="collapse">
+  <li><a href="#morans-i-analysis" id="toc-morans-i-analysis" class="nav-link" data-scroll-target="#morans-i-analysis">Moran’s I Analysis</a></li>
+  <li><a href="#semantic-similarity-and-identity" id="toc-semantic-similarity-and-identity" class="nav-link" data-scroll-target="#semantic-similarity-and-identity">Semantic Similarity and Identity</a></li>
+  <li><a href="#general-observations" id="toc-general-observations" class="nav-link" data-scroll-target="#general-observations">General Observations</a></li>
+  </ul></li>
+  <li><a href="#sec-conclusion" id="toc-sec-conclusion" class="nav-link" data-scroll-target="#sec-conclusion">Conclusion</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.odt"><i class="bi bi-file"></i>OpenOffice</a></li><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>PDF (arxiv)</a></li></ul></div><div class="quarto-other-links"><h2>Other Links</h2><ul><li><a href="https://github.com/cjber/reddit-footprint" rel="icon"><i class="bi bi-github"></i>Github Repository</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Mapping Great Britain’s Semantic Footprints through a Large Language Model Analysis of Reddit Comments</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">open-access</div>
+    <div class="quarto-category">github</div>
+    <div class="quarto-category">pre-print</div>
+  </div>
+  </div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Authors</div>
+  <div class="quarto-title-meta-heading">Affiliations</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Cillian Berragan <a href="mailto:c.berragan@liverpool.ac.uk" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0003-2198-2245" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            University of Liverpool
+          </p>
+      </div>
+    <div class="quarto-title-meta-contents">
+    <p class="author">Alex Singleton <a href="mailto:alex.singleton@liverpool.ac.uk" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0002-2338-2334" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            University of Liverpool
+          </p>
+      </div>
+    <div class="quarto-title-meta-contents">
+    <p class="author">Alessia Calafiore <a href="mailto:acalafio@ed.ac.uk" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0002-5953-2891" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            University of Edinburgh
+          </p>
+      </div>
+    <div class="quarto-title-meta-contents">
+    <p class="author">Jeremy Morley <a href="mailto:Jeremy.Morley@os.uk" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0002-3658-8796" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Ordnance Survey
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+  
+    
+  </div>
+  
+<div>
+  <div class="abstract">
+    <div class="block-title">Abstract</div>
+    <p>Observed regional variation in geotagged social media text is often attributed to dialects, where features in language are assumed to exhibit region-specific properties. While dialects are seen as a key component in defining the identity of regions, there are a multitude of other geographic properties that may be captured within natural language text. In our work, we consider locational mentions that are directly embedded within comments on the social media website Reddit, providing a range of associated semantic information, and enabling deeper representations between locations to be captured. Using a large corpus of geoparsed Reddit comments from UK-related local discussion subreddits, we first extract embedded semantic information using a large language model, aggregated into local authority districts, representing the semantic footprint of these regions. These footprints broadly exhibit spatial autocorrelation, with clusters that conform with the national borders of Wales and Scotland. London, Wales, and Scotland also demonstrate notably different semantic footprints compared with the rest of Great Britain.</p>
+  </div>
+</div>
+
+<div>
+  <div class="keywords">
+    <div class="block-title">Keywords</div>
+    <p>vernacular geography, semantics, social media, natural language processing</p>
+  </div>
+</div>
+
+</header>
+
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>The prevalence of social media data for use in geographic research has generated a renewed interest in the concept of ‘place’ <span class="citation" data-cites="wagner2020 purves2019 westerholt2018a">(<a href="#ref-wagner2020" role="doc-biblioref">Wagner, Zipf, and Westerholt 2020</a>; <a href="#ref-purves2019" role="doc-biblioref">Purves, Winter, and Kuhn 2019</a>; <a href="#ref-westerholt2018a" role="doc-biblioref">Westerholt, Mocnik, and Zipf 2018</a>)</span>, as contributions to social media are theorised to capture informal knowledge that represents a place-based understanding of geography <span class="citation" data-cites="goodchild2011 sui2011">(<a href="#ref-goodchild2011" role="doc-biblioref">Goodchild and Li 2011</a>; <a href="#ref-sui2011" role="doc-biblioref">Sui and Goodchild 2011</a>)</span>. In the context of language, this place-based knowledge is generated through ‘vernacular geography’, which describes the natural language used when informally describing geographic locations <span class="citation" data-cites="gao2017a goodchild2011 waters2003 hollenstein2008">(<a href="#ref-gao2017a" role="doc-biblioref">Gao et al. 2017</a>; <a href="#ref-goodchild2011" role="doc-biblioref">Goodchild and Li 2011</a>; <a href="#ref-waters2003" role="doc-biblioref">Waters and Evans 2003</a>; <a href="#ref-hollenstein2008" role="doc-biblioref">Hollenstein 2008</a>)</span>. This informal knowledge incorporates biases regarding locations, better representing human perceptions of geography, compared with formal administrative definitions. In this sense, associations of geography drawn from social media capture place through a ‘bottom-up’ approach, building knowledge through experience rather than administrative formalisations <span class="citation" data-cites="agnew2005 sui2011">(<a href="#ref-agnew2005" role="doc-biblioref">Agnew 2005</a>; <a href="#ref-sui2011" role="doc-biblioref">Sui and Goodchild 2011</a>)</span>. While many works have considered the formalisation of place through geotagged social media data, few have considered how the semantic properties of text may reveal geographic heterogeneity between regions, generated directly through vernacular geography. The components of vernacular geography are closely coupled with the identity of regions, where culture, topics, and general perceptions are captured through the language associated with locational mentions in text <span class="citation" data-cites="paasi2003 buttimer2015">(<a href="#ref-paasi2003" role="doc-biblioref">Paasi 2003</a>; <a href="#ref-buttimer2015" role="doc-biblioref">Buttimer 2015</a>)</span>.</p>
+<p>A multitude of works have considered the geographic variation in geotagged social media text <span class="citation" data-cites="russ2012 doyle2014 huang2016 goncalves2014 perez2019 arthur2019 eisenstein2014">(<a href="#ref-russ2012" role="doc-biblioref">Russ 2012</a>; <a href="#ref-doyle2014" role="doc-biblioref">Doyle 2014</a>; <a href="#ref-huang2016" role="doc-biblioref">Huang et al. 2016</a>; <a href="#ref-goncalves2014" role="doc-biblioref">Gonçalves and Sánchez 2014</a>; <a href="#ref-perez2019" role="doc-biblioref">Pérez et al. 2019</a>; <a href="#ref-arthur2019" role="doc-biblioref">Arthur and Williams 2019</a>; <a href="#ref-eisenstein2014" role="doc-biblioref">Eisenstein et al. 2014</a>)</span>, focussing primarily on how dialect variation is captured through differences in the vocabulary (lexicons) of contributors over geographic space. For example; Tweet lexicons originating in the North East of England are noticeably different compared with the South <span class="citation" data-cites="arthur2019">(<a href="#ref-arthur2019" role="doc-biblioref">Arthur and Williams 2019</a>)</span>. While dialects do demonstrate geographic heterogeneity, they only present one component of language that may exhibit geographic variation and do not directly contribute properties associated with vernacular geography. This limitation stems primarily from the reliance of these works on geotagged social media, where the textual content rarely relates to the geotagged location <span class="citation" data-cites="kropczynski2018">(<a href="#ref-kropczynski2018" role="doc-biblioref">Kropczynski et al. 2018</a>)</span>, meaning dialects are the only explainable trait that results in geographic heterogeneity.</p>
+<p>In our work, we instead consider the ability to compare the geographic variation in semantic information relating to locational mentions embedded directly within social media text. This approach means that instead of solely focussing on dialects, our semantic differences capture a broad range of associations between locations, contributed by the vernacular geography of users. While a lexical approach explores the vocabulary of a language, we instead generate sentence embeddings using new developments in natural language processing, which enable nuanced semantic information to be numerically represented <span class="citation" data-cites="devlin2019">(<a href="#ref-devlin2019" role="doc-biblioref">Devlin et al. 2019</a>)</span>. Unlike simple lexical representations, sentence embeddings capture contextual semantic information <span class="citation" data-cites="hu2020">(<a href="#ref-hu2020" role="doc-biblioref">Hu et al. 2020</a>)</span>. While general topics of discussion are shared between locations, semantic representations are capable of capturing the differing context in which they are mentioned. For example, ‘restaurants’ are frequently discussed in location forums, but the way they are discussed is influenced by the distinctive culture of each location.</p>
+<p>We name these representations the ‘semantic footprints’ of locations; capturing semantic traces relating to locations, contributed by individuals through a subset of their digital footprints <span class="citation" data-cites="walden-schreiner2018">(<a href="#ref-walden-schreiner2018" role="doc-biblioref">Walden-Schreiner, Leung, and Tateosian 2018</a>)</span>. We then analyse these semantic footprints, to determine whether they exhibit spatial autocorrelation or geographically cohesive clustering. To generate an explainable characteristic of these footprints, we then explore whether generated national identities of location-associated text correlates with regions where footprints appear more semantically isolated. To achieve this, we utilise the emergent properties of large language models (LLMs), where a task known as zero-shot classification enables models to assign labels to text, without any annotated training data. We query an LLM to attribute a specific sub-nationality within the United Kingdom to each of our comments and explore whether the varying strength of these nationalities correlate with differences in our semantic footprints.</p>
+<p><a href="#sec-literature" class="quarto-xref">Section&nbsp;2</a> first gives an overview of work exploring semantic variation in social media text, regional identities, and how our approach differs to related work. <a href="#sec-methodology" class="quarto-xref">Section&nbsp;3</a> describes our data, then outlines the processing used to generate semantic footprints and describes our geographic analysis of these footprints. <a href="#sec-results" class="quarto-xref">Section&nbsp;4</a> presents our results and <a href="#sec-conclusion" class="quarto-xref">Section&nbsp;5</a> concludes with suggestions for future work.</p>
+</section>
+<section id="sec-literature" class="level1">
+<h1>Geographic Variation in Social Media Text</h1>
+<p>While formal geographic regions within Great Britain are typically designed for administrative and political purposes, they are non-restrictive in how populations can move between them. The level of geographic cohesion between regions across Great Britain is often studied from the context of mobility, where data sources like Census or transport records describe the physical movement of populations and individuals across geographic space <span class="citation" data-cites="rae2009 titheridge2009">(<a href="#ref-rae2009" role="doc-biblioref">Rae 2009</a>; <a href="#ref-titheridge2009" role="doc-biblioref">Titheridge et al. 2009</a>)</span>, or through non-physical networks using phone records <span class="citation" data-cites="sobolevsky2013 reades2009 zheng2015 lambiotte2008">(<a href="#ref-sobolevsky2013" role="doc-biblioref">Sobolevsky et al. 2013</a>; <a href="#ref-reades2009" role="doc-biblioref">Reades, Calabrese, and Ratti 2009</a>; <a href="#ref-zheng2015" role="doc-biblioref">Y. Zheng 2015</a>; <a href="#ref-lambiotte2008" role="doc-biblioref">Lambiotte et al. 2008</a>)</span>, and social media <span class="citation" data-cites="lengyel2015 arthur2019 sui2011">(<a href="#ref-lengyel2015" role="doc-biblioref">Lengyel et al. 2015</a>; <a href="#ref-arthur2019" role="doc-biblioref">Arthur and Williams 2019</a>; <a href="#ref-sui2011" role="doc-biblioref">Sui and Goodchild 2011</a>)</span>. When these networks are examined, cohesive clusters develop, which broadly appear to correlate with administrative boundaries <span class="citation" data-cites="arthur2019 ratti2010">(<a href="#ref-arthur2019" role="doc-biblioref">Arthur and Williams 2019</a>; <a href="#ref-ratti2010" role="doc-biblioref">Ratti et al. 2010</a>)</span>.</p>
+<p>Alternatively, many works have taken advantage of the abundance of geotagged social media text, to examine regional differences in dialects <span class="citation" data-cites="huang2016 eisenstein2014 goncalves2014 arthur2019 russ2012 han2012 doyle2014 zheng2018">(<a href="#ref-huang2016" role="doc-biblioref">Huang et al. 2016</a>; <a href="#ref-eisenstein2014" role="doc-biblioref">Eisenstein et al. 2014</a>; <a href="#ref-goncalves2014" role="doc-biblioref">Gonçalves and Sánchez 2014</a>; <a href="#ref-arthur2019" role="doc-biblioref">Arthur and Williams 2019</a>; <a href="#ref-russ2012" role="doc-biblioref">Russ 2012</a>; <a href="#ref-han2012" role="doc-biblioref">B. Han, Cook, and Baldwin 2012</a>; <a href="#ref-doyle2014" role="doc-biblioref">Doyle 2014</a>; <a href="#ref-zheng2018" role="doc-biblioref">X. Zheng, Han, and Sun 2018</a>)</span>. Many of these works have noted that, like online or physical networks, geographically cohesive properties emerge, which appear to correlate with administrative boundaries <span class="citation" data-cites="huang2016 eisenstein2014 goncalves2014 arthur2019">(<a href="#ref-huang2016" role="doc-biblioref">Huang et al. 2016</a>; <a href="#ref-eisenstein2014" role="doc-biblioref">Eisenstein et al. 2014</a>; <a href="#ref-goncalves2014" role="doc-biblioref">Gonçalves and Sánchez 2014</a>; <a href="#ref-arthur2019" role="doc-biblioref">Arthur and Williams 2019</a>)</span>. These results conform with the idea that dialects are an important component in the identity of regions <span class="citation" data-cites="haesly2005 llamas2014 llamas2009">(<a href="#ref-haesly2005" role="doc-biblioref">Haesly 2005</a>; <a href="#ref-llamas2014" role="doc-biblioref">Llamas and Watt 2014</a>; <a href="#ref-llamas2009" role="doc-biblioref">Llamas 2009</a>)</span>. Despite this, dialects only present a single component of language that contributes to a sense of geographic identity between regions <span class="citation" data-cites="middleton2008 haesly2005">(<a href="#ref-middleton2008" role="doc-biblioref">Middleton and Freestone 2008</a>; <a href="#ref-haesly2005" role="doc-biblioref">Haesly 2005</a>)</span>, ignoring the wealth of vernacular geography that may also be captured in text <span class="citation" data-cites="evans2007 sui2011 berragan2023a">(<a href="#ref-evans2007" role="doc-biblioref">Evans and Waters 2007</a>; <a href="#ref-sui2011" role="doc-biblioref">Sui and Goodchild 2011</a>; <a href="#ref-berragan2023a" role="doc-biblioref">Berragan et al. 2023</a>)</span>.</p>
+<p>Studies that consider dialect variation in social media text only consider geotags to be a geographically relatable feature of this data source. Given social media communication comprises a broad range of topics that do not necessarily relate to locational discussion, these geotags and associated text are unlikely to be directly related. Any observed regional variation is therefore only attributable to the dialect of the contributing author, with the assumption that the author is a resident in the geotagged location. In contrast to this approach, locational mentions embedded directly within text present an alternative method to explore how the language regarding locations varies geographically. Place names embedded within text directly can also be related with the surrounding context of their use, capturing the vernacular geography of contributing users <span class="citation" data-cites="sui2011 evans2007">(<a href="#ref-sui2011" role="doc-biblioref">Sui and Goodchild 2011</a>; <a href="#ref-evans2007" role="doc-biblioref">Evans and Waters 2007</a>)</span>. Lexicons associated with locations identified in this manner therefore incorporate a broad range of topics, associations, and cultural information, rather than solely dialects, more broadly capturing the components of language that contribute to the identity of locations <span class="citation" data-cites="haesly2005">(<a href="#ref-haesly2005" role="doc-biblioref">Haesly 2005</a>)</span>. In our work, we therefore extract place names from a collection of UK specific comments taken from the social media website Reddit, attributing coordinate information through a process called geoparsing <span class="citation" data-cites="purves2019">(<a href="#ref-purves2019" role="doc-biblioref">Purves, Winter, and Kuhn 2019</a>)</span>, allowing for us to explore the geographic heterogeneity of text associated with identified locations.</p>
+<p>While past works have primarily considered the statistical comparison between location-based lexicons, where word counts are associated with aggregate regions generated through geotagged Tweets, this approach is limited when considering the more nuanced semantic variations in vernacular geography. Recent progress in natural language processing have led to the development of large language models (LLMs) which are able to capture deep contextual semantic information from text, through sentence and word embeddings <span class="citation" data-cites="devlin2019">(<a href="#ref-devlin2019" role="doc-biblioref">Devlin et al. 2019</a>)</span>. Unlike a lexical approach, where word order and semantic information is not captured, these embeddings act as numerical representations of text which incorporate contextual semantic information in depth. Embeddings that are more semantically similar are closer together in their embedding space, meaning, like lexicons, these embeddings may be statistically compared. We therefore generate sentence embeddings for each comment in our corpus that contains a place name, which are then aggregated by location, forming what we call a semantic footprint. These footprints represent the collective geographic knowledge of each individual user in our corpus, built through their vernacular geography, capturing informal, place-based information through their perception of geoparsed locations <span class="citation" data-cites="sui2011 goodchild2011">(<a href="#ref-sui2011" role="doc-biblioref">Sui and Goodchild 2011</a>; <a href="#ref-goodchild2011" role="doc-biblioref">Goodchild and Li 2011</a>)</span>.</p>
+<p>In this work, we generate a new comparative measure between regions in the UK through an examination of text associated with locations, extracted from comments on the social media website Reddit. While past work has examined variation between regions from the perspective of social media networks, or by examining lexicons associated with geotagged social media messages, we examine regional variations derived from geoparsed embeddings generated from a large language model. Unlike using geotags, which ascribe linguistic features such as dialect to specific locations, our method instead captures any comment that mentions a location alongside its semantic context. Quantified information therefore does not reflect dialects associated with locations, but common semantic associations, embedding cultural information, or location-specific topics and opinions. Given users mentioning locations are not necessarily residents, these semantic associations represent a collective informal geographic knowledge generated through the vernacular geography of people across the UK, embedding their general semantic footprint.</p>
+</section>
+<section id="sec-methodology" class="level1">
+<h1>Methodology</h1>
+<p>The following section first introduces our main data source; the social media website Reddit, from which we access a collection of user-submitted comments. Following this, we detail our methodology for generating semantic footprints from each of these comments, and how we analyse the geographic properties of these footprints.</p>
+<section id="data" class="level2">
+<h2 class="anchored" data-anchor-id="data">Data</h2>
+<p><a href="https://reddit.com">Reddit</a> is a public discussion, news aggregation social network, and among the top 20 most visited websites in the United Kingdom. In 2020, Reddit had around 430 million active monthly users, comparable to the number of Twitter<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> users <span class="citation" data-cites="murphy2019 statista2022">(<a href="#ref-murphy2019" role="doc-biblioref">Murphy 2019</a>; <a href="#ref-statista2022" role="doc-biblioref">Statista 2022</a>)</span>. Reddit is divided into separate independent <em>subreddits</em> each with specific topics of discussion, where <em>users</em> may submit <em>posts</em> which each have dedicated nested conversation threads that users can add <em>comments</em> to. Subreddits cover a wide range of topics, and in the interest of geography, they also act as forums for the discussion of local places. The <a href="https://reddit.com/r/unitedkingdom">United Kingdom subreddit</a> acts as a general hub for related topics, notably including a list of smaller and more specific related subreddits. This list provides a ‘Places’ section, a collection of local British subreddits, ranging in scale from country (<code>/r/England</code>), region (<code>/r/thenorth</code>, <code>/r/Teeside</code>), to cities (<code>/r/Manchester</code>) and small towns (<code>/r/Alnwick</code>). In total there are 213 subreddits that relate to ‘places’ within the United Kingdom<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. We use the corpus generated by <em>anonymised</em>, which consists of a collection of all Reddit comments taken from each UK related subreddit <span class="citation" data-cites="baumgartner2020">(<a href="#ref-baumgartner2020" role="doc-biblioref">Baumgartner et al. 2020</a>)</span>, with place names identified by a custom transformer-based named entity recognition model<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. In total 8,282,331 comments were extracted, submitted by 490,535 unique users, between 2011-01-01 and 2022-04-17. Table <span class="math inline">\(\ref{tbl-example}\)</span> gives an example entry from this geoparsed Reddit corpus.</p>
+<p>There are a total of 40,429 unique locations in this corpus, with a highly skewed distribution in mentions. Many locations were only mentioned a single time (37%), while ‘London’ was mentioned in 283,521 comments. To reduce this skew, we sampled any location mentioned more than 5,000 times, retaining only up to 5,000 randomly sampled comments per location. The goal with this processing was to ensure that our generated embeddings did not simply become biased towards the word embedding for a single location, and instead capture a broader sense of an aggregate region. In our data subset, we find that 1% of users (1,734) mention 29% of our place names. This subset leaves a total of 852,461 comments containing place names. Comments range from 1 to 3,555 words in length, with a mean length of 79. Table <span class="math inline">\(\ref{tbl-sum}\)</span> gives an overview of the number of comments, word count and number of places that were identified within each administrative region of the UK.</p>
+</section>
+<section id="generating-and-analysing-geographic-footprints" class="level2">
+<h2 class="anchored" data-anchor-id="generating-and-analysing-geographic-footprints">Generating and Analysing Geographic Footprints</h2>
+<p>Statistical comparisons between two or more distinct texts first relies on an appropriate method for processing the text into a numerical format. Typically, a Term Frequency-Inverse Document Frequency (TF-IDF) approach is used to generate document embeddings <span class="citation" data-cites="daniel2007">(<a href="#ref-daniel2007" role="doc-biblioref">Daniel and James H 2007</a>)</span>, which assigns word importance based on the frequency of mentions within a corpus. TF-IDF however does not have the capability to capture broader semantic information, given that there is no knowledge of the meaning behind words. Large Language Models (LLMs) instead are pre-trained on a very large corpus of natural language text, which, alongside their architecture, enables them to more appropriately consider semantic information <span class="citation" data-cites="devlin2019">(<a href="#ref-devlin2019" role="doc-biblioref">Devlin et al. 2019</a>)</span>. As with TF-IDF, text is input into these models and output as a numerical representation, which embeds words as high dimensional vectors, capturing contextual semantic information.</p>
+<p>This approach differs from past work that only considered a lexical analysis, where semantic information and context is not preserved, instead building vectors that act as semantic representations of locations identified in our corpus, which we name ‘semantic footprints’. Given semantic information is preserved, locational embeddings are able to reflect the deeper associations between geographic locations, built from a multitude of contexts and perspectives, forming an aggregate representation. Any geographically cohesive relationships between footprints therefore demonstrate a direct association between geography and language, which hasn’t been captured previously.</p>
+<p>Once we generate these footprints we first explore how they produce emerging spatial structures from the bottom-up, generating clusters of small-scale geographic units to capture larger scale aggregations based on semantic information. In this analysis we find that our generated spatial structures broadly conform with larger scale administrative aggregations. We therefore then consider a top-down approach, using these larger administrative regions to generate a comparative analysis of aggregate footprints. To derive explainable characteristics of observed differences between these regions, we observe how national identities can be captured through text, and how these identities vary geographically.</p>
+</section>
+<section id="creating-embeddings" class="level2">
+<h2 class="anchored" data-anchor-id="creating-embeddings">Creating Embeddings</h2>
+<p>We first create semantic embeddings for each comment in which a location was mentioned, using the <code>sentence-transformers</code> Python library <span class="citation" data-cites="reimers2019">(<a href="#ref-reimers2019" role="doc-biblioref">Reimers and Gurevych 2019</a>)</span>, with the <code>all-mpnet-base-v2</code> model<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>. With our selected embedding model, we then performed the following steps to generate embeddings for each Local Authority District (LAD) in Great Britain.</p>
+<ol type="1">
+<li>Masked any place name with a generic token: ‘PLACE’ (using place name text spans included in the corpus).</li>
+<li>Generate sentence embeddings for each comment.</li>
+<li>Group embeddings by LAD using identified locations, taking the mean embedding.</li>
+</ol>
+<p>To visualise the outputs from this processing we consider an example comment <span class="math inline">\(s_1 = \text{"I live in London."}\)</span>, shown on Equation <span class="math inline">\(\ref{eq-dims}\)</span>.</p>
+<p><span id="eq-dims"><span class="math display">\[
+\begin{aligned}
+\mathit{s_{i}} &amp;= \text{'I live in \textit{London}'} \\
+\textbf{1. }\downarrow \\
+\mathit{s_{i}} &amp;= \text{'I live in \texttt{PLACE}'},
+\end{aligned}
+\qquad
+\begin{aligned}
+\textbf{2. }\mathit{s_{i}} \rightarrow
+\begin{bmatrix}
+x_{1} \\
+x_{2} \\
+\vdots\\
+x_{n}
+\end{bmatrix},
+\end{aligned}
+\qquad
+\begin{aligned}
+\textbf{3. }\mathit{LAD_{j}} =
+\begin{bmatrix}
+x_{1,1} &amp; x_{1,2} &amp; \cdots &amp; x_{1,t} \\
+x_{2,1} &amp; x_{2,2} &amp; \cdots &amp; x_{2,t} \\
+\vdots  &amp; \vdots  &amp; \ddots &amp; \vdots  \\
+x_{n,1} &amp; x_{n,2} &amp; \cdots &amp; x_{n,t}
+\end{bmatrix} \rightarrow \begin{bmatrix}
+\bar{x_{1}} \\
+\bar{x_{2}} \\
+\vdots \\
+\bar{x_{n}}
+\end{bmatrix}
+\end{aligned}
+\tag{1}\]</span></span></p>
+<p>In Equation <span class="math inline">\(\ref{eq-dims}\)</span>, <span class="math inline">\(n\)</span> is the <code>sentence-transformers</code> embedding dimension (768), and <span class="math inline">\(t\)</span> is the total number of unique comments that relate to locations within a single LAD region (<span class="math inline">\(LAD_j\)</span>). Values (<span class="math inline">\(x_i\)</span>) in step <strong>2.</strong> are model weights that represent the embedding for the comment <span class="math inline">\(s_i\)</span>, capturing semantic information. This process is also visually demonstrated on <a href="#fig-workflowfoot" class="quarto-xref">Figure&nbsp;1</a>.</p>
+<div id="fig-workflowfoot" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-workflowfoot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<embed src="./figures/workflow.pdf" class="img-fluid">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-workflowfoot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Workflow diagram showing Reddit Corpus processed into sentence embeddings, then aggregated into location and LAD semantic footprints.
+</figcaption>
+</figure>
+</div>
+<p>Given each <span class="math inline">\(LAD\)</span> has a variable number of comments associated with them, we must process associated embeddings into a ‘semantic footprint’ representation of a fixed size, so that they may be directly compared. To achieve this, all embeddings associated with comments relating to locations within a <span class="math inline">\(LAD_j\)</span> are processed into a one-dimension vector of size <span class="math inline">\(1x768\)</span>. The most common approach for this dimensionality reduction uses ‘mean-pooling’; taking the mean across all embeddings, which is common in tasks like topic analysis <span class="citation" data-cites="reimers2019">(<a href="#ref-reimers2019" role="doc-biblioref">Reimers and Gurevych 2019</a>)</span>.</p>
+<p>By masking place names, we ensure that no comment embeddings accidentally incorporate geographically grounded information. For example, comments in South Eastern local authorities are likely to frequently mention London, given they are geographically proximal. Embeddings for these locations would therefore capture an association through the mention of London, rather than general semantic information. For our work, we want to exclude any geographic information, ensuring that embeddings solely capture semantic associations.</p>
+<p>Given that transformers are a relatively new architecture in natural language processing, and the creation of these models require significant computational resources and training time, their use to date has been limited in related research. Our choice to use the transformer architecture stems from the emphasis we place on the extraction of nuanced and contextual semantic information, which is lost with lexical count-based methods like TF-IDF. It should be noted however that while TF-IDF methods are less complex, they are typically more interpretable; for instance, words that contribute importance to an embedding may be extracted from a TF-IDF model. The numerical representations of any text generated by transformers are not directly interpretable in this manner. The following section therefore analyses our semantic footprints with respect to their numerical representations, rather than through their lexicons.</p>
+</section>
+<section id="spatial-clustering-and-autocorrelation" class="level2">
+<h2 class="anchored" data-anchor-id="spatial-clustering-and-autocorrelation">Spatial Clustering and Autocorrelation</h2>
+<p>It is reasonable to assume that there are LADs within our corpora that generate embeddings that capture similar semantic properties. A typical method to group unlabelled multi-variate data based on shared properties uses unsupervised clustering <span class="citation" data-cites="sinaga2020 likas2003">(<a href="#ref-sinaga2020" role="doc-biblioref">Sinaga and Yang 2020</a>; <a href="#ref-likas2003" role="doc-biblioref">Likas, Vlassis, and J. Verbeek 2003</a>)</span>. Therefore, to explore whether geographically cohesive clusters appear within our semantic embeddings, we generate hierarchical clusters, which are non-geographically bounded, using agglomerative clustering. This clustering method allows for the optimal number of clusters to be determined automatically, which was determined to be 3. These clusters were visualised geographically, to examine whether geographically cohesive groupings occurred. The proportion of clusters present within each administrative region (RGN)<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> in Great Britain was also plotted to determine whether clusters appeared to correlate with administrative boundaries.</p>
+<p>To quantify the level of spatial autocorrelation that our embeddings exhibit, we consider the Moran’s I metric, which identifies the spatial relationship between each observation and its geographic neighbours <span class="citation" data-cites="anselin1995 rey2023">(<a href="#ref-anselin1995" role="doc-biblioref">Anselin 1995</a>; <a href="#ref-rey2023" role="doc-biblioref">Rey, Arribas-Bel, and Wolf 2023</a>)</span>. Moran’s I values are generated based on the strength of correlation between values and the aggregate values of their geographic neighbours, known as their spatial lag. Higher Moran’s I values therefore denote a stronger spatial autocorrelation. Given that Moran’s I analysis requires univariate data, we explore global spatial autocorrelation of our semantic footprints UMAP decomposed into two dimensions, and plot both dimensions against their spatial lag, giving two distinct global Moran’s I values.</p>
+<p>We then consider how localised levels of high spatial autocorrelation may be identified through a Local Indicators of Spatial Autocorrelation (LISA) analysis. Instead of single global values, LISA analysis determines whether each unique LAD polygon exhibits a significant level of spatial autocorrelation, and assigns a local Moran’s I value for each.</p>
+<p>It is important to note that the magnitude of our embeddings do not convey any definable information, values therefore only highlight differences in semantic information between regions, rather than importance. For example, an embedding value of 0 is not less important than a value of 1 or -1.</p>
+</section>
+<section id="semantic-similarity" class="level2">
+<h2 class="anchored" data-anchor-id="semantic-similarity">Semantic Similarity</h2>
+<p>Following our analysis of LAD semantic footprints, we explore our semantic footprints from a top-down perspective, aggregating LADs into established large-scale RGNs across Great Britain, taking the mean of the collective semantic footprints. Each RGN is therefore represented by a single 768 dimension semantic footprint embedding. We then calculate the cosine similarity between each RGN embedding, demonstrating the level of inter-region semantic cohesion across Great Britain.</p>
+<p>Cosine similarity is a common metric for comparing embeddings, as it is invariant to the magnitude of the vectors, and only considers the direction. This is important as the magnitude of embeddings is not meaningful, and only the direction of the vector conveys information. For example, the embedding for the ‘South East’ cannot be twice as important as the embedding for the ‘North West’.</p>
+</section>
+<section id="capturing-national-identities-through-text" class="level2">
+<h2 class="anchored" data-anchor-id="capturing-national-identities-through-text">Capturing National Identities through Text</h2>
+<p>To generate explainable characteristics of any geographically distinct semantic footprints generated in our analysis, we consider how a language model associates national identities with the semantic properties of text. In our approach we mirror qualitative data collection methodologies in political science research, where individuals are typically queried as to their chosen national identity <span class="citation" data-cites="haesly2005 griffiths2022">(<a href="#ref-haesly2005" role="doc-biblioref">Haesly 2005</a>; <a href="#ref-griffiths2022" role="doc-biblioref">Griffiths 2022</a>)</span>, instead generating the categorisations of comments by querying a large language model (LLM).</p>
+<p>LLMs are pre-trained on a large corpus of natural language text, building representations of this text that emulate a human understanding of language. The underlying theory is that these representations capture the collective knowledge of humans that contributed the natural language text used to build them. Therefore, in addition to factual information, when posed with non-deterministic questioning, these models are able to contribute the biased information that is incorporated into their model weights.</p>
+<p>Recent research has noted on the ability to perform zero-shot classification using LLMs, where class predictions may be made without the model ever having previously seen the labels <span class="citation" data-cites="wei2022a wei2022">(<a href="#ref-wei2022a" role="doc-biblioref">Wei, Bosma, et al. 2022</a>; <a href="#ref-wei2022" role="doc-biblioref">Wei, Tay, et al. 2022</a>)</span>. While research has considered the use of questionnaires to query the strength of national identities within the UK <span class="citation" data-cites="haesly2005 griffiths2022">(<a href="#ref-haesly2005" role="doc-biblioref">Haesly 2005</a>; <a href="#ref-griffiths2022" role="doc-biblioref">Griffiths 2022</a>)</span>, an LLM may instead be used. For example, an LLM may be questioned whether it personally feels a sequence of text appears to be ‘British’, ‘English’, ‘Scottish’, or ‘Welsh’. Through this zero-shot classification, we are able to determine the strength of national identity associated with each region in our work, to examine whether this appears to correlate with any cohesion between the semantic footprints that we generate. Importantly, we are also able to generate confidence values from the chosen LLM, allowing for the strength of these national identities to be captured.</p>
+<p>Semantic information within our comments is expected to capture both explicit information contributed by users; for example stating ‘London is a British city’, in addition to implicit semantic information that exists within language. For example the phrase ‘bonnie Scotland’ may suggest a strong identity due to the inclusion of Scottish slang<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>. Unlike our semantic footprints, we do not mask place name mentions in these embeddings, enabling the model to make its own decisions regarding place name mentions.</p>
+<p>To identify regional identities through semantic information, we build on the emergent properties of large language models, which enable a task known as ‘Zero-Shot Classification’. This allows models to predict a class that was not seen during training, by generating a prompt that contains the labels required. For this task we select the <code>typeform/distilbert-base-uncased-mnli</code> model<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>, which is tailored towards zero-shot classification, therefore generating slightly different embeddings compared with those used for our semantic footprints. For our task the following gives an example prompt with a portion of a comment taken from our corpus, where the Scottish colloquial slang ‘gonnae’ is used:</p>
+<pre><code>Classify the following input text into one of the following four categories:
+[British, English, Scottish, Welsh]
+
+Input Text: My favourite was in Livingston: 'Rab, I'm gonnae find you.'</code></pre>
+<p>The output would then be given as a sequence of confidence values for each label:</p>
+<pre><code>'labels': ['Scottish', 'British', 'Welsh', 'English']
+'scores': [0.761, 0.144, 0.052, 0.043]</code></pre>
+</section>
+</section>
+<section id="sec-results" class="level1">
+<h1>Results</h1>
+<div class="cell" data-execution_count="6">
+<div class="cell-output cell-output-display">
+<div id="fig-clusters" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-clusters-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="main_files/figure-pdf/fig-clusters-output-1.jpg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-clusters-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Semantic footprints associated with each LAD corpus coloured by hierarchical agglomerative clusters where <span class="math inline">\(K=3\)</span>. (a) Footprints UMAP decomposed into two dimensions. (b) Proportion of clusters by RGN. (c) Geographic location of clusters.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="#fig-clusters" class="quarto-xref">Figure&nbsp;2</a> (a) shows clusters of LAD transformer embeddings UMAP decomposed into two dimensions, indicating embeddings that share similar semantic properties. These clusters appear to broadly correlate with three distinct regions within Great Britain, where cluster 0 most closely identifies with England, 1 with London and surrounding areas, and 2 with Scotland and Wales (<a href="#fig-clusters" class="quarto-xref">Figure&nbsp;2</a> (b-c)). The few areas that appear as cluster 0 in Wales and Scotland are major urban centres like Cardiff, Glasgow, and Edinburgh. Overall these clusters appear to be geographically restricted, and even broadly conform with administrative regions like the Welsh and Scottish borders.</p>
+<p>These findings appear to share similarities with past work that has observed strong ‘boundary effects’, where lexical similarity between geotagged Tweets often correlates with administrative boundaries <span class="citation" data-cites="li2021 bailey2018 arthur2019 yin2017a">(<a href="#ref-li2021" role="doc-biblioref">Li et al. 2021</a>; <a href="#ref-bailey2018" role="doc-biblioref">Bailey et al. 2018</a>; <a href="#ref-arthur2019" role="doc-biblioref">Arthur and Williams 2019</a>; <a href="#ref-yin2017a" role="doc-biblioref">Yin et al. 2017</a>)</span>. Our embeddings also exhibit the general geographically coherent patterns that have been observed in geographical lexical variations in social media <span class="citation" data-cites="russ2012 doyle2014 huang2016 goncalves2014 perez2019 arthur2019 eisenstein2014">(<a href="#ref-russ2012" role="doc-biblioref">Russ 2012</a>; <a href="#ref-doyle2014" role="doc-biblioref">Doyle 2014</a>; <a href="#ref-huang2016" role="doc-biblioref">Huang et al. 2016</a>; <a href="#ref-goncalves2014" role="doc-biblioref">Gonçalves and Sánchez 2014</a>; <a href="#ref-perez2019" role="doc-biblioref">Pérez et al. 2019</a>; <a href="#ref-arthur2019" role="doc-biblioref">Arthur and Williams 2019</a>; <a href="#ref-eisenstein2014" role="doc-biblioref">Eisenstein et al. 2014</a>)</span>. Notably, unlike dialects, where a geographic component is expected, the geographic association of our general semantic embeddings has not been demonstrated in past work. Results therefore demonstrate that despite no pre-existing geographic information like geotags or place names, general text associated with locations appears to embed a geographic component. The geographic coherence in our results is particularly strong at the borders of Scotland and Wales, which conforms with our hypothesis that the vernacular geography that exists within social media text embeds components that contribute to the strength of national identities <span class="citation" data-cites="haesly2005">(<a href="#ref-haesly2005" role="doc-biblioref">Haesly 2005</a>)</span>.</p>
+<p>As noted however, major cities in Wales and Scotland Glasgow, Edinburgh and Cardiff share a cluster with English LADs rather than their respective country, suggesting that these locations are more semantically connected with the rest of Great Britain. This observation mirrors the results of work that considered co-occurring locational mentions between cities, where shared city mentions in text often appear irrespective of distance, and across administrative borders [anonymised]. This deviation from the relative semantic isolation of Scotland and Wales from England appears to be reflective of the nature of major cities, given they tend to share stronger physical geographic connections across a larger geographic scope, and more influential cultural connections compared with rural areas, captured in our work through shared semantic traits.</p>
+<p>Cluster 1 presents in areas surrounding London and suggests distinctiveness of this region relative to the rest of Great Britain. This is interesting given London’s extensive connectivity relative to the rest of the country, and the general sense of strong association with other cities, given it is the capital city [anonymised]. Our results therefore suggest that despite London’s importance nationally, semantic information is able to capture a deeper context that dissociates it from other regions. This effect may be due to factors unique to London, for example its prominence globally, influencing both tourism and business external to the United Kingdom, which alter the cultural landscape of the city. The isolated characteristics of London are particularly observable through its economic differences, where high costs of living have generated the need for a ‘London weighting’<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a> of salaries <span class="citation" data-cites="hirsch2016">(<a href="#ref-hirsch2016" role="doc-biblioref">Hirsch 2016</a>)</span>.</p>
+<p>The following section formalises the level of geographic coherence that the embeddings exhibit, and highlights the key locations that drive the relationship between text and geography.</p>
+<section id="morans-i-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="morans-i-analysis">Moran’s I Analysis</h2>
+<div class="cell" data-execution_count="7">
+<div class="cell-output cell-output-display">
+<div id="fig-morans" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-morans-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="main_files/figure-pdf/fig-morans-output-1.jpg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-morans-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Moran’s I Plot: LAD embeddings decomposed into 2 dimensions and standardised against their spatial lag.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>To quantify whether our embeddings demonstrate spatial autocorrelation, we consider the Moran’s I metric, which identifies the spatial relationship between each observation and its geographic neighbours <span class="citation" data-cites="anselin1995">(<a href="#ref-anselin1995" role="doc-biblioref">Anselin 1995</a>)</span>. Given that this analysis requires univariate data, we explore global spatial autocorrelation of our UMAP decomposed embeddings computing the spatial lag for both dimensions. On <a href="#fig-morans" class="quarto-xref">Figure&nbsp;3</a>, we plot both values for each LAD semantic footprint in Great Britain, against the spatial lag of these values. A higher correlation between the semantic footprints values and their spatial lag indicates a stronger level of global spatial autocorrelation, resulting in a higher Moran’s I value. <a href="#fig-morans" class="quarto-xref">Figure&nbsp;3</a> shows a positive correlation between the PCA decomposed embedding values and their spatial lag, resulting in Moran’s I values of 0.31 and 0.39. This indicates a reasonably strong spatial autocorrelation with both embedding dimensions, confirming that semantic footprints are typically more similar between nearby locations. While the Moran’s I values for both dimensions are similar, their cosine similarity is negative (-0.11), meaning these two decomposed dimensions capture distinctly different semantic traits.</p>
+<p>While spatially coherent results have been demonstrated from the perspective of dialects on social media <span class="citation" data-cites="russ2012 doyle2014 huang2016 goncalves2014 perez2019 arthur2019 eisenstein2014">(<a href="#ref-russ2012" role="doc-biblioref">Russ 2012</a>; <a href="#ref-doyle2014" role="doc-biblioref">Doyle 2014</a>; <a href="#ref-huang2016" role="doc-biblioref">Huang et al. 2016</a>; <a href="#ref-goncalves2014" role="doc-biblioref">Gonçalves and Sánchez 2014</a>; <a href="#ref-perez2019" role="doc-biblioref">Pérez et al. 2019</a>; <a href="#ref-arthur2019" role="doc-biblioref">Arthur and Williams 2019</a>; <a href="#ref-eisenstein2014" role="doc-biblioref">Eisenstein et al. 2014</a>)</span>, we have demonstrated that this phenomenon can also be captured from general semantic information. Notably, while dialects have always been considered to have strong geographical grounding <span class="citation" data-cites="trudgill2004">(<a href="#ref-trudgill2004" role="doc-biblioref">Trudgill 2004</a>)</span>, it is more surprising that general semantic information regarding locations similarly exhibits this relationship.</p>
+<div class="cell" data-execution_count="8">
+<div class="cell-output cell-output-display">
+<div id="fig-lisa" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-lisa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="main_files/figure-pdf/fig-lisa-output-1.jpg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-lisa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Local Indicators of Spatial Auto-correlation (LISA). (a/d) 1 dimensional embedding values. (b/e) Local Moran’s I values (<span class="math inline">\(Is\)</span>). (c/f) LISA HH and LL significant values (<span class="math inline">\(p&lt;0.05\)</span>), both are included as the value of embeddings do not convey information.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>To explore local indicators of spatial autocorrelation (LISA) we plot each decomposed embedding on <a href="#fig-lisa" class="quarto-xref">Figure&nbsp;4</a> (a/d), each local Moran’s I value on (b/e) and all significant (<span class="math inline">\(p&lt;0.05\)</span>) HH and LL LISA quadrants on (c/f). Note that only selecting significant <span class="math inline">\(p\)</span> values on <a href="#fig-lisa" class="quarto-xref">Figure&nbsp;4</a> (c/f) ensures that no regions are included that have values that could demonstrate autocorrelation even if randomly distributed geographically. From <a href="#fig-lisa" class="quarto-xref">Figure&nbsp;4</a> (c/f), we can see that notable large areas with significant levels of spatial correlation include;</p>
+<ul>
+<li>Scotland</li>
+<li>Wales</li>
+<li>London and surrounding LADs</li>
+<li>the South West; towards Cornwall</li>
+</ul>
+<p>As demonstrated by the low cosine similarity between our UMAP embeddings, they appear to capture distinctly different semantic information. London for example only appears in dimension 0, while dimension 1 captures broader spatial autocorrelation across Scotland and Wales. In Scotland we can see that from both LISAs, Glasgow and Edinburgh represent areas of HL/LH, where semantic information in these cities is not the same as surrounding LADs, an effect that is also captured in some LADs surrounding London. England overall appears to be a less semantically cohesive country based on this analysis, where most LADs do not contribute significant levels of spatial autocorrelation.</p>
+<p>These results again demonstrate geographic cohesion between semantic footprints, which notably appear to correspond with the national boundaries of Wales and Scotland. This mirrors the observations of past work where dialect differences appeared to correlate with administrative boundaries <span class="citation" data-cites="li2021 bailey2018 arthur2019 yin2017a">(<a href="#ref-li2021" role="doc-biblioref">Li et al. 2021</a>; <a href="#ref-bailey2018" role="doc-biblioref">Bailey et al. 2018</a>; <a href="#ref-arthur2019" role="doc-biblioref">Arthur and Williams 2019</a>; <a href="#ref-yin2017a" role="doc-biblioref">Yin et al. 2017</a>)</span>. In addition to Wales and Scotland, we have also identified a notable grouping in the South West, which potentially reflects the Cornish identity <span class="citation" data-cites="deacon2007">(<a href="#ref-deacon2007" role="doc-biblioref">Deacon 2007</a>)</span>, as well as a grouping associated with London.</p>
+</section>
+<section id="semantic-similarity-and-identity" class="level2">
+<h2 class="anchored" data-anchor-id="semantic-similarity-and-identity">Semantic Similarity and Identity</h2>
+<div class="cell" data-execution_count="9">
+<div class="cell-output cell-output-display">
+<div id="fig-similarity" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-similarity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="main_files/figure-pdf/fig-similarity-output-1.jpg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-similarity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Scaled cosine similarity of embeddings for administrative regions across the UK. Higher values indicate greater cosine similarity. Regions shown in descending order by mean cosine similarity value.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Given the regions highlighted as having strong spatial autocorrelation in their semantic footprints appear to broadly conform with the administrative regions of Wales, Scotland, and London, we examine these footprints from a top-down analysis using pre-defined larger scale aggregations.</p>
+<p><a href="#fig-similarity" class="quarto-xref">Figure&nbsp;5</a> compares the cosine similarity between each RGN embedding, allowing for inter-regional cohesion to be explored. The North West has the overall highest level of cosine similarity, displaying comparatively high similarity with most regions across England, excluding London. London has the lowest overall similarity, only sharing positive cosine similarity values with the South and South East of England. As expected, Scotland and Wales have low overall cosine similarity values, with Wales sharing even lower similarity with respect to London and the South East compared with Scotland. Mean values show clearly that the least cohesive regions appear to be London, Wales, and Scotland, three regions that are also those with the strongest levels of spatial autocorrelation.</p>
+<p>Excluding London, the North East is the region in England with the lowest overall cosine similarity with the rest of Great Britain. This is perhaps reflective of distinct differences with this region, for example the distinctly lower gross value added (GVA) compared with other regions <span class="citation" data-cites="fenton2018">(<a href="#ref-fenton2018" role="doc-biblioref">Fenton 2018</a>)</span>, or the general sense of strong identity that is often noted by residents <span class="citation" data-cites="middleton2008">(<a href="#ref-middleton2008" role="doc-biblioref">Middleton and Freestone 2008</a>)</span>. Alternatively, the North West is home to nationally influential urban conurbations, especially between Manchester and Liverpool <span class="citation" data-cites="oguz2022">(<a href="#ref-oguz2022" role="doc-biblioref">Oguz and Walton 2022</a>)</span>, likely generating the highest overall semantic similarity of this region compared with the rest of the UK. Comparatively, the East of England, South East and London are neighbouring regions that share high similarities with each other, but exhibit low similarity with the rest of Great Britain, suggesting there are semantic components that distinguish this region of the country from the rest. There is a slightly higher mean similarity with respect to Scotland compared with Wales, due to higher similarities with regions in England, like the North West and South East. Major urban centres in Scotland are relatively well connected to Great Britain through rail routes, and Edinburgh and Glasgow are historically important UK cities, captured by their distinct difference in embedding values during the spatial autocorrelation analysis. This factor likely increases the cosine similarity of Scotland with regions in England, while Wales in this sense is less directly associated with the rest of the UK.</p>
+<p>To determine whether regional identities generated by a large language model aligns with these semantically isolated regions in our analysis, we plot the distribution of regional identities identified through our zero-shot classification on <a href="#fig-identity" class="quarto-xref">Figure&nbsp;6</a>.</p>
+<p>Across each region, the ‘English’ identity is always lower than ‘British’, suggesting that regions within England are typically more strongly associated with the United Kingdom<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> than solely England. Unlike English regions however, comments relating to both Scottish and Welsh locations are more strongly associated with their respective nationalities. However, comments relating to Welsh locations appear on average to have stronger confidence values with respect to the British classification, compared with Scottish locations. Similar observations have been captured from qualitative interviewing, where Welsh residents similarly appear to more strongly associate themselves with the British identity, compared with Scottish residents <span class="citation" data-cites="carman2014 llamas2014 llamas2009 haesly2005">(<a href="#ref-carman2014" role="doc-biblioref">Carman, Johns, and Mitchell 2014</a>; <a href="#ref-llamas2014" role="doc-biblioref">Llamas and Watt 2014</a>; <a href="#ref-llamas2009" role="doc-biblioref">Llamas 2009</a>; <a href="#ref-haesly2005" role="doc-biblioref">Haesly 2005</a>)</span>. Of the English regions, London has a distinctly higher average confidence value of both British and English identities compared with all other regions. Notably given the semantic footprints for Scotland, Wales, and London also have the lowest overall cosine similarity values, these differences in generated identity compared with other regions are a likely component in their semantic differences.</p>
+<div class="cell" data-execution_count="10">
+<div class="cell-output cell-output-display">
+<div id="fig-identity" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-identity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="main_files/figure-pdf/fig-identity-output-1.jpg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-identity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Zero Shot classification of each corpus into regional identities; [B]ritish, [E]nglish, [S]cottish, [W]elsh. Values show mean confidence value across each comment, lines indicate standard error. Descending order by [B]ritish confidence. The dashed line separates English regions from Scotland and Wales.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="general-observations" class="level2">
+<h2 class="anchored" data-anchor-id="general-observations">General Observations</h2>
+<p>Unlike typical representations of the North-South divide within England <span class="citation" data-cites="jewell1994">(<a href="#ref-jewell1994" role="doc-biblioref">Jewell 1994</a>)</span>, semantic differences appear to be influenced primarily by proximity to London. Unlike typical representations of this divide, the South West of England therefore appears to be distinct from the South East, with a stronger association with the North. South Eastern regions however do share lower similarity to the Midlands and North of England, which conforms with a typical view of the English North-South divide.</p>
+<p>In a similar sense, Scotland and Wales demonstrate distinctly more cohesive semantic properties compared with England, where groupings of high spatial autocorrelation are constrained to smaller regions, like London. In traditional linguistic research, the spoken dialect across England is known to vary considerably <span class="citation" data-cites="chambers1998 knowles1973 deacon2007 mackenzie2022">(<a href="#ref-chambers1998" role="doc-biblioref">Chambers and Trudgill 1998</a>; <a href="#ref-knowles1973" role="doc-biblioref">Knowles 1973</a>; <a href="#ref-deacon2007" role="doc-biblioref">Deacon 2007</a>; <a href="#ref-mackenzie2022" role="doc-biblioref">MacKenzie, Bailey, and Turton 2022</a>)</span>, which itself captures the distinct social differences, and the localised identities that exist across geographic space. Instead, the high cohesion within Wales and Scotland appears to capture the sense of national identity that these constituent countries exhibit in our analysis, and is a common qualitative observation in political science research <span class="citation" data-cites="haesly2005 carman2014">(<a href="#ref-haesly2005" role="doc-biblioref">Haesly 2005</a>; <a href="#ref-carman2014" role="doc-biblioref">Carman, Johns, and Mitchell 2014</a>)</span>.</p>
+<p>As demonstrated in past work that has examined both physical and non-physical networks, our observed semantic information similarly appears to correlate with pre-defined administrative boundaries, particularly the national boundaries of Scotland and Wales <span class="citation" data-cites="li2021 bailey2018 arthur2019 yin2017a">(<a href="#ref-li2021" role="doc-biblioref">Li et al. 2021</a>; <a href="#ref-bailey2018" role="doc-biblioref">Bailey et al. 2018</a>; <a href="#ref-arthur2019" role="doc-biblioref">Arthur and Williams 2019</a>; <a href="#ref-yin2017a" role="doc-biblioref">Yin et al. 2017</a>)</span>. The distinct difference in footprints between each constituent country in the UK conforms with the idea that vernacular geography captures a sense of identity, given our zero-shot classification demonstrates distinct nationalities between Scotland and Wales, unlike English regions where the generated national identity is typically considered British rather than English. Notably however, the slightly stronger British identity within Wales has been observed previously through qualitative interviewing <span class="citation" data-cites="haesly2005 carman2014">(<a href="#ref-haesly2005" role="doc-biblioref">Haesly 2005</a>; <a href="#ref-carman2014" role="doc-biblioref">Carman, Johns, and Mitchell 2014</a>)</span>, suggesting that even the nuanced properties of text appear to correlate with the true perceptions of individuals. It is also worth noting that, given the exclusion of place names in our embeddings, these distinct differences are not simply the result of differences in place names (e.g.&nbsp;place names in Wales are distinct from England), which may have influenced the results of past lexical work.</p>
+<p>Despite most locations across Scotland and Wales appearing disconnected with the rest of the UK, major cities like Glasgow and Edinburgh are more semantically similar, a distinction that was also observed when the distance decay of locational co-occurrences in text was examined [anonymised]. This suggests that these cities do appear to be typically more semantically connected with the UK, regardless of geographic distance and borders, while other locations typically share semantic properties within the same nation, captured through stronger spatial autocorrelation.</p>
+<p>Internal migration patterns within the UK are primarily influenced by family ties, rather than economic factors, employment, or education <span class="citation" data-cites="thomas2019">(<a href="#ref-thomas2019" role="doc-biblioref">Thomas 2019</a>)</span>. The observations made in our work demonstrate that this sense of belonging to regions influences the geographically cohesive nature of our semantic footprints. While populations have the ability to distribute evenly across geographic space, they are often reluctant to move far. Local inhabitants within regions develop an identity associated with their home region, traditionally captured in language through dialect variation, and demonstrated in our work through broader semantic associations, which embed contextual meaning, incorporating the cultural variation of regions.</p>
+</section>
+</section>
+<section id="sec-conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>Our paper demonstrates a new method to compare aggregate semantic information for local authorities and regions within the UK, from Reddit comments that mention geoparsed locations, which we name semantic footprints. When examining the semantic footprints of each LAD in the UK, we find that geographically cohesive clusters appear, with significant levels of spatial autocorrelation. Clusters broadly conform with the national borders of Scotland and Wales, while London also appears to be semantically distinct from the rest of England. Through an examination of generated national identities associated with each region, we find that these distinct geographic groupings are a likely result of associated identities, which are generated through general associations captured through the vernacular geography of all users in our social media corpus.</p>
+<p>Geoparsing methods contribute an additional geographic dimension to non-geotagged social media data, allowing for a much larger repository of informal natural language geographic text to be used for research. Future work may consider the use of Reddit comment data to derive notable urban areas of interest <span class="citation" data-cites="chen2019">(<a href="#ref-chen2019" role="doc-biblioref">Chen 2019</a>)</span>. This area of research in particular would benefit from methodologies focussing on the extraction of fine-grained locations from text, which at present is a challenging task <span class="citation" data-cites="han2018">(<a href="#ref-han2018" role="doc-biblioref">J. Han et al. 2018</a>)</span>.</p>
+</section>
+<section id="references" class="level1 unnumbered">
+
+
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-agnew2005" class="csl-entry" role="listitem">
+Agnew, John. 2005. <span>“Space: Place in <span>Cloke P</span> and <span>Johnston R</span> Eds <span>Spaces</span> of Geographical Thought.”</span>
+</div>
+<div id="ref-anselin1995" class="csl-entry" role="listitem">
+Anselin, Luc. 1995. <span>“Local <span>Indicators</span> of <span>Spatial Association</span><span></span><span>LISA</span>.”</span> <em>Geographical Analysis</em> 27 (2): 93–115. <a href="https://doi.org/10.1111/j.1538-4632.1995.tb00338.x">https://doi.org/10.1111/j.1538-4632.1995.tb00338.x</a>.
+</div>
+<div id="ref-arthur2019" class="csl-entry" role="listitem">
+Arthur, Rudy, and Hywel T. P. Williams. 2019. <span>“The Human Geography of <span>Twitter</span>: <span>Quantifying</span> Regional Identity and Inter-Region Communication in <span>England</span> and <span>Wales</span>.”</span> Edited by Emilio Ferrara. <em>PLOS ONE</em> 14 (4): e0214466. <a href="https://doi.org/10.1371/journal.pone.0214466">https://doi.org/10.1371/journal.pone.0214466</a>.
+</div>
+<div id="ref-bailey2018" class="csl-entry" role="listitem">
+Bailey, Michael, Rachel Cao, Theresa Kuchler, Johannes Stroebel, and Arlene Wong. 2018. <span>“Social <span>Connectedness</span>: <span>Measurement</span>, <span>Determinants</span>, and <span>Effects</span>.”</span> <em>Journal of Economic Perspectives</em> 32 (3): 259–80. <a href="https://doi.org/10.1257/jep.32.3.259">https://doi.org/10.1257/jep.32.3.259</a>.
+</div>
+<div id="ref-baumgartner2020" class="csl-entry" role="listitem">
+Baumgartner, Jason, Savvas Zannettou, Brian Keegan, Megan Squire, and Jeremy Blackburn. 2020. <span>“The <span>Pushshift Reddit Dataset</span>.”</span> <span>arXiv</span>. <a href="https://arxiv.org/abs/2001.08435">https://arxiv.org/abs/2001.08435</a>.
+</div>
+<div id="ref-berragan2023a" class="csl-entry" role="listitem">
+Berragan, Cillian, Alex Singleton, Alessia Calafiore, and Jeremy Morley. 2023. <span>“Transformer Based Named Entity Recognition for Place Name Extraction from Unstructured Text.”</span> <em>International Journal of Geographical Information Science</em> 37 (4): 747–66. <a href="https://doi.org/10.1080/13658816.2022.2133125">https://doi.org/10.1080/13658816.2022.2133125</a>.
+</div>
+<div id="ref-buttimer2015" class="csl-entry" role="listitem">
+Buttimer, Anne. 2015. <span>“Home, Reach, and the Sense of Place.”</span> In <em>The Human Experience of Space and Place</em>, 166–87. <span>Routledge</span>.
+</div>
+<div id="ref-carman2014" class="csl-entry" role="listitem">
+Carman, Christopher, Robert Johns, and James Mitchell. 2014. <em>More <span>Scottish</span> Than <span>British</span>: <span>The</span> 2011 <span>Scottish Parliament Election</span></em>. <span>Springer</span>.
+</div>
+<div id="ref-chambers1998" class="csl-entry" role="listitem">
+Chambers, J. K., and Peter Trudgill, eds. 1998. <span>“Social Differentiation and Language.”</span> In <em>Dialectology</em>, 2nd ed., 57–69. Cambridge <span>Textbooks</span> in <span>Linguistics</span>. <span>Cambridge</span>: <span>Cambridge University Press</span>. <a href="https://doi.org/10.1017/CBO9780511805103.007">https://doi.org/10.1017/CBO9780511805103.007</a>.
+</div>
+<div id="ref-chen2019" class="csl-entry" role="listitem">
+Chen, Meixu. 2019. <span>“Understanding the Dynamics of Urban Areas of Interest Through Volunteered Geographic Information,”</span> 21. <a href="https://doi.org/10.1007/s10109-018-0284-3">https://doi.org/10.1007/s10109-018-0284-3</a>.
+</div>
+<div id="ref-daniel2007" class="csl-entry" role="listitem">
+Daniel, Jurafsky, and Martin James H. 2007. <em>Speech and Language Processing: <span>An</span> Introduction to Natural Language Processing, Computational Linguistics, and Speech Recognition</em>. <span>prentice hall</span>.
+</div>
+<div id="ref-deacon2007" class="csl-entry" role="listitem">
+Deacon, Bernard. 2007. <span>“County, <span>Nation</span>, <span>Ethnic Group</span>? <span>The Shaping</span> of the <span>Cornish Identity</span>.”</span> <em>The International Journal of Regional and Local Studies</em> 3 (1): 5–29. <a href="https://doi.org/10.1179/jrl.2007.3.1.5">https://doi.org/10.1179/jrl.2007.3.1.5</a>.
+</div>
+<div id="ref-devlin2019" class="csl-entry" role="listitem">
+Devlin, Jacob, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova. 2019. <span>“<span>BERT</span>: <span class="nocase">Pre-training</span> of <span>Deep Bidirectional Transformers</span> for <span>Language Understanding</span>.”</span> <em>arXiv:1810.04805 [Cs]</em>, May. <a href="https://arxiv.org/abs/1810.04805">https://arxiv.org/abs/1810.04805</a>.
+</div>
+<div id="ref-doyle2014" class="csl-entry" role="listitem">
+Doyle, Gabriel. 2014. <span>“Mapping <span>Dialectal Variation</span> by <span>Querying Social Media</span>.”</span> In <em>Proceedings of the 14th <span>Conference</span> of the <span>European Chapter</span> of the <span>Association</span> for <span>Computational Linguistics</span></em>, 98–106. <span>Gothenburg, Sweden</span>: <span>Association for Computational Linguistics</span>. <a href="https://doi.org/10.3115/v1/E14-1011">https://doi.org/10.3115/v1/E14-1011</a>.
+</div>
+<div id="ref-eisenstein2014" class="csl-entry" role="listitem">
+Eisenstein, Jacob, Brendan O’Connor, Noah A. Smith, and Eric P. Xing. 2014. <span>“Diffusion of <span>Lexical Change</span> in <span>Social Media</span>.”</span> Edited by Robert C. Berwick. <em>PLoS ONE</em> 9 (11): e113114. <a href="https://doi.org/10.1371/journal.pone.0113114">https://doi.org/10.1371/journal.pone.0113114</a>.
+</div>
+<div id="ref-evans2007" class="csl-entry" role="listitem">
+Evans, A. J., and T. Waters. 2007. <span>“Mapping Vernacular Geography: Web-Based <span>GIS</span> Tools for Capturing ’Fuzzy’ or ’Vague’ Entities.”</span> <em>International Journal of Technology, Policy and Management</em>, July.
+</div>
+<div id="ref-fenton2018" class="csl-entry" role="listitem">
+Fenton, Trevor. 2018. <span>“Regional Economic Activity by Gross Value Added (Balanced), <span>UK</span> - <span>Office</span> for <span>National Statistics</span>.”</span> https://www.ons.gov.uk/economy/grossvalueaddedgva/bulletins/regionalgrossvalueaddedbalanceduk/1998to2017.
+</div>
+<div id="ref-gao2017a" class="csl-entry" role="listitem">
+Gao, Song, Krzysztof Janowicz, Daniel R. Montello, Yingjie Hu, Jiue-An Yang, Grant McKenzie, Yiting Ju, Li Gong, Benjamin Adams, and Bo Yan. 2017. <span>“A Data-Synthesis-Driven Method for Detecting and Extracting Vague Cognitive Regions.”</span> <em>International Journal of Geographical Information Science</em> 31 (6): 1245–71. <a href="https://doi.org/10.1080/13658816.2016.1273357">https://doi.org/10.1080/13658816.2016.1273357</a>.
+</div>
+<div id="ref-goncalves2014" class="csl-entry" role="listitem">
+Gonçalves, Bruno, and David Sánchez. 2014. <span>“Crowdsourcing <span>Dialect Characterization</span> Through <span>Twitter</span>.”</span> Edited by Tobias Preis. <em>PLoS ONE</em> 9 (11): e112074. <a href="https://doi.org/10.1371/journal.pone.0112074">https://doi.org/10.1371/journal.pone.0112074</a>.
+</div>
+<div id="ref-goodchild2011" class="csl-entry" role="listitem">
+Goodchild, Michael F., and Linna Li. 2011. <span>“Formalizing Space and Place.”</span>
+</div>
+<div id="ref-griffiths2022" class="csl-entry" role="listitem">
+Griffiths, James David. 2022. <span>“Scrutinizing <span>Relative Territorial Identity Measures</span>.”</span> <em>Publius: The Journal of Federalism</em> 53 (1): 133–51. <a href="https://doi.org/10.1093/publius/pjac011">https://doi.org/10.1093/publius/pjac011</a>.
+</div>
+<div id="ref-haesly2005" class="csl-entry" role="listitem">
+Haesly, Richard. 2005. <span>“Identifying <span>Scotland</span> and <span>Wales</span>: Types of <span>Scottish</span> and <span>Welsh</span> National Identities.”</span> <em>Nations and Nationalism</em> 11 (2): 243–63. <a href="https://doi.org/10.1111/j.1354-5078.2005.00202.x">https://doi.org/10.1111/j.1354-5078.2005.00202.x</a>.
+</div>
+<div id="ref-han2012" class="csl-entry" role="listitem">
+Han, Bo, Paul Cook, and Timothy Baldwin. 2012. <span>“Geolocation <span>Prediction</span> in <span>Social Media Data</span> by <span>Finding Location Indicative Words</span>,”</span> 18.
+</div>
+<div id="ref-han2018" class="csl-entry" role="listitem">
+Han, Jialong, Aixin Sun, Gao Cong, Wayne Xin Zhao, Zongcheng Ji, and Minh C. Phan. 2018. <span>“Linking <span>Fine-Grained Locations</span> in <span>User Comments</span>.”</span> <em>IEEE Transactions on Knowledge and Data Engineering</em> 30 (1): 59–72. <a href="https://doi.org/10.1109/TKDE.2017.2758780">https://doi.org/10.1109/TKDE.2017.2758780</a>.
+</div>
+<div id="ref-hirsch2016" class="csl-entry" role="listitem">
+Hirsch, Donald. 2016. <span>“London Weighting and <span>London</span> Costs-a Fresh Approach?”</span>
+</div>
+<div id="ref-hollenstein2008" class="csl-entry" role="listitem">
+Hollenstein, Livia. 2008. <span>“Capturing Vernacular Geography from Georeferenced Tags.”</span>
+</div>
+<div id="ref-hu2020" class="csl-entry" role="listitem">
+Hu, Sheng, Zhanjun He, Liang Wu, Li Yin, Yongyang Xu, and Haifu Cui. 2020. <span>“A Framework for Extracting Urban Functional Regions Based on Multiprototype Word Embeddings Using Points-of-Interest Data.”</span> <em>Computers, Environment and Urban Systems</em> 80 (March): 101442. <a href="https://doi.org/10.1016/j.compenvurbsys.2019.101442">https://doi.org/10.1016/j.compenvurbsys.2019.101442</a>.
+</div>
+<div id="ref-huang2016" class="csl-entry" role="listitem">
+Huang, Yuan, Diansheng Guo, Alice Kasakoff, and Jack Grieve. 2016. <span>“Understanding <span>U</span>.<span>S</span>. Regional Linguistic Variation with <span>Twitter</span> Data Analysis.”</span> <em>Computers, Environment and Urban Systems</em> 59 (September): 244–55. <a href="https://doi.org/10.1016/j.compenvurbsys.2015.12.003">https://doi.org/10.1016/j.compenvurbsys.2015.12.003</a>.
+</div>
+<div id="ref-jewell1994" class="csl-entry" role="listitem">
+Jewell, Helen M. 1994. <em>The <span class="nocase">North-south Divide</span>: <span>The Origins</span> of <span>Northern Consciousness</span> in <span>England</span></em>. <span>Manchester University Press</span>.
+</div>
+<div id="ref-knowles1973" class="csl-entry" role="listitem">
+Knowles, Gerald O. 1973. <span>“Scouse: The Urban Dialect of <span>Liverpool</span>.”</span>
+</div>
+<div id="ref-kropczynski2018" class="csl-entry" role="listitem">
+Kropczynski, Jess, Julien Coche, Eric Obeysekare, Frederick Bénaben, Rob Grace, Shane Halse, Aurélie Montarnal, and Andrea Tapia. 2018. <span>“Identifying <span>Actionable Information</span> on <span>Social Media</span> for <span>Emergency Dispatch</span>,”</span> 11.
+</div>
+<div id="ref-lambiotte2008" class="csl-entry" role="listitem">
+Lambiotte, Renaud, Vincent D. Blondel, Cristobald de Kerchove, Etienne Huens, Christophe Prieur, Zbigniew Smoreda, and Paul Van Dooren. 2008. <span>“Geographical Dispersal of Mobile Communication Networks.”</span> <em>Physica A: Statistical Mechanics and Its Applications</em> 387 (21): 5317–25. <a href="https://doi.org/10.1016/j.physa.2008.05.014">https://doi.org/10.1016/j.physa.2008.05.014</a>.
+</div>
+<div id="ref-lengyel2015" class="csl-entry" role="listitem">
+Lengyel, Balázs, Attila Varga, Bence Ságvári, Ákos Jakobi, and János Kertész. 2015. <span>“Geographies of an <span>Online Social Network</span>.”</span> Edited by Wei-Xing Zhou. <em>PLOS ONE</em> 10 (9): e0137248. <a href="https://doi.org/10.1371/journal.pone.0137248">https://doi.org/10.1371/journal.pone.0137248</a>.
+</div>
+<div id="ref-li2021" class="csl-entry" role="listitem">
+Li, Zhenlong, Xiao Huang, Xinyue Ye, Yuqin Jiang, Yago Martin, Huan Ning, Michael E. Hodgson, and Xiaoming Li. 2021. <span>“Measuring Global Multi-Scale Place Connectivity Using Geotagged Social Media Data.”</span> <em>Scientific Reports</em> 11 (1): 14694. <a href="https://doi.org/10.1038/s41598-021-94300-7">https://doi.org/10.1038/s41598-021-94300-7</a>.
+</div>
+<div id="ref-likas2003" class="csl-entry" role="listitem">
+Likas, Aristidis, Nikos Vlassis, and Jakob J. Verbeek. 2003. <span>“The Global k-Means Clustering Algorithm.”</span> <em>Pattern Recognition</em>, Biometrics, 36 (2): 451–61. <a href="https://doi.org/10.1016/S0031-3203(02)00060-2">https://doi.org/10.1016/S0031-3203(02)00060-2</a>.
+</div>
+<div id="ref-llamas2009" class="csl-entry" role="listitem">
+Llamas, Carmen. 2009. <em>Language and <span>Identities</span></em>. <span>Edinburgh University Press</span>.
+</div>
+<div id="ref-llamas2014" class="csl-entry" role="listitem">
+Llamas, Carmen, and Dominic Watt. 2014. <span>“Scottish, <span>English</span>, <span>British</span>?: <span>Innovations</span> in <span>Attitude Measurement</span>.”</span> <em>Language and Linguistics Compass</em> 8 (11): 610–17. <a href="https://doi.org/10.1111/lnc3.12109">https://doi.org/10.1111/lnc3.12109</a>.
+</div>
+<div id="ref-mackenzie2022" class="csl-entry" role="listitem">
+MacKenzie, Laurel, George Bailey, and Danielle Turton. 2022. <span>“Towards an Updated Dialect Atlas of <span>British English</span>.”</span> <em>Journal of Linguistic Geography</em> 10 (1): 46–66. <a href="https://doi.org/10.1017/jlg.2022.2">https://doi.org/10.1017/jlg.2022.2</a>.
+</div>
+<div id="ref-middleton2008" class="csl-entry" role="listitem">
+Middleton, Christopher, and Philip Freestone. 2008. <span>“The <span>Impact</span> of <span class="nocase">Culture-led Regeneration</span> on <span>Regional Identity</span> in <span>North East England</span>.”</span>
+</div>
+<div id="ref-murphy2019" class="csl-entry" role="listitem">
+Murphy, Nicole. 2019. <span>“Reddit’s 2019 <span>Year</span> in <span>Review</span> - <span>Upvoted</span>.”</span> https://www.redditinc.com/blog/reddits-2019-year-in-review/#content.
+</div>
+<div id="ref-oguz2022" class="csl-entry" role="listitem">
+Oguz, Sebnem, and Aaron Walton. 2022. <span>“Productivity in Towns and Travel to Work Areas, <span>UK</span> - <span>Office</span> for <span>National Statistics</span>.”</span> https://www.ons.gov.uk/economy/economicoutputandproductivity/publicservicesproductivity/articles/productivityintownsandtraveltoworkareasuk/2019.
+</div>
+<div id="ref-paasi2003" class="csl-entry" role="listitem">
+Paasi, Anssi. 2003. <span>“Region and Place: Regional Identity in Question.”</span> <em>Progress in Human Geography</em> 27 (4): 475–85. <a href="https://doi.org/10.1191/0309132503ph439pr">https://doi.org/10.1191/0309132503ph439pr</a>.
+</div>
+<div id="ref-perez2019" class="csl-entry" role="listitem">
+Pérez, Juan Manuel, Damián E. Aleman, Santiago N. Kalinowski, and Agustín Gravano. 2019. <span>“Exploiting User-Frequency Information for Mining Regionalisms from <span>Social Media</span> Texts.”</span> <span>arXiv</span>. <a href="https://arxiv.org/abs/1907.04492">https://arxiv.org/abs/1907.04492</a>.
+</div>
+<div id="ref-purves2019" class="csl-entry" role="listitem">
+Purves, Ross S., Stephan Winter, and Werner Kuhn. 2019. <span>“Places in <span>Information Science</span>.”</span> <em>Journal of the Association for Information Science and Technology</em> 70 (11): 1173–82. <a href="https://doi.org/10.1002/asi.24194">https://doi.org/10.1002/asi.24194</a>.
+</div>
+<div id="ref-rae2009" class="csl-entry" role="listitem">
+Rae, Alasdair. 2009. <span>“From Spatial Interaction Data to Spatial Interaction Information? <span>Geovisualisation</span> and Spatial Structures of Migration from the 2001 <span>UK</span> Census.”</span> <em>Computers, Environment and Urban Systems</em> 33 (3): 161–78. <a href="https://doi.org/10.1016/j.compenvurbsys.2009.01.007">https://doi.org/10.1016/j.compenvurbsys.2009.01.007</a>.
+</div>
+<div id="ref-ratti2010" class="csl-entry" role="listitem">
+Ratti, Carlo, Stanislav Sobolevsky, Francesco Calabrese, Clio Andris, Jonathan Reades, Mauro Martino, Rob Claxton, and Steven H. Strogatz. 2010. <span>“Redrawing the <span>Map</span> of <span>Great Britain</span> from a <span>Network</span> of <span>Human Interactions</span>.”</span> Edited by Olaf Sporns. <em>PLoS ONE</em> 5 (12): e14248. <a href="https://doi.org/10.1371/journal.pone.0014248">https://doi.org/10.1371/journal.pone.0014248</a>.
+</div>
+<div id="ref-reades2009" class="csl-entry" role="listitem">
+Reades, Jonathan, Francesco Calabrese, and Carlo Ratti. 2009. <span>“Eigenplaces: Analysing Cities Using the Space <span></span> Time Structure of the Mobile Phone Network.”</span> <em>Environment and Planning B: Planning and Design</em> 36 (5): 824–36. <a href="https://doi.org/10.1068/b34133t">https://doi.org/10.1068/b34133t</a>.
+</div>
+<div id="ref-reimers2019" class="csl-entry" role="listitem">
+Reimers, Nils, and Iryna Gurevych. 2019. <span>“Sentence-<span>BERT</span>: <span>Sentence Embeddings</span> Using <span>Siamese BERT-Networks</span>.”</span> In <em>Proceedings of the 2019 <span>Conference</span> on <span>Empirical Methods</span> in <span>Natural Language Processing</span> and the 9th <span>International Joint Conference</span> on <span>Natural Language Processing</span> (<span>EMNLP-IJCNLP</span>)</em>, 3980–90. <span>Hong Kong, China</span>: <span>Association for Computational Linguistics</span>. <a href="https://doi.org/10.18653/v1/D19-1410">https://doi.org/10.18653/v1/D19-1410</a>.
+</div>
+<div id="ref-rey2023" class="csl-entry" role="listitem">
+Rey, Sergio, Dani Arribas-Bel, and Levi John Wolf. 2023. <em>Geographic Data Science with Python</em>. <span>CRC Press</span>.
+</div>
+<div id="ref-russ2012" class="csl-entry" role="listitem">
+Russ, Brice. 2012. <span>“Examining Large-Scale Regional Variation Through Online Geotagged Corpora.”</span> In.
+</div>
+<div id="ref-sinaga2020" class="csl-entry" role="listitem">
+Sinaga, Kristina P., and Miin-Shen Yang. 2020. <span>“Unsupervised <span>K-Means Clustering Algorithm</span>.”</span> <em>IEEE Access</em> 8: 80716–27. <a href="https://doi.org/10.1109/ACCESS.2020.2988796">https://doi.org/10.1109/ACCESS.2020.2988796</a>.
+</div>
+<div id="ref-sobolevsky2013" class="csl-entry" role="listitem">
+Sobolevsky, Stanislav, Michael Szell, Riccardo Campari, Thomas Couronné, Zbigniew Smoreda, and Carlo Ratti. 2013. <span>“Delineating <span>Geographical Regions</span> with <span>Networks</span> of <span>Human Interactions</span> in an <span>Extensive Set</span> of <span>Countries</span>.”</span> Edited by Yamir Moreno. <em>PLoS ONE</em> 8 (12): e81707. <a href="https://doi.org/10.1371/journal.pone.0081707">https://doi.org/10.1371/journal.pone.0081707</a>.
+</div>
+<div id="ref-statista2022" class="csl-entry" role="listitem">
+Statista. 2022. <span>“Most Popular Social Networks Worldwide as of <span>January</span> 2022, Ranked by Number of Monthly Active Users.”</span> <em>Statista</em>. https://www.statista.com/statistics/272014/global-social-networks-ranked-by-number-of-users/.
+</div>
+<div id="ref-stuart-smith2008" class="csl-entry" role="listitem">
+Stuart-Smith, Jane. 2008. <span>“Scottish <span>English</span>: <span>Phonology</span>.”</span> <em>Varieties of English</em> 1: 48–70.
+</div>
+<div id="ref-sui2011" class="csl-entry" role="listitem">
+Sui, Daniel, and Michael F. Goodchild. 2011. <span>“The Convergence of <span>GIS</span> and Social Media: Challenges for <span>GIScience</span>.”</span> <em>International Journal of Geographical Information Science</em> 25 (11): 1737–48. <a href="https://doi.org/10.1080/13658816.2011.604636">https://doi.org/10.1080/13658816.2011.604636</a>.
+</div>
+<div id="ref-thomas2019" class="csl-entry" role="listitem">
+Thomas, Michael J. 2019. <span>“Employment, Education, and Family: <span>Revealing</span> the Motives Behind Internal Migration in <span>Great Britain</span>.”</span> <em>Population, Space and Place</em> 25 (4): e2233. <a href="https://doi.org/10.1002/psp.2233">https://doi.org/10.1002/psp.2233</a>.
+</div>
+<div id="ref-titheridge2009" class="csl-entry" role="listitem">
+Titheridge, Helena, Kamalasudhan Achuthan, Roger L. Mackett, and Juliet Solomon. 2009. <span>“Assessing the Extent of Transport Social Exclusion Among the Elderly.”</span> <em>Journal of Transport and Land Use</em> 2 (2). <a href="https://doi.org/10.5198/jtlu.v2i2.44">https://doi.org/10.5198/jtlu.v2i2.44</a>.
+</div>
+<div id="ref-trudgill2004" class="csl-entry" role="listitem">
+Trudgill, Peter. 2004. <em>Dialects</em>. 2nd ed. <span>London</span>: <span>Routledge</span>. <a href="https://doi.org/10.4324/9780203314609">https://doi.org/10.4324/9780203314609</a>.
+</div>
+<div id="ref-wagner2020" class="csl-entry" role="listitem">
+Wagner, Daniel, Alexander Zipf, and Rene Westerholt. 2020. <span>“Place in the <span>GIScience Community</span> <span></span> an <span>Indicative</span> and <span>Preliminary Systematic Literature Review</span>,”</span> January. <a href="https://doi.org/10.5281/zenodo.3628855">https://doi.org/10.5281/zenodo.3628855</a>.
+</div>
+<div id="ref-walden-schreiner2018" class="csl-entry" role="listitem">
+Walden-Schreiner, Chelsey, Yu-Fai Leung, and Laura Tateosian. 2018. <span>“Digital Footprints: <span>Incorporating</span> Crowdsourced Geographic Information for Protected Area Management.”</span> <em>Applied Geography</em> 90 (January): 44–54. <a href="https://doi.org/10.1016/j.apgeog.2017.11.004">https://doi.org/10.1016/j.apgeog.2017.11.004</a>.
+</div>
+<div id="ref-waters2003" class="csl-entry" role="listitem">
+Waters, T, and A J Evans. 2003. <span>“Tools for Web-Based <span>GIS</span> Mapping of a "Fuzzy" Vernacular Geography,”</span> 10.
+</div>
+<div id="ref-wei2022a" class="csl-entry" role="listitem">
+Wei, Jason, Maarten Bosma, Vincent Y. Zhao, Kelvin Guu, Adams Wei Yu, Brian Lester, Nan Du, Andrew M. Dai, and Quoc V. Le. 2022. <span>“Finetuned <span>Language Models Are Zero-Shot Learners</span>.”</span> <span>arXiv</span>. <a href="https://doi.org/10.48550/arXiv.2109.01652">https://doi.org/10.48550/arXiv.2109.01652</a>.
+</div>
+<div id="ref-wei2022" class="csl-entry" role="listitem">
+Wei, Jason, Yi Tay, Rishi Bommasani, Colin Raffel, Barret Zoph, Sebastian Borgeaud, Dani Yogatama, et al. 2022. <span>“Emergent <span>Abilities</span> of <span>Large Language Models</span>.”</span> <span>arXiv</span>. <a href="https://doi.org/10.48550/arXiv.2206.07682">https://doi.org/10.48550/arXiv.2206.07682</a>.
+</div>
+<div id="ref-westerholt2018a" class="csl-entry" role="listitem">
+Westerholt, Rene, Franz-Benjamin Mocnik, and Alexander Zipf. 2018. <span>“Introduction to the <span>PLATIAL</span>’18 <span>Workshop</span> on <span>Platial Analysis</span>,”</span> October. <a href="https://doi.org/10.5281/zenodo.1475267">https://doi.org/10.5281/zenodo.1475267</a>.
+</div>
+<div id="ref-yin2017a" class="csl-entry" role="listitem">
+Yin, Wenpeng, Katharina Kann, Mo Yu, and Hinrich Schütze. 2017. <span>“Comparative <span>Study</span> of <span>CNN</span> and <span>RNN</span> for <span>Natural Language Processing</span>.”</span> <em>arXiv:1702.01923 [Cs]</em>, February. <a href="https://arxiv.org/abs/1702.01923">https://arxiv.org/abs/1702.01923</a>.
+</div>
+<div id="ref-zheng2018" class="csl-entry" role="listitem">
+Zheng, Xin, Jialong Han, and Aixin Sun. 2018. <span>“A <span>Survey</span> of <span>Location Prediction</span> on <span>Twitter</span>.”</span> <em>IEEE Transactions on Knowledge and Data Engineering</em> 30 (9): 1652–71. <a href="https://doi.org/10.1109/tkde.2018.2807840">https://doi.org/10.1109/tkde.2018.2807840</a>.
+</div>
+<div id="ref-zheng2015" class="csl-entry" role="listitem">
+Zheng, Yu. 2015. <span>“Trajectory <span>Data Mining</span>: <span>An Overview</span>.”</span> <em>ACM Transactions on Intelligent Systems and Technology</em> 6 (3): 1–41. <a href="https://doi.org/10.1145/2743025">https://doi.org/10.1145/2743025</a>.
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Now known as <a href="x.com">X</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>https://www.reddit.com/r/unitedkingdom/wiki/british_subreddits<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>anonymised link<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>https://huggingface.co/sentence-transformers/all-mpnet-base-v2<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>The highest tier of sub-national division in England. For Scotland and Wales we use the full national extents.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>See ‘Scottish English’ or ‘Scots’; <span class="citation" data-cites="stuart-smith2008">(<a href="#ref-stuart-smith2008" role="doc-biblioref">Stuart-Smith 2008</a>)</span><a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>https://huggingface.co/typeform/distilbert-base-uncased-mnli<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>https://en.wikipedia.org/wiki/London_weighting<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>Note that despite etymologically relating to ‘Great Britain’, the term ‘British’ refers to ‘belonging to or relating to the United Kingdom of Great Britain and Northern Ireland’<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

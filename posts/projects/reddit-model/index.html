@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2022-09-07">
+<meta name="dcterms.date" content="2023-10-31">
 
-<title>cjber.github.io - Access to Healthy Assets &amp; Hazards (AHAH)</title>
+<title>cjber.github.io - Reddit NER for Place Names</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -102,35 +102,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../../../styles.css">
 </head>
@@ -178,28 +149,21 @@ window.Quarto = {
   <ul>
   <li><a href="#github-readme" id="toc-github-readme" class="nav-link active" data-scroll-target="#github-readme">GitHub README</a>
   <ul class="collapse">
-  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#reproduce-model" id="toc-reproduce-model" class="nav-link" data-scroll-target="#reproduce-model">Reproduce Model</a></li>
   <li><a href="#project-layout" id="toc-project-layout" class="nav-link" data-scroll-target="#project-layout">Project layout</a></li>
-  <li><a href="#methodology" id="toc-methodology" class="nav-link" data-scroll-target="#methodology">Methodology</a></li>
-  <li><a href="#scripts" id="toc-scripts" class="nav-link" data-scroll-target="#scripts">Scripts</a>
-  <ul class="collapse">
-  <li><a href="#process-road-network-ahahos_highways.py" id="toc-process-road-network-ahahos_highways.py" class="nav-link" data-scroll-target="#process-road-network-ahahos_highways.py">1. Process road network <code>ahah/os_highways.py</code></a></li>
-  <li><a href="#process-data-ahahprocess_routing.py" id="toc-process-data-ahahprocess_routing.py" class="nav-link" data-scroll-target="#process-data-ahahprocess_routing.py">2. Process Data <code>ahah/process_routing.py</code></a></li>
-  <li><a href="#routing-ahahrouting.py" id="toc-routing-ahahrouting.py" class="nav-link" data-scroll-target="#routing-ahahrouting.py">3. Routing <code>ahah/routing.py</code></a></li>
-  <li><a href="#process-air-quality-data-ahahprocess_air.py" id="toc-process-air-quality-data-ahahprocess_air.py" class="nav-link" data-scroll-target="#process-air-quality-data-ahahprocess_air.py">4. Process air quality data <code>ahah/process_air.py</code></a></li>
-  <li><a href="#combine-into-index-ahahcreate_index.py" id="toc-combine-into-index-ahahcreate_index.py" class="nav-link" data-scroll-target="#combine-into-index-ahahcreate_index.py">5. Combine into index <code>ahah/create_index.py</code></a></li>
+  <li><a href="#dvc-pipeline" id="toc-dvc-pipeline" class="nav-link" data-scroll-target="#dvc-pipeline">DVC pipeline</a></li>
+  <li><a href="#dvc-dag" id="toc-dvc-dag" class="nav-link" data-scroll-target="#dvc-dag">DVC DAG</a></li>
   </ul></li>
-  <li><a href="#ahah-data-sources" id="toc-ahah-data-sources" class="nav-link" data-scroll-target="#ahah-data-sources">AHAH Data Sources</a></li>
-  </ul></li>
+  <li><a href="#hugging-face-model-readme" id="toc-hugging-face-model-readme" class="nav-link" data-scroll-target="#hugging-face-model-readme">Hugging Face Model README</a></li>
   </ul>
-<div class="quarto-other-links"><h2>Other Links</h2><ul><li><a href="https://github.com/ESRC-CDRC/ahah" rel="icon"><i class="bi bi-github"></i>Github Repository</a></li><li><a href="https://data.cdrc.ac.uk/dataset/access-healthy-assets-hazards-ahah" rel="icon"><i class="bi bi-database"></i>Data Product</a></li></ul></div></nav>
+<div class="quarto-other-links"><h2>Other Links</h2><ul><li><a href="https://github.com/cjber/reddit-model" rel="icon"><i class="bi bi-github"></i>Github Repository</a></li><li><a href="https://huggingface.co/cjber/reddit-ner-place_names" rel="icon"><i class="bi bi-activity"></i>HuggingFace Repository</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Access to Healthy Assets &amp; Hazards (AHAH)</h1>
+<h1 class="title">Reddit NER for Place Names</h1>
   <div class="quarto-categories">
     <div class="quarto-category">github</div>
   </div>
@@ -213,7 +177,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 7, 2022</p>
+      <p class="date">October 31, 2023</p>
     </div>
   </div>
   
@@ -225,147 +189,67 @@ window.Quarto = {
 </header>
 
 
-<p>This project identifies the time-weighted distance required to travel by road between every postcode in Great Britain and a selection of health-related points of interest. A ranked combination of these drive-times is used to create the AHAH index. Using the GPU-accelerated <code>cugraph</code> Python library, this implementation reduces processing time per variable down to ~10 minutes from 8 hours.</p>
+<p>Fine-tuned bert-base-uncased for named entity recognition, trained using wnut_17 with 1,001 additional comments from Reddit. This model is intended solely for place name extraction from social media text, other entities have therefore been removed.</p>
 <section id="github-readme" class="level1">
 <h1>GitHub README</h1>
-<div data-align="center">
-<p><strong>GPU accelerated road network routing between postcodes and health related POIs</strong></p>
-<p><a href="https://www.python.org"><img alt="Python" src="https://img.shields.io/badge/python%20-%2314354C.svg?&amp;style=for-the-badge&amp;logo=python&amp;logoColor=white"></a> <a href="https://rapids.ai/"><img alt="RAPIDS" src="https://img.shields.io/badge/-rapids.ai-blueviolet?style=for-the-badge"></a><br>
-<a href="https://dvc.org/"><img alt="DVC" src="https://img.shields.io/badge/data-DVC-lightblue?style=flat-square"></a> <a href="https://black.readthedocs.io/en/stable/"><img alt="Code style: black" src="https://img.shields.io/badge/style-black-000000.svg?style=flat-square"></a></p>
-</div>
-<p><a href="https://www.liverpool.ac.uk/geographic-data-science/our-people/">Cillian Berragan</a> [<a href="http://twitter.com/cjberragan"><code>@cjberragan</code></a>]<sup>1*</sup> <a href="https://www.liverpool.ac.uk/geographic-data-science/our-people/">Mark Green</a> [<a href="http://twitter.com/markalangreen"><code>@markalangreen</code></a>]<sup>1</sup> <a href="https://www.liverpool.ac.uk/geographic-data-science/our-people/">Alex Singleton</a> [<a href="http://twitter.com/alexsingleton"><code>@alexsingleton</code></a>]<sup>1</sup></p>
-<p><sup>1</sup> <em>Geographic Data Science Lab, University of Liverpool, Liverpool, United Kingdom</em><br>
-<sup>*</sup> <em>Correspondence</em>: C.Berragan@liverpool.ac.uk</p>
-<section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>This project identifies the time-weighted distance required to travel by road between every postcode in Great Britain and a selection of health related points of interest. A ranked combination of these drive-times is used to create the AHAH index.</p>
-<p>Access is defined through the average time-weighted road network distance for each postcode within each LSOA to the nearest point of interest of a particular type. For this, the road highways network and road speed estimates provided through <a href="https://www.ordnancesurvey.co.uk/business-government/products/open-map-roads">Ordnance Survey</a> was used, alongside the <a href="https://data.gov.uk/dataset/06803af0-6054-410a-822a-f7ab30bcd8b1/ons-postcode-directory-may-2020">OWNS Postcode Directory for May 2020</a>, which gives centroids for every postcode in the country.</p>
-<p>This is a computationally intense calculation, with the total road network used having 3,816,897 edges, and 3,215,522 nodes. Access to each nearest health related POI was calculated using the <em>Single Source Shortest Path</em> algorithm, for all 1,659,451 postcodes in Great Britain.</p>
-<p>This calculation was made possible through the GPU accelerated Python library <code>cugraph</code>, part of the <a href="https://rapids.ai">NVIDIA RAPIDS ecosystem</a>, allowing the computation to be highly parallel, taking minutes, rather than days.</p>
+<p>This GitHub repository contains the code relating to the NER model for place name identification from Reddit comments. This model is hosted on the <a href="https://huggingface.co/cjber/reddit-ner-place_names">HuggingFace Model Hub</a>, allowing for easy use in Python.</p>
+<p>Training monitored using DagsHub and MLFlow.</p>
+<section id="reproduce-model" class="level3">
+<h3 class="anchored" data-anchor-id="reproduce-model">Reproduce Model</h3>
+<p>To retrain the model locally using the WNUT_17 corpus:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> src.train <span class="at">--dataset</span> <span class="st">"wnut_17"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Train this model using CoNLL03, CoNLLpp, or OntoNotes 5 corpora:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> src.train <span class="at">--dataset</span> <span class="st">"tner/ontonotes5"</span> / <span class="st">"conllpp"</span> / <span class="st">"conll2003"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Note that <code>dvc repro</code> reproducibly builds this model and uploads it to Hugging Face, if I build future versions.</p>
 </section>
-<section id="project-layout" class="level2">
-<h2 class="anchored" data-anchor-id="project-layout">Project layout</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ahah</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> aggregate_lsoa.py  <span class="co"># aggregate outputs to LSOA level</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> create_index.py  <span class="co"># use aggregates to create index</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> get_nhs.py  <span class="co"># retrieve NHS data</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> os_highways.py  <span class="co"># process OS open roads data</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> process_air.py  <span class="co"># process air quality data</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> process_routing.py  <span class="co"># process all POI data</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> routing.py  <span class="co"># main routing class</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="ex">└──</span> common</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a> <span class="ex">&nbsp;&nbsp;</span> ├── logger.py  <span class="co"># use rich logging</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a> <span class="ex">&nbsp;&nbsp;</span> └── utils.py  <span class="co"># utility functions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="project-layout" class="level3">
+<h3 class="anchored" data-anchor-id="project-layout">Project layout</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">src</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> common</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> └── utils.py  <span class="co"># utility functions</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> pl_data </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── conll_dataset.py  <span class="co"># reader for conll format</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── datamodule.py  <span class="co"># generic datamodule</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── jsonl_dataset.py  <span class="co"># reader for doccano jsonl format</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> └── test_dataset.py  <span class="co"># reader for testing dataset</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> pl_metric</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> └── seqeval_f1.py  <span class="co"># F1 metric</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> pl_module</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── ger_model.py  <span class="co"># model implementation</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="ex">└──</span> train.py  <span class="co"># training script</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="methodology" class="level2">
-<h2 class="anchored" data-anchor-id="methodology">Methodology</h2>
-<p>Accessibility measures were created using the <code>cugraph</code> GPU accelerated Python library for parallel processing of graph networks, in conjunction with the OS Open Road network. Unlike Routino, which uses Open Street Map data, the OS Open Road Network provides more accurate road speed estimates for UK roads.</p>
-<p>In this study, we measured the network distance (travel time) between the centroid of each active postcode in Great Britain to the coordinates of each unique health asset (e.g.&nbsp;GP practice). Measured network distances for each indicator for postcodes were aggregated to the LSOA level, providing average network distance for each indicator (as a measure of accessibility). All other indicators were also summarised for LSOAs. The indicators within each domain were standardised by ranking and transformed to the standard normal distribution. The direction of each variable was dictated by the literature (e.g.&nbsp;accessibility to fast food outlets were identified as health negating, wheras accessibility to GP practices was health promoting).</p>
-<p>To calculate our overall index (and domain specific values), we followed the methodology of the 2015 IMD. For each domain, we ranked each domain <span class="math inline">\(R\)</span> and any LSOA scaled to the range <span class="math inline">\([0,1]\)</span>. <span class="math inline">\(R=1/N\)</span> for the most ‘health promoting’ LSOA and <span class="math inline">\(R=N/N\)</span> for the least promoting, where <span class="math inline">\(N\)</span> is the number of LSOAs in Great Britain. Exponential transformation of the ranked domainscores was then applied to LSOA values to reduce ‘cancellation effects’. So, for example, high levels of accessibility in one domainare not completely cancelled out by low levels of accessibility in a different domain. The exponential transformation applied also puts more emphasis on the LSOAs at theend of the health demoting side of the distribution and so facilitates identification of the neighbourhoods with the worsthealth promoting aspects. The exponential transformed indicator score <span class="math inline">\(X\)</span> is given by:</p>
-<p><span class="math display">\[
-X=−23ln(1−R(1−exp^{−100/23}))
-\]</span></p>
-<p>where ‘ln’ denotes natural logarithm and ‘exp’ the exponential transformation.</p>
-<p>The main domains across our indicators: retail services, health services, physical environment and air quality then were combined to form an overall index of‘Access to Healthy Assets and Hazards’ (AHAH)</p>
-<div style="text-align: center;">
-<p><img src="./overview.png" class="img-fluid"></p>
-</div>
+<section id="dvc-pipeline" class="level3">
+<h3 class="anchored" data-anchor-id="dvc-pipeline">DVC pipeline</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stages</span><span class="kw">:</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">train</span><span class="kw">:</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">cmd</span><span class="kw">:</span><span class="at"> python -m src.train</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">deps</span><span class="kw">:</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> data/doccano_annotated.jsonl</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> src/train.py</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">outs</span><span class="kw">:</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> logs</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">frozen</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">upload</span><span class="kw">:</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">cmd</span><span class="kw">:</span><span class="at"> python -m src.train --upload=true</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">deps</span><span class="kw">:</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> data/doccano_annotated.jsonl</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> src/train.py</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">frozen</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="scripts" class="level2">
-<h2 class="anchored" data-anchor-id="scripts">Scripts</h2>
-<section id="process-road-network-ahahos_highways.py" class="level3">
-<h3 class="anchored" data-anchor-id="process-road-network-ahahos_highways.py">1. Process road network <code>ahah/os_highways.py</code></h3>
-<ul>
-<li>Speed estimates given to each road, based on <code>formOfway</code> and <code>roadClassification</code></li>
-<li>Time-weighted distance calculated using length of edge and speed estimate</li>
-<li>Node ID converted to sequential integers and saved with edges as parquet files</li>
-</ul>
-</section>
-<section id="process-data-ahahprocess_routing.py" class="level3">
-<h3 class="anchored" data-anchor-id="process-data-ahahprocess_routing.py">2. Process Data <code>ahah/process_routing.py</code></h3>
-<blockquote class="blockquote">
-<p>This stage prepares the <code>nodes</code>, <code>postcodes</code>, and <code>poi</code> data for use in RAPIDS <code>cugraph</code>. Makes use of utility functions to assist with data preparation from the raw data sources.</p>
-</blockquote>
-<ul>
-<li>Clean raw data</li>
-<li>Find the nearest road node to each postcode and point of interest using GPU accelerated K Means Clustering</li>
-<li>Determine minimum buffer distance to use for each point of interest
-<ul>
-<li>Distances returned for nearest 10 points of interest to each postcode using K Means</li>
-<li>For each unique POI the maximum distance to associated postcodes is taken and saved as a buffer for this POI</li>
-<li>Each POI is assigned the postcodes that fall within their KNN, used to determine buffer suitability when converted to a graph</li>
-</ul></li>
-<li>All processed data written to respective files</li>
-</ul>
-</section>
-<section id="routing-ahahrouting.py" class="level3">
-<h3 class="anchored" data-anchor-id="routing-ahahrouting.py">3. Routing <code>ahah/routing.py</code></h3>
-<blockquote class="blockquote">
-<p>The routing stage of this project primarily makes use of the RAPIDS <code>cugraph</code> library. This stage iterates sequentially over each POI of a certain type and finds routes to every postcode within a certain buffer.</p>
-</blockquote>
-<ul>
-<li>Iterate over POI of a certain type</li>
-<li>Create <code>cuspatial.Graph()</code> with subset of road nodes using <code>cuspatial.points_in_spatial_window</code> with buffer</li>
-<li>Run <em>single-source shortest path</em> from POI to each node in the sub graph
-<ul>
-<li><code>cugraph.sssp</code> takes into account <code>weights</code>, which in this case are the <code>time-weighted</code> distance of each connection between nodes as reported by OSM.</li>
-</ul></li>
-<li><code>SSSP</code> distances subset to return only nodes associated with postcodes, these distances are added iteratively to a complete dataframe of postcodes of which the smallest value for each postcode is taken</li>
-</ul>
-</section>
-<section id="process-air-quality-data-ahahprocess_air.py" class="level3">
-<h3 class="anchored" data-anchor-id="process-air-quality-data-ahahprocess_air.py">4. Process air quality data <code>ahah/process_air.py</code></h3>
-<ul>
-<li>Create raster of interpolated values from monitoring station points
-<ul>
-<li>Exclude points that are <em>MISSING</em></li>
-</ul></li>
-<li>Aggregate to LSOA by taking mean values</li>
-</ul>
-</section>
-<section id="combine-into-index-ahahcreate_index.py" class="level3">
-<h3 class="anchored" data-anchor-id="combine-into-index-ahahcreate_index.py">5. Combine into index <code>ahah/create_index.py</code></h3>
-<ul>
-<li>Combine both processed secure and open data</li>
-<li>Intermediate variables calculated
-<ul>
-<li>All variables ranked</li>
-<li>Exponential default calculated for all ranked variables</li>
-<li>Percentiles calculated from ranked variables</li>
-</ul></li>
-<li>Domains Scores calculated
-<ul>
-<li>Domain scores calculated from mean of each domains input variables</li>
-<li>Domain scores ranked</li>
-<li>Domain percentiles calculated</li>
-<li>Exponential transformation calculated for each domain</li>
-</ul></li>
-<li>AHAH index calculated from mean of domain exponential transformations
-<ul>
-<li>Ranked AHAH index calculated</li>
-<li>AHAH percentiles calculated</li>
-</ul></li>
-</ul>
+<section id="dvc-dag" class="level3">
+<h3 class="anchored" data-anchor-id="dvc-dag">DVC DAG</h3>
+<pre class="mermaid"><code>flowchart TD
+    node1["train"]
+    node2["upload"]</code></pre>
 </section>
 </section>
-<section id="ahah-data-sources" class="level2">
-<h2 class="anchored" data-anchor-id="ahah-data-sources">AHAH Data Sources</h2>
-<blockquote class="blockquote">
-<p>See the <a href="https://figshare.com/articles/online_resource/Access_to_Healthy_Assets_and_Hazards_AHAH_-_Updated_version_2017/8295842/1">AHAH V2 FigShare Repository</a> for the previous iteration.</p>
-</blockquote>
-<ul>
-<li><p><a href="https://www.ordnancesurvey.co.uk/business-government/products/open-map-roads">OS Open Roads</a></p></li>
-<li><p><a href="https://www.ordnancesurvey.co.uk/business-government/products/strategi">Ferry Routes</a></p></li>
-<li><p><a href="https://uk-air.defra.gov.uk/data/pcm-data">Air quality</a></p></li>
-<li><p>Greenspace (NDVI Classification)</p></li>
-<li><p><a href="https://digital.nhs.uk/services/organisation-data-service/data-downloads">NHS England</a></p></li>
-<li><p><a href="https://www.opendata.nhs.scot/dataset/">NHS Scotland</a></p></li>
-<li><p><a href="https://geoportal.statistics.gov.uk/datasets/ons-postcode-directory-february-2022/about">Postcodes</a></p></li>
-<li><p><a href="https://borders.ukdataservice.ac.uk/easy_download_data.html?data=England_lsoa_2011">LSOA Polygons</a></p></li>
-</ul>
+<section id="hugging-face-model-readme" class="level1">
+<h1>Hugging Face Model README</h1>
+<p>Entry not found</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

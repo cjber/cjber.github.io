@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/manuscripts/footprint/index.html",
       "/posts/manuscripts/associations/index.html",
       "/posts/manuscripts/overture/index.html",
       "/posts/manuscripts/geoext/index.html",
@@ -9,6 +10,7 @@
       "/posts/manuscripts/sdss/index.html",
       "/posts/manuscripts/gisruk/index.html",
       "/posts/projects/cdrc-semantic-search/index.html",
+      "/posts/projects/reddit-model/index.html",
       "/posts/projects/ahah/index.html"
     ]
   }
