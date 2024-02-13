@@ -1,10 +1,5 @@
-manuscript:
-  article: index.qmd
-
 format:
-  html:
-    comments:
-      hypothesis: false
+  html: default
   odt: default
   arxiv-pdf:
     authorcols: true
@@ -17,8 +12,7 @@ format:
           \usepackage{makecell}
           \usepackage{multirow}
 
-execute:
-  freeze: true
+jupyter: python3
 
 filters:
   - abstract-section

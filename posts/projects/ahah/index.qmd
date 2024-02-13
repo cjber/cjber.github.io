@@ -1,7 +1,7 @@
 ---
 title: "Access to Healthy Assets & Hazards (AHAH)"
 
-categories: [code]
+categories: [github]
 date: 2022-09-07
 other-links: [{href: https://github.com/ESRC-CDRC/ahah, icon: github, rel: icon, text: Github Repository}, {href: https://data.cdrc.ac.uk/dataset/access-healthy-assets-hazards-ahah, icon: database, rel: icon, text: Data Product}]
 image: "https://data.cdrc.ac.uk/sites/default/files/cdrclogo_0.svg"
@@ -9,6 +9,6 @@ image: "https://data.cdrc.ac.uk/sites/default/files/cdrclogo_0.svg"
 
 This project identifies the time-weighted distance required to travel by road between every postcode in Great Britain and a selection of health-related points of interest. A ranked combination of these drive-times is used to create the AHAH index. Using the GPU-accelerated `cugraph` Python library, this implementation reduces processing time per variable down to ~10 minutes from 8 hours.
 
----
+# GitHub README
 
-{{< include README.md >}}
+{{< include .README.md >}}

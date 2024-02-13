@@ -1,7 +1,7 @@
 ---
 title: "CDRC Semantic Search System"
 
-categories: [code]
+categories: [github]
 date: last-modified
 other-links: [{href: https://github.com/cjber/cdrc-semantic-search, icon: github, rel: icon, text: Github Repository}, {href: https://apps.cdrc.ac.uk/semanticsearch/Search, icon: search, rel: icon, text: Semantic Search Link}]
 image: "https://assets-global.website-files.com/6459a0e3f348e9e898b7df80/6462ca68c52fdda3d86e90d9_Frame%2033-p-1600.png"
@@ -9,6 +9,6 @@ image: "https://assets-global.website-files.com/6459a0e3f348e9e898b7df80/6462ca6
 
 The CDRC Semantic Search System is a project designed to enhance the search capabilities of the Centre for Consumer Data Research (CDRC) data catalogue. The goal is to implement a semantic search approach that goes beyond traditional keyword-based searches, providing users with more accurate and relevant results. 
 
----
+# GitHub README
 
-{{< include README.md >}}
+{{< include .README.md >}}

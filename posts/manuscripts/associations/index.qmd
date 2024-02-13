@@ -38,9 +38,6 @@ citation:
 
 This paper explores cognitive place associations; conceptualised as a place-based mental model that derives subconscious links between geographic locations. Utilising a large corpus of online discussion data from the social media website Reddit, we experiment on the extraction of such geographic knowledge from unstructured text. First we construct a system to identify place names found in Reddit comments, disambiguating each to a set of coordinates where possible. Following this, we build a collective picture of cognitive place associations in the United Kingdom, linking locations that co-occur in user comments and evaluating the effect of distance on the strength of these associations. Exploring these geographies nationally, associations were shown to be typically weaker over greater distances. This distance decay is also highly regional, rural areas typically have greater levels of distance decay, particularly in Wales and Scotland. When comparing major cities across the UK, we observe distinct distance decay patterns, influenced primarily by proximity to other cities.
 
-
-
-
 # Introduction {#sec-introduction}
 
 The importance of relational thinking to understand geographical phenomena has been widely acknowledged in human and computational geography [@gluckler2021;@bergmann2018;@lukermann1961]. Spatial networks have been explored from a variety of perspectives, to uncover the dynamics underpinning the spatial behaviours of individuals [@gonzalez2008;@noulas2011], or to challenge conceptualisations of regions as bounded by administrative definitions [@calafiore2021;@alessandretti2020].

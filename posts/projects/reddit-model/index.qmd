@@ -1,0 +1,18 @@
+---
+title: "Reddit NER for Place Names"
+
+categories: [github]
+date: 10-31-2023
+other-links: [{href: https://github.com/cjber/reddit-model, icon: github, rel: icon, text: Github Repository}, {href: https://huggingface.co/cjber/reddit-ner-place_names, icon: activity, rel: icon, text: HuggingFace Repository}]
+image: "hf.png"
+---
+
+Fine-tuned bert-base-uncased for named entity recognition, trained using wnut_17 with 1,001 additional comments from Reddit. This model is intended solely for place name extraction from social media text, other entities have therefore been removed.
+
+# GitHub README
+
+{{< include .README.md >}}
+
+# Hugging Face Model README
+
+{{< include .hf_README.md >}}
