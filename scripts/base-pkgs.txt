@@ -16,6 +16,7 @@ python-pdm
 quarto-cli-bin
 rclone
 ripgrep
+rye
 tealdeer
 unp
 wl-clipboard
