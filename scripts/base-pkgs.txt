@@ -1,5 +1,11 @@
 base-devel
+yamllint
+mypy
+luacheck
+vale
 bat
+nodejs-jsonlint
+hadolint-bin
 chezmoi
 direnv
 eza
@@ -16,9 +22,11 @@ python-pdm
 quarto-cli-bin
 rclone
 ripgrep
+ruff-lsp
 rye
 tealdeer
 unp
+uv
 wl-clipboard
 zoxide
 zsh
