@@ -19,14 +19,15 @@ personal:
 
 work:
   - organization: Consumer Data Research Centre
-    position: Software Engineer (NLP)
+    position: Machine Learning Engineer
     url: https://www.cdrc.ac.uk
     location: Liverpool, UK
     startDate: 2023-12-01
     endDate: 2024-05-01
     highlights:
-      - Developing a Retrieval Augmented Generation (RAG) Search System for the CDRC Data Catalogue, powered by Llama Index and OpenAI, to enhance data discovery and access.
+      - Developed a Retrieval Augmented Generation (RAG) Search System for the CDRC Data Catalogue, powered by Llama Index and OpenAI, to enhance data discovery and access.
       - Generated data schemas for data products to enable automated checks on ingestion of new data products; using Pydantic, Pandera (pandas/polars dataframes) and Prefect for monitoring.
+      - Automated the generation of a large-scale geographically aligned dataset from the common crawl using Prefect for monitoring, and Hugging Face transformers for named entity recognition.
   - organization: University of Liverpool
     position: PhD Researcher
     url: https://www.liverpool.ac.uk/geographic-data-science/our-people/
@@ -81,10 +82,11 @@ education:
     honors:
     courses:
     highlights:
-      - "*Dissertation*: Utilisting Supervised Parametric Classification to Assess the Quality of the UK Rural Road Network using Aerial LiDAR Data"
-      - TODO; See old CV.
+      - "*Dissertation*: Utilising Supervised Parametric Classification to Assess the Quality of the UK Rural Road Network using Aerial LiDAR Data"
+      - Completed modules in both Computer Science and Applied Social Science covering Machine Learning, statistics and geographical analysis.
+      - Highest mark in the cohort.
 
-# affiliations:
+affiliations:
 #   - organization: White Hat Hackers Association
 #     position: Vice President for Internal Affairs
 #     location: Cambridge, United Kingdom
@@ -106,7 +108,7 @@ education:
 #       - Promising Toastmaster of the Year (PY 2022-2023)
 #       - Tell me, pray, what explanation do you put upon their actions?
 
-# awards:
+awards:
 #   - title: Champion in the Division A District X Speech Evaluation Contest
 #     date: 2023-05-09
 #     issuer: Toastmasters International
@@ -123,28 +125,32 @@ education:
 #       - "Made it to the Top 5 (selected from over 100 teams) in the world for the semi-finals of the SCG Bangkok Business Challenge #sym.at Sasin 2020 Global Competition held at Bangkok, Thailand from July 7-12, 2020."
 #       - "Served as the speaker and presented in the 60-second pitch round of the Opening Reception of the SCG Bangkok Business Challenge #sym.at Sasin 2022 for Team London Bridge."
 
-# certificates:
+certificates:
 #   - name: "Learning How to Learn: Powerful mental tools to help you master tough subjects"
 #     date: 2021-09-01
 #     issuer: Coursera
 #     url: https://example.com
 
 publications:
+  - name: Mapping cognitive place associations within the United Kingdom through online discussion on Reddit
+    publisher: Transactions of the Institute of British Geographers
+    releaseDate: 2024-01-08
+    url: https://doi.org/10.1111/tran.12669
   - name: Transformer based named entity recognition for place name extraction from unstructured text
     publisher: International Journal of Geographical Information Science
     releaseDate: 2022-10-17
     url: https://doi.org/10.1080/13658816.2022.2133125
 
 projects:
-  - name: "Job Tailor"
-    url: https://example.com/
-    affiliation: Open University
-    startDate: 2020-11-01
-    endDate: 2021-04-30
-    highlights:
-      - Created an AI-powered resume editor application that allowed users to easily create different resumes and cover letters specifically tailored to and customized for individual job descriptions based on their personal information in their complete curriculum vitae.
-      - Acquired more than 100,000 user sign ups in 3 months and more than 10,000 active monthly users in its lifetime before being sold to investors.
-      - Generated profit of upwards \$20,000 yearly with a team of only four developers and three business operatives
+#   - name: "Job Tailor"
+#     url: https://example.com/
+#     affiliation: Open University
+#     startDate: 2020-11-01
+#     endDate: 2021-04-30
+#     highlights:
+#       - Created an AI-powered resume editor application that allowed users to easily create different resumes and cover letters specifically tailored to and customized for individual job descriptions based on their personal information in their complete curriculum vitae.
+#       - Acquired more than 100,000 user sign ups in 3 months and more than 10,000 active monthly users in its lifetime before being sold to investors.
+#       - Generated profit of upwards \$20,000 yearly with a team of only four developers and three business operatives
 
 skills:
   - category: Soft Skills
@@ -155,43 +161,36 @@ skills:
       - Leadership
       - Academic Writing
       - Technical Writing
-  - category: Programming
-    skills:
-      - Python
-      - SQL, PostgreSQL
-      - MATLAB/Octave
-      - HTML
-      - CSS
-      - Javascript
-      - Typst
-      - LaTeX
   - category: Tools
     skills:
-      - Microsoft Word
+      - Python
+      - Linux (Bash, Zsh, Arch Linux)
       - Git
-      - Docker
-      - Visual Studio Code
-      - Canva
+      - Docker/Podman
+      - Neovim
+      - Regex
   - category: Machine Learning & Data Science
     skills:
-      - React
-      - Next.js
-      - million.js
-      - Svelte & Sveltekit
-      - Tailwind CSS
-      - Node.js
-      - Deno
-      - FastAPI
-      - Flask
-  - category: Natural Language Processing
+      - Natural Language Processing
+      - Deep Learning
+      - Data Analysis
+      - PyTorch (Lightning)
+      - Polars
+      - (Geo) Pandas
+      - Hugging Face (transformers, datasets)
+      - spaCy
+      - SciKit Learn
+  - category: MLOps
     skills:
-      - Jupyter Notebook
-      - Numpy
-      - Pandas
-      - Plotly
-      - Altair
+      - Prefect
+      - Pytest
+      - FastAPI
+      - Dask
+      - DVC
+      - DagsHub
+      - GitHub Actions
 
-# languages:
+languages:
 #   - language: English
 #     fluency: Native speaker
 #   - language: German
@@ -199,7 +198,7 @@ skills:
 #   - language: Japanese
 #     fluency: Basic proficiency
 
-# interests:
+interests:
 #   - Video Games
 #   - Anime
 #   - Reading Non-fiction

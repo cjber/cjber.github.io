@@ -48,12 +48,15 @@
 
 #cveducation(cvdata)
 #cvwork(cvdata)
-// #cvskills(cvdata)
-// #cvaffiliations(cvdata)
+#cvskills(cvdata)
+#cvaffiliations(cvdata)
 #cvprojects(cvdata)
-// #cvawards(cvdata)
-// #cvcertificates(cvdata)
-// #cvpublications(cvdata)
+#cvawards(cvdata)
+#cvcertificates(cvdata)
+
+#pagebreak()
+
+#cvpublications(cvdata)
 #cvreferences(cvdata)
 
 #endnote
