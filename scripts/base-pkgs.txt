@@ -17,6 +17,7 @@ nodejs-jsonlint
 npm
 nvtop
 paru
+pyarrow
 pyenv
 python-pdm
 quarto-cli-bin
@@ -28,6 +29,7 @@ tealdeer
 unp
 uv
 vale
+visidata
 wl-clipboard
 yamllint
 zoxide
