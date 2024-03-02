@@ -17,10 +17,10 @@ nodejs-jsonlint
 npm
 nvtop
 paru
-pyarrow
 pyenv
 pyright
 python-pdm
+python-pyarrow
 quarto-cli-bin
 rclone
 ripgrep
