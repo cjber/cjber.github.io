@@ -16,6 +16,8 @@ personal:
     - network: GitHub
       username: cjber
       url: https://github.com/cjber
+    - network: Personal Website
+      url: https://cjber.github.io
 
 work:
   - organization: Consumer Data Research Centre
@@ -23,11 +25,11 @@ work:
     url: https://www.cdrc.ac.uk
     location: Liverpool, UK
     startDate: 2023-12-01
-    endDate: 2024-05-01
+    endDate: 2024-10-01
     highlights:
       - Developed a Retrieval Augmented Generation (RAG) Search System for the CDRC Data Catalogue, powered by Llama Index and OpenAI, to enhance data discovery and access.
       - Generated data schemas for data products to enable automated checks on ingestion of new data products; using Pydantic, Pandera (pandas/polars dataframes) and Prefect for monitoring.
-      - Automated the generation of a large-scale geographically aligned dataset from the common crawl using Prefect for monitoring, and Hugging Face transformers for named entity recognition.
+      - Automated the generation of a large-scale geographically aligned dataset from the common crawl using Prefect for pipeline monitoring, and Hugging Face transformers for named entity recognition + classification.
   - organization: University of Liverpool
     position: PhD Researcher
     url: https://www.liverpool.ac.uk/geographic-data-science/our-people/
@@ -35,8 +37,8 @@ work:
     startDate: 2019-09-01
     endDate: 2023-12-01
     highlights:
-      - Funded CDT position contributing to research through the Geographic Data Science Lab.
-      - Engaged with lab activities; hosting and contributing to weekly meetings. Showcasing research or technical demonstrations.
+      - Funded CDT position contributing to published research through the Geographic Data Science Lab.
+      - Engaged with lab activities; hosting and contributing to weekly meetings. Showcasing research and technical demonstrations.
       - Collaborated on peer-reviewed research external to PhD thesis.
   - organization: Consumer Data Research Centre
     position: Data Scientist (Part Time)
@@ -47,16 +49,16 @@ work:
     highlights:
       - Developed a system to calculate access to amenities using the road network across each postcode in Great Britain.
       - Improved calculation times from previous implementations using GPU accelerated (cugraph) graphs, reducting time from 8 hours per calculation, to 10 minutes.
-  - organization: TEP - The Evnironment Partnership
+  - organization: TEP - The Environment Partnership
     position: Graduate Ecologist
     url: https://www.tep.uk.com
     location: Warrington, UK
     startDate: 2018-05-01
     endDate: 2018-09-01
     highlights:
-      - Led projects to support planning and development across the country
-      - Wrote professional reports and collaborated as part of a large team
-      - Travelled to sites to engage in-person with clients and site managers
+      - Led projects to support planning and development across the country.
+      - Wrote professional reports and collaborated as part of a large team.
+      - Travelled to sites to engage in-person with clients and site managers.
 education:
   - institution: University of Liverpool
     url: https://www.liverpool.ac.uk
@@ -71,10 +73,10 @@ education:
       - "*Thesis*: Exploring Place from the Perspective of Informal Social Media Text"
       - Published peer-reviewed research in reputable journals and presented at international conferences.
       - Expanded research focussing on geographic knowledge extracted through natural language processing.
-      - Extensively used Python for deep learning through PyTorch (Lightning) and Hugging Face Transformers.
+      - Extensively used Python for deep learning through PyTorch (Lightning) and Hugging Face Transformers, ensuring reproducible analysis through Docker/Podman, DVC and Git.
   - institution: University of Liverpool
     url:
-    area: Geographic Data Science
+    area: "Geographic Data Science (Distinction: 82%)"
     studyType: Master's of Science
     startDate: 2018-09-01
     endDate: 2019-09-01
@@ -84,7 +86,17 @@ education:
     highlights:
       - "*Dissertation*: Utilising Supervised Parametric Classification to Assess the Quality of the UK Rural Road Network using Aerial LiDAR Data"
       - Completed modules in both Computer Science and Applied Social Science covering Machine Learning, statistics and geographical analysis.
-      - Highest mark in the cohort.
+      - Highest degree grade in the cohort.
+  - institution: University of Hull (Scarborough Campus)
+    url:
+    area: "Marine Biology (First: 71%)"
+    studyType: Bachelor's of Science
+    startDate: 2014-09-01
+    endDate: 2017-09-01
+    location: Scarborough, UK
+    honors:
+    courses:
+    highlights:
 
 affiliations:
 #   - organization: White Hat Hackers Association
@@ -168,7 +180,7 @@ skills:
       - Git
       - Docker/Podman
       - Neovim
-      - Regex
+      - Typst/LaTex/Quarto
   - category: Machine Learning & Data Science
     skills:
       - Natural Language Processing
@@ -178,6 +190,7 @@ skills:
       - Polars
       - (Geo) Pandas
       - Hugging Face (transformers, datasets)
+      - LlamaIndex/LangChain
       - spaCy
       - SciKit Learn
   - category: MLOps

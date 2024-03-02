@@ -46,8 +46,8 @@
 
 #cvheading(cvdata, uservars)
 
-#cveducation(cvdata)
 #cvwork(cvdata)
+#cveducation(cvdata)
 #cvskills(cvdata)
 #cvaffiliations(cvdata)
 #cvprojects(cvdata)
