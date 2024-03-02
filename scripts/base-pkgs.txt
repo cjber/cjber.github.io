@@ -19,6 +19,7 @@ nvtop
 paru
 pyarrow
 pyenv
+pyright
 python-pdm
 quarto-cli-bin
 rclone
