@@ -1,4 +1,3 @@
-base-devel
 bat
 chezmoi
 direnv
@@ -7,7 +6,6 @@ fzf
 git
 hadolint-bin
 htop-vim-git
-joshuto
 kitty
 luacheck
 man
@@ -24,15 +22,20 @@ python-pyarrow
 quarto-cli-bin
 rclone
 ripgrep
+ruff
 ruff-lsp
 rye
+shellcheck
+stylua
 tealdeer
 unp
 uv
 vale
+vint
 visidata
 wl-clipboard
 yamllint
+yazi
 zoxide
 zsh
 zsh-antidote
