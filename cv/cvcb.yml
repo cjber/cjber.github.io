@@ -1,5 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/jskherman/cv.typ/main/cv.typ.schema.json
 
+summary: |
+  Machine Learning Engineer at the Consumer Data Research Centre (CDRC), with over 5 years of experience programming in Python. PhD with published research papers in geographic information science and NLP. In my current role, I worked with Llama Index and LangChain to build a Retrieval Augmented Generation (RAG) LLM-powered search system for the CDRC Data Catalogue. Extensive experience with PyTorch (Lightning), Hugging Face transformers, and the OpenAI API. MLOps and data engineering with DVC, Dagster, GitHub Actions and Docker/Podman. Machine Learning and data processing with Scikit-Learn, Pandas and Polars.
 personal:
   name: Cillian Berragan
   email: cjberragan@gmail.com
@@ -16,8 +18,8 @@ personal:
     - network: GitHub
       username: cjber
       url: https://github.com/cjber
-    - network: Personal Website
-      url: https://cjber.github.io
+    # - network: Personal Website
+    #   url: https://cjber.github.io
 
 work:
   - organization: Consumer Data Research Centre
@@ -28,18 +30,8 @@ work:
     endDate: 2024-10-01
     highlights:
       - Developed a Retrieval Augmented Generation (RAG) Search System for the CDRC Data Catalogue, powered by Llama Index and OpenAI, to enhance data discovery and access.
-      - Generated data schemas for data products to enable automated checks on ingestion of new data products; using Pydantic, Pandera (pandas/polars dataframes) and Prefect for monitoring.
-      - Automated the generation of a large-scale geographically aligned dataset from the common crawl using Prefect for pipeline monitoring, and Hugging Face transformers for named entity recognition + classification.
-  - organization: University of Liverpool
-    position: PhD Researcher
-    url: https://www.liverpool.ac.uk/geographic-data-science/our-people/
-    location: Liverpool, UK
-    startDate: 2019-09-01
-    endDate: 2023-12-01
-    highlights:
-      - Funded CDT position contributing to published research through the Geographic Data Science Lab.
-      - Engaged with lab activities; hosting and contributing to weekly meetings. Showcasing research and technical demonstrations.
-      - Collaborated on peer-reviewed research external to PhD thesis.
+      - Generated data schemas for data products to enable automated checks on ingestion of new data products; using Pydantic, Pandera (pandas/polars dataframes) and Dagster for monitoring.
+      - Automated the generation of a large-scale geographically aligned dataset from the common crawl using Dagster for pipeline monitoring, and Hugging Face transformers for named entity recognition + classification.
   - organization: Consumer Data Research Centre
     position: Data Scientist (Part Time)
     url: https://www.cdrc.ac.uk
@@ -72,8 +64,8 @@ education:
     highlights:
       - "*Thesis*: Exploring Place from the Perspective of Informal Social Media Text"
       - Published peer-reviewed research in reputable journals and presented at international conferences.
-      - Expanded research focussing on geographic knowledge extracted through natural language processing.
       - Extensively used Python for deep learning through PyTorch (Lightning) and Hugging Face Transformers, ensuring reproducible analysis through Docker/Podman, DVC and Git.
+      - Engaged with lab activities; hosting and contributing to weekly meetings. Showcasing research and technical demonstrations.
   - institution: University of Liverpool
     url:
     area: "Geographic Data Science (Distinction: 82%)"
@@ -144,15 +136,15 @@ certificates:
 #     url: https://example.com
 
 publications:
-  - name: Mapping cognitive place associations within the United Kingdom through online discussion on Reddit
-    publisher: Transactions of the Institute of British Geographers
-    releaseDate: 2024-01-08
-    url: https://doi.org/10.1111/tran.12669
-  - name: Transformer based named entity recognition for place name extraction from unstructured text
-    publisher: International Journal of Geographical Information Science
-    releaseDate: 2022-10-17
-    url: https://doi.org/10.1080/13658816.2022.2133125
-
+#   - name: Mapping cognitive place associations within the United Kingdom through online discussion on Reddit
+#     publisher: Transactions of the Institute of British Geographers
+#     releaseDate: 2024-01-08
+#     url: https://doi.org/10.1111/tran.12669
+#   - name: Transformer based named entity recognition for place name extraction from unstructured text
+#     publisher: International Journal of Geographical Information Science
+#     releaseDate: 2022-10-17
+#     url: https://doi.org/10.1080/13658816.2022.2133125
+#
 projects:
 #   - name: "Job Tailor"
 #     url: https://example.com/
@@ -180,7 +172,7 @@ skills:
       - Git
       - Docker/Podman
       - Neovim
-      - Typst/LaTex/Quarto
+      - Typst/LaTeX/Quarto
   - category: Machine Learning & Data Science
     skills:
       - Natural Language Processing
@@ -195,12 +187,12 @@ skills:
       - SciKit Learn
   - category: MLOps
     skills:
-      - Prefect
+      - SQL (duckdb, maria, postgresql)
       - Pytest
       - FastAPI
+      - Dagster
       - Dask
       - DVC
-      - DagsHub
       - GitHub Actions
 
 languages:
