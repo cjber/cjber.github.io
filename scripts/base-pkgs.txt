@@ -7,6 +7,7 @@ git
 hadolint-bin
 htop-vim-git
 kitty
+ltex-ls-bin
 luacheck
 man
 mypy
@@ -30,6 +31,7 @@ stylua
 tealdeer
 unp
 uv
+vale
 vale
 vint
 visidata
